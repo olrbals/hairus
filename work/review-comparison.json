@@ -1,0 +1,7 @@
+TypeError: cannot read property 'slice' of undefined
+    at dif (PLUGIN_1_SOURCE:6:334)
+    at <anonymous> (PLUGIN_1_SOURCE:8:321)
+    at map (native)
+    at <anonymous> (PLUGIN_1_SOURCE:8:294)
+
+Figma Debug UUID: 22aaef84-82c5-4804-bd04-ded806c1d2ca

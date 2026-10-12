@@ -1,0 +1,7 @@
+"use client";
+import {useEffect,useId,useRef,type ReactNode} from 'react';
+export function BottomSheet({open,onClose,title,children,variant='default',eyebrow}:{open:boolean;onClose:()=>void;title:string;children:ReactNode;variant?:'default'|'editor'|'permission';eyebrow?:string}){
+ const ref=useRef<HTMLDialogElement>(null);const id=useId();const drag=useRef<number|null>(null);
+ useEffect(()=>{const dialog=ref.current;if(!dialog)return;if(open){const previous=document.activeElement as HTMLElement;dialog.showModal();const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{dialog.close();document.body.style.overflow=overflow;previous?.focus();};}dialog.close();},[open]);
+ return <dialog ref={ref} className={`bottom-sheet bottom-sheet--${variant}`} aria-labelledby={id} onCancel={e=>{e.preventDefault();onClose();}} onClick={e=>{if(e.target!==e.currentTarget)return;const r=e.currentTarget.getBoundingClientRect();if(e.clientY<r.top||e.clientX<r.left||e.clientX>r.right)onClose();}}><div className="sheet-content"><div className="sheet-drag" onPointerDown={e=>{drag.current=e.clientY;e.currentTarget.setPointerCapture(e.pointerId);}} onPointerUp={e=>{if(drag.current!==null&&e.clientY-drag.current>60)onClose();drag.current=null;}}><div className="sheet-handle"/></div>{eyebrow&&<div className="eyebrow">{eyebrow}</div>}<div className="sheet-heading"><h2 id={id}>{title}</h2>{variant==='editor'&&<button type="button" className="sheet-close" onClick={onClose} aria-label="수정 취소하고 닫기">X</button>}</div>{children}</div></dialog>;
+}

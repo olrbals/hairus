@@ -1,0 +1,61 @@
+{
+  "fileKey": "Ja8Ep1JwxOOFgMArfYr16T",
+  "finalSection": "814:1264",
+  "assets": [
+    {
+      "path": "/assets/figma/in-focus-soft-bob.png",
+      "nodeId": "I876:2663;692:1621",
+      "hash": "03feaaf18972541fee1f4e19e105fce31aeb57d4",
+      "ratio": "382:466",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/home.svg",
+      "sourceNode": "876:2762",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/explore.svg",
+      "sourceNode": "876:2762",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/saved.svg",
+      "sourceNode": "876:2762",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/my.svg",
+      "sourceNode": "876:2762",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/bookmark.svg",
+      "sourceNode": "I876:2663;692:1626;628:827",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/entry/kakao.svg",
+      "sourceNode": "920:5393",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/entry/naver.svg",
+      "sourceNode": "920:5396",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/entry/apple.svg",
+      "sourceNode": "920:5399",
+      "status": "local-figma-export"
+    },
+    {
+      "path": "/assets/figma/entry/back.svg",
+      "sourceNode": "920:5616",
+      "status": "local-figma-export"
+    }
+  ],
+  "note": "화면 전체 캡처가 아닌 실제 사진·아이콘만 UI에 사용. 전체 원본 다운로드 완료 아님. 미수출 자산은 후속 화면 구현 시 확보.",
+  "latestSection": "920:3429",
+  "fallbackSection": "814:1264 (현재 미조회; 기존 기록 보존)"
+}
