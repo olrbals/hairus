@@ -1,0 +1,29 @@
+# Dependencies and generated output
+node_modules/
+.next/
+.turbo/
+.vercel/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.npmrc
+.pnpmrc
+# Logs and temporary files
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+*.tmp
+*.swp
+*.swo
+# Backups belong outside the source tree
+HAIRUS_SOURCE_BACKUP_*.zip
