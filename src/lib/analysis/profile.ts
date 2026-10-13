@@ -9,8 +9,10 @@ export const fields = [
  {key:'neck',label:'목 길이',group:'Other Features',initial:'짧은 편',kind:'text'},
  {key:'skin',label:'피부톤',group:'Other Features',initial:'뉴트럴',kind:'text'},
  {key:'layer',label:'레이어',group:'직접 알려주세요',initial:null,kind:'text'},
- {key:'dyeHistory',label:'염색 이력',group:'직접 알려주세요',initial:null,kind:'text'},
- {key:'permHistory',label:'펌 이력',group:'직접 알려주세요',initial:null,kind:'text'},
+ {key:'dyeHistory',label:'염색 이력',group:'직접 알려주세요',initial:null,kind:'history'},
+ {key:'permHistory',label:'펌 이력',group:'직접 알려주세요',initial:null,kind:'history'},
+ {key:'cutHistory',label:'커트 이력',group:'직접 알려주세요',initial:null,kind:'history'},
+ {key:'bleachHistory',label:'탈색 이력',group:'직접 알려주세요',initial:null,kind:'history'},
  {key:'condition',label:'관리 상태',group:'직접 알려주세요',initial:null,kind:'text'},
 ] as const;
 export type FieldKey=typeof fields[number]['key'];
@@ -28,7 +30,7 @@ export function readProfile():Profile|null {
  try {const raw=localStorage.getItem(storageKey);if(!raw)return memory;const p=JSON.parse(raw);
  if(p.version!==1||p.source!=='mock'||typeof p.analyzedAt!=='string'||typeof p.updatedAt!=='string'||!p.original||!p.edits)return null;
  const result=newProfile();result.analyzedAt=p.analyzedAt;result.updatedAt=p.updatedAt;
- for(const f of fields){const v=p.original[f.key];if(v!==null&&typeof v!=='string')return null;result.original[f.key]=typeof v==='string'?v.slice(0,160):null;const e=p.edits[f.key];if(e===null||typeof e==='string')result.edits[f.key]=typeof e==='string'?e.slice(0,160):null;}
+ for(const f of fields){const v=p.original[f.key];if(v!==undefined&&v!==null&&typeof v!=='string')return null;result.original[f.key]=typeof v==='string'?v.slice(0,160):null;const e=p.edits[f.key];if(e===null||typeof e==='string')result.edits[f.key]=typeof e==='string'?e.slice(0,160):null;}
  memory=result;return result;
  }catch{return memory;}
 }
