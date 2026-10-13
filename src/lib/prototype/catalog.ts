@@ -35,3 +35,5 @@ export const matchQuestions:Question[]=[
  {key:'consult',title:'어떤 방식의 상담을 선호하시나요?',max:3,options:['친절한','다양한 스타일 추천','솔직한','단호한','꼼꼼한','추가 시술 권유 없는','핵심만 빠르게','긍정적인','취향 존중','공감 위주의','대신 결정','충분한 대화','상담 필요 없음']},
  {key:'avoid',title:'불편했던 경험을 선택해주세요',max:3,options:['과한 시술 권유','긴 대기 시간','예상 밖 추가금','불편한 응대','부족한 설명','아쉬운 결과','특별한 경험 없음']},
 ];
+
+export const events=[{id:'popup',title:'HAIRUS × CHAHONG ROOM',subtitle:'취향이 만나는 공간',image:asset('20198.png'),body:'Figma에 제안된 팝업 행사 콘셉트를 체험하는 페이지입니다. 실제 행사 일정이나 참가 예약은 제공하지 않아요. 공간을 둘러보고, 마음에 드는 디자이너와 스타일을 찾아보세요.'},{id:'issue',title:'A NEW ISSUE',subtitle:'새로운 헤어 이야기를 만나다',image:asset('88ad2.png'),body:'HAIRUS가 제안하는 새로운 헤어 이야기. 프로토타입에 담긴 에디토리얼과 스타일을 둘러보고, 나의 취향에 맞는 디자이너를 찾아보세요.'}];
