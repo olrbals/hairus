@@ -1,0 +1,105 @@
+'use client';
+
+import Link from 'next/link';
+import {useRouter} from 'next/navigation';
+import {useEffect,useState} from 'react';
+import {readEntry} from '@/lib/entry-state';
+import {asset,findItem,salons,services} from '@/lib/prototype/catalog';
+import {recommend} from '@/lib/prototype/logic';
+import {SaveButton} from './shared';
+import {usePrototype} from './store';
+import styles from './designer-detail.module.css';
+
+const profileTags=['꼼꼼한 상담','편안한 소통','세심한 시술'];
+const matchTags=['긴 기장','가벼운 레이어','자연스러운 볼륨'];
+const reviewTags=['상담이 꼼꼼해요','친절해요','원하는 스타일을 잘 이해해요','손질법을 잘 알려줘요'];
+
+export function DesignerPage({id}:{id:string}){
+  const router=useRouter();
+  const {state,update}=usePrototype();
+  const [userName,setUserName]=useState('');
+  useEffect(()=>setUserName(readEntry().name.trim()),[]);
+  const item=findItem('designer',id);
+  useEffect(()=>{if(item)update(current=>({...current,recent:[`designer:${id}`,...current.recent.filter(value=>value!==`designer:${id}`)].slice(0,30)}));},[id,item,update]);
+  if(!item)return <main id="main" className={styles.missing}><p>이 디자이너를 찾을 수 없어요.</p><Link href="/explore?category=designer">디자이너 탐색으로</Link></main>;
+  const salon=salons.find(candidate=>candidate.id===item.salonId);
+  const result=recommend(state.matching,state.preferences).find(entry=>entry.designer.id===item.id);
+  const hero=item.id==='sohee'?asset('a91f5.png'):item.image;
+  const reviewCount=item.id==='sohee'?513:623;
+  const introduction=`“ 작은 변화로도, 고객님의 가장 자연스러운 매력을 찾을 수 있도록 함께 고민하는 ${item.name} 디자이너입니다. ”`;
+  const userLabel=userName?`${userName}님이`:'고객님이';
+
+  return <main id="main" className={styles.page}>
+    <header className={styles.header}>
+      <button type="button" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><img src={asset('30ced.svg')} alt=""/></button>
+      <span>디자이너</span>
+      <div className={styles.saveControl}><SaveButton item={item}/></div>
+    </header>
+
+    <img className={styles.hero} src={hero} alt={`${item.name} 디자이너 대표 작업`}/>
+
+    <section className={styles.profile} aria-labelledby="designer-name">
+      <h1 id="designer-name">{item.english}</h1>
+      <h2>{item.name} · {salon?.name||item.location}</h2>
+      <div className={styles.tags}>{profileTags.map(tag=><span key={tag}>{tag}</span>)}</div>
+      <div className={styles.identity}>
+        <Link href={`/designers/${item.id}/reviews`}>★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</Link>
+        <p>{introduction}</p>
+      </div>
+    </section>
+
+    <nav className={styles.sectionNav} aria-label="디자이너 상세 섹션">
+      <a href="#match">매칭</a><a href="#works">스타일</a><a href="#service">메뉴</a><a href="#reviews">후기</a><a href="#salon">살롱</a>
+    </nav>
+
+    <section id="match" className={styles.match} aria-labelledby="match-title">
+      <h2 id="match-title">WHY WE MATCH</h2>
+      <p>{userLabel} 저장한 스타일과 {item.name} 디자이너의 작업에서<br/>공통된 디테일을 발견했어요.</p>
+      <div className={styles.matchImages} aria-label={result?.reasons.join(' ')||`${item.name} 디자이너 추천 비교`}>
+        <figure><img src={asset('5a15e.png')} alt={`${item.name} 디자이너의 실제 작업`}/><figcaption>{item.name} 디자이너의 실제 작업</figcaption></figure>
+        <figure><img src={asset('ad0de.png')} alt="내가 저장한 스타일"/><figcaption>내가 저장한 스타일</figcaption></figure>
+      </div>
+      <div className={styles.matchPager} aria-hidden="true"><span>←</span><span>01 / 03</span><span>→</span></div>
+      <div className={styles.tags}>{matchTags.map(tag=><span key={tag}>{tag}</span>)}</div>
+    </section>
+
+    <section id="works" className={styles.works} aria-labelledby="works-title">
+      <div><h2 id="works-title">SELECTED WORKS</h2><p>또 다른 스타일을 만나보세요</p></div>
+      <Link href={`/designers/${item.id}/portfolio`}>VIEW ALL ↗</Link>
+      <div className={styles.workGrid}>
+        <img src={asset('bd491.png')} alt="쇼트 레이어드 스타일"/>
+        <div><img src={asset('d7b6a.png')} alt="롱 레이어드 스타일 정면"/><img src={asset('f66bd.png')} alt="롱 레이어드 스타일 뒷모습"/></div>
+      </div>
+    </section>
+
+    <section id="service" className={styles.serviceSection} aria-labelledby="service-title">
+      <div className={styles.sectionHeading}><h2 id="service-title">SERVICE &amp; PRICE</h2><p>시술과 가격을 확인해 보세요.</p></div>
+      <div className={styles.serviceList}>{services.map((service,index)=><details className={styles.service} key={service.id} open={index===0}>
+        <summary><span>{service.name}</span><span>{service.price.toLocaleString()}원{index>0?' ~':''}<i aria-hidden="true"/></span></summary>
+        <div className={styles.serviceBody}>
+          <p>{service.description}</p>
+          <dl><div><dt><img src={asset('b5458.svg')} alt=""/>소요 시간</dt><dd>{service.minutes}분</dd></div><div><dt><span aria-hidden="true">＄</span>기장 추가</dt><dd>없음</dd></div></dl>
+          <Link href={`/reservation/${item.id}/service?service=${service.id}`}>이 시술 예약하기</Link>
+        </div>
+      </details>)}</div>
+    </section>
+
+    <section id="reviews" className={styles.reviews} aria-labelledby="reviews-title">
+      <h2 id="reviews-title">REVIEWS</h2>
+      <div className={styles.rating}><strong>4.9</strong><span>/ 5.0</span><small>고객 후기 623개</small></div>
+      <div className={styles.tags}>{reviewTags.map(tag=><span key={tag}>{tag}</span>)}</div>
+      <article><header><span>★ 5.0</span><time dateTime="2026-09-28">2026.09.28</time></header><small>레이어드 컷 · 긴머리</small><p>매번 원하는 스타일을 정확히 이해해주셔요 !<br/>{item.name}쌤 진짜 좋아요 유명해지세요 아니에요 유명해지지마세요 유명해주세요 아니 유명</p></article>
+      <article><header><span>★ 5.0</span><time dateTime="2026-09-20">2026.09.20</time></header><small>C컬펌 · 긴머리</small><p>강한 컬은 부담스럽다고 말씀드렸는데 자연스럽게 맞춰주셨어요. 다음에도 {item.name}쌤한테 머리 할래요 ~~~~</p></article>
+      <Link className={styles.textLink} href={`/designers/${item.id}/reviews`}>모든 후기 보기 →</Link>
+    </section>
+
+    {salon&&<section id="salon" className={styles.salon} aria-labelledby="salon-title">
+      <h2 id="salon-title">THE SALON</h2>
+      <img src={salon.image} alt={salon.name}/>
+      <h3>{salon.name}</h3><p>{salon.location}</p>
+      <Link className={styles.textLink} href={`/salons/${salon.id}`}>자세히 보기 →</Link>
+    </section>}
+
+    <div className={styles.booking}><Link href={`/reservation/${item.id}/service`}>예약하기</Link></div>
+  </main>;
+}

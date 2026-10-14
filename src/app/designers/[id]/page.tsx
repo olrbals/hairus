@@ -1,2 +1,2 @@
-import {Detail} from '@/components/prototype/details';
-export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <Detail kind="designer" id={id}/>;}
+import {DesignerPage} from '@/components/prototype/designer-detail';
+export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <DesignerPage id={id}/>;}
