@@ -19,12 +19,12 @@ export function SaveButton({item}:{item:Item}){
  const [open,setOpen]=useState(false);
  const [reasons,setReasons]=useState<string[]>([]);
  const [note,setNote]=useState('');
- const [toggleNotice,setToggleNotice]=useState<boolean|null>(null);
+ const [showOffNotice,setShowOffNotice]=useState(false);
  useEffect(()=>{
-  if(toggleNotice===null)return;
-  const timeout=window.setTimeout(()=>setToggleNotice(null),2500);
+  if(!showOffNotice)return;
+  const timeout=window.setTimeout(()=>setShowOffNotice(false),2500);
   return ()=>window.clearTimeout(timeout);
- },[toggleNotice]);
+ },[showOffNotice]);
  const options=item.kind==='style'
   ?['나중에 도전','분위기 참고','나에게 어울림','상담할 때 보여줄 사진','스타일링 참고']
   :item.kind==='designer'
@@ -35,16 +35,16 @@ export function SaveButton({item}:{item:Item}){
  const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
  const save=()=>{update(s=>({...s,saved:[...s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id)),{id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()}]}));setOpen(false);};
  return <>
-  <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(!saved&&!saveNoteEnabled){update(s=>({...s,saved:[...s.saved,{id:item.id,kind:item.kind,reasons:[],note:'',savedAt:new Date().toISOString()}]}));return;}setReasons(saved?.reasons||[]);setNote(saved?.note||'');setToggleNotice(null);setOpen(true);}}>
+  <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(!saved&&!saveNoteEnabled){update(s=>({...s,saved:[...s.saved,{id:item.id,kind:item.kind,reasons:[],note:'',savedAt:new Date().toISOString()}]}));return;}setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);}}>
    {saved?'♥':<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555551" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{display:'block'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>}
   </button>
-  <BottomSheet open={open} onClose={()=>setOpen(false)} title="SAVENOTE" variant="editor" headingAction={<span/>}>
+  <BottomSheet open={open} onClose={()=>{setOpen(false);setShowOffNotice(false);}} title="SAVENOTE" variant="editor" headingAction={<span/>}>
+   {showOffNotice&&<div className={savenote.toggleNotice} role="status" aria-live="polite"><strong>SAVENOTE OFF</strong><span>MY → 알림에서 다시 설정할 수 있어요.</span></div>}
    <div className={savenote.sheet}>
     <div className={savenote.heading}>
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
-     <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>{setToggleNotice(!saveNoteEnabled);update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}));}}><span className={savenote.toggleThumb}/></button>
+     <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>{setShowOffNotice(saveNoteEnabled);update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}));}}><span className={savenote.toggleThumb}/></button>
     </div>
-    {toggleNotice!==null&&<p className={savenote.toggleNotice} role="status" aria-live="polite">{toggleNotice?'SAVENOTE가 켜졌어요. 이제 저장할 때 메모를 남길 수 있어요.':'SAVENOTE가 꺼졌어요. 이제 메모 없이 바로 저장돼요. 설정은 MY → 알림 및 설정에서 변경할 수 있어요.'}</p>}
     <div className={savenote.savedItem}><img src={item.image} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
      <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
