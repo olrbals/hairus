@@ -1,0 +1,153 @@
+
+/* HAIRUS HOME POPUP — Figma 920:3964, 920:3953 */
+
+.home-banner-dialog {
+  position: fixed;
+  transform: translateY(120px);
+  width: min(396px, calc(100vw - 32px));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  margin: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #000;
+  overflow: hidden;
+}
+
+.home-banner-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* Popup container */
+
+.home-banner {
+  width: 100%;
+  background: #fff;
+  font-family: Pretendard, sans-serif;
+}
+
+/* Black banner area — 396 × 259 */
+
+.home-banner-content {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 396 / 259;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Figma banner images */
+
+.home-banner-image {
+  position: absolute;
+  top: 8.494%;
+  width: 69.444%;
+  height: 83.012%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.home-banner-image-0 {
+  left: 15.152%;
+  object-position: center;
+}
+
+.home-banner-image-1 {
+  left: 12.121%;
+  object-position: center bottom;
+}
+
+/* Page indicator */
+
+.home-banner-count {
+  position: absolute;
+  top: 16px;
+  right: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* Editorial text */
+
+.home-banner-copy {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.home-banner-copy strong {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.home-banner-copy span {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* White footer — 48px */
+
+.home-banner-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 24px;
+  background: #fff;
+}
+
+.home-banner-footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.home-banner-footer button:first-child {
+  color: rgba(116, 126, 142, 0.8);
+}
+
+.home-banner-footer button:last-child {
+  color: #000;
+}
+
+.home-banner-footer button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: -3px;
+}
