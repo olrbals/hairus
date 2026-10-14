@@ -1,8 +1,10 @@
 :global(.bottom-sheet--editor):has(.sheet) :global(.sheet-heading){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .sheet{display:flex;flex-direction:column;gap:24px;padding:4px 0 8px;color:#222b3a}
 .sheet p{margin:0}
-.toggleNotice{font-size:10px;line-height:1.5;letter-spacing:-.01em;color:rgba(34,43,58,.55);animation:noteNoticeIn .2s ease-out}
-@keyframes noteNoticeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+.toggleNotice{position:fixed;z-index:5;top:50%;left:50%;display:flex;flex-direction:column;align-items:center;gap:5px;width:max-content;max-width:calc(100vw - 48px);padding:13px 18px;border:1px solid rgba(255,255,255,.82);border-radius:12px;background:rgba(248,248,248,.94);color:#222b3a;box-shadow:0 6px 24px rgba(0,0,0,.17),inset 0 1px 1px rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:12px;line-height:1.45;letter-spacing:-.01em;text-align:center;pointer-events:none;transform:translate(-50%,-50%);animation:noteNoticeIn .2s ease-out}
+.toggleNotice strong{font-size:12px;font-weight:600;line-height:1.45}
+.toggleNotice span{font-size:12px;color:rgba(34,43,58,.67);line-height:1.45}
+@keyframes noteNoticeIn{from{opacity:0;transform:translate(-50%,calc(-50% + 6px))}to{opacity:1;transform:translate(-50%,-50%)}}
 @media(prefers-reduced-motion:reduce){.toggleNotice{animation:none}}
 .heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .heading>div{min-width:0}
