@@ -1,3 +1,3 @@
-import {Explore} from '@/components/prototype/explore';
+import {PeopleExplore} from '@/components/prototype/people-explore';
 import {StyleExplore} from '@/components/prototype/style-explore';
-export default async function Page({searchParams}:{searchParams:Promise<{category?:string}>}){const {category}=await searchParams;return category==='designer'||category==='salon'?<Explore key={category} category={category}/>:<StyleExplore/>;}
+export default async function Page({searchParams}:{searchParams:Promise<{category?:string}>}){const {category}=await searchParams;return category==='designer'||category==='salon'?<PeopleExplore key={category} category={category}/>:<StyleExplore/>;}
