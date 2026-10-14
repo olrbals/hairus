@@ -14,10 +14,10 @@ const experiences = [
 
 export function PopupDetail() {
   const [notice,setNotice] = useState<'coupon'|'session'|null>(null);
-  return <main className="hairus-popup-detail">
+  return <main id="main" className="hairus-popup-detail">
     <header className="pd-header"><Link href="/home" aria-label="홈으로 돌아가기" className="pd-back">‹</Link><span>POPUP 공지</span><span aria-hidden="true"/></header>
     <section className="pd-hero" aria-label="HAIRUS 차홍룸 팝업">
-      <h1>HAIRUS ×<br/>CHAHONG ROOM</h1>
+      <h1><span className="pd-hero-brand">HAIRUS <span className="pd-hero-cross">×</span></span><span className="pd-hero-partner">CHAHONG ROOM</span></h1>
       <img src={base+'hero.png'} alt="차홍룸 팝업 매장 조감도" className="pd-hero-image"/>
       <div className="pd-hero-bottom"><span>POP-UP / SEONGSU, SEOUL</span><strong>11.06</strong></div>
     </section>
