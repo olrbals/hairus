@@ -337,7 +337,15 @@ className={`magazine-card magazine-card--${articles[index].id} ${
     </div>
   </div>
 </section>
-<section className="match-banner"><h2>Meet Your Match</h2><p>당신의 취향을 이해하는 디자이너를 만나보세요.</p><Action href="/recommendation/intro">디자이너 추천 받기</Action><Action secondary href="/preferences/intro">나의 취향 알아보기</Action></section></main><BottomNav active="/home"/>
+<section className="match-banner" aria-labelledby="match-banner-title">
+  <div className="match-banner-copy">
+    <h2 id="match-banner-title">Meet Your Match</h2>
+    <p>The right style. The right designer.<br />Just for you.</p>
+  </div>
+  <Link className="match-banner-cta" href="/recommendation/intro">
+    맞춤 추천 받기
+  </Link>
+</section></main><BottomNav active="/home"/>
 <HomePopup
   open={popup}
   slide={popupSlide}
