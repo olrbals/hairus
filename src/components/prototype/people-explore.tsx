@@ -23,6 +23,7 @@ const salonGroups:FilterGroup[]=[
  {key:'designerCount',label:'디자이너',options:['전체','1인','5인 미만','대규모']},
  {key:'rating',label:'평점',options:['전체','4.5 이상','4.0 이상','3.5 이상','3.0 이상']},
 ];
+const provinces=['전체','서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도','강원특별자치도','충청북도','충청남도','전북특별자치도','전라남도','경상북도','경상남도','제주특별자치도'];
 const designerDetails:Record<string,{avatar:string;location:string;specialty:string;works:string[]}>={
  yoona:{avatar:asset('31628.png'),location:'아르보 성수  ·  성수동',specialty:'레이어드컷 · 샌드펌 전문',works:[asset('28f27.png'),asset('8b53e.png'),asset('5a15e.png')]},
  sohee:{avatar:asset('a91f5.png'),location:'아르보 성수  ·  성수동',specialty:'테슬컷 · 히피펌 전문',works:[asset('83c13.png'),asset('034ea.png'),asset('93dbc.png')]},
@@ -40,19 +41,22 @@ const salonDetails:Record<string,{rating:string;location:string}>={
  'ob-hair':{rating:'4.84',location:'서울 성동구 성동구  ·  성수역 도보 5분'},
  noir:{rating:'4.84',location:'서울 성동구 성동구  ·  성수역 도보 5분'},
 };
-const allFilters=(groups:FilterGroup[])=>Object.fromEntries(groups.map(group=>[group.key,'전체'])) as FilterValues;
+const allFilters=(groups:FilterGroup[])=>({...Object.fromEntries(groups.map(group=>[group.key,'전체'])),region:'전체'}) as FilterValues;
 
 export function PeopleExplore({category}:{category:ExploreKind}){
  const router=useRouter();
  const [query,setQuery]=useState('');
  const [open,setOpen]=useState(false);
+ const [regionOpen,setRegionOpen]=useState(false);
+ const [sortOpen,setSortOpen]=useState(false);
+ const [sortOrder,setSortOrder]=useState('추천순');
  const groups=category==='designer'?designerGroups:salonGroups;
  const [filters,setFilters]=useState<FilterValues>(()=>allFilters(groups));
  const [draft,setDraft]=useState<FilterValues>(()=>allFilters(groups));
  const items=category==='designer'?designers:salons;
  const results=useMemo(()=>items.filter(item=>`${item.name} ${item.english} ${item.tags.join(' ')} ${item.location||''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())),[items,query]);
- const openFilter=()=>{setDraft(filters);setOpen(true);};
- const reset=()=>{const cleared=allFilters(groups);setDraft(cleared);setFilters(cleared);};
+ const openFilter=()=>{setDraft(filters);setRegionOpen(false);setOpen(true);};
+ const reset=()=>{const cleared=allFilters(groups);setDraft(cleared);setFilters(cleared);setRegionOpen(false);};
  const label=category==='designer'?'디자이너':'헤어샵';
  return <>
   <main id="main" className={sheet.page}>
@@ -71,7 +75,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
      <input aria-label={`${label} 검색`} placeholder="이름이나 지역을 검색하세요" value={query} onChange={event=>setQuery(event.target.value)}/>
      <button type="button" className={sheet.filterTrigger} aria-label={`${label} FILTER`} onClick={openFilter}><span/><span/><span/></button>
     </label>
-    <div className={sheet.listMeta}><span>{results.length}명의 {label}</span><span>추천순⌄</span></div>
+    <div className={sheet.listMeta}><span>{results.length}명의 {label}</span><div className={sheet.sort}><button type="button" aria-haspopup="menu" aria-expanded={sortOpen} onClick={()=>setSortOpen(current=>!current)}>{sortOrder}<span aria-hidden="true">⌄</span></button>{sortOpen&&<div className={sheet.sortMenu} role="menu">{['추천순','이름순'].map(option=><button type="button" role="menuitemradio" aria-checked={sortOrder===option} key={option} onClick={()=>{setSortOrder(option);setSortOpen(false);}}>{option}</button>)}</div>}</div></div>
     {category==='designer'?<DesignerList items={results}/>:<SalonList items={results}/>} 
    </div>
   </main>
@@ -80,7 +84,8 @@ export function PeopleExplore({category}:{category:ExploreKind}){
    <div className={sheet.filterSheet}>
     <section className={sheet.locationGroup}>
      <h3>지역</h3>
-     <button type="button" className={sheet.location} aria-label="지역 서울특별시 서초동"><span>⌖</span>서울특별시 서초동 <b>⌄</b></button>
+     <button type="button" className={sheet.location} aria-expanded={regionOpen} onClick={()=>setRegionOpen(current=>!current)}><span aria-hidden="true">⌖</span>{draft.region}<b aria-hidden="true">⌄</b></button>
+     {regionOpen&&<div className={sheet.regionOptions} role="listbox" aria-label="시도 선택">{provinces.map(province=><button type="button" role="option" aria-selected={draft.region===province} key={province} onClick={()=>{setDraft(current=>({...current,region:province}));setRegionOpen(false);}}>{province}</button>)}</div>}
     </section>
     {groups.map(group=><section key={group.key} className={sheet.filterGroup}>
      <h3>{group.label}</h3>
