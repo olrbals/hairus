@@ -11,12 +11,30 @@ export const styles:Item[]=[
  ['face','페이스라인 레이어드','Face Framing','623f2.png','MEDIUM','러블리','yoona'],
  ['fringe','소프트 프린지','Soft Fringe','191a4.png','SHORT','귀여운','sohee'],
 ].map(([id,name,english,image,length,mood,designerId])=>({id,kind:'style',name,english,image:asset(image),tags:[length,mood],designerId,description:'얼굴 주변의 흐름과 자연스러운 질감을 살리는 스타일. 원하는 기장과 평소 손질 방법을 디자이너와 함께 상담해 보세요.'}));
+
+export const inFocusStyle: Item = {
+  id: 'soft-bob',
+  kind: 'style',
+  name: '소프트 보브',
+  english: 'Soft Bob',
+  image: asset('83c13.png'),
+  tags: ['SHORT', '부드러운 웨이브'],
+  description: '짧은 기장과 부드러운 웨이브가 특징인 스타일.',
+};
+
 export const designers:Item[]=[
  {id:'yoona',kind:'designer',name:'윤아',english:'YOONA',image:asset('31628.png'),tags:['내추럴','러블리','레이어드','청순'],description:'취향을 세심하게 듣고, 일상에서 자연스러운 스타일을 제안해요.',salonId:'arvo',location:'성수',gender:'여자',strengths:['충분한 상담','손질하기 쉬운 결과','친절한','취향 존중','충분한 대화']},
  {id:'sohee',kind:'designer',name:'소희',english:'SOHEE',image:asset('ad0de.png'),tags:['모던 · 시크','귀여운','단발','y2k'],description:'선명한 커트 라인과 가벼운 질감으로 나다운 변화를 함께 만들어요.',salonId:'arvo',location:'성수',gender:'여자',strengths:['원하는 스타일 경험','솔직한','꼼꼼한','핵심만 빠르게']},
 ];
 export const salons:Item[]=[{id:'arvo',kind:'salon',name:'아르보 성수',english:'ARVO SEONGSU',image:asset('4e00b.png'),tags:['성수','상담','내추럴'],description:'빛과 여백이 머무는 공간에서 나를 위한 시간을 만나보세요.',location:'서울 성동구 성수동'}];
-export const catalog=[...styles,...designers,...salons];
+
+export const catalog = [
+  ...styles,
+  inFocusStyle,
+  ...designers,
+  ...salons,
+];
+
 export const findItem=(kind:Kind,id:string)=>catalog.find(i=>i.kind===kind&&i.id===id);
 export const itemHref=(item:Item)=>`/${item.kind==='style'?'styles':item.kind==='designer'?'designers':'salons'}/${item.id}`;
 export const services=[{id:'cut',name:'여성 디자인 컷',price:40000,minutes:60,description:'얼굴선과 모발의 흐름을 고려해 손질하기 편한 길이로 정돈해요.'},{id:'perm',name:'디자인 펌',price:180000,minutes:150,description:'원하는 웨이브와 모발 상태를 상담하고 자연스러운 컬을 제안해요.'},{id:'color',name:'전체 염색',price:120000,minutes:120,description:'현재 컬러와 원하는 분위기에 맞춰 색상을 상담해요.'}];
