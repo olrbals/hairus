@@ -75,7 +75,7 @@ export function StyleExplore(){
     </div>
     <div className={sheet.resultBar}>
      <span>{result.length} styles</span>
-     <button type="button" onClick={openFilter}>FILTER{appliedCount?` ${appliedCount}`:''}</button>
+     <button type="button" onClick={openFilter} aria-label="스타일 필터 열기"><span>FILTER{appliedCount?` ${appliedCount}`:''}</span><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M3 5h14M6 10h8M8 15h4"/></svg></button>
     </div>
     {result.length?<div className={sheet.grid}>{result.map(item=><StyleCard item={item} key={item.id}/>)}</div>:<div className={sheet.empty}><p>조건에 맞는 스타일이 없어요.</p><button type="button" onClick={()=>{setQuery('');setFilters(emptyFilters);}}>검색 조건 초기화</button></div>}
    </div>
