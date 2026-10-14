@@ -1,0 +1,62 @@
+/* Figma infocusDetail 920:4986 — entirely scoped to the In Focus editorial page. */
+.ifd-page{width:100%;max-width:430px;margin:auto;background:#fff;color:#111;font-family:Pretendard,Arial,sans-serif;line-height:1.3;overflow:hidden;padding-bottom:140px;min-height:100dvh}
+.ifd-page *{box-sizing:border-box}
+.ifd-page img{display:block;max-width:100%;object-fit:cover}
+.ifd-header{height:64px;padding:0 24px;display:flex;align-items:center}
+.ifd-back{height:44px;width:44px;border:0;background:transparent;color:#252525;display:flex;align-items:center;justify-content:flex-start;padding:0;cursor:pointer}
+.ifd-opening{padding:0 24px}
+.ifd-cover{width:100%;display:flex;flex-direction:column;align-items:flex-start}
+.ifd-cover-photo{width:100%;height:494px}
+.ifd-cover-caption{position:relative;z-index:1;width:350px;max-width:100%;margin-top:-52px;display:flex;flex-direction:column;gap:8px}
+.ifd-cover-caption h1{margin:0;display:flex;flex-direction:column;font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:52px;line-height:.95;font-weight:700;letter-spacing:0}
+.ifd-cover-caption h1 span:first-child{color:#fff}
+.ifd-cover-caption h1 span:last-child{color:#111}
+.ifd-cover-subtitle{display:flex;flex-direction:column;gap:4px;line-height:1.3}
+.ifd-cover-subtitle p{font-size:16px;letter-spacing:-.02em;font-weight:400}
+.ifd-cover-subtitle span{font-size:12px;letter-spacing:-.02em;font-weight:400}
+.ifd-style-intro{margin-top:40px;margin-left:0;border-left:1.6px solid rgba(0,0,0,.7);padding-left:12px;min-height:111px;display:flex;flex-direction:column;gap:8px}
+.ifd-style-intro h2{margin:0;font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.02em}
+.ifd-style-intro p{font-size:14px;color:#666;line-height:1.3;letter-spacing:-.02em;margin:0;word-break:keep-all}
+.ifd-style-intro p+p{margin-top:0}
+.ifd-details{margin:52px 24px 0;border-top:.8px solid rgba(0,0,0,.3);padding-top:24px;display:flex;flex-direction:column;gap:28px;min-height:1175px}
+.ifd-details-heading{display:flex;flex-direction:column;gap:4px}
+.ifd-details-heading h2,.ifd-designer-heading h2{font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:36px;line-height:1.3;font-weight:600;letter-spacing:-.02em;white-space:nowrap;margin:0}
+.ifd-details-heading p{font-size:14px;font-weight:500;letter-spacing:-.02em;color:#666460;margin:0}
+.ifd-detail-row{display:grid;align-items:center;gap:12px;width:100%;min-width:0;height:342px}
+.ifd-detail-row--side{grid-template-columns:minmax(0,244fr) minmax(0,126fr)}
+.ifd-detail-row--rear{grid-template-columns:minmax(0,149fr) minmax(0,220fr)}
+.ifd-detail-row>img{width:100%;height:342px;min-width:0}
+.ifd-detail-caption{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.ifd-ordinal{font-size:8px;line-height:1.3;letter-spacing:-.02em;font-weight:400;white-space:nowrap}
+.ifd-detail-caption h3,.ifd-wave-caption h3{font-size:18px;line-height:1.3;letter-spacing:-.02em;font-weight:500;margin:0}
+.ifd-detail-caption p,.ifd-wave-caption p{font-size:14px;line-height:1.4;letter-spacing:-.02em;color:#666;font-weight:400;margin:8px 0 0;word-break:keep-all}
+.ifd-wave{display:flex;flex-direction:column;gap:8px}
+.ifd-wave>img{width:100%;height:208px}
+.ifd-wave-caption{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.ifd-wave-caption p{margin-top:8px}
+.ifd-designer{margin-top:52px;min-height:830px;padding:28px 24px 2px;background:linear-gradient(to bottom,#000 0%,#000 65.584%,#fff 65.735%,#fff 100%)}
+.ifd-designer-content{display:flex;flex-direction:column;gap:28px}
+.ifd-designer-heading{display:flex;flex-direction:column;gap:4px;color:white}
+.ifd-designer-heading p{font-size:14px;line-height:1.3;letter-spacing:-.02em;font-weight:500;opacity:.8;margin:0}
+.ifd-designer-profile{display:grid;grid-template-columns:minmax(0,196fr) minmax(0,178fr);gap:8px;align-items:end;width:100%;height:251px}
+.ifd-designer-profile img{width:100%;height:251px}
+.ifd-designer-profile>div{padding-bottom:12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;color:white;white-space:nowrap}
+.ifd-designer-profile strong{font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:48px;line-height:1.3;letter-spacing:-.02em;font-weight:700}
+.ifd-designer-profile span{font-size:16px;line-height:1.3;font-weight:500;letter-spacing:-.02em}
+.ifd-interview{margin-top:28px;min-height:424px;padding:20px 24px 0;background:#fff;color:#000;display:flex;flex-direction:column;gap:28px}
+.ifd-interview-lead{display:flex;flex-direction:column;gap:4px}
+.ifd-interview-lead h3{font-size:18px;line-height:1.3;letter-spacing:-.02em;font-weight:500;margin:0}
+.ifd-interview-lead p{font-size:14px;line-height:1.3;letter-spacing:-.02em;margin:0}
+.ifd-qa{display:flex;flex-direction:column;gap:28px}
+.ifd-question{display:flex;flex-direction:column;gap:8px}
+.ifd-question h4{font-size:14px;font-weight:500;line-height:1.3;letter-spacing:-.02em;margin:0}
+.ifd-question h4 span{display:block;font-size:12px;font-weight:600;line-height:1.3}
+.ifd-question p{padding-left:12px;font-size:14px;line-height:1.3;letter-spacing:-.02em;color:rgba(0,0,0,.7);margin:0}
+.ifd-designer-link{height:47px;min-height:47px;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1.3;font-weight:500;letter-spacing:-.02em;color:rgba(0,0,0,.7);border:.8px solid rgba(0,0,0,.04);background:rgba(0,0,0,.01);box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
+.ifd-epilogue{margin:95px 24px 0;display:flex;flex-direction:column;gap:8px}
+.ifd-epilogue>span{font-size:12px;letter-spacing:-.02em;line-height:1.3}
+.ifd-epilogue>div{display:flex;flex-direction:column;gap:20px}
+.ifd-epilogue h2{font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:46px;font-weight:500;line-height:43px;margin:0}
+.ifd-epilogue p{font-size:16px;letter-spacing:-.02em;line-height:1.3;margin:0}
+.mobile-shell:has(> .ifd-page){padding-bottom:0}
+@media(max-width:385px){.ifd-page{padding-bottom:140px}.ifd-cover-caption h1{font-size:47px}.ifd-cover-caption{margin-top:-47px}.ifd-details-heading h2,.ifd-designer-heading h2{font-size:32px}.ifd-detail-caption h3,.ifd-wave-caption h3{font-size:16px}.ifd-detail-caption p{font-size:12px}.ifd-designer-profile strong{font-size:42px}.ifd-designer-profile span{font-size:13px}.ifd-question p{font-size:12px}}
