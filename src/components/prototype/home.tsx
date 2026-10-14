@@ -7,7 +7,6 @@ import {SectionHeading} from '@/components/primitives';
 import {
   asset,
   homeDiscoverStyles,
-  salons,
   articles,
   inFocusStyle
 } from '@/lib/prototype/catalog';
@@ -265,7 +264,58 @@ className={`magazine-card magazine-card--${articles[index].id} ${
       <h3>Popular Designers</h3>
       <p>지금 가장 많이 찾는 디자이너를 만나보세요</p>
     </header>
-    <div className="home-seat-designers-track" aria-label="인기 디자이너">
+
+<div
+  className="home-seat-designers-track"
+  aria-label="인기 디자이너"
+  onMouseDown={(e) => {
+    if (e.button !== 0) return;
+
+    const el = e.currentTarget;
+    el.dataset.dragging = "true";
+    el.dataset.startX = String(e.clientX);
+    el.dataset.startScrollLeft = String(el.scrollLeft);
+    el.dataset.dragMoved = "false";
+  }}
+  onMouseMove={(e) => {
+    const el = e.currentTarget;
+
+    if (el.dataset.dragging !== "true") return;
+
+    if ((e.buttons & 1) === 0) {
+      el.dataset.dragging = "false";
+      return;
+    }
+
+    const distance = e.clientX - Number(el.dataset.startX);
+
+    if (Math.abs(distance) <= 6) return;
+
+    el.dataset.dragMoved = "true";
+    el.style.scrollSnapType = "none";
+    el.scrollLeft =
+      Number(el.dataset.startScrollLeft) - distance;
+  }}
+  onMouseUp={(e) => {
+    e.currentTarget.dataset.dragging = "false";
+    e.currentTarget.style.scrollSnapType = "";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.dataset.dragging = "false";
+    e.currentTarget.style.scrollSnapType = "";
+  }}
+  onDragStartCapture={(e) => {
+    e.preventDefault();
+  }}
+  onClickCapture={(e) => {
+    if (e.currentTarget.dataset.dragMoved === "true") {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.dataset.dragMoved = "false";
+    }
+  }}
+>
+
       {homePopularDesigners.map((designer) => {
         const identity = (
           <>
@@ -287,7 +337,7 @@ className={`magazine-card magazine-card--${articles[index].id} ${
     </div>
   </div>
 </section>
-<section className="home-section"><SectionHeading title="The Salon" description="취향이 머무는 공간."/><Card item={salons[0]}/></section><section className="match-banner"><h2>Meet Your Match</h2><p>당신의 취향을 이해하는 디자이너를 만나보세요.</p><Action href="/recommendation/intro">디자이너 추천 받기</Action><Action secondary href="/preferences/intro">나의 취향 알아보기</Action></section></main><BottomNav active="/home"/>
+<section className="match-banner"><h2>Meet Your Match</h2><p>당신의 취향을 이해하는 디자이너를 만나보세요.</p><Action href="/recommendation/intro">디자이너 추천 받기</Action><Action secondary href="/preferences/intro">나의 취향 알아보기</Action></section></main><BottomNav active="/home"/>
 <HomePopup
   open={popup}
   slide={popupSlide}
