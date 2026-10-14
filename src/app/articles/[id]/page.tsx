@@ -1,2 +1,10 @@
 import {Magazine} from '@/components/prototype/details';
-export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <Magazine id={id} focus={false}/>;}
+import {PopupDetail} from '@/components/prototype/popup-detail';
+import {HairCareArticle} from '@/components/prototype/article-homecare';
+
+export default async function Page({params}:{params:Promise<{id:string}>}) {
+  const {id}=await params;
+  if (id === 'popup') return <PopupDetail/>;
+  if (id === 'care' || id === 'issue') return <HairCareArticle/>;
+  return <Magazine id={id} focus={false}/>;
+}
