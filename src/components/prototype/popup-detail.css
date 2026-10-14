@@ -1,0 +1,45 @@
+/* Figma: popUp 920:3997. Scoped to the popup article only. */
+.hairus-popup-detail{background:#fff;color:#20201e;width:100%;max-width:430px;margin:0 auto;min-height:100vh;font-family:Pretendard,Arial,sans-serif;line-height:1.5}
+.hairus-popup-detail *{box-sizing:border-box}
+.hairus-popup-detail img{display:block;max-width:100%;object-fit:cover}
+.pd-header{height:64px;padding:0 24px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;text-align:center;font-size:12px;background:#fff;color:#20242a}
+.pd-header .pd-back{display:flex;align-items:center;justify-content:flex-start;color:inherit;font-family:Arial,sans-serif;font-size:31px;text-decoration:none;height:44px;width:44px;font-weight:200;line-height:1}
+.pd-hero{height:584px;background:#000;color:#fff;position:relative;overflow:hidden}
+.pd-hero h1{position:absolute;top:60px;left:24px;right:24px;margin:0;font-family:var(--font-editorial),Georgia,serif;font-size:40px;font-weight:500;line-height:1.06;letter-spacing:-.02em;z-index:1}
+.pd-hero-image{position:absolute;left:17.45%;top:163px;width:82.55%;height:297px;object-fit:cover}
+.pd-hero-bottom{position:absolute;top:480px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:flex-end}
+.pd-hero-bottom span{font-size:11px;letter-spacing:-.02em}
+.pd-hero-bottom strong{font-size:34px;font-weight:500;letter-spacing:-.04em;line-height:1.2}
+.pd-experience{padding:52px 24px 52px}
+.pd-experience h2,.pd-coming h2{font-family:var(--font-editorial),Georgia,serif;font-size:40px;font-weight:500;letter-spacing:-.025em;line-height:1.3;margin:0}
+.pd-experience-list{margin-top:52px;display:flex;flex-direction:column;gap:28px}
+.pd-experience-item{display:grid;grid-template-columns:minmax(0,212fr) minmax(0,158fr);column-gap:12px;min-height:208px;align-items:center}
+.pd-experience-item.pd-flip{grid-template-columns:minmax(0,158fr) minmax(0,212fr)}
+.pd-experience-item img{width:100%;height:208px;object-fit:cover}
+.pd-experience-item.pd-flip img{order:2}
+.pd-experience-copy{text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px;min-width:0}
+.pd-experience-copy h3{margin:0;font-size:20px;font-weight:500;line-height:1.3}
+.pd-experience-copy p{margin:0;font-size:14px;font-weight:400;line-height:1.45;word-break:keep-all}
+.pd-benefits{display:flex;flex-direction:column}
+.pd-benefit{position:relative;width:100%}
+.pd-benefit img{width:100%;height:auto}
+.pd-benefit button{position:absolute;cursor:pointer;left:7%;right:7%;height:19%;bottom:8%;border:0;background:transparent}
+.pd-benefit button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.pd-coming{padding:52px 24px 52px}
+.pd-coming>p{margin:4px 0 24px;color:#66645f;font-size:12px}
+.pd-space-wide{width:100%;aspect-ratio:382/287;object-fit:cover}
+.pd-space-row{display:grid;grid-template-columns:158fr 212fr;gap:12px;margin-top:12px}
+.pd-space-row img{width:100%;height:146px;object-fit:cover}
+.pd-space-caption{display:block;margin-top:4px;text-align:right;font-size:8px;line-height:1.2}
+.pd-footer{background:#000;color:#fff;min-height:277px;padding:48px 24px}
+.pd-footer h2{font-family:var(--font-editorial),Georgia,serif;font-size:40px;font-weight:500;line-height:1.05;margin:0}
+.pd-footer p{font-size:16px;margin:20px 0}
+.pd-footer small{font-size:12px;line-height:1.5}
+.pd-dialog-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:1000}
+.pd-dialog{position:relative;width:min(100%,382px);background:#fff;color:#222;padding:40px 24px 24px}
+.pd-dialog h2{font-family:var(--font-editorial),Georgia,serif;font-size:30px;font-weight:500;margin:0 0 16px}
+.pd-dialog p{font-size:14px;line-height:1.7;margin:0 0 28px}
+.pd-dialog button{cursor:pointer}
+.pd-dialog-close{position:absolute;right:16px;top:12px;border:0;background:none;font-size:26px}
+.pd-dialog-confirm{width:100%;height:46px;background:#111;color:white;border:0}
+@media(max-width:390px){.pd-hero h1{font-size:36px}.pd-experience-item{min-height:180px}.pd-experience-item img{height:180px}.pd-experience-copy h3{font-size:18px}.pd-experience-copy p{font-size:12px}}
