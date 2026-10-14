@@ -40,17 +40,13 @@ export function StyleExplore(){
  const [draft,setDraft]=useState<Filters>(emptyFilters);
  const [open,setOpen]=useState(false);
  const imageInput=useRef<HTMLInputElement>(null);
- const [selectedImage,setSelectedImage]=useState<{name:string;url:string}|null>(null);
  const [imageError,setImageError]=useState('');
  const chooseImage=(file?:File)=>{
   if(!file)return;
   if(!file.type.startsWith('image/')){setImageError('이미지 파일을 선택해 주세요.');return;}
   if(file.size>10*1024*1024){setImageError('10MB 이하의 이미지를 선택해 주세요.');return;}
   setImageError('');
-  const reader=new FileReader();
-  reader.onload=()=>{if(typeof reader.result==='string')setSelectedImage({name:file.name,url:reader.result});};
-  reader.onerror=()=>setImageError('이미지를 불러오지 못했어요. 다시 선택해 주세요.');
-  reader.readAsDataURL(file);
+  router.push('/styles/airy');
  };
  const appliedCount=filterCount(filters);
  const result=useMemo(()=>styles.filter(item=>{
@@ -84,7 +80,6 @@ export function StyleExplore(){
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 18 5.5-5.5 3.5 3.5 2.5-2.5 4.5 4.5"/></svg>
      </button>
     </div>
-    {selectedImage&&<div className={sheet.imagePreview}><img src={selectedImage.url} alt="선택한 참고 이미지 미리보기"/><div><span className={sheet.imageName}>{selectedImage.name}</span><small>참고 이미지가 선택되었어요. 유사 이미지 검색은 아직 지원하지 않아요.</small></div><button type="button" aria-label="선택한 이미지 제거" onClick={()=>{setSelectedImage(null);setImageError('');}}>×</button></div>}
     {imageError&&<p className={sheet.imageError} role="alert">{imageError}</p>}
     <div className={sheet.quickFilters} aria-label="기장 빠른 필터">
      {['ALL','SHORT','MEDIUM','LONG'].map(value=><button key={value} type="button" aria-pressed={(value==='ALL'?filters.length==='전체':filters.length===lengthLabels[value])} onClick={()=>selectQuickLength(value)}>{value}</button>)}
