@@ -4,30 +4,47 @@ import {useRouter} from 'next/navigation';
 import {useState,type ReactNode} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
-import {Button} from '@/components/primitives';
 import {itemHref,type Item} from '@/lib/prototype/catalog';
 import {usePrototype} from './store';
+import savenote from './savenote.module.css';
 export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back" onClick={()=>window.history.length>1?router.back():router.push(back)}>←</button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
 export function Action({href,children,secondary=false}:{href:string;children:ReactNode;secondary?:boolean}){return <Link className={`button button--${secondary?'plain':'primary'}`} href={href}>{children}</Link>;}
 export function Card({item}:{item:Item}){return <article className={`proto-card ${item.kind}`}><Link href={itemHref(item)}><img src={item.image} alt={item.name} loading="lazy"/><h3>{item.name}</h3><p>{item.location||item.tags.join(' · ')}</p></Link><SaveButton item={item}/></article>;}
 export function Cards({items}:{items:Item[]}){return <div className="proto-grid">{items.map(item=><Card item={item} key={`${item.kind}:${item.id}`}/>)}</div>;}
 export function Chips({options,selected,onSelect}:{options:string[];selected:string[];onSelect:(v:string)=>void}){return <div className="chips">{options.map(option=><button key={option} aria-pressed={selected.includes(option)} onClick={()=>onSelect(option)}>{option}</button>)}</div>;}
-export function SaveButton({item}:{item:Item}){const {state,update,ready}=usePrototype();const saved=state.saved.find(s=>s.id===item.id&&s.kind===item.kind);const [open,setOpen]=useState(false);const [reasons,setReasons]=useState<string[]>([]);const [note,setNote]=useState('');const options=item.kind==='style'?['전체 분위기','기장','컬 / 웨이브','컬러','얼굴 주변 디테일']:item.kind==='designer'?['포트폴리오','상담 방식','스타일 취향','방문해 보고 싶어요']:['공간 분위기','위치','소속 디자이너','방문해 보고 싶어요'];return <><button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{setReasons(saved?.reasons||[]);setNote(saved?.note||'');setOpen(true);}}>{saved ? (
-  '♥'
-) : (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#555551"
-    strokeWidth={1.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    style={{ display: 'block' }}
-  >
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" />
-  </svg>
-)}</button><BottomSheet open={open} onClose={()=>setOpen(false)} title="SAVENOTE" variant="editor"><p>{item.name}<br/>어떤 점이 마음에 들었나요?</p><Chips options={options} selected={reasons} onSelect={v=>setReasons(reasons.includes(v)?reasons.filter(r=>r!==v):[...reasons,v])}/><label className="input-label">나만의 메모<textarea aria-label="나만의 메모" placeholder="다음 상담에서 이야기하고 싶은 점" value={note} maxLength={500} onChange={e=>setNote(e.target.value)}/></label><Button onClick={()=>{update(s=>({...s,saved:[...s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id)),{id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()}]}));setOpen(false);}}>저장하기</Button>{saved&&<Button variant="plain" onClick={()=>{update(s=>({...s,saved:s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id))}));setOpen(false);}}>저장 해제</Button>}</BottomSheet></>;}
+export function SaveButton({item}:{item:Item}){
+ const {state,update,ready}=usePrototype();
+ const saved=state.saved.find(s=>s.id===item.id&&s.kind===item.kind);
+ const [open,setOpen]=useState(false);
+ const [reasons,setReasons]=useState<string[]>([]);
+ const [note,setNote]=useState('');
+ const options=item.kind==='style'
+  ?['나중에 도전','분위기 참고','나에게 어울림','상담할 때 보여줄 사진','스타일링 참고']
+  :item.kind==='designer'
+  ?['예약하고 싶음','시술 결과 좋음','후기 좋음','취향 잘 맞음']
+  :['방문하고 싶음','위치 좋음','매장 분위기 좋음','가격 괜찮음'];
+ const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
+ const save=()=>{update(s=>({...s,saved:[...s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id)),{id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()}]}));setOpen(false);};
+ return <>
+  <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{setReasons(saved?.reasons||[]);setNote(saved?.note||'');setOpen(true);}}>
+   {saved?'♥':<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555551" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{display:'block'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>}
+  </button>
+  <BottomSheet open={open} onClose={()=>setOpen(false)} title="SAVENOTE" variant="editor" headingAction={<span/>}>
+   <div className={savenote.sheet}>
+    <div className={savenote.heading}>
+     <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
+     <button type="button" onClick={()=>setOpen(false)}>열지 않기</button>
+    </div>
+    <div className={savenote.savedItem}><img src={item.image} alt="" /><strong>{item.name}</strong></div>
+    <div className={savenote.form}>
+     <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
+     <div className={savenote.options}>{options.map(option=><button type="button" key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</button>)}</div>
+     <input className={savenote.note} aria-label="나만의 메모" placeholder="직접 적어보세요." value={note} maxLength={500} onChange={e=>setNote(e.target.value)}/>
+    </div>
+    <button type="button" className={savenote.apply} onClick={save}>적용하기</button>
+    {saved&&<button type="button" className={savenote.remove} onClick={()=>{update(s=>({...s,saved:s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id))}));setOpen(false);}}>저장 해제</button>}
+   </div>
+  </BottomSheet>
+ </>;
+}
 export function DemoNotice({children}:{children?:ReactNode}){return <p className="demo-notice">{children||'데모 콘텐츠 · 실제 서비스 정보와 다를 수 있어요.'}</p>;}
