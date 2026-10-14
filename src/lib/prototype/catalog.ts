@@ -35,8 +35,53 @@ export const catalog = [
   ...salons,
 ];
 
-export const findItem=(kind:Kind,id:string)=>catalog.find(i=>i.kind===kind&&i.id===id);
+
+export const findItem = (kind: Kind, id: string) =>
+  [...catalog, ...homeDiscoverStyles].find(
+    item => item.kind === kind && item.id === id
+  );
+
 export const itemHref=(item:Item)=>`/${item.kind==='style'?'styles':item.kind==='designer'?'designers':'salons'}/${item.id}`;
+
+/* HOME — More to Discover 전용 스타일 */
+
+export const homeDiscoverStyles: Item[] = [
+  // 01. 에어리 레이어드
+  styles[0],
+
+  // 02. 테슬컷
+  styles[1],
+
+  // 03. 샌드펌
+  styles[2],
+
+  // 04. 허쉬컷 — 새 이미지
+  {
+    ...styles[3],
+    id: 'discover-hush',
+    image: asset('discover-hush.png'),
+  },
+
+  // 05. 소프트 프린지
+  styles[7],
+
+  // 06. 스트레이트 레이어드
+  styles[5],
+
+  // 07. 텍스처드 픽시
+  styles[4],
+
+  // 08. 미디엄 레이어드컷
+  {
+    ...styles[6],
+    id: 'medium-layered',
+    name: '미디엄 레이어드컷',
+    english: 'Medium Layered Cut',
+    image: asset('baf82.png'),
+    tags: ['MEDIUM', '내추럴'],
+  },
+];
+
 export const services=[{id:'cut',name:'여성 디자인 컷',price:40000,minutes:60,description:'얼굴선과 모발의 흐름을 고려해 손질하기 편한 길이로 정돈해요.'},{id:'perm',name:'디자인 펌',price:180000,minutes:150,description:'원하는 웨이브와 모발 상태를 상담하고 자연스러운 컬을 제안해요.'},{id:'color',name:'전체 염색',price:120000,minutes:120,description:'현재 컬러와 원하는 분위기에 맞춰 색상을 상담해요.'}];
 export const articles=[{id:'care',title:'THE ART OF HAIR CARE',subtitle:'머릿결을 돌보는 작은 습관',image:asset('0dc76.png'),body:'좋은 헤어는 매일의 작은 습관에서 시작됩니다. 머리를 감은 뒤 수건으로 가볍게 물기를 누르고, 두피부터 부드럽게 말려보세요. 나의 모발과 생활에 맞는 손질 방법은 디자이너와의 상담으로 찾아갈 수 있습니다.'},{id:'story',title:'BEYOND THE CHAIR',subtitle:'스타일을 만드는 사람들의 이야기',image:asset('48a15.png'),body:'한 사람의 헤어에는 취향과 일상이 담깁니다. 디자이너는 원하는 이미지뿐 아니라 아침에 머리를 손질하는 시간과 습관에도 귀를 기울입니다. 상담에서 평소 어려웠던 점을 함께 이야기해 보세요.'},{id:'color',title:'THE COLOR RITUAL',subtitle:'나를 표현하는 색',image:asset('6b945.png'),body:'컬러를 고르는 일은 새로운 분위기를 상상하는 일입니다. 지금의 모발 이력, 유지하고 싶은 톤과 관리 주기를 상담 노트에 기록해 보세요.'},{id:'fringe',title:'THE FRINGE THEORY',subtitle:'작은 변화, 새로운 표정',image:asset('5f044.png'),body:'얼굴 주변의 짧은 선이 전체 인상을 바꿉니다. 앞머리와 옆머리의 길이를 결정하기 전, 가르마와 평소 손질 습관을 함께 살펴보세요.'}];
 export type Question={key:string;title:string;max:number;options:string[];images?:string[]};
