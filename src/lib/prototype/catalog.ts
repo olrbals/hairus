@@ -1,6 +1,6 @@
 export const asset=(file:string)=>`/assets/figma/v1/${file}`;
 export type Kind='style'|'designer'|'salon';
-export type Item={id:string;kind:Kind;name:string;english:string;image:string;tags:string[];description:string;designerId?:string;salonId?:string;location?:string;gender?:string;strengths?:string[]};
+export type Item={id:string;kind:Kind;name:string;english:string;image:string;tags:string[];description:string;designerId?:string;salonId?:string;location?:string;gender?:string;strengths?:string[];discoveryOnly?:boolean};
 export const styles:Item[]=[
  ['airy','에어리 레이어드','Airy Layered','5582e.png','LONG','내추럴','yoona'],
  ['tassel','테슬컷','Tassel Cut','05be4.png','SHORT','모던 · 시크','sohee'],
@@ -14,8 +14,20 @@ export const styles:Item[]=[
 export const designers:Item[]=[
  {id:'yoona',kind:'designer',name:'윤아',english:'YOONA',image:asset('31628.png'),tags:['내추럴','러블리','레이어드','청순'],description:'취향을 세심하게 듣고, 일상에서 자연스러운 스타일을 제안해요.',salonId:'arvo',location:'성수',gender:'여자',strengths:['충분한 상담','손질하기 쉬운 결과','친절한','취향 존중','충분한 대화']},
  {id:'sohee',kind:'designer',name:'소희',english:'SOHEE',image:asset('ad0de.png'),tags:['모던 · 시크','귀여운','단발','y2k'],description:'선명한 커트 라인과 가벼운 질감으로 나다운 변화를 함께 만들어요.',salonId:'arvo',location:'성수',gender:'여자',strengths:['원하는 스타일 경험','솔직한','꼼꼼한','핵심만 빠르게']},
+ {id:'jisu',kind:'designer',name:'지수',english:'JISU',image:asset('d9387.png'),tags:['테슬컷','컬러'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',location:'논현동',strengths:[],discoveryOnly:true},
+ {id:'gyunghyun',kind:'designer',name:'경현',english:'GYUNGHYUN',image:asset('3a62b.png'),tags:['허쉬컷','매트브라운'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',salonId:'arvo',location:'성수동',strengths:[],discoveryOnly:true},
+ {id:'seeun',kind:'designer',name:'세은',english:'SEEUN',image:asset('2dae9.png'),tags:['테슬컷','히피펌'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',location:'이의동',strengths:[],discoveryOnly:true},
+ {id:'soyul',kind:'designer',name:'소율',english:'SOYUL',image:asset('c451a.png'),tags:['볼륨펌','자연스러운 컬'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',salonId:'arvo',location:'성수동',strengths:[],discoveryOnly:true},
+ {id:'jonghun',kind:'designer',name:'종훈',english:'JONGHUN',image:asset('92e32.png'),tags:['픽시컷','애쉬 브라운'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',salonId:'arvo',location:'성수동',strengths:[],discoveryOnly:true},
+ {id:'hana',kind:'designer',name:'하나',english:'HANA',image:asset('63467.png'),tags:['내츄럴컷','모발관리'],description:'Figma 탐색 목록에 표시된 데모 디자이너입니다. 시술과 예약 정보는 별도로 준비되지 않았어요.',location:'신사동',strengths:[],discoveryOnly:true},
 ];
-export const salons:Item[]=[{id:'arvo',kind:'salon',name:'아르보 성수',english:'ARVO SEONGSU',image:asset('4e00b.png'),tags:['성수','상담','내추럴'],description:'빛과 여백이 머무는 공간에서 나를 위한 시간을 만나보세요.',location:'서울 성동구 성수동'}];
+export const salons:Item[]=[
+ {id:'arvo',kind:'salon',name:'아르보 성수',english:'ARVO SEONGSU',image:asset('4e00b.png'),tags:['성수','상담','내추럴'],description:'빛과 여백이 머무는 공간에서 나를 위한 시간을 만나보세요.',location:'서울 성동구 성수동'},
+ {id:'moodon',kind:'salon',name:'무드온',english:'MOOD ON',image:asset('8d087.png'),tags:['논현동'],description:'Figma 탐색 목록에 표시된 데모 헤어샵입니다.',location:'서울 서초구 논현동 · 신논현역 도보 5분'},
+ {id:'ongyeol',kind:'salon',name:'온결',english:'ONGYEOL',image:asset('d64e8.png'),tags:['성동구'],description:'Figma 탐색 목록에 표시된 데모 헤어샵입니다.',location:'서울 성동구 성동구 · 성수역 도보 5분'},
+ {id:'ob-hair',kind:'salon',name:'오브헤어',english:'OB HAIR',image:asset('5111e.png'),tags:['성동구'],description:'Figma 탐색 목록에 표시된 데모 헤어샵입니다.',location:'서울 성동구 성동구 · 성수역 도보 5분'},
+ {id:'noir',kind:'salon',name:'누아르',english:'NOIR',image:asset('766e3.png'),tags:['성동구'],description:'Figma 탐색 목록에 표시된 데모 헤어샵입니다.',location:'서울 성동구 성동구 · 성수역 도보 5분'},
+];
 export const catalog=[...styles,...designers,...salons];
 export const findItem=(kind:Kind,id:string)=>catalog.find(i=>i.kind===kind&&i.id===id);
 export const itemHref=(item:Item)=>`/${item.kind==='style'?'styles':item.kind==='designer'?'designers':'salons'}/${item.id}`;
