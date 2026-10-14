@@ -4,7 +4,7 @@ import {useRouter} from 'next/navigation';
 import {useEffect,useState,type ReactNode} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
-import {itemHref,type Item} from '@/lib/prototype/catalog';
+import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {usePrototype} from './store';
 import savenote from './savenote.module.css';
 export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back" onClick={()=>window.history.length>1?router.back():router.push(back)}>←</button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
@@ -30,6 +30,8 @@ export function SaveButton({item}:{item:Item}){
   :item.kind==='designer'
   ?['예약하고 싶음','시술 결과 좋음','후기 좋음','취향 잘 맞음']
   :['방문하고 싶음','위치 좋음','매장 분위기 좋음','가격 괜찮음'];
+ const displayName=item.kind==='designer'?`${item.name} 디자이너`:item.name;
+ const itemInfo=item.kind==='salon'?item.location:item.kind==='designer'?[salons.find(salon=>salon.id===item.salonId)?.name,item.location].filter(Boolean).join(' · '):undefined;
  const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
  const save=()=>{update(s=>({...s,saved:[...s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id)),{id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()}]}));setOpen(false);};
  return <>
@@ -42,8 +44,8 @@ export function SaveButton({item}:{item:Item}){
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
      <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>{setToggleNotice(!saveNoteEnabled);update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}));}}><span className={savenote.toggleThumb}/></button>
     </div>
-    {toggleNotice!==null&&<p className={savenote.toggleNotice} role="status" aria-live="polite">{toggleNotice?'SAVENOTE가 켜졌어요. 이제 저장할 때 메모를 남길 수 있어요.':'SAVENOTE가 꺼졌어요. 이제 메모 없이 바로 저장돼요.'}</p>}
-    <div className={savenote.savedItem}><img src={item.image} alt="" /><strong>{item.name}</strong></div>
+    {toggleNotice!==null&&<p className={savenote.toggleNotice} role="status" aria-live="polite">{toggleNotice?'SAVENOTE가 켜졌어요. 이제 저장할 때 메모를 남길 수 있어요.':'SAVENOTE가 꺼졌어요. 이제 메모 없이 바로 저장돼요. 설정은 MY → 알림 및 설정에서 변경할 수 있어요.'}</p>}
+    <div className={savenote.savedItem}><img src={item.image} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
      <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
      <div className={savenote.options}>{options.map(option=><button type="button" key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</button>)}</div>
