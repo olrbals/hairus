@@ -15,6 +15,7 @@ export function Chips({options,selected,onSelect}:{options:string[];selected:str
 export function SaveButton({item}:{item:Item}){
  const {state,update,ready}=usePrototype();
  const saved=state.saved.find(s=>s.id===item.id&&s.kind===item.kind);
+ const saveNoteEnabled=state.saveNoteEnabled!==false;
  const [open,setOpen]=useState(false);
  const [reasons,setReasons]=useState<string[]>([]);
  const [note,setNote]=useState('');
@@ -26,14 +27,14 @@ export function SaveButton({item}:{item:Item}){
  const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
  const save=()=>{update(s=>({...s,saved:[...s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id)),{id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()}]}));setOpen(false);};
  return <>
-  <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{setReasons(saved?.reasons||[]);setNote(saved?.note||'');setOpen(true);}}>
+  <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(!saved&&!saveNoteEnabled){update(s=>({...s,saved:[...s.saved,{id:item.id,kind:item.kind,reasons:[],note:'',savedAt:new Date().toISOString()}]}));return;}setReasons(saved?.reasons||[]);setNote(saved?.note||'');setOpen(true);}}>
    {saved?'♥':<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555551" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{display:'block'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>}
   </button>
   <BottomSheet open={open} onClose={()=>setOpen(false)} title="SAVENOTE" variant="editor" headingAction={<span/>}>
    <div className={savenote.sheet}>
     <div className={savenote.heading}>
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
-     <button type="button" onClick={()=>setOpen(false)}>열지 않기</button>
+     <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}))}><span className={savenote.toggleThumb}/></button>
     </div>
     <div className={savenote.savedItem}><img src={item.image} alt="" /><strong>{item.name}</strong></div>
     <div className={savenote.form}>
