@@ -7,13 +7,12 @@ import {SectionHeading} from '@/components/primitives';
 import {
   asset,
   homeDiscoverStyles,
-  designers,
   salons,
   articles,
   inFocusStyle
 } from '@/lib/prototype/catalog';
 
-import {Action,Card,Cards,SaveButton} from './shared';
+import {Action,Card,SaveButton} from './shared';
 import {HomePopup} from './home-popup';
 import {usePrototype} from './store';
 
@@ -33,6 +32,40 @@ const magazineCopy = [
   {
     title: "나에게 어울리는 앞머리는 따로 있다",
     subtitle: "얼굴형과 분위기에 따라 달라지는 앞머리 선택법",
+  },
+];
+
+const homePopularDesigners: {
+  name: string;
+  image: string;
+  specialty: string;
+  salon: string;
+  href?: string;
+}[] = [
+  {
+    name: "윤아",
+    image: "31628.png",
+    specialty: "레이어드컷 · 샌드펌",
+    salon: "아르보 성수",
+    href: "/designers/yoona",
+  },
+  {
+    name: "지수",
+    image: "d9387.png",
+    specialty: "허쉬컷 · 히피펌",
+    salon: "준오헤어 신논현점",
+  },
+  {
+    name: "경현",
+    image: "3a62b.png",
+    specialty: "허쉬컷 · 매트브라운",
+    salon: "아르보 성수",
+  },
+  {
+    name: "세은",
+    image: "2dae9.png",
+    specialty: "테슬컷 · 컬러리스트",
+    salon: "청아하다 광교",
   },
 ];
 
@@ -209,7 +242,52 @@ className={`magazine-card magazine-card--${articles[index].id} ${
     )
   )}
 </div>
-<div className="banner-controls"><button aria-label="이전 배너" onClick={()=>setBanner((banner+articles.length-1)%articles.length)}>←</button><button aria-label="다음 배너" onClick={()=>setBanner((banner+1)%articles.length)}>→</button></div></section><section className="home-section home-seat"><h2 className="section-title">A Seat for You</h2><p>변화는 한 자리에 앉는 순간부터 시작됩니다.<br/><br></br>오늘 당신을 위한 자리에 앉아보세요.</p><Link href="/salons/arvo"><img src={asset('4401b.png')} alt="나를 위한 살롱의 자리"/></Link><Action secondary href="/explore?category=salon">헤어샵 둘러보기 →</Action></section><section className="home-section"><SectionHeading title="People & Layers" description="마음에 든 스타일, 그 끝을 만든 사람."/><Cards items={designers}/><Action secondary href="/explore?category=designer">디자이너 모두 보기 →</Action></section><section className="home-section"><SectionHeading title="The Salon" description="취향이 머무는 공간."/><Card item={salons[0]}/></section><section className="match-banner"><h2>Meet Your Match</h2><p>당신의 취향을 이해하는 디자이너를 만나보세요.</p><Action href="/recommendation/intro">디자이너 추천 받기</Action><Action secondary href="/preferences/intro">나의 취향 알아보기</Action></section></main><BottomNav active="/home"/>
+<div className="banner-controls"><button aria-label="이전 배너" onClick={()=>setBanner((banner+articles.length-1)%articles.length)}>←</button><button aria-label="다음 배너" onClick={()=>setBanner((banner+1)%articles.length)}>→</button></div></section><section className="home-section home-seat">
+  <div className="home-seat-intro">
+    <h2 className="section-title">A Seat for You</h2>
+    <p>
+      변화는 한 자리에 앉는 순간부터 시작됩니다.
+      <br />
+      <br />
+      어떤 모습이 되고 싶은지,
+      <br />
+      어떤 분위기가 나다운지
+      <br />
+      <br />
+      오늘 당신을 위한 자리에 앉아보세요.
+    </p>
+  </div>
+  <Link className="home-seat-photo" href="/salons/arvo" aria-label="아르보 성수 살롱 자세히 보기">
+    <img src={asset("4401b.png")} alt="나를 위한 살롱의 자리" />
+  </Link>
+  <div className="home-seat-designers">
+    <header className="home-seat-designers-heading">
+      <h3>Popular Designers</h3>
+      <p>지금 가장 많이 찾는 디자이너를 만나보세요</p>
+    </header>
+    <div className="home-seat-designers-track" aria-label="인기 디자이너">
+      {homePopularDesigners.map((designer) => {
+        const identity = (
+          <>
+            <img className="home-seat-designer-photo" src={asset(designer.image)} alt={`${designer.name} 디자이너`} loading="lazy" />
+            <span className="home-seat-designer-name">{designer.name}</span>
+          </>
+        );
+        return (
+          <article className="home-seat-designer-card" key={designer.name}>
+            {designer.href ? (
+              <Link className="home-seat-designer-identity" href={designer.href}>{identity}</Link>
+            ) : (
+              <div className="home-seat-designer-identity">{identity}</div>
+            )}
+            <p>{designer.specialty}<br />{designer.salon}</p>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+<section className="home-section"><SectionHeading title="The Salon" description="취향이 머무는 공간."/><Card item={salons[0]}/></section><section className="match-banner"><h2>Meet Your Match</h2><p>당신의 취향을 이해하는 디자이너를 만나보세요.</p><Action href="/recommendation/intro">디자이너 추천 받기</Action><Action secondary href="/preferences/intro">나의 취향 알아보기</Action></section></main><BottomNav active="/home"/>
 <HomePopup
   open={popup}
   slide={popupSlide}
