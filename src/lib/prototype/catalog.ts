@@ -59,7 +59,7 @@ export const homeDiscoverStyles: Item[] = [
   {
     ...styles[3],
     id: 'discover-hush',
-    image: asset('discover-hush.png'),
+    image: asset('discover-hushcut.png'),
   },
 
   // 05. 소프트 프린지
@@ -77,7 +77,7 @@ export const homeDiscoverStyles: Item[] = [
     id: 'medium-layered',
     name: '미디엄 레이어드컷',
     english: 'Medium Layered Cut',
-    image: asset('baf82.png'),
+    image: asset('discover-last.png'),
     tags: ['MEDIUM', '내추럴'],
   },
 ];

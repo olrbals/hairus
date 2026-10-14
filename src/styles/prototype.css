@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: center;
   gap: 48px;
-  border-top: 0.8px solid rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 .home-seat-intro {
@@ -110,7 +109,7 @@
 .home-seat-designer-identity {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   color: #20201e;
   text-decoration: none;
 }
@@ -158,22 +157,33 @@
   justify-content: center;
   gap: 36px;
   text-align: center;
-  background: #f8f5f0 url('/assets/figma/v1/ce227.png') center / cover no-repeat;
+  background: #fff url('/assets/figma/v1/ce227.png') center / cover no-repeat;
+  overflow: hidden;
 }
+
+
 .prototype > .match-banner::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.7) 4.8077%,
-    rgba(255, 255, 255, 0.175) 22.12%,
-    rgba(255, 255, 255, 0.087) 90.426%,
-    rgba(255, 255, 255, 0.7) 100%
+    to bottom,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.85) 3%,
+    rgba(255, 255, 255, 0.45) 8%,
+    rgba(255, 255, 255, 0.12) 14%,
+    rgba(255, 255, 255, 0) 22%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(255, 255, 255, 0.12) 90%,
+    rgba(255, 255, 255, 0.5) 96%,
+    #ffffff 100%
   );
 }
+
+
 .match-banner-copy {
   display: flex;
   flex-direction: column;

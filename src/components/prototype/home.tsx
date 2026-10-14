@@ -11,7 +11,7 @@ import {
   inFocusStyle
 } from '@/lib/prototype/catalog';
 
-import {Action,Card,SaveButton} from './shared';
+import {Action,Card} from './shared';
 import {HomePopup} from './home-popup';
 import {usePrototype} from './store';
 
@@ -81,7 +81,6 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
       <span>Soft bob · Shape</span>
     </div>
   </Link>
-  <SaveButton item={inFocusStyle} />
 </div>
 </section>
 
