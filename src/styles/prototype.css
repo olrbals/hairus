@@ -345,14 +345,310 @@
 
 
 
-/* HOME — More to Discover Section Spacing */
 
-.home-discover {
-  margin-bottom: 0;
+/* HOME — Magazine */
+
+.home-magazine {
+  gap: 28px;
+  padding: 24px;
+  min-width: 0;
 }
 
-/* More to Discover 다음 섹션 간격 */
-.home-discover + .home-section {
-  margin-top: 0;
-  padding-top: 28px;
+.home-magazine .section-heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-magazine .section-heading h2 {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 48px;
+  color: #20201e;
+}
+
+.home-magazine .section-heading p {
+  margin: 0;
+  font-family: Pretendard, var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #666460;
+}
+
+.home-magazine .section-heading .view-link {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #20201e;
+}
+
+/* Magazine cards */
+
+.home-magazine .magazine-track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.home-magazine .magazine-card {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+
+.home-magazine .magazine-card--active {
+  width: 335px;
+  height: 460px;
+}
+
+.home-magazine .magazine-card--peek {
+  width: 240px;
+  height: 330px;
+}
+
+.home-magazine .magazine-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text over image */
+
+.home-magazine .magazine-caption {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #fff;
+}
+
+.home-magazine .magazine-caption h3 {
+  margin: 0;
+  font-family: Pretendard, var(--font-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.home-magazine .magazine-caption p {
+  margin: 0;
+  font-family: Pretendard, var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+/* Smaller preview card */
+
+.home-magazine .magazine-card--peek .magazine-caption {
+  left: 20px;
+  right: 20px;
+  bottom: 32px;
+}
+
+.home-magazine .magazine-card--peek h3 {
+  font-size: 12px;
+}
+
+.home-magazine .magazine-card--peek p {
+  font-size: 8px;
+}
+
+
+
+/* HOME — Magazine Swipe Interaction */
+
+.home-magazine .magazine-track {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.home-magazine .magazine-track:active {
+  cursor: grabbing;
+}
+
+.home-magazine .magazine-card img {
+  -webkit-user-drag: none;
+}
+
+
+/* HOME — Magazine Controls Refinement */
+
+.home-magazine {
+  row-gap: 16px;
+}
+
+/* 제목과 이미지 사이는 기존 28px 유지 */
+.home-magazine .section-heading {
+  margin-bottom: 12px;
+}
+
+/* 하단 페이지 컨트롤 */
+.home-magazine .banner-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+.home-magazine .banner-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #666460;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.home-magazine .banner-controls span {
+  font-family: Pretendard, var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #20201e;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* HOME — Shared Section Spacing */
+
+/* 모든 일반 HOME 섹션: 상하좌우 24px */
+.prototype > .home-section {
+  margin: 0;
+  padding: 24px;
+}
+
+/* 인접한 섹션 프레임 사이: 52px */
+.prototype > .home-section + .home-section {
+  margin-top: 52px;
+}
+
+
+/* HOME — Magazine Image Crop Refinement */
+
+/* 이미지가 카드 프레임 안에서 확대되도록 설정 */
+.home-magazine .magazine-card img {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* 01 — Hair Care */
+.home-magazine .magazine-card--care.magazine-card--active img {
+  width: 141.09%;
+  height: 125.12%;
+  left: -24.97%;
+  top: -5.79%;
+}
+
+/* 02 — Styling */
+.home-magazine .magazine-card--story img {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/* 03 — Hair Color */
+.home-magazine .magazine-card--color img {
+  width: 160%;
+  height: 142%;
+  left: -42%;
+  top: -20%;
+}
+
+/* 04 — Fringe / active card crop refinement */
+.home-magazine .magazine-card--fringe.magazine-card--active img {
+  width: 114%;
+  height: 114%;
+  left: -2%;
+  top: -3%;
+}
+
+/* 04 — Fringe / peek card */
+.home-magazine .magazine-card--fringe.magazine-card--peek img {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
+
+/* HOME — Magazine Arrow Interaction */
+
+.home-magazine .banner-controls button {
+  transition: color 180ms ease;
+}
+
+.home-magazine .banner-controls button:hover,
+.home-magazine .banner-controls button:focus-visible {
+  color: #20201e;
+}
+
+
+
+/* HOME — Magazine Minimal Navigation */
+
+.home-magazine .banner-controls {
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.home-magazine .banner-controls button {
+  color: #666460;
+  transition: color 180ms ease;
+}
+
+
+.home-magazine .banner-controls button {
+  color: #666460;
+  font-size: 12px;
+  transition: color 180ms ease;
+}
+
+
+.home-magazine .banner-controls button:hover,
+.home-magazine .banner-controls button:focus-visible {
+  color: #20201e;
+}
+
+
+/* HOME — Magazine Arrow Spacing */
+
+/* 왼쪽 화살표를 오른쪽으로 */
+.home-magazine .banner-controls button:first-child {
+  justify-content: flex-end;
+}
+
+/* 오른쪽 화살표를 왼쪽으로 */
+.home-magazine .banner-controls button:last-child {
+  justify-content: flex-start;
+  padding-left: 20px;
 }
