@@ -1,0 +1,31 @@
+{
+  "checks": [
+    "Unanswered step cannot advance",
+    "Single selection active",
+    "Region selection closes picker",
+    "Consultation selection capped at three",
+    "Selection limit announced",
+    "Answers persist after reload",
+    "Six experience cards",
+    "Figma 108x154 cards in three columns, two rows, 22px row gap",
+    "Experience cards support multi-selection",
+    "No-experience choice clears conflicting negative selections",
+    "Selecting an experience clears no-experience choice",
+    "Existing recommendation results connected",
+    "Existing preferences unanswered state retained",
+    "Selected colors exactly match existing preferences",
+    "No horizontal overflow at 430px",
+    "No overflow 375px step 1",
+    "No overflow 375px step 2",
+    "No overflow 375px step 3",
+    "No overflow 375px step 4",
+    "No overflow 375px step 5",
+    "No overflow 430px step 1",
+    "No overflow 430px step 2",
+    "No overflow 430px step 3",
+    "No overflow 430px step 4",
+    "No overflow 430px step 5",
+    "No runtime errors"
+  ],
+  "errors": []
+}
