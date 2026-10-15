@@ -82,8 +82,11 @@
 .rating strong{width:100px;font:700 68px/72px var(--font-editorial);color:#20201e}
 .rating>span{width:52px;color:#616161;font-size:16px}
 .rating small{flex:1;color:#616161;font-size:12px;text-align:right}
-.reviews>.tags{padding-left:0}
-.reviews>.tags span{padding-block:3px;font-size:11px;line-height:18px;white-space:normal;max-width:100%}
+.reviewHighlights{margin-top:8px}
+.reviewHighlights h3{font-size:14px;font-weight:600;line-height:1.4;letter-spacing:-.02em}
+.reviewHighlights ul{margin:12px 0 0;padding:0;list-style:none}
+.reviewHighlights li{padding:12px 0;border-bottom:1px solid #e5e5e5;font-size:14px;font-weight:400;line-height:1.4;color:#20201e}
+.reviews .reviewHighlights+article{margin-top:24px;padding-top:0;border-top:0}
 .reviews article{margin-top:20px;padding-top:20px;border-top:1px solid #d1d1d1}
 .reviews article header{display:flex;justify-content:space-between;font-size:14px}
 .reviews article time,.reviews article small{color:#616161;font-size:12px}
@@ -96,4 +99,4 @@
 .salon>p{margin-top:6px;color:#616161;font-size:14px}
 .booking{padding:28px 12px 40px}
 .booking>a{min-height:61px;font-size:16px;font-weight:500}
-@media(max-width:360px){.header,.profile,.sectionNav,.match,.works,.serviceSection,.reviews,.salon{padding-inline:18px}.hero{height:auto;aspect-ratio:430/528}.profile h1{font-size:46px}.matchImages img{height:auto;aspect-ratio:190/276}.workGrid{height:auto;aspect-ratio:382/346}.tags{gap:6px}.tags span{padding-inline:10px}.reviews>.tags span{padding-inline:12px}}
+@media(max-width:360px){.header,.profile,.sectionNav,.match,.works,.serviceSection,.reviews,.salon{padding-inline:18px}.hero{height:auto;aspect-ratio:430/528}.profile h1{font-size:46px}.matchImages img{height:auto;aspect-ratio:190/276}.workGrid{height:auto;aspect-ratio:382/346}.tags{gap:6px}.tags span{padding-inline:10px}}
