@@ -70,3 +70,16 @@
   display: inline-block;
   margin-right: 0;
 }
+
+/* Result profile section headings and direct-history helper spacing. */
+.result-screen .profile-group h2 {
+  font-size: 14px;
+}
+
+.result-screen .profile-group h2:has(+ .privacy-note) {
+  margin-bottom: 0;
+}
+
+.result-screen .profile-group > .privacy-note {
+  margin-top: 4px;
+}
