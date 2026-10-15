@@ -1,6 +1,8 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import {EditorialBookmarkButton} from './editorial-bookmark';
+import {findEditorial} from '@/lib/prototype/editorials';
 import './article-homecare.css';
 
 const photos = '/assets/figma/article-homecare/';
@@ -30,6 +32,7 @@ export function HairCareArticle() {
     </header>
 
     <section className="hc-cover" aria-label="THE ART OF HAIR CARE">
+      <EditorialBookmarkButton item={findEditorial('article', 'care')!}/>
       <img src={photos+'cover.png'} alt="욕실에서 긴 머리를 손질하는 여성" />
       <div className="hc-cover-content">
         <p>HAIRUS EDITORIAL / VOL. 01</p>

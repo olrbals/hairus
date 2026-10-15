@@ -1,0 +1,4 @@
+.button{position:absolute;z-index:2;top:12px;right:12px;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(255,255,255,.94);color:#20201e;box-shadow:0 1px 4px #00000012}
+.button svg{display:block}
+.warning{position:absolute;z-index:3;top:64px;right:12px;left:12px;background:#f5f4f2;padding:12px;color:#20201e;font-size:12px;line-height:1.4}
+.cover{position:relative}

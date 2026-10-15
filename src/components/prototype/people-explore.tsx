@@ -7,6 +7,7 @@ import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
 import {asset,designers,itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {SaveButton} from './shared';
+import {designerDetails} from '@/lib/prototype/people-presentation';
 import sheet from './people-explore.module.css';
 
 type ExploreKind='designer'|'salon';
@@ -24,16 +25,6 @@ const salonGroups:FilterGroup[]=[
  {key:'rating',label:'평점',options:['전체','4.5 이상','4.0 이상','3.5 이상','3.0 이상']},
 ];
 const provinces=['전체','서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도','강원특별자치도','충청북도','충청남도','전북특별자치도','전라남도','경상북도','경상남도','제주특별자치도'];
-const designerDetails:Record<string,{avatar:string;location:string;specialty:string;works:string[]}>={
- yoona:{avatar:asset('31628.png'),location:'아르보 성수  ·  성수동',specialty:'레이어드컷 · 샌드펌 전문',works:[asset('28f27.png'),asset('8b53e.png'),asset('5a15e.png')]},
- sohee:{avatar:asset('a91f5.png'),location:'아르보 성수  ·  성수동',specialty:'테슬컷 · 히피펌 전문',works:[asset('83c13.png'),asset('034ea.png'),asset('93dbc.png')]},
- jisu:{avatar:asset('d9387.png'),location:'준오 헤어 신논현점  ·  논현동',specialty:'테슬컷 전문 · 컬러리스트',works:[asset('a173d.png'),asset('9bfed.png'),asset('6dd70.png')]},
- gyunghyun:{avatar:asset('3a62b.png'),location:'아르보 성수  ·  성수동',specialty:'허쉬컷 · 매트브라운 전문',works:[asset('3af4c.png'),asset('ab7cf.png'),asset('636e2.png')]},
- seeun:{avatar:asset('2dae9.png'),location:'청아하다 광교  ·  이의동',specialty:'테슬컷 · 히피펌 전문',works:[asset('9d4ed.png'),asset('034ea.png'),asset('93dbc.png')]},
- soyul:{avatar:asset('c451a.png'),location:'아르보 성수  ·  성수동',specialty:'볼륨펌 · 자연스러운 컬 전문',works:[asset('1c182.png'),asset('8b53e.png'),asset('5a15e.png')]},
- jonghun:{avatar:asset('92e32.png'),location:'아르보 성수  ·  성수동',specialty:'픽시컷 · 애쉬 브라운 전문',works:[asset('3a96c.png'),asset('438b4.png'),asset('1c182.png')]},
- hana:{avatar:asset('63467.png'),location:'스튜디오 929  ·  신사동',specialty:'내츄럴컷 · 모발관리 전문',works:[asset('93dbc.png'),asset('034ea.png'),asset('6dd70.png')]},
-};
 const salonDetails:Record<string,{rating:string;location:string}>={
  arvo:{rating:'4.87',location:'서울 성동구 성수동  ·  성수역 도보 3분'},
  moodon:{rating:'4.84',location:'서울 서초구 논현동  ·  신논현역 도보 5분'},

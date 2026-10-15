@@ -1,0 +1,175 @@
+{
+  "viewport": {
+    "width": 430,
+    "height": 932
+  },
+  "checks": [
+    "Four category tabs without ALL",
+    "STYLE is selected on entry",
+    "STYLE two columns, 183px images and 16px gutter",
+    "STYLE names below images with 8px space",
+    "Existing save order and image resources preserved",
+    "First note line takes precedence",
+    "First selected reason used without note",
+    "No chip without reason/note",
+    "Quiet chip exact colors, no Glass Effect",
+    "Long note truncates to one line",
+    "Chip opens SAVENOTE without navigation",
+    "Entire multiline legacy memo loaded intact",
+    "All selected reasons restored",
+    "Applying unchanged SAVENOTE preserves full data and order",
+    "Legacy bookings and reservation draft preserved",
+    "Edited note updates representative chip",
+    "Search filters only selected saved category",
+    "Switching category resets search",
+    "Designer profile first line",
+    "Designer profile salon second line",
+    "No specialty text on Archive designer cards",
+    "Designer original three portfolio images and order",
+    "Second designer retains three works",
+    "Salon original space image",
+    "Salon name/location/chip structure",
+    "Empty magazine without fabricated saves",
+    "Magazine empty state links to exploration",
+    "ARTICLE bookmark instantly saves",
+    "ARTICLE bookmark never opens SAVENOTE",
+    "IN FOCUS bookmark instantly saves",
+    "IN FOCUS bookmark never opens SAVENOTE",
+    "ARTICLE and IN FOCUS appear in Archive MAGAZINE",
+    "Magazine large-image single column list at 430px",
+    "Reload defaults to STYLE",
+    "Bookmarks persist after refresh",
+    "Archive bookmark instantly removes article",
+    "Archive removal syncs to ARTICLE detail",
+    "Existing issue alias shares canonical care bookmark",
+    "ARTICLE second click instantly removes",
+    "IN FOCUS saved state syncs",
+    "IN FOCUS removal syncs to Archive",
+    "Real Magazine list supports four existing article bookmarks",
+    "Magazine card bookmark syncs to ordinary ARTICLE",
+    "Bookmarks leave legacy saved unchanged",
+    "Bookmarks leave legacy bookings unchanged",
+    "Bookmarks leave legacy draft unchanged",
+    "Bookmarks leave legacy preferences unchanged",
+    "Bookmarks leave legacy matching unchanged",
+    "POPUP has no bookmark",
+    "Legacy missing SAVENOTE setting defaults ON",
+    "SAVENOTE OFF saves immediately without sheet",
+    "OFF save appears in Archive",
+    "Existing chip remains editable with SAVENOTE OFF",
+    "Save removal removes only target content",
+    "SAVENOTE ON opens original editor",
+    "Editorial bookmark synchronizes across open browser tabs",
+    "Cross-tab removal synchronizes without refresh",
+    "Storage failure keeps in-memory bookmark usable",
+    "Storage failure is reported honestly",
+    "스타일 empty state and relevant exploration link",
+    "디자이너 empty state and relevant exploration link",
+    "헤어샵 empty state and relevant exploration link",
+    "매거진 empty state and relevant exploration link",
+    "Opening empty Archive does not manufacture legacy storage",
+    "Regression smoke /home",
+    "No horizontal overflow /home",
+    "Regression smoke /explore",
+    "No horizontal overflow /explore",
+    "Regression smoke /my",
+    "No horizontal overflow /my",
+    "Regression smoke /designers/yoona",
+    "No horizontal overflow /designers/yoona",
+    "Regression smoke /salons/arvo",
+    "No horizontal overflow /salons/arvo",
+    "Regression smoke /styles/airy",
+    "No horizontal overflow /styles/airy",
+    "Regression smoke /reservation/yoona/service",
+    "No horizontal overflow /reservation/yoona/service",
+    "Existing reservation service preserved",
+    "Direct detail loads preserve saved after provider hydration",
+    "Direct detail loads preserve bookings after provider hydration",
+    "Direct detail loads preserve draft after provider hydration",
+    "Direct detail loads preserve preferences after provider hydration",
+    "Direct detail loads preserve matching after provider hydration",
+    "Airy Layered polished gallery retains four slides",
+    "Tabs support keyboard arrow navigation",
+    "Original bottom navigation retained",
+    "No browser runtime errors"
+  ],
+  "metrics": {
+    "style": [
+      {
+        "name": "샌드펌",
+        "image": "/assets/figma/v1/03042.png",
+        "x": 24,
+        "y": 314,
+        "width": 183,
+        "height": 251,
+        "titleBelow": true
+      },
+      {
+        "name": "에어리 레이어드",
+        "image": "/assets/figma/v1/5582e.png",
+        "x": 223,
+        "y": 314,
+        "width": 183,
+        "height": 251,
+        "titleBelow": true
+      },
+      {
+        "name": "테슬컷",
+        "image": "/assets/figma/v1/05be4.png",
+        "x": 24,
+        "y": 655.390625,
+        "width": 183,
+        "height": 251,
+        "titleBelow": true
+      },
+      {
+        "name": "허쉬컷",
+        "image": "/assets/figma/v1/deb8c.png",
+        "x": 223,
+        "y": 655.390625,
+        "width": 183,
+        "height": 251,
+        "titleBelow": true
+      }
+    ],
+    "chip": {
+      "background": "rgb(245, 244, 242)",
+      "color": "rgb(102, 100, 96)",
+      "fontSize": "12px",
+      "whiteSpace": "nowrap",
+      "padding": "6px 10px",
+      "backdrop": "none"
+    },
+    "magazine": [
+      {
+        "x": 24,
+        "width": 382,
+        "title": "THE ART OF HAIR CARE"
+      },
+      {
+        "x": 24,
+        "width": 382,
+        "title": "SOFTLY, IN MOTION."
+      }
+    ],
+    "airy": [
+      {
+        "src": "/assets/figma/v1/5582e.png",
+        "style": null
+      },
+      {
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "style": "width:422.31855742953104%;left:-315.4605253842544%;top:3.7201353109139745e-10%"
+      },
+      {
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "style": "width:422.3735517049742%;left:-216.41367252184125%;top:0.013220928667578846%"
+      },
+      {
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "style": "width:422.31855742953104%;left:-111.10700245724212%;top:-0.02171645173802972%"
+      }
+    ]
+  },
+  "errors": []
+}

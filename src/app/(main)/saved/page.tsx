@@ -1,1 +1,1 @@
-export {Saved as default} from "@/components/prototype/explore";
+export {Saved as default} from "@/components/prototype/saved";
