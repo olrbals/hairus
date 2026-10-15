@@ -71,3 +71,11 @@
 @media(max-width:400px){.choiceRow{flex-wrap:wrap;justify-content:flex-start;gap:10px}.choiceRow button{padding-inline:16px}.choices{gap:10px}.avoidCards{margin-inline:0;gap:12px}.avoidCards strong{font-size:12px}.avoidCards small{font-size:11px}.question h1{font-size:22px}.strengths small{font-size:12px}.introCopy h1{font-size:42px}}
 
 .avoidCards>button:first-child img{width:54px;height:50px;margin-top:6px}
+.portraitFill{display:block;width:100%;height:100%}
+@media(hover:hover) and (pointer:fine){
+ .portraitFill{transition:transform 180ms ease}
+ .strengths>button>img,.avoidCards>button>img{transition:scale 180ms ease}
+ .person:not(:disabled):hover .portraitFill{transform:scale(1.025)}
+ .strengths>button:not(:disabled):hover>img{scale:1.025}
+ .avoidCards>button:not(:disabled):hover>img{scale:1.05}
+}
