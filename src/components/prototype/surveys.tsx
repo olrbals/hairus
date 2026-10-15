@@ -62,7 +62,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    }else router.push(`${prefix}/${index+2}`);
   };
   const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:index===3?<>지금 가장 바꾸고 싶은<br/>부분은 무엇인가요?</>:question.title;
-  const description=index===1?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
+  const description=index===1||index===3?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
   const renderedOptions=index===3
    ? question.options.flatMap((option,itemIndex)=>itemIndex===8?[{label:'손질 편의성',value:'손질 편의성 (스타일)'},{label:option,value:option}]:[{label:option,value:option}])
    : question.options.map(option=>({label:option,value:option}));
