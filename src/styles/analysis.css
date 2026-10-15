@@ -11,24 +11,23 @@
 .bottom-sheet--editor .sheet-close{margin-block:-4px;margin-right:-16px;color:#000b;letter-spacing:-.36px}
 .bottom-sheet--editor .sheet-content .editor-description{margin:-24px 4px 0;font-size:12px;line-height:1.3;letter-spacing:-.24px;color:#747e8ecc}
 .profile-options{margin:0 4px}
-.profile-options button{font:inherit;font-size:14px;font-weight:400;line-height:1.3;letter-spacing:-.28px;color:#0008;background:#00000014;border:0;box-shadow:inset 0 0 0 1px #00000029;touch-action:manipulation}
-.profile-options button[aria-pressed=true]{background:white;color:#000c;box-shadow:inset 0 0 0 1px #000}
+.profile-options button{font:inherit;font-size:14px;font-weight:400;line-height:1.3;letter-spacing:-.28px;color:rgba(0,0,0,.5);background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);box-shadow:none;touch-action:manipulation}
+.chip-options button[aria-pressed=true]{background:#000;color:#fff;border-color:transparent;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
 .visual-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 11px;margin-top:12px}
 .visual-options button{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:4px 8px;border-radius:4px;overflow-wrap:anywhere}
-.visual-options button[aria-pressed=true]{box-shadow:inset 0 0 0 1px #0009}
+.visual-options button[aria-pressed=true]{background:#fff;color:#000c;border-color:#0009;box-shadow:none}
 .face-crop{display:block;position:relative;overflow:hidden;width:100%;aspect-ratio:320/400}
 .face-crop img{position:absolute;max-width:none;width:419.79%;height:223.54%}
 .profile-swatch{display:block;width:100%;aspect-ratio:320/400}
 .chip-options{display:flex;flex-wrap:wrap;align-items:center;gap:20px 16px}
 .chip-options button{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:48px;max-width:100%;padding:4px 18px;border-radius:20px;overflow-wrap:anywhere}
 .length-options{justify-content:space-between;column-gap:8px}
-.length-options button:has(small)>span{margin-bottom:-4px}
 .length-options small{font-size:8px;line-height:1.3;letter-spacing:-.16px}
 .history-options button:nth-child(n+4){padding-inline:16px}
 
 .profile-options .legacy-option{flex-basis:100%;grid-column:1/-1;white-space:normal;overflow-wrap:anywhere}
 .profile-options .legacy-option small{font-size:10px;line-height:1.3;margin-top:4px}
-.bottom-sheet--editor>.sheet-content>.button{flex-shrink:0;letter-spacing:-.32px;box-shadow:var(--glass-shadow)}
+.bottom-sheet--editor>.sheet-content>.button{flex-shrink:0;margin-top:24px;letter-spacing:-.32px;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
 .bottom-sheet--editor .clear-field{align-self:center;margin-top:-24px;min-height:44px;padding:10px 0;font-size:12px;flex-shrink:0}
 @media(max-width:400px){.length-options{justify-content:flex-start}}
 
