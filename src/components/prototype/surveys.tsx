@@ -38,8 +38,8 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
     </button>)}
    </div>
    <div className="preference-first-step__actions">
+    <Button disabled={!ready||selected.length===0} onClick={()=>router.push(`${prefix}/2`)}>다음</Button>
     <Action secondary href={`${prefix}/intro`}>이전 단계</Action>
-    <Button variant="glass" disabled={!ready||selected.length===0} onClick={()=>router.push(`${prefix}/2`)}>다음</Button>
    </div>
   </main>;
  }
