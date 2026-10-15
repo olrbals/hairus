@@ -9,7 +9,20 @@
 .header>span{font-size:20px;font-weight:500;text-align:center;color:#222b3a}
 .saveControl{position:relative;width:44px;height:44px}
 .saveControl :global(.proto-save){top:0;right:-11px;width:44px;height:44px;padding:0;background:transparent;border-radius:0;font-size:29px;line-height:44px;font-family:Arial,sans-serif;font-weight:400}
-.saveControl :global(.proto-save[aria-pressed=true]){background:transparent;color:#0e0e0e}
+/* The designer header uses a plain heart, not the global saved Glass Heart. */
+.saveControl :global(.proto-save[aria-pressed=true]){
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  overflow:visible;
+  color:#0e0e0e;
+  font-size:29px;
+}
+.saveControl :global(.proto-save[aria-pressed=true]::before),
+.saveControl :global(.proto-save[aria-pressed=true]::after){content:none;display:none}
 .hero{display:block;width:100%;height:528px;object-fit:cover;object-position:center top}
 .profile{padding:20px 24px 48px}
 .profile h1,.page section>h2,.sectionHeading h2,.works h2{font-family:var(--font-editorial);font-weight:700}
