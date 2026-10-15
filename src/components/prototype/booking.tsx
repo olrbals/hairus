@@ -17,9 +17,10 @@ const titles=['어떤 시술을 원하시나요?','언제 방문하고 싶으세
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
-function BookingPage({back,children,title='예약하기'}:{back:string;children:ReactNode;title?:string}){
+function BookingPage({back,children,title='예약하기',historyBack=false}:{back:string;children:ReactNode;title?:string;historyBack?:boolean}){
+ const router=useRouter();
   return <main id="main" className={styles.page}>
-    <header className={styles.header}><Link href={back} aria-label="뒤로 가기"><Arrow/></Link><span>{title}</span><Link href="/my/reservations" aria-label="MY 예약 내역">MY</Link></header>
+    <header className={styles.header}><Link href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><Arrow/></Link><span>{title}</span><span aria-hidden="true"/></header>
     {children}
   </main>;
 }
@@ -68,6 +69,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
   const [dates,setDates]=useState<string[]>([]);
   const [windowDates,setWindowDates]=useState<string[]>([]);
   const [editing,setEditing]=useState(false);
+  const editorRef=useRef<HTMLTextAreaElement>(null);
   const designer=designers.find(person=>person.id===designerId);
   const draft=state.draft?.designerId===designerId?state.draft:null;
   const prefix=`/reservation/${designerId}`;
@@ -106,6 +108,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
     }
   },[ready,draft,step,state.preferences,designerId,update]);
   useEffect(()=>{setEditing(false);setError('');},[step]);
+  useEffect(()=>{const editor=editorRef.current;if(editor){editor.style.height='auto';editor.style.height=`${editor.scrollHeight+2}px`;}},[editing,draft?.note]);
   function patchDraft(change:(value:BookingDraft)=>BookingDraft){
     setError('');
     update(current=>({...current,draft:current.draft?.designerId===designerId?change(current.draft):current.draft}));
@@ -132,18 +135,18 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
     <div className={styles.content}>
       <ol className={styles.progress} aria-label={`예약 ${index+1} / 4단계`}>{steps.map((value,i)=><li key={value} data-active={i<=index} aria-current={i===index?'step':undefined}><span>0{i+1}</span>{labels[i]}</li>)}</ol>
       <DesignerIdentity id={designerId}/>
-      <div className={styles.intro}><p className={styles.eyebrow}>STEP 0{index+1}</p><h1 tabIndex={-1}>{titles[index]}</h1>{index===2&&<p>디자이너에게 전하고 싶은 이야기를 정리했어요.<br/>내용을 확인하고 자유롭게 수정해 주세요.</p>}</div>
-      {index===0&&<><div className={styles.services} role="group" aria-label="시술 선택">{services.map(service=><button type="button" className={styles.service} key={service.id} aria-pressed={draft.serviceId===service.id} onClick={()=>patchDraft(current=>selectBookingService(current,service.id))}><span><strong>{service.name}</strong><small>{service.price.toLocaleString('ko-KR')}원 · 약 {service.minutes}분</small></span><span className={styles.selection}>{draft.serviceId===service.id&&<Check/>}</span></button>)}</div><p className={styles.hint}>한 가지 시술을 선택해 주세요. 금액과 일정은 데모 기준이에요.</p></>}
+      <div className={styles.intro}><h1 tabIndex={-1}>{titles[index]}</h1>{index===2&&<p>디자이너에게 전하고 싶은 이야기를 정리했어요.<br/>내용을 확인하고 자유롭게 수정해 주세요.</p>}</div>
+      {index===0&&<><div className={styles.services} role="group" aria-label="시술 선택">{services.map(service=><button type="button" className={styles.service} key={service.id} aria-pressed={draft.serviceId===service.id} onClick={()=>patchDraft(current=>selectBookingService(current,service.id))}><span><strong>{service.name}</strong><small>{service.price.toLocaleString('ko-KR')}원 · 약 {service.minutes}분</small></span><span className={styles.selection}>{draft.serviceId===service.id&&<Check/>}</span></button>)}</div><p className={styles.hint}>한 가지 시술을 선택해 주세요.</p></>}
       {index===1&&<div className={styles.schedule}>
         <BookingCalendar dates={dates} windowDates={windowDates} value={draft.date} onSelect={date=>patchDraft(current=>selectBookingDate(current,date))}/>
-        <p className={styles.hint}>{person?`정기 휴무 · ${offDaysLabel(person).replace(' OFF','')}`:'선택 가능한 날짜만 표시했어요.'}<br/>내일부터 14일 이내의 일정을 선택할 수 있어요.</p>
+        <p className={styles.hint}>{person?`정기 휴무 · ${offDaysLabel(person).replace(' OFF','')}`:'선택 가능한 날짜만 표시했어요.'}<br/>방문 가능한 날짜를 선택해 주세요.</p>
         <section className={styles.timeSection} aria-labelledby="time-title"><div className={styles.cardHeading}><h2 id="time-title">시간 선택</h2><span className={styles.hint}>약 {service?.minutes||'—'}분 소요</span></div><p className={styles.dateCaption} aria-live="polite">{draft.date?bookingDateLabel(draft.date):'날짜를 먼저 선택해 주세요.'}</p><div className={styles.times} role="group" aria-label="예약 시간 선택">{demoTimes.map(time=><button type="button" key={time} disabled={!dates.includes(draft.date)} aria-pressed={draft.time===time} onClick={()=>patchDraft(current=>({...current,time}))}>{time}</button>)}</div></section>
         {!service&&<Link className={styles.textLink} href={`${prefix}/service`}>시술 먼저 선택하기</Link>}
       </div>}
       {index===2&&<>
         <section className={styles.noteCard} aria-label="상담 노트">
           <div className={styles.cardHeading}><h2 className={styles.editorial}>HAIR NOTE</h2>{editing?<span className={styles.noteTag}>노트 수정 중</span>:<button type="button" className={styles.edit} onClick={()=>setEditing(true)}>노트 수정하기</button>}</div>
-          {editing?<div className={styles.editor}><label htmlFor="booking-note">상담 노트 수정</label><textarea id="booking-note" autoFocus rows={12} maxLength={3000} value={draft.note} onChange={event=>patchDraft(current=>({...current,note:event.target.value,noteEdited:true}))}/><div className={styles.editorMeta}><span>자동 저장 · {draft.note.length.toLocaleString()} / 3,000</span><button type="button" className={styles.edit} onClick={()=>setEditing(false)}>수정 마치기</button></div></div>:<><NoteContent note={draft.note}/>{!draft.note.trim()&&<p className={styles.hint}>디자이너에게 전하고 싶은 말을 작성해 주세요.</p>}</>}
+          {editing?<div className={styles.editor}><label htmlFor="booking-note">상담 노트 수정</label><textarea id="booking-note" ref={editorRef} autoFocus rows={3} maxLength={3000} value={draft.noteEdited?draft.note:noteSections(draft.note).map(section=>section.label?`${section.label}: ${section.value}`:section.value).join('\n\n')} onChange={event=>patchDraft(current=>({...current,note:event.target.value,noteEdited:true}))}/><div className={styles.editorMeta}><span>자동 저장 · {draft.note.length.toLocaleString()} / 3,000</span><button type="button" className={styles.edit} onClick={()=>setEditing(false)}>수정 마치기</button></div></div>:<><NoteContent note={draft.note}/>{!draft.note.trim()&&<p className={styles.hint}>디자이너에게 전하고 싶은 말을 작성해 주세요.</p>}</>}
         </section>
         <p className={styles.hint}>수정한 내용은 자동 저장돼요.</p>
         <div className={styles.noteTools}><Link className={styles.textLink} href="/analysis/result">헤어 프로필 확인</Link><button type="button" className={styles.textLink} onClick={()=>{const profile=readProfile();const note=hairNote(profile?effectiveProfile(profile):null,state.preferences,draft.serviceId);patchDraft(current=>({...current,note:(current.noteEdited?current.note+'\n\n— 현재 프로필 초안 —\n':'')+note}));if(draft.noteEdited)setError('직접 수정한 내용 아래에 현재 프로필 초안을 추가했어요.');}}>{draft.noteEdited?'프로필 초안 추가':'프로필로 초안 새로고침'}</button></div>
@@ -152,7 +155,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
       {error&&<p role="status" className={styles.message}>{error}</p>}
       {index>0&&!canContinue&&<p className={styles.hint} role="status">{!service?<Link className={styles.textLink} href={editHref('service')}>시술을 선택해 주세요.</Link>:!dateValid?<Link className={styles.textLink} href={editHref('schedule')}>날짜와 시간을 선택해 주세요.</Link>:<Link className={styles.textLink} href={editHref('note')}>상담 노트를 작성해 주세요.</Link>}</p>}
     </div>
-    <footer className={styles.footer}><button type="button" className={styles.primary} disabled={!canContinue} onClick={continueBooking}>{index===3?'데모 예약 저장하기':returnToReview?'수정하고 예약 확인':index===2?'예약 정보 확인하기':'다음'}</button></footer>
+    <footer className={styles.footer}><button type="button" className={styles.primary} disabled={!canContinue} onClick={continueBooking}>{index===3?'예약 정보 저장하기':returnToReview?'수정하고 예약 확인':index===2?'예약 정보 확인하기':'다음'}</button></footer>
   </BookingPage>;
 }
 
@@ -175,11 +178,22 @@ export function BookingComplete({id}:{id:string}){
   const booking=state.bookings.find(booking=>booking.id===id);
   return <BookingPage title="예약 완료" back="/my/reservations"><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
-      <div className={styles.success}><span className={styles.successIcon}><Check/></span><p className={styles.eyebrow}>DEMO COMPLETE</p><h1>예약이 확정되었어요 !</h1><p>새로운 헤어를 만날 준비가 되었어요.</p></div>
+      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약 정보를 저장했어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>
-      <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>선택한 일정과 상담 노트를 MY에서 확인해 주세요.<br/>시술 금액과 결제는 방문 상담 후 안내받으세요.</p></div>
+      <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>시술 금액과 결제는 방문 상담 후 안내받으세요.</p></div>
       <NotePreview draft={booking}/>
       <div className={styles.completeActions}><Link className={styles.primary} href="/my/reservations">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
     </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={styles.primary} href="/my/reservations">MY 예약 내역 보기</Link></>}
   </div></BookingPage>;
+}
+
+export function BookingAppointments(){
+ const {state,ready}=usePrototype();
+ return <BookingPage back="/my" title="" historyBack><div className={`${styles.content} ${styles.appointments}`}>
+ <h1 className={styles.appointmentsTitle}>My Appointments</h1>
+ {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
+ const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';
+ return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{service?.name}</span><span>{service?.price.toLocaleString('ko-KR')}원</span></div><Link className={styles.primary} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
+ }):<><p>아직 저장한 예약이 없어요.</p><Link className={styles.primary} href="/explore?category=designer">디자이너 찾아보기</Link></>}
+ </div></BookingPage>;
 }

@@ -61,8 +61,8 @@
 .edit{border:0;background:none;min-height:44px;min-width:44px;padding:12px 0;display:inline-flex;align-items:center;justify-content:flex-end;color:#77776e;font-size:12px;flex-shrink:0;text-decoration:underline;text-underline-offset:3px}
 .editor{display:flex;flex-direction:column;gap:10px}
 .editor label{font-size:12px;color:#77776e}
-.editor textarea{display:block;width:100%;border:1px solid #d4d3cd;border-radius:0;background:#fff;padding:14px;color:#171715;font-size:16px;resize:vertical;min-height:280px}
-.editor textarea:focus-visible{outline:1px solid #171715;outline-offset:1px}
+.editor textarea{display:block;width:100%;border:1px solid #d4d3cd;border-radius:0;background:#fff;padding:14px;color:#171715;font-size:16px;resize:none;min-height:100px;overflow:hidden}
+.editor textarea:focus-visible{outline:1px solid #b8b6ae;outline-offset:0}
 .editorMeta{display:flex;justify-content:space-between;gap:8px;align-items:center}
 .editorMeta>span{font-size:10px;color:#77776e}
 .noteTools{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -103,3 +103,13 @@
 .completeActions{display:flex;flex-direction:column;gap:8px}
 .homeLink{min-height:48px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#777772}
 @media(max-width:360px){.progress{gap:6px}.progress li{font-size:10px}.noteCard,.summary{padding:16px}.intro h1,.success h1{font-size:22px}.days button,.days>span{height:40px}}
+
+.appointments{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+.appointments .appointmentsTitle{font-family:var(--font-editorial);font-size:60px;font-weight:600;line-height:1;letter-spacing:-.02em;margin:8px 0 12px}
+.appointment{border:1px solid #e5e5df;padding:20px;display:flex;flex-direction:column;gap:10px}
+.savedStatus{font-size:12px;color:#777772}
+.appointmentDate{font-size:13px;margin-top:4px}
+.appointment h2{font-size:20px;font-weight:500;margin:8px 0 0}
+.appointmentSalon{font-size:13px;color:#777772}
+.appointmentService{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #e9e9e4;padding-top:16px;margin-top:6px;font-size:14px}
+.appointment .primary{margin-top:8px}
