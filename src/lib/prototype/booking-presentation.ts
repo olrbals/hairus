@@ -1,7 +1,7 @@
 import type {BookingDraft} from './logic.ts';
 
 // Presentation only: the stored note remains the original, editable string.
-const noteLabels=['현재 헤어','선호하는 분위기','평소 손질','헤어 고민','바꾸고 싶은 부분','희망 시술','시술 이력','디자이너에게 전하고 싶은 말'];
+const noteLabels=['스타일 제안','나의 취향','YOUR WISH','더 전하고 싶은 이야기','직접 작성한 노트','현재 헤어','선호하는 분위기','평소 손질','헤어 고민','바꾸고 싶은 부분','희망 시술','시술 이력','디자이너에게 전하고 싶은 말'];
 const emptyValues=['미입력','미선택','아직 입력하지 않았어요.'];
 export function noteSections(note:string){
   return note.split(/\n\s*\n/).map(paragraph=>{
