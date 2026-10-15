@@ -18,15 +18,31 @@ const matchComparisons=[
   {work:'bd491.png',saved:'31628.png',tags:['짧은 기장','얼굴선 레이어','차분한 실루엣']},
 ];
 const reviewTags=['상담이 꼼꼼해요','친절해요','원하는 스타일을 잘 이해해요','손질법을 잘 알려줘요'];
+const designerSectionIds=['match','works','service','reviews','salon'] as const;
 
 export function DesignerPage({id}:{id:string}){
   const router=useRouter();
   const {state,update}=usePrototype();
   const [userName,setUserName]=useState('');
   const [matchIndex,setMatchIndex]=useState(0);
+  const [activeSection,setActiveSection]=useState<string>('match');
   const touchStartX=useRef<number|null>(null);
   const stepMatch=(direction:number)=>setMatchIndex(index=>(index+direction+matchComparisons.length)%matchComparisons.length);
   useEffect(()=>setUserName(readEntry().name.trim()),[]);
+  useEffect(()=>{
+    // Keep the tab underline in sync with the section currently below the sticky nav.
+    const updateActiveSection=()=>{
+      let current='match';
+      for(const sectionId of designerSectionIds){
+        const section=document.getElementById(sectionId);
+        if(section&&section.getBoundingClientRect().top<=80)current=sectionId;
+      }
+      setActiveSection(previous=>previous===current?previous:current);
+    };
+    window.addEventListener('scroll',updateActiveSection,{passive:true});
+    updateActiveSection();
+    return()=>window.removeEventListener('scroll',updateActiveSection);
+  },[]);
   const item=findItem('designer',id);
   useEffect(()=>{if(item)update(current=>({...current,recent:[`designer:${id}`,...current.recent.filter(value=>value!==`designer:${id}`)].slice(0,30)}));},[id,item,update]);
   if(!item)return <main id="main" className={styles.missing}><p>이 디자이너를 찾을 수 없어요.</p><Link href="/explore?category=designer">디자이너 탐색으로</Link></main>;
@@ -58,7 +74,11 @@ export function DesignerPage({id}:{id:string}){
     </section>
 
     <nav className={styles.sectionNav} aria-label="디자이너 상세 섹션">
-      <a href="#match">매칭</a><a href="#works">스타일</a><a href="#service">메뉴</a><a href="#reviews">후기</a><a href="#salon">살롱</a>
+      <a href="#match" aria-current={activeSection==='match'?'location':undefined} onClick={()=>setActiveSection('match')}>매칭</a>
+      <a href="#works" aria-current={activeSection==='works'?'location':undefined} onClick={()=>setActiveSection('works')}>스타일</a>
+      <a href="#service" aria-current={activeSection==='service'?'location':undefined} onClick={()=>setActiveSection('service')}>메뉴</a>
+      <a href="#reviews" aria-current={activeSection==='reviews'?'location':undefined} onClick={()=>setActiveSection('reviews')}>후기</a>
+      <a href="#salon" aria-current={activeSection==='salon'?'location':undefined} onClick={()=>setActiveSection('salon')}>살롱</a>
     </nav>
 
     <section id="match" className={styles.match} aria-labelledby="match-title">
@@ -73,7 +93,7 @@ export function DesignerPage({id}:{id:string}){
           if(Math.abs(distance)>40)stepMatch(distance<0?1:-1);
         }}
         onTouchCancel={()=>{touchStartX.current=null;}}>
-        <figure><figcaption>{item.name}의 실제 작업</figcaption><img src={asset(matchComparison.work)} alt={`${item.name} 디자이너의 실제 작업 예시`}/></figure>
+        <figure><figcaption>{item.name} 디자이너의 실제 작업</figcaption><img src={asset(matchComparison.work)} alt={`${item.name} 디자이너의 실제 작업 예시`}/></figure>
         <figure><figcaption>내가 저장한 스타일</figcaption><img src={asset(matchComparison.saved)} alt="저장한 스타일 비교 예시"/></figure>
       </div>
       <div className={styles.matchPager} aria-label="매칭 비교 슬라이드">
