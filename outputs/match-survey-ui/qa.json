@@ -1,0 +1,148 @@
+{
+  "viewport": {
+    "width": 430,
+    "height": 874
+  },
+  "checks": [
+    "Figma intro title",
+    "STEP01 unanswered Next is truly disabled",
+    "Unselected image options remain selectable",
+    "Both masks are exact 173x173 circles with fixed 1:1 aspect",
+    "Image CSS fills square mask using 100% and object-fit cover",
+    "STEP01 unselected images are grayscale",
+    "Touch selects female",
+    "Selected gender becomes color",
+    "Other gender stays grayscale",
+    "Required answer enables Next",
+    "Single selection can deselect and disable Next",
+    "Selecting another gender replaces single answer",
+    "Keyboard Space deselects",
+    "Keyboard Enter selects",
+    "Keyboard focus visible",
+    "STEP02 empty region blocks progression",
+    "Back navigation restores STEP01 answer",
+    "Existing region picker updates real displayed state",
+    "Region input 60px high",
+    "Strength cards 380x145px and 20px gaps",
+    "Figma strength card origin x25 y263",
+    "STEP03 all unselected images grayscale",
+    "Selected strength switches to original color",
+    "Unselected strength remains grayscale",
+    "Selected strength has lighter Figma gradient overlay",
+    "Selected STEP03 CTA uses Figma y766",
+    "Strength can deselect",
+    "Hover does not select or color an unselected card",
+    "Strength answer restored on reload",
+    "Unselected chips are light gray and clickable",
+    "Selected chip is black with white text",
+    "Original max-three consultation rule preserved",
+    "Maximum selection leaves unselected controls available",
+    "Deselect frees a slot for another choice",
+    "Consultation restores persisted choices",
+    "STEP05 no answer disables final CTA",
+    "Six experience cards preserve 108x154px slots",
+    "Selected experience cards are black/white",
+    "Unselected experience cards stay gray",
+    "Experience max-three rule preserved",
+    "No-experience choice clears conflicting experiences",
+    "No-experience answer can deselect",
+    "Existing recommendation results reached",
+    "Answers passed to results intact",
+    "375px STEP1 no horizontal overflow",
+    "375px circles keep 1:1 under flex layout",
+    "375px STEP2 no horizontal overflow",
+    "375px STEP3 no horizontal overflow",
+    "375px STEP4 no horizontal overflow",
+    "375px STEP5 no horizontal overflow",
+    "430px STEP1 no horizontal overflow",
+    "430px circles keep 1:1 under flex layout",
+    "430px STEP2 no horizontal overflow",
+    "430px STEP3 no horizontal overflow",
+    "430px STEP4 no horizontal overflow",
+    "430px STEP5 no horizontal overflow",
+    "No browser runtime errors"
+  ],
+  "metrics": {
+    "circles": [
+      {
+        "width": 173,
+        "height": 173,
+        "x": 128.5,
+        "y": 261.5,
+        "radius": "50%",
+        "overflow": "hidden",
+        "aspect": "1 / 1",
+        "imageWidth": "173px",
+        "imageHeight": "173px",
+        "fit": "cover",
+        "filter": "grayscale(1)",
+        "source": "/assets/figma/match-survey/female.png"
+      },
+      {
+        "width": 173,
+        "height": 173,
+        "x": 128.5,
+        "y": 496.5,
+        "radius": "50%",
+        "overflow": "hidden",
+        "aspect": "1 / 1",
+        "imageWidth": "173px",
+        "imageHeight": "173px",
+        "fit": "cover",
+        "filter": "grayscale(1)",
+        "source": "/assets/figma/match-survey/male.png"
+      }
+    ],
+    "cards": [
+      {
+        "x": 25,
+        "y": 263,
+        "w": 380,
+        "h": 145,
+        "src": "/assets/figma/match-survey/experience.png",
+        "position": "0% 56.2964%"
+      },
+      {
+        "x": 25,
+        "y": 428,
+        "w": 380,
+        "h": 145,
+        "src": "/assets/figma/match-survey/consultation.png",
+        "position": "50% 50%"
+      },
+      {
+        "x": 25,
+        "y": 593,
+        "w": 380,
+        "h": 145,
+        "src": "/assets/figma/match-survey/styling.png",
+        "position": "0% 59.3872%"
+      }
+    ],
+    "overlays": [
+      "linear-gradient(98.2556deg, rgba(0, 0, 0, 0.35) 46.424%, rgba(0, 0, 0, 0) 99.186%)",
+      "linear-gradient(98.2556deg, rgba(0, 0, 0, 0.35) 46.424%, rgba(0, 0, 0, 0) 99.186%)",
+      "linear-gradient(98.2556deg, rgba(0, 0, 0, 0.21) 46.424%, rgba(0, 0, 0, 0) 99.186%)"
+    ],
+    "matching": {
+      "gender": [
+        "여자"
+      ],
+      "location": [
+        "성수"
+      ],
+      "strength": [
+        "손질하기 쉬운 결과"
+      ],
+      "consult": [
+        "친절한",
+        "긍정적인",
+        "취향 존중"
+      ],
+      "avoid": [
+        "긴 대기 시간"
+      ]
+    }
+  },
+  "errors": []
+}
