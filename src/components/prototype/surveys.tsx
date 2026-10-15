@@ -44,6 +44,55 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    </div>
   </main>;
  }
+ if(kind==='preferences'&&index>=1&&index<=3){
+  const selectOption=(option:string)=>{
+   if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}
+   setMessage('');
+   update(s=>{
+    let next=toggleChoice(s.preferences[question.key]||[],option,question.max);
+    if(option==='특별한 고민 없음')next=['특별한 고민 없음'];
+    else next=next.filter(value=>value!=='특별한 고민 없음');
+    return {...s,preferences:{...s.preferences,[question.key]:next}};
+   });
+  };
+  const goNext=()=>{
+   if(index===questions.length-1){
+    update(s=>({...s,preferenceComplete:true}));
+    router.push('/preferences/loading');
+   }else router.push(`${prefix}/${index+2}`);
+  };
+  const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:index===3?<>지금 가장 바꾸고 싶은<br/>부분은 무엇인가요?</>:question.title;
+  const description=index===1?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
+  const renderedOptions=index===3
+   ? question.options.flatMap((option,itemIndex)=>itemIndex===8?[{label:'손질 편의성',value:'손질 편의성 (스타일)'},{label:option,value:option}]:[{label:option,value:option}])
+   : question.options.map(option=>({label:option,value:option}));
+  return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':index===2?'939:8597':'939:8639'}>
+   <header className="preference-survey-step__header">
+    <button type="button" className="preference-survey-step__back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
+     <img src="/assets/figma/v1/30ced.svg" alt=""/>
+    </button>
+    <div className="preference-survey-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
+     {questions.map((item,itemIndex)=><span key={item.key} className={itemIndex<=index?'active':undefined}/>) }
+    </div>
+   </header>
+   <section className="preference-survey-step__question" aria-labelledby="preference-survey-step-heading">
+    <h1 id="preference-survey-step-heading">{title}</h1>
+    {description&&<p>{description}</p>}
+   </section>
+   {images?<div className="preference-survey-step__images" role="group" aria-label={question.title}>
+    {renderedOptions.map(({label,value},itemIndex)=><button type="button" disabled={!ready} key={value} aria-pressed={selected.includes(value)} onClick={()=>selectOption(value)}>
+     <span><img src={asset(images[itemIndex])} alt=""/></span>
+     <strong>{label}</strong>
+    </button>)}
+   </div>:<div className="preference-survey-step__chips chip-options" role="group" aria-label={question.title}>
+    {renderedOptions.map(({label,value})=><button type="button" disabled={!ready} key={value} aria-pressed={selected.includes(value)} onClick={()=>selectOption(value)}>{label}</button>)}
+   </div>}
+   <p role="status" className="preference-survey-step__validation">{message}</p>
+   <div className="preference-survey-step__actions">
+    <Button disabled={!ready||selected.length===0} onClick={goNext}>{index===questions.length-1?'헤어 프로필 완성하기':'다음'}</Button>
+   </div>
+  </main>;
+ }
  return <Screen title={kind==='preferences'?'My Preference':'Meet Your Match'} back={prefix+'/intro'}><div className="progress" aria-label={`${index+1} / ${questions.length}`}>{questions.map((q,i)=><span key={q.key} className={i<=index?'active':''}/>)}</div><div className="question"><p className="eyebrow">0{index+1} / 0{questions.length}</p><h2>{question.title}</h2><p>{question.max===1?'가장 가까운 한 가지를 선택해 주세요.':`최대 ${question.max}개까지 선택할 수 있어요.`}</p></div><div className={images?`image-choices ${images.length===6?'three':''}`:'chips survey-chips'}>{question.options.map((option,i)=><button disabled={!ready} key={option} aria-pressed={selected.includes(option)} onClick={()=>{if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}setMessage('');update(s=>{let next=toggleChoice(s[kind][question.key]||[],option,question.max);if(option==='특별한 고민 없음')next=['특별한 고민 없음'];else next=next.filter(v=>v!=='특별한 고민 없음');return {...s,[kind]:{...s[kind],[question.key]:next}};});}}>{images&&<span><img src={asset(images[i])} alt=""/></span>}{option}</button>)}</div><p role="status" className="validation">{message}</p><div className="survey-actions"><Button disabled={!ready||selected.length===0} onClick={()=>{if(index===questions.length-1){if(kind==='preferences')update(s=>({...s,preferenceComplete:true}));router.push(kind==='preferences'?'/preferences/loading':'/recommendation/results');}else router.push(`${prefix}/${index+2}`);}}>{index===questions.length-1?'결과 보기':'다음'}</Button><Action secondary href={index?`${prefix}/${index}`:`${prefix}/intro`}>이전 단계</Action></div></Screen>;}
 export function ProfileComplete(){
  const router=useRouter();

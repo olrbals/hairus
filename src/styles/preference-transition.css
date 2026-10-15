@@ -149,6 +149,182 @@
   .preference-first-step__image img{transition:none}
 }
 
+/* Figma 939:8528 / 939:8597 / 939:8639 — preference questions 2–4. */
+.mobile-shell:has(.preference-survey-step){padding-bottom:0}
+.preference-survey-step{
+  position:relative;
+  min-height:max(874px,100svh);
+  padding:0 24px calc(39px + env(safe-area-inset-bottom));
+  overflow:hidden;
+  background:#fff;
+  color:#222b3a;
+}
+.preference-survey-step__header{height:67px}
+.preference-survey-step__back{
+  display:grid;
+  width:44px;
+  height:64px;
+  padding:10px 0;
+  place-items:center;
+  border:0;
+  background:none;
+}
+.preference-survey-step__back img{display:block;width:44px;height:44px}
+.preference-survey-step__progress{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:20.6667px;
+  height:3px;
+}
+.preference-survey-step__progress span{height:3px;border-radius:1px;background:#e6eaf1}
+.preference-survey-step__progress span.active{background:#000}
+.preference-survey-step__question{
+  width:354px;
+  max-width:100%;
+  margin:80px auto 0;
+  text-align:center;
+}
+.preference-survey-step__question h1{
+  margin:0;
+  color:#222b3a;
+  font-size:28px;
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:-2px;
+}
+.preference-survey-step__question p{
+  margin:12px 0 0;
+  color:rgba(116,126,142,.8);
+  font-size:14px;
+  line-height:1.3;
+  letter-spacing:-.28px;
+}
+.preference-survey-step__chips{
+  display:flex;
+  width:382px;
+  max-width:100%;
+  margin:48px auto 0;
+  align-items:center;
+  gap:20px 16px;
+  flex-wrap:wrap;
+}
+.preference-survey-step__chips.chip-options button{
+  display:flex;
+  min-height:57px;
+  padding:16px 24px;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:50px;
+  background:rgba(0,0,0,.04);
+  box-shadow:none;
+  color:rgba(116,126,142,.8);
+  font-size:16px;
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:-.32px;
+  white-space:nowrap;
+}
+.preference-survey-step__chips.chip-options button[aria-pressed=true]{
+  border-color:transparent;
+  background:#000;
+  color:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.preference-survey-step__images{
+  display:grid;
+  grid-template-columns:repeat(3,116px);
+  gap:40px 16px;
+  width:380px;
+  max-width:100%;
+  margin:52px auto 0;
+}
+.preference-survey-step__images button{
+  display:flex;
+  min-width:0;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#000;
+}
+.preference-survey-step__images button>span{
+  position:relative;
+  display:block;
+  width:116px;
+  height:116px;
+  overflow:hidden;
+  border-radius:50%;
+}
+.preference-survey-step__images img{
+  position:absolute;
+  max-width:none;
+  filter:grayscale(1);
+  transform-origin:center;
+  transition:transform .65s cubic-bezier(.2,.65,.15,1),filter .4s ease;
+}
+.preference-survey-step__images button:nth-child(1) img{top:-11.1%;left:.13%;width:100%;height:150%}
+.preference-survey-step__images button:nth-child(2) img{top:-26.14%;left:.09%;width:100%;height:177.68%}
+.preference-survey-step__images button:nth-child(3) img{top:.24%;left:.13%;width:100%;height:124.96%}
+.preference-survey-step__images button:nth-child(4) img{top:-8.49%;left:-.12%;width:100%;height:133.25%}
+.preference-survey-step__images button:nth-child(5) img{top:-6.86%;left:-15.81%;width:131.31%;height:167.17%}
+.preference-survey-step__images button:nth-child(6) img{inset:0;width:100%;height:100%;object-fit:cover}
+.preference-survey-step__images button[aria-pressed=true]>span{box-shadow:0 0 0 1px rgba(34,43,58,.23)}
+.preference-survey-step__images button[aria-pressed=true] img{filter:grayscale(0)}
+.preference-survey-step__images strong{
+  font-size:16px;
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:-.32px;
+  white-space:nowrap;
+}
+@media(hover:hover) and (pointer:fine){
+  .preference-survey-step__images button:not(:disabled):hover img{transform:scale(1.1)}
+}
+.preference-survey-step__validation{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+}
+.preference-survey-step__actions{
+  position:absolute;
+  right:24px;
+  bottom:calc(39px + env(safe-area-inset-bottom));
+  left:24px;
+}
+.preference-survey-step__actions .button--primary{
+  min-height:56px;
+  height:56px;
+  padding:0 24px;
+  border:0;
+  border-radius:0;
+  background:#000;
+  color:#fff;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:-.28px;
+  box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);
+}
+@media(max-width:400px){
+  .preference-survey-step__chips{gap:16px 12px}
+  .preference-survey-step__chips.chip-options button{padding-inline:20px;font-size:15px}
+  .preference-survey-step__images{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 10px}
+  .preference-survey-step__images button>span{width:min(116px,100%);height:auto;aspect-ratio:1}
+  .preference-survey-step__images strong{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .preference-survey-step__images img{transition:none}
+}
+
 /* Figma 939:8783 — preference survey completion screen only. */
 .mobile-shell:has(.preference-complete){padding-bottom:0}
 .preference-complete{
