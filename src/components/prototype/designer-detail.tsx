@@ -17,7 +17,20 @@ const matchComparisons=[
   {work:'f66bd.png',saved:'d7b6a.png',tags:['긴 기장','웨이브','풍성한 볼륨']},
   {work:'bd491.png',saved:'31628.png',tags:['짧은 기장','얼굴선 레이어','차분한 실루엣']},
 ];
-const reviewTags=['상담이 꼼꼼해요','친절해요','원하는 스타일을 잘 이해해요','손질법을 잘 알려줘요'];
+// Portfolio prototype figures, kept separate from the live reviews for later data integration.
+const ratingDistribution=[
+  {stars:5,percent:90},
+  {stars:4,percent:9},
+  {stars:3,percent:1},
+  {stars:2,percent:0},
+  {stars:1,percent:0},
+];
+const reviewHighlights=[
+  {label:'상담이 꼼꼼해요',percent:85},
+  {label:'원하는 스타일을 잘 이해해요',percent:78},
+  {label:'친절해요',percent:72},
+  {label:'손질법을 잘 알려줘요',percent:64},
+];
 const designerSectionIds=['match','works','service','reviews','salon'] as const;
 
 export function DesignerPage({id}:{id:string}){
@@ -129,10 +142,28 @@ export function DesignerPage({id}:{id:string}){
 
     <section id="reviews" className={styles.reviews} aria-labelledby="reviews-title">
       <h2 id="reviews-title">REVIEWS</h2>
-      <div className={styles.rating}><strong>4.9</strong><span>/ 5.0</span><small>고객 후기 {reviewCount}개</small></div>
+      <div className={styles.rating}>
+        <div className={styles.ratingSummary}>
+          <div className={styles.ratingScore}><strong>4.9</strong><span aria-hidden="true">★</span></div>
+          <div className={styles.ratingMeta}><span>/ 5.0</span><small>고객 후기 {reviewCount}개</small></div>
+        </div>
+        <div className={styles.ratingDistribution} aria-label="별점별 후기 분포">
+          {ratingDistribution.map(({stars,percent})=><div key={stars} className={styles.ratingDistributionRow}>
+            <div className={styles.ratingDistributionTrack} role="progressbar" aria-label={`${stars}점 평가 비율`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
+              <span style={{width:`${percent}%`}}/>
+            </div>
+            <span aria-hidden="true">{stars}</span>
+          </div>)}
+        </div>
+      </div>
       <div className={styles.reviewHighlights}>
         <h3>고객들이 자주 언급한 장점</h3>
-        <ul>{reviewTags.map(tag=><li key={tag}>{tag}</li>)}</ul>
+        <ul>{reviewHighlights.map(({label,percent})=><li key={label}>
+          <div className={styles.reviewHighlightHeading}><span>{label}</span><span>{percent}%</span></div>
+          <div className={styles.reviewHighlightTrack} role="progressbar" aria-label={`${label} 언급 비율`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
+            <span style={{width:`${percent}%`}}/>
+          </div>
+        </li>)}</ul>
       </div>
       <article><header><span>★ 5.0</span><time dateTime="2026-09-28">2026.09.28</time></header><small>레이어드 컷 · 긴머리</small><p>매번 원하는 스타일을 정확히 이해해주셔요 !<br/>{item.name}쌤 진짜 좋아요 유명해지세요 아니에요 유명해지지마세요 유명해주세요 아니 유명</p></article>
       <article><header><span>★ 5.0</span><time dateTime="2026-09-20">2026.09.20</time></header><small>C컬펌 · 긴머리</small><p>강한 컬은 부담스럽다고 말씀드렸는데 자연스럽게 맞춰주셨어요. 다음에도 {item.name}쌤한테 머리 할래요 ~~~~</p></article>
