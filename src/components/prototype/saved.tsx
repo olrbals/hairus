@@ -65,7 +65,7 @@ export function Saved() {
 function SavedCard({item}: {item: Item}) {
   if (item.kind === 'style') return <article className={css.styleCard}>
     <Link href={itemHref(item)}><img src={item.image} alt={item.name}/><h2>{item.name}</h2></Link>
-    <SaveButton item={item} reasonClassName={css.reason}/>
+    <SaveButton item={item} reasonClassName={css.reason} reasonGroupClassName={css.reasonGroup}/>
   </article>;
   if (item.kind === 'designer') {
     const detail = designerDetails[item.id];
@@ -75,11 +75,11 @@ function SavedCard({item}: {item: Item}) {
         <div className={css.identity}><img src={detail?.avatar || item.image} alt=""/><div><h2>{item.name} 디자이너</h2>{salon && <p>{salon}</p>}</div></div>
         <div className={css.works}>{detail?.works.map((image, index) => <img key={image} src={image} alt={`${item.name} 포트폴리오 ${index + 1}`}/>)}</div>
       </Link>
-      <SaveButton item={item} reasonClassName={css.reason}/>
+      <SaveButton item={item} reasonClassName={css.reason} reasonGroupClassName={css.reasonGroup}/>
     </article>;
   }
   return <article className={css.salonCard}>
     <Link href={itemHref(item)}><img src={item.image} alt={item.name}/><h2>{item.name}</h2><p>{item.location?.replace('구 ', '구 · ').split(' · ').slice(0,2).join(' · ')}</p></Link>
-    <SaveButton item={item} reasonClassName={css.reason}/>
+    <SaveButton item={item} reasonClassName={css.reason} reasonGroupClassName={css.reasonGroup}/>
   </article>;
 }

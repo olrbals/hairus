@@ -1,15 +1,17 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {representativeReason} from '../src/lib/prototype/archive.ts';
+import {saveNotePreview} from '../src/lib/prototype/archive.ts';
 import {editorials, findEditorial, readEditorialBookmarks, toggleEditorialBookmark} from '../src/lib/prototype/editorials.ts';
 
-test('Archive previews one note line, then first reason, without mutating the full SAVENOTE', () => {
-  const saved = {note:'상담 때 보여주기\n옆머리는 더 길게', reasons:['분위기 참고','나중에 도전']};
+test('Archive previews at most two chips, with memo first and an accurate overflow count', () => {
+  const saved = {note:'상담 때 보여주기\n옆머리는 더 길게', reasons:['분위기 참고','나중에 도전','스타일링 참고']};
   const before = structuredClone(saved);
-  assert.equal(representativeReason(saved), '상담 때 보여주기');
+  assert.deepEqual(saveNotePreview(saved), {visible:['상담 때 보여주기','분위기 참고'],hiddenCount:2});
   assert.deepEqual(saved, before);
-  assert.equal(representativeReason({...saved,note:'  '}), '분위기 참고');
-  assert.equal(representativeReason({note:'', reasons:[]}), '');
+  assert.deepEqual(saveNotePreview({...saved,note:'  '}), {visible:['분위기 참고','나중에 도전'],hiddenCount:1});
+  assert.deepEqual(saveNotePreview({note:'', reasons:['분위기 참고','나중에 도전']}), {visible:['분위기 참고','나중에 도전'],hiddenCount:0});
+  assert.deepEqual(saveNotePreview({note:'', reasons:['분위기 참고']}), {visible:['분위기 참고'],hiddenCount:0});
+  assert.deepEqual(saveNotePreview({note:'', reasons:[]}), {visible:[],hiddenCount:0});
 });
 
 test('Editorial registry reuses existing articles/IN FOCUS and excludes popup promotions', () => {

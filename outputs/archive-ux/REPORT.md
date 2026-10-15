@@ -16,7 +16,7 @@
 - DESIGNER: 기존 프로필 + 이름 16px / 살롱 12px의 2줄 구성. 기존 3장 포트폴리오 이미지와 순서 재사용. 전문 분야는 Archive에서만 제외. 포트폴리오 아래 이유 칩.
 - SALON: 기존 공간 이미지, 이름 20px, 위치 12px, 이유 칩. 평점이나 가격 추가 없음.
 - 기존 Glass 하트와 하단 네비게이션 재사용. 이유 칩은 배경 #F5F4F2 / 글자 #666460 / 12px / 6px 10px 패딩 / 999px 모서리이며 Glass 없음.
-- 이유 표시: 직접 메모 첫 줄 → 첫 번째 선택형 이유 → 없으면 미표시. 1개만 한 줄 말줄임. 전체 메모와 모든 선택 이유를 그대로 보존한다.
+- 이유 표시: 직접 메모 첫 줄을 우선한 뒤 선택형 이유 순서로 최대 2개 칩을 표시한다. 3개 이상이면 옆에 작은 +N으로 나머지 개수를 표시한다. 각 칩은 한 줄 말줄임이며, 칩과 +N 모두 기존 SAVENOTE를 연다. 전체 메모와 모든 선택 이유를 그대로 보존한다.
 - 칩과 하트는 상세 링크 바깥에 배치하며 동일한 기존 SAVENOTE 편집기를 연다. OFF여도 기존 메모는 편집할 수 있다. 메모 입력은 여러 줄 원문을 유지하는 textarea로 보완했다.
 - SAVENOTE 적용 시 기존 저장 항목의 위치와 savedAt을 유지한다. 해제와 ON/OFF 설정은 기존 동작 유지.
 - MAGAZINE: 기존 ARTICLE 4개 및 IN FOCUS soft-bob을 지원한다. 큰 이미지 1열 리스트, 기존 영문 제목과 카테고리, 이미지 우측 상단 44px 북마크. 새 기사나 이미지 생성 없음.
@@ -41,8 +41,8 @@
 - 테스트에는 기존 Node MODULE_TYPELESS_PACKAGE_JSON 경고가 있으며 실패는 아니다.
 - 초기 공유 node_modules Junction으로 빌드할 때 Turbopack root 제한 오류가 있었다. 새 worktree에 `npx pnpm install --offline --frozen-lockfile`로 독립 설치한 후 표준 빌드가 통과했다. package.json/lockfile/빌드 설정은 변경하지 않았다.
 - 프로덕션 서버 + 실제 Chrome headless 브라우저 / 모바일 터치 에뮬레이션 / viewport 430×932 / DPR 1.
-- `node outputs/archive-ux/verify.cjs`: **88개 확인 통과**, 브라우저 런타임 오류 0. 상세 결과는 `qa.json`.
-- 4개 탭, 기본 STYLE, 2열/16px 간격, 텍스트 배치, 칩 우선순위·숨김·말줄임, 전체 다중 이유와 여러 줄 메모 복원/수정, 저장 순서, 저장 해제, SAVENOTE ON/OFF, 빈 상태, 실제 기사/IN FOCUS 저장·해제·Archive 동기화, issue 별칭, 새로고침 유지, 다른 탭 동기화, 저장소 실패 안내를 검증했다.
+- `node outputs/archive-ux/verify.cjs`: **92개 확인 통과**, 브라우저 런타임 오류 0. 상세 결과는 `qa.json`.
+- 최대 2개 칩, 3개 이상 +N 표시 및 편집 연결, 4개 탭, 기본 STYLE, 2열/16px 간격, 텍스트 배치, 칩 우선순위·숨김·말줄임, 전체 다중 이유와 여러 줄 메모 복원/수정, 저장 순서, 저장 해제, SAVENOTE ON/OFF, 빈 상태, 실제 기사/IN FOCUS 저장·해제·Archive 동기화, issue 별칭, 새로고침 유지, 다른 탭 동기화, 저장소 실패 안내를 검증했다.
 - 기존 저장/예약/초안/취향/매칭 데이터를 삽입한 격리된 테스트 브라우저에서 스크랩 전후 및 상세 직접 진입 전후 동일성을 비교했다. 실제 사용자 브라우저의 저장소는 수정하지 않았다. 스크린샷에 보이는 저장 항목은 이 테스트 fixture이며 제품 초기 데이터가 아니다.
 - HOME / Discover / MY / 디자이너 / 살롱 / Airy Layered / 예약 페이지 HTTP 200 및 가로 넘침 없음을 확인했다. 기존 예약 서비스 선택 유지, Airy Layered 4슬라이드와 원본 이미지 경로 유지도 확인했다.
 - 스크린샷 STYLE / DESIGNER / SALON / MAGAZINE / SAVENOTE / ARTICLE / IN FOCUS를 직접 열어 시각 검수했다.
@@ -63,6 +63,7 @@
 - `src/components/prototype/explore.tsx`
 - `src/components/prototype/people-explore.tsx`
 - `src/components/prototype/shared.tsx`
+- `src/components/prototype/savenote.module.css`
 - `src/components/prototype/store.tsx`
 - `src/lib/prototype/archive.ts` (신규)
 - `src/lib/prototype/editorials.ts` (신규)
