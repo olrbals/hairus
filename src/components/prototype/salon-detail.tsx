@@ -25,7 +25,7 @@ function SalonHeader({title,back,save=false}:{title:string;back:string;save?:boo
 }
 
 function BookingLink({className}:{className?:string}){
-  return <Link className={`${styles.bookingLink} ${className||''}`} href="/salons/arvo/designers">예약하기</Link>;
+  return <Link className={`${styles.bookingLink} primary-cta ${className||''}`} href="/salons/arvo/designers">예약하기</Link>;
 }
 
 export function ArvoSalonPage(){
@@ -140,10 +140,10 @@ export function ArvoDesignersPage(){
       <section className={styles.recommended}><h2>내 취향에서 먼저 살펴볼 디자이너</h2><DesignerRow person={findArvoDesigner('yoona')!} recommended/></section>
       {groups.map(group=><section className={styles.designerGroup} key={group.title}><h2>{group.title}</h2><div>{group.ids.map(id=><DesignerRow key={id} person={findArvoDesigner(id)!}/>)}</div></section>)}
     </div>
-    <footer className={styles.teamBooking}><button type="button" className={styles.bookingLink} onClick={()=>{document.querySelector(`.${styles.recommended}`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});document.querySelector<HTMLAnchorElement>(`.${styles.reserveDesigner}`)?.focus({preventScroll:true});}}>예약하기</button><p className={styles.srOnly}>디자이너별 예약하기를 선택해 주세요.</p></footer>
+    <footer className={styles.teamBooking}><button type="button" className={`${styles.bookingLink} primary-cta`} onClick={()=>{document.querySelector(`.${styles.recommended}`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});document.querySelector<HTMLAnchorElement>(`.${styles.reserveDesigner}`)?.focus({preventScroll:true});}}>예약하기</button><p className={styles.srOnly}>디자이너별 예약하기를 선택해 주세요.</p></footer>
   </main>;
 }
 
 export function ArvoReviewsPage(){
-  return <main id="main" className={styles.page}><SalonHeader title="아르보 성수 후기" back="/salons/arvo#reviews"/><ReviewSection data={arvoReviews}/><footer className={styles.booking}><Link className={styles.bookingLink} href="/salons/arvo#reviews">매장 상세로 돌아가기</Link></footer></main>;
+  return <main id="main" className={styles.page}><SalonHeader title="아르보 성수 후기" back="/salons/arvo#reviews"/><ReviewSection data={arvoReviews}/><footer className={styles.booking}><Link className={`${styles.bookingLink} primary-cta`} href="/salons/arvo#reviews">매장 상세로 돌아가기</Link></footer></main>;
 }

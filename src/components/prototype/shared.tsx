@@ -76,7 +76,7 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
      <div className={savenote.options}>{options.map(option=><button type="button" key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</button>)}</div>
      <textarea className={savenote.note} rows={1} aria-label="나만의 메모" placeholder="직접 적어보세요." value={note} maxLength={500} onChange={e=>setNote(e.target.value)}/>
     </div>
-    <button type="button" className={savenote.apply} onClick={save}>적용하기</button>
+    <button type="button" className={`${savenote.apply} primary-cta`} onClick={save}>적용하기</button>
     {saved&&<button type="button" className={savenote.remove} onClick={()=>{update(s=>({...s,saved:s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id))}));setOpen(false);}}>저장 해제</button>}
    </div>
   </BottomSheet>

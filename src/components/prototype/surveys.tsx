@@ -147,7 +147,7 @@ export function ProfileComplete(){
   </article>
   <div className="preference-complete__actions">
    <button type="button" onClick={()=>router.push('/preferences/1')}>다시 하기</button>
-   <button type="button" onClick={()=>router.push('/home')}>홈으로 가기</button>
+   <button type="button" className="primary-cta" onClick={()=>router.push('/home')}>홈으로 가기</button>
   </div>
  </main>;
 }

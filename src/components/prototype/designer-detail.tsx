@@ -137,6 +137,6 @@ export function DesignerPage({id}:{id:string}){
       <Link className={styles.textLink} href={`/salons/${salon.id}`}>자세히 보기 →</Link>
     </section>}
 
-    <div className={styles.booking}><Link href={`/reservation/${item.id}/service`}>예약하기</Link></div>
+    <div className={styles.booking}><Link className="primary-cta" href={`/reservation/${item.id}/service`}>예약하기</Link></div>
   </main>;
 }

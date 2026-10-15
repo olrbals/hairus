@@ -113,9 +113,9 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
     setError('');
     update(current=>({...current,draft:current.draft?.designerId===designerId?change(current.draft):current.draft}));
   }
-  if(!designer)return <BookingPage back="/explore?category=designer"><div className={styles.content}><h1>디자이너를 찾을 수 없어요.</h1><Link className={styles.primary} href="/explore?category=designer">디자이너 선택하기</Link></div></BookingPage>;
+  if(!designer)return <BookingPage back="/explore?category=designer"><div className={styles.content}><h1>디자이너를 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 선택하기</Link></div></BookingPage>;
   if(!ready||!draft)return <BookingPage back={`/designers/${designerId}`}><p className={styles.content} role="status">예약 내용을 불러오는 중이에요.</p></BookingPage>;
-  if(index<0)return <BookingPage back={`/designers/${designerId}`}><div className={styles.content}><Link className={styles.primary} href={`${prefix}/service`}>예약 시작하기</Link></div></BookingPage>;
+  if(index<0)return <BookingPage back={`/designers/${designerId}`}><div className={styles.content}><Link className={`${styles.primary} primary-cta`} href={`${prefix}/service`}>예약 시작하기</Link></div></BookingPage>;
   const service=services.find(service=>service.id===draft.serviceId);
   const dateValid=dates.includes(draft.date)&&demoTimes.includes(draft.time);
   const canContinue=index===0?!!service:index===1?!!service&&dateValid:index===2?!!service&&dateValid&&!!draft.note.trim():validBooking(draft);
@@ -148,7 +148,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
       {error&&<p role="status" className={styles.message}>{error}</p>}
       {index>0&&!canContinue&&<p className={styles.hint} role="status">{!service?<Link className={styles.textLink} href={editHref('service')}>시술을 선택해 주세요.</Link>:!dateValid?<Link className={styles.textLink} href={editHref('schedule')}>날짜와 시간을 선택해 주세요.</Link>:<Link className={styles.textLink} href={editHref('note')}>상담 노트를 작성해 주세요.</Link>}</p>}
     </div>
-    <footer className={styles.footer}><button type="button" className={styles.primary} disabled={!canContinue} onClick={continueBooking}>{index===3?'예약 정보 저장하기':returnToReview?'수정하고 예약 확인':index===2?'예약 정보 확인하기':'다음'}</button></footer>
+    <footer className={styles.footer}><button type="button" className={`${styles.primary} primary-cta`} disabled={!canContinue} onClick={continueBooking}>{index===3?'예약 정보 저장하기':returnToReview?'수정하고 예약 확인':index===2?'예약 정보 확인하기':'다음'}</button></footer>
   </BookingPage>;
 }
 
@@ -175,8 +175,8 @@ export function BookingComplete({id}:{id:string}){
       <BookingSummary draft={booking}/>
       <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>시술 금액과 결제는 방문 상담 후 안내받으세요.</p></div>
       <NotePreview draft={booking}/>
-      <div className={styles.completeActions}><Link className={styles.primary} href="/my/reservations">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
-    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={styles.primary} href="/my/reservations">MY 예약 내역 보기</Link></>}
+      <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my/reservations">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
+    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/my/reservations">MY 예약 내역 보기</Link></>}
   </div></BookingPage>;
 }
 
@@ -186,7 +186,7 @@ export function BookingAppointments(){
  <h1 className={styles.appointmentsTitle}>My Appointments</h1>
  {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
  const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';
- return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{service?.name}</span><span>{service?.price.toLocaleString('ko-KR')}원</span></div><Link className={styles.primary} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
- }):<><p>아직 저장한 예약이 없어요.</p><Link className={styles.primary} href="/explore?category=designer">디자이너 찾아보기</Link></>}
+ return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{service?.name}</span><span>{service?.price.toLocaleString('ko-KR')}원</span></div><Link className={`${styles.primary} primary-cta`} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
+ }):<><p>아직 저장한 예약이 없어요.</p><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></>}
  </div></BookingPage>;
 }

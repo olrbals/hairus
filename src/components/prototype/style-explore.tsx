@@ -100,7 +100,7 @@ export function StyleExplore(){
       {options.map(option=><button type="button" key={option} aria-pressed={draft[key]===option} onClick={()=>setDraft(current=>({...current,[key]:option}))}>{option}</button>)}
      </div>
     </section>)}
-    <button type="button" className={sheet.apply} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
+    <button type="button" className={`${sheet.apply} primary-cta`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
    </div>
   </BottomSheet>
  </>;

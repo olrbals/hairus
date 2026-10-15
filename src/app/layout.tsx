@@ -3,6 +3,7 @@ import "@fontsource-variable/cormorant-garamond";
 import "@fontsource-variable/cormorant";
 import "./globals.css";
 import "../styles/prototype.css";
+import "../styles/primary-cta.css";
 import {PrototypeProvider} from "@/components/prototype/store";
 export const metadata: Metadata = { title: "HAIRUS", description: "나의 헤어를 이해하고 취향을 발견하는 HAIRUS 모바일 프로토타입" };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
