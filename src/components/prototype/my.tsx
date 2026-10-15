@@ -8,7 +8,7 @@ import {readEntry} from '@/lib/entry-state';
 import {BottomNav} from '@/components/bottom-nav';
 import {usePrototype} from './store';
 import {Screen,Action,Card,DemoNotice} from './shared';
-import {BookingSummary} from './booking';
+import {BookingAppointments} from './booking';
 
 const myAsset=(name:string)=>`/assets/figma/my/${name}`;
 
@@ -33,7 +33,7 @@ export function My({view}:{view?:string}){
   setProfile(savedProfile?effectiveProfile(savedProfile):null);
  },[]);
 
- if(view==='reservations')return <Screen title="My Appointments" back="/my"><DemoNotice>이 브라우저에서 완료한 데모 예약입니다. 실제 예약 내역이 아니에요.</DemoNotice>{!ready?<p>불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(b=><article className="appointment" key={b.id}><p className="eyebrow">DEMO · 저장 완료</p><BookingSummary draft={b}/><Action href={`/reservations/${b.id}`}>상담 노트 및 상세 보기</Action></article>):<div className="empty-state"><p>아직 데모 예약이 없어요.</p><Action href="/explore?category=designer">디자이너 찾아보기</Action></div>}</Screen>;
+ if(view==='reservations')return <BookingAppointments/>;
 
  if(view==='recent')return <Screen title="Recently Viewed" back="/my">{!state.recent.length?<p>최근 조회한 콘텐츠가 없어요.</p>:state.recent.map(key=>{const [kind,id]=key.split(':');if(kind==='article'){const article=[...articles,...events].find(a=>a.id===id);return article?<Link key={key} className="list-link" href={`/articles/${id}`}>{article.title} ↗</Link>:null;}if(kind==='focus')return <Link key={key} className="list-link" href="/in-focus/soft-bob">IN FOCUS · SOFT EXPRESSION ↗</Link>;const item=findItem(kind as Kind,id);return item?<Card key={key} item={item}/>:null;})}</Screen>;
 

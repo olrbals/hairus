@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "Profile edits saved through real UI",
+    "Latest saved profile reflected",
+    "No invented history or raw reference features",
+    "Wishes and separate memo composed",
+    "Memo survives refresh",
+    "Service-specific recommendations",
+    "Manual final note protected from regeneration",
+    "Cancel rebuild retains note",
+    "Confirmed rebuild also preserves manual original",
+    "Review exposes final note",
+    "Saved booking exact final note",
+    "MY detail retains final note",
+    "No horizontal overflow",
+    "No runtime errors"
+  ],
+  "errors": []
+}

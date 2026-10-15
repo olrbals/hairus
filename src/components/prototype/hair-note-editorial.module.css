@@ -1,0 +1,36 @@
+.layout{display:flex;flex-direction:column;gap:28px;min-width:0}
+.card{background:#f8f7f3;border:1px solid #efeee8;padding:24px;display:flex;flex-direction:column;gap:24px}
+.title{font-family:var(--font-editorial);font-size:36px;font-weight:500;margin:0}
+.myHair h3,.label{font-size:10px;font-weight:500;color:#85857b;margin:0 0 9px}
+.myHair p{font-size:13px;color:#69695f;overflow-wrap:anywhere}
+.forYou{padding-top:20px;border-top:1px solid #e6e5dd}
+.forYou h3{font-size:18px;font-weight:500;word-break:keep-all;overflow-wrap:anywhere;margin:0}
+.recommendation{margin-top:12px;font-size:14px;color:#68685f;word-break:keep-all;overflow-wrap:anywhere}
+.wishes{display:flex;flex-direction:column;gap:20px}
+.wishHeading h2{font-size:16px;font-weight:500;margin:0 0 6px}
+.wishHeading p{font-size:12px;color:#85857b}
+.wishes fieldset{border:0;padding:0;margin:0;min-width:0}
+.wishes legend{font-size:12px;color:#69695f;padding:0;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:#f4f3f0;border:0;border-radius:24px;padding:10px 15px;min-height:44px;font-size:12px}
+.chips button[aria-pressed=true]{background:#171715;color:white}
+.chips button:disabled{opacity:.45}
+.memo{display:flex;flex-direction:column;gap:10px;font-size:12px;color:#69695f}
+.memo textarea,.editor textarea{font:inherit;font-size:16px;line-height:1.3;letter-spacing:-.02em;width:100%;resize:none;overflow:hidden;padding:12px;border:1px solid #efeee8;background:#faf9f6;color:#171715;border-radius:2px;min-height:68px}
+.memo textarea::placeholder{color:#aaa99f;font-size:13px}
+.memo textarea:focus-visible,.editor textarea:focus-visible{outline:1px solid #b7b5aa;outline-offset:0}
+.protected{font-size:12px;color:#77776c;word-break:keep-all}
+.final{border-top:1px solid #e9e8e1}
+.final summary{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;font-size:13px;color:#66665e}
+.final summary::-webkit-details-marker{display:none}
+.final[open] summary>span{transform:rotate(180deg)}
+.final summary:focus-visible{outline:2px solid #171715;outline-offset:3px}
+.finalBody{padding:12px 0 0;display:flex;flex-direction:column;gap:16px}
+.finalText{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+.textAction,.tools button,.tools a,.editorMeta button{border:0;background:none;font-size:12px;min-height:44px;padding:10px 0;color:#77776d;text-decoration:underline;text-underline-offset:3px}
+.textAction{align-self:flex-start}
+.tools{border-top:1px solid #efeee8;padding-top:8px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.editor{display:flex;flex-direction:column;gap:12px}
+.editor label{font-size:12px;color:#77776c}
+.editorMeta{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.editorMeta span{font-size:10px;color:#85857b}
