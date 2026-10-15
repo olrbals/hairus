@@ -1,0 +1,75 @@
+{
+  "checks": [
+    "progress 0",
+    "progress 1",
+    "progress 2",
+    "progress 3",
+    "430px gallery slots 382x538",
+    "cards 183x298",
+    "original angle resolution",
+    "title preserved",
+    "touch swipe backward updates progress",
+    "touch swipe forward updates progress",
+    "no runtime errors"
+  ],
+  "metrics": {
+    "slides": [
+      {
+        "width": 382,
+        "height": 538,
+        "src": "/assets/figma/v1/5582e.png",
+        "natural": [
+          1024,
+          1557
+        ],
+        "style": null
+      },
+      {
+        "width": 382,
+        "height": 538,
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "natural": [
+          2171,
+          724
+        ],
+        "style": "width:422.31855742953104%;left:-315.4605253842544%;top:3.7201353109139745e-10%"
+      },
+      {
+        "width": 382,
+        "height": 538,
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "natural": [
+          2171,
+          724
+        ],
+        "style": "width:422.3735517049742%;left:-216.41367252184125%;top:0.013220928667578846%"
+      },
+      {
+        "width": 382,
+        "height": 538,
+        "src": "/assets/figma/discover-airy/angles-original.png",
+        "natural": [
+          2171,
+          724
+        ],
+        "style": "width:422.31855742953104%;left:-111.10700245724212%;top:-0.02171645173802972%"
+      }
+    ],
+    "cards": [
+      {
+        "width": 183,
+        "height": 298
+      },
+      {
+        "width": 183,
+        "height": 298
+      },
+      {
+        "width": 183,
+        "height": 298
+      }
+    ],
+    "title": "Airy Layered"
+  },
+  "errors": []
+}

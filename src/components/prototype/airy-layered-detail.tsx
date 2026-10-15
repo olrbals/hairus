@@ -9,10 +9,10 @@ import {SaveButton} from './shared';
 import './airy-layered-detail.css';
 
 const gallery = [
-  {src:'/assets/figma/v1/5582e.png',alt:'에어리 레이어드 정면 스타일'},
-  {src:'/assets/figma/discover-airy/side.png',alt:'에어리 레이어드 측면 스타일'},
-  {src:'/assets/figma/discover-airy/back.png',alt:'에어리 레이어드 뒷모습'},
-  {src:'/assets/figma/discover-airy/other-side.png',alt:'에어리 레이어드 반대쪽 측면 스타일'},
+  {src:'/assets/figma/v1/5582e.png',crop:undefined,alt:'에어리 레이어드 정면 스타일'},
+  {src:'/assets/figma/discover-airy/angles-original.png',crop:{width:`${100 / .2367880791425705}%`,left:`${-100 * .746972918510437 / .2367880791425705}%`,top:`${-100 * -3.7201353109139745e-12}%`},alt:'에어리 레이어드 측면 스타일'},
+  {src:'/assets/figma/discover-airy/angles-original.png',crop:{width:`${100 / .23675724864006042}%`,left:`${-100 * .5123750567436218 / .23675724864006042}%`,top:`${-100 * -.00013220928667578846}%`},alt:'에어리 레이어드 뒷모습'},
+  {src:'/assets/figma/discover-airy/angles-original.png',crop:{width:`${100 / .2367880791425705}%`,left:`${-100 * .2630881369113922 / .2367880791425705}%`,top:`${-100 * .00021716451738029718}%`},alt:'에어리 레이어드 반대쪽 측면 스타일'},
 ];
 
 const guidelines = [
@@ -64,7 +64,7 @@ export function AiryLayeredDetail() {
         <div className="airy-gallery-track" ref={sliderRef} onScroll={updateSlide} role="region" aria-roledescription="carousel" aria-label="스타일 사진 4장" tabIndex={0}>
           {gallery.map((photo,index)=>
             <div className="airy-slide" role="group" aria-roledescription="slide" aria-label={`${index+1} / ${gallery.length}`} key={photo.alt}>
-              <img src={photo.src} alt={photo.alt} draggable={false} loading={index===0?'eager':'lazy'}/>
+              <img style={photo.crop} src={photo.src} alt={photo.alt} draggable={false} loading={index===0?'eager':'lazy'}/>
             </div>
           )}
         </div>
@@ -107,7 +107,7 @@ export function AiryLayeredDetail() {
         <div className="airy-more-scroll" aria-label="다른 스타일 가로 탐색">
           {moreStyles.map(style=>
             <Link className="airy-more-card" href={`/styles/${style.id}`} key={style.id}>
-              <img src={style.image} alt={style.name} loading="lazy"/>
+              <div className={style.id==='hush'?'airy-more-image airy-more-image-hush':'airy-more-image'}><img src={style.image} alt={style.name} loading="lazy"/></div>
               <span>{style.name}</span>
             </Link>
           )}
