@@ -37,6 +37,8 @@ export function DesignerPage({id}:{id:string}){
         const section=document.getElementById(sectionId);
         if(section&&section.getBoundingClientRect().top<=80)current=sectionId;
       }
+      // The salon is near the page end and may not reach the sticky bar on short pages.
+      if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2&&document.getElementById('salon'))current='salon';
       setActiveSection(previous=>previous===current?previous:current);
     };
     window.addEventListener('scroll',updateActiveSection,{passive:true});
