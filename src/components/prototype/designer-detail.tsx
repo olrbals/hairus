@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {readEntry} from '@/lib/entry-state';
 import {asset,findItem,salons,services} from '@/lib/prototype/catalog';
 import {recommend} from '@/lib/prototype/logic';
@@ -11,13 +11,21 @@ import {usePrototype} from './store';
 import styles from './designer-detail.module.css';
 
 const profileTags=['꼼꼼한 상담','편안한 소통','세심한 시술'];
-const matchTags=['긴 기장','가벼운 레이어','자연스러운 볼륨'];
+// Figma prototype comparison pairs. These images illustrate the matching UX only.
+const matchComparisons=[
+  {work:'5a15e.png',saved:'ad0de.png',tags:['긴 기장','가벼운 레이어','자연스러운 볼륨']},
+  {work:'f66bd.png',saved:'d7b6a.png',tags:['긴 기장','웨이브','풍성한 볼륨']},
+  {work:'bd491.png',saved:'31628.png',tags:['짧은 기장','얼굴선 레이어','차분한 실루엣']},
+];
 const reviewTags=['상담이 꼼꼼해요','친절해요','원하는 스타일을 잘 이해해요','손질법을 잘 알려줘요'];
 
 export function DesignerPage({id}:{id:string}){
   const router=useRouter();
   const {state,update}=usePrototype();
   const [userName,setUserName]=useState('');
+  const [matchIndex,setMatchIndex]=useState(0);
+  const touchStartX=useRef<number|null>(null);
+  const stepMatch=(direction:number)=>setMatchIndex(index=>(index+direction+matchComparisons.length)%matchComparisons.length);
   useEffect(()=>setUserName(readEntry().name.trim()),[]);
   const item=findItem('designer',id);
   useEffect(()=>{if(item)update(current=>({...current,recent:[`designer:${id}`,...current.recent.filter(value=>value!==`designer:${id}`)].slice(0,30)}));},[id,item,update]);
@@ -28,6 +36,7 @@ export function DesignerPage({id}:{id:string}){
   const reviewCount=item.id==='sohee'?513:623;
   const introduction=`“ 작은 변화로도, 고객님의 가장 자연스러운 매력을 찾을 수 있도록 함께 고민하는 ${item.name} 디자이너입니다. ”`;
   const userLabel=userName?`${userName}님이`:'고객님이';
+  const matchComparison=matchComparisons[matchIndex];
 
   return <main id="main" className={styles.page}>
     <header className={styles.header}>
@@ -55,12 +64,24 @@ export function DesignerPage({id}:{id:string}){
     <section id="match" className={styles.match} aria-labelledby="match-title">
       <h2 id="match-title">WHY WE MATCH</h2>
       <p>{userLabel} 저장한 스타일과 {item.name} 디자이너의 작업에서<br/>공통된 디테일을 발견했어요.</p>
-      <div className={styles.matchImages} aria-label={result?.reasons.join(' ')||`${item.name} 디자이너 추천 비교`}>
-        <figure><img src={asset('5a15e.png')} alt={`${item.name} 디자이너의 실제 작업`}/><figcaption>{item.name} 디자이너의 실제 작업</figcaption></figure>
-        <figure><img src={asset('ad0de.png')} alt="내가 저장한 스타일"/><figcaption>내가 저장한 스타일</figcaption></figure>
+      <div className={styles.matchImages} role="group" aria-label={result?.reasons.join(' ')||`${item.name} 디자이너 추천 비교`}
+        onTouchStart={event=>{touchStartX.current=event.touches[0]?.clientX??null;}}
+        onTouchEnd={event=>{
+          if(touchStartX.current===null)return;
+          const distance=event.changedTouches[0].clientX-touchStartX.current;
+          touchStartX.current=null;
+          if(Math.abs(distance)>40)stepMatch(distance<0?1:-1);
+        }}
+        onTouchCancel={()=>{touchStartX.current=null;}}>
+        <figure><figcaption>{item.name}의 실제 작업</figcaption><img src={asset(matchComparison.work)} alt={`${item.name} 디자이너의 실제 작업 예시`}/></figure>
+        <figure><figcaption>내가 저장한 스타일</figcaption><img src={asset(matchComparison.saved)} alt="저장한 스타일 비교 예시"/></figure>
       </div>
-      <div className={styles.matchPager} aria-hidden="true"><span>←</span><span>01 / 03</span><span>→</span></div>
-      <div className={styles.tags}>{matchTags.map(tag=><span key={tag}>{tag}</span>)}</div>
+      <div className={styles.matchPager} aria-label="매칭 비교 슬라이드">
+        <button type="button" aria-label="이전 비교 보기" onClick={()=>stepMatch(-1)}>←</button>
+        <span aria-live="polite" aria-atomic="true">{String(matchIndex+1).padStart(2,'0')} / {String(matchComparisons.length).padStart(2,'0')}</span>
+        <button type="button" aria-label="다음 비교 보기" onClick={()=>stepMatch(1)}>→</button>
+      </div>
+      <div className={styles.tags}>{matchComparison.tags.map(tag=><span key={tag}>{tag}</span>)}</div>
     </section>
 
     <section id="works" className={styles.works} aria-labelledby="works-title">
