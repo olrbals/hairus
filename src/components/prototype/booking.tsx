@@ -10,7 +10,7 @@ import {bookingDateLabel,calendarCells,noteSections,selectBookingDate,selectBook
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {usePrototype} from './store';
 import styles from './booking.module.css';
-import {wishQuestions} from '@/lib/prototype/personalized-note';
+import {HairNoteEditorial} from './hair-note-editorial';
 
 const steps=['service','schedule','note','review'];
 const labels=['시술 선택','날짜 및 시간','HAIR NOTE','예약 확인'];
@@ -71,8 +71,6 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
   useEffect(()=>{const refresh=()=>setProfileRevision(v=>v+1);window.addEventListener('focus',refresh);window.addEventListener('storage',refresh);return()=>{window.removeEventListener('focus',refresh);window.removeEventListener('storage',refresh);};},[]);
   const [dates,setDates]=useState<string[]>([]);
   const [windowDates,setWindowDates]=useState<string[]>([]);
-  const [editing,setEditing]=useState(false);
-  const editorRef=useRef<HTMLTextAreaElement>(null);
   const designer=designers.find(person=>person.id===designerId);
   const draft=state.draft?.designerId===designerId?state.draft:null;
   const prefix=`/reservation/${designerId}`;
@@ -110,8 +108,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
       if(note!==draft.note)update(current=>({...current,draft:current.draft?.designerId===designerId?{...current.draft,note}:current.draft}));
     }
   },[ready,draft,step,state.preferences,designerId,update,profileRevision]);
-  useEffect(()=>{setEditing(false);setError('');},[step]);
-  useEffect(()=>{const editor=editorRef.current;if(editor){editor.style.height='auto';editor.style.height=`${editor.scrollHeight+2}px`;}},[editing,draft?.note]);
+  useEffect(()=>{setError('');},[step]);
   function patchDraft(change:(value:BookingDraft)=>BookingDraft){
     setError('');
     update(current=>({...current,draft:current.draft?.designerId===designerId?change(current.draft):current.draft}));
@@ -138,7 +135,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
     <div className={styles.content}>
       <ol className={styles.progress} aria-label={`예약 ${index+1} / 4단계`}>{steps.map((value,i)=><li key={value} data-active={i<=index} aria-current={i===index?'step':undefined}><span>0{i+1}</span>{labels[i]}</li>)}</ol>
       <DesignerIdentity id={designerId}/>
-      <div className={styles.intro}><h1 tabIndex={-1}>{titles[index]}</h1>{index===2&&<p>디자이너에게 전하고 싶은 이야기를 정리했어요.<br/>내용을 확인하고 자유롭게 수정해 주세요.</p>}</div>
+      <div className={styles.intro}><h1 tabIndex={-1}>{titles[index]}</h1>{index===2&&<p>나의 헤어를 바탕으로 상담 내용을 정리했어요.</p>}</div>
       {index===0&&<><div className={styles.services} role="group" aria-label="시술 선택">{services.map(service=><button type="button" className={styles.service} key={service.id} aria-pressed={draft.serviceId===service.id} onClick={()=>patchDraft(current=>selectBookingService(current,service.id))}><span><strong>{service.name}</strong><small>{service.price.toLocaleString('ko-KR')}원 · 약 {service.minutes}분</small></span><span className={styles.selection}>{draft.serviceId===service.id&&<Check/>}</span></button>)}</div><p className={styles.hint}>한 가지 시술을 선택해 주세요.</p></>}
       {index===1&&<div className={styles.schedule}>
         <BookingCalendar dates={dates} windowDates={windowDates} value={draft.date} onSelect={date=>patchDraft(current=>selectBookingDate(current,date))}/>
@@ -146,18 +143,7 @@ export function BookingFlow({designerId,step,initialService,returnToReview=false
         <section className={styles.timeSection} aria-labelledby="time-title"><div className={styles.cardHeading}><h2 id="time-title">시간 선택</h2><span className={styles.hint}>약 {service?.minutes||'—'}분 소요</span></div><p className={styles.dateCaption} aria-live="polite">{draft.date?bookingDateLabel(draft.date):'날짜를 먼저 선택해 주세요.'}</p><div className={styles.times} role="group" aria-label="예약 시간 선택">{demoTimes.map(time=><button type="button" key={time} disabled={!dates.includes(draft.date)} aria-pressed={draft.time===time} onClick={()=>patchDraft(current=>({...current,time}))}>{time}</button>)}</div></section>
         {!service&&<Link className={styles.textLink} href={`${prefix}/service`}>시술 먼저 선택하기</Link>}
       </div>}
-      {index===2&&<>
-        <section className={styles.wishes} aria-label="YOUR WISH"><h2>YOUR WISH</h2><p className={styles.hint}>원하는 디테일만 더해 주세요. 선택하지 않아도 괜찮아요.</p>
-        {wishQuestions(draft.serviceId).map(question=><fieldset key={question.key} disabled={draft.noteEdited}><legend>{question.label}</legend><div>{question.options.map(option=><button type="button" key={option} aria-pressed={draft.noteInput?.wishes?.[question.key]===option} onClick={()=>patchDraft(current=>({...current,noteInput:{...current.noteInput,wishes:{...current.noteInput?.wishes,[question.key]:current.noteInput?.wishes?.[question.key]===option?'':option}}}))}>{option}</button>)}</div></fieldset>)}
-        <label className={styles.memo}>더 전하고 싶은 이야기가 있나요?<textarea rows={2} maxLength={1000} disabled={draft.noteEdited} value={draft.noteInput?.memo||''} onChange={event=>patchDraft(current=>({...current,noteInput:{...current.noteInput,memo:event.target.value}}))}/></label>
-        {draft.noteEdited&&<p className={styles.hint}>직접 수정한 최종 노트를 보호하고 있어요. 선택과 메모를 더하려면 아래에서 프로필로 노트를 다시 구성해 주세요. 수정한 내용은 보존돼요.</p>}</section>
-        <section className={styles.noteCard} aria-label="상담 노트">
-          <div className={styles.cardHeading}><h2 className={styles.editorial}>HAIR NOTE</h2>{editing?<span className={styles.noteTag}>노트 수정 중</span>:<button type="button" className={styles.edit} onClick={()=>setEditing(true)}>노트 수정하기</button>}</div>
-          {editing?<div className={styles.editor}><label htmlFor="booking-note">상담 노트 수정</label><textarea id="booking-note" ref={editorRef} autoFocus rows={3} maxLength={3000} value={draft.noteEdited?draft.note:noteSections(draft.note).map(section=>section.label?`${section.label}: ${section.value}`:section.value).join('\n\n')} onChange={event=>patchDraft(current=>({...current,note:event.target.value,noteEdited:true}))}/><div className={styles.editorMeta}><span>자동 저장 · {draft.note.length.toLocaleString()} / 3,000</span><button type="button" className={styles.edit} onClick={()=>setEditing(false)}>수정 마치기</button></div></div>:<><p className={styles.preview}>{draft.note}</p><details className={styles.noteDetails}><summary>노트 전체 보기</summary><NoteContent note={draft.note}/></details>{!draft.note.trim()&&<p className={styles.hint}>디자이너에게 전하고 싶은 말을 작성해 주세요.</p>}</>}
-        </section>
-        <p className={styles.hint}>수정한 내용은 자동 저장돼요.</p>
-        <div className={styles.noteTools}><Link className={styles.textLink} href="/analysis/result">헤어 프로필 확인</Link><button type="button" className={styles.textLink} onClick={()=>{if(draft.noteEdited&&!window.confirm('최신 프로필로 노트를 다시 구성할까요? 직접 수정한 노트는 아래에 보존됩니다.'))return;const profile=readProfile();const noteInput={...draft.noteInput,...(draft.noteEdited?{preserved:draft.note}:{})};patchDraft(current=>({...current,noteInput,noteEdited:false,note:hairNote(profile?effectiveProfile(profile):null,state.preferences,current.serviceId,noteInput)}));}}>프로필로 노트 다시 구성</button></div>
-      </>}
+      {index===2&&<HairNoteEditorial draft={draft} profileRevision={profileRevision} onChange={patchDraft} onRebuild={()=>{if(draft.noteEdited&&!window.confirm('최신 프로필로 노트를 다시 구성할까요? 직접 수정한 노트는 아래에 보존됩니다.'))return;const profile=readProfile();const noteInput={...draft.noteInput,...(draft.noteEdited?{preserved:draft.note}:{})};patchDraft(current=>({...current,noteInput,noteEdited:false,note:hairNote(profile?effectiveProfile(profile):null,state.preferences,current.serviceId,noteInput)}));}}/>}
       {index===3&&<><BookingSummary draft={draft} editPrefix={prefix}/><NotePreview draft={draft} editHref={editHref('note')}/><p className={styles.hint}>저장한 예약과 상담 노트는 MY에서 다시 볼 수 있어요.</p></>}
       {error&&<p role="status" className={styles.message}>{error}</p>}
       {index>0&&!canContinue&&<p className={styles.hint} role="status">{!service?<Link className={styles.textLink} href={editHref('service')}>시술을 선택해 주세요.</Link>:!dateValid?<Link className={styles.textLink} href={editHref('schedule')}>날짜와 시간을 선택해 주세요.</Link>:<Link className={styles.textLink} href={editHref('note')}>상담 노트를 작성해 주세요.</Link>}</p>}
