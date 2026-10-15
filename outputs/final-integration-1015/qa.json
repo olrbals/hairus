@@ -1,0 +1,179 @@
+{
+  "checks": [
+    "/designers/sohee HTTP 200",
+    "sohee profile",
+    "sohee sticky CSS",
+    "sohee comparison next changes image",
+    "sohee comparison previous restores image",
+    "sohee swipe handler changes image",
+    "sohee five rating and four highlight bars",
+    "sohee original two reviews",
+    "sohee section gaps 52px",
+    "sohee section padding 24px / works 40px",
+    "sohee section dividers absent",
+    "sohee salon content to booking 52px",
+    "sohee active section works",
+    "sohee sticky stays at viewport top works",
+    "sohee active section reviews",
+    "sohee sticky stays at viewport top reviews",
+    "sohee active section salon",
+    "sohee sticky stays at viewport top salon",
+    "sohee original SAVENOTE opens",
+    "sohee save persisted",
+    "sohee header saved heart remains plain",
+    "sohee save restored after refresh",
+    "sohee SAVENOTE memo restored",
+    "sohee unsave",
+    "sohee booking receives correct designer",
+    "sohee booking schedule connected",
+    "/designers/yoona HTTP 200",
+    "yoona profile",
+    "yoona sticky CSS",
+    "yoona comparison next changes image",
+    "yoona comparison previous restores image",
+    "yoona swipe handler changes image",
+    "yoona five rating and four highlight bars",
+    "yoona original two reviews",
+    "yoona section gaps 52px",
+    "yoona section padding 24px / works 40px",
+    "yoona section dividers absent",
+    "yoona salon content to booking 52px",
+    "yoona active section works",
+    "yoona sticky stays at viewport top works",
+    "yoona active section reviews",
+    "yoona sticky stays at viewport top reviews",
+    "yoona active section salon",
+    "yoona sticky stays at viewport top salon",
+    "yoona original SAVENOTE opens",
+    "yoona save persisted",
+    "yoona header saved heart remains plain",
+    "yoona save restored after refresh",
+    "yoona SAVENOTE memo restored",
+    "yoona unsave",
+    "yoona booking receives correct designer",
+    "yoona booking schedule connected",
+    "/in-focus/soft-bob HTTP 200",
+    "IN FOCUS bookmark selected",
+    "Bookmark never opens SAVENOTE",
+    "High quality image renders designer-sohee.png",
+    "High quality image renders silhouette-side.png",
+    "High quality image renders texture-rear.png",
+    "High quality image renders wave-close-up.png",
+    "/saved HTTP 200",
+    "Archive defaults to style",
+    "Archive four categories preserved",
+    "IN FOCUS bookmark syncs to Archive",
+    "Editorial bookmark persists after reload",
+    "Archive unbookmark and empty state",
+    "/home HTTP 200",
+    "/home content renders",
+    "/explore HTTP 200",
+    "/explore content renders",
+    "/my HTTP 200",
+    "/my content renders",
+    "/articles/popup HTTP 200",
+    "/articles/popup content renders",
+    "/articles/care HTTP 200",
+    "/articles/care content renders",
+    "/styles/airy HTTP 200",
+    "/styles/airy content renders",
+    "/recommendation/intro HTTP 200",
+    "/recommendation/intro content renders",
+    "/recommendation/1 HTTP 200",
+    "/recommendation/1 content renders",
+    "Survey selection remains functional",
+    "Survey 173px circular mask preserved",
+    "/designers/sohee HTTP 200",
+    "Manual scroll synchronizes active review tab",
+    "No browser JavaScript errors"
+  ],
+  "errors": [],
+  "metrics": {
+    "sohee": [
+      {
+        "id": "match",
+        "margin": "0px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "works",
+        "margin": "52px",
+        "padding": "40px",
+        "border": "0px"
+      },
+      {
+        "id": "service",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "reviews",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "salon",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      }
+    ],
+    "yoona": [
+      {
+        "id": "match",
+        "margin": "0px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "works",
+        "margin": "52px",
+        "padding": "40px",
+        "border": "0px"
+      },
+      {
+        "id": "service",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "reviews",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      },
+      {
+        "id": "salon",
+        "margin": "52px",
+        "padding": "24px",
+        "border": "0px"
+      }
+    ],
+    "focus": [
+      {
+        "file": "http://localhost:3112/assets/figma/in-focus-detail/designer-sohee.png",
+        "width": 1106,
+        "height": 1422
+      },
+      {
+        "file": "http://localhost:3112/assets/figma/in-focus-detail/silhouette-side.png",
+        "width": 414,
+        "height": 578
+      },
+      {
+        "file": "http://localhost:3112/assets/figma/in-focus-detail/texture-rear.png",
+        "width": 374,
+        "height": 582
+      },
+      {
+        "file": "http://localhost:3112/assets/figma/in-focus-detail/wave-close-up.png",
+        "width": 759,
+        "height": 413
+      }
+    ]
+  }
+}
