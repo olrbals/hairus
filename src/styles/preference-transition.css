@@ -104,6 +104,7 @@
   flex-direction:column;
   gap:8px;
 }
+.preference-first-step__actions .button--plain{line-height:1.4}
 .preference-first-step__actions .button--glass{
   min-height:56px;
   height:56px;
