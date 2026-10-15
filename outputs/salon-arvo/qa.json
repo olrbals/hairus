@@ -1,0 +1,446 @@
+{
+  "base": "http://127.0.0.1:3017",
+  "viewport": {
+    "width": 430,
+    "height": 932
+  },
+  "checks": [
+    "/salons/arvo HTTP 200",
+    "salon identity",
+    "five section links",
+    "Figma hero 430 × 338",
+    "salon nav sticky at viewport top",
+    "click 공지 scroll and active underline",
+    "notice heading is clear of sticky navigation",
+    "click 가격 scroll and active underline",
+    "price heading is clear of sticky navigation",
+    "click 디자이너 scroll and active underline",
+    "designers heading is clear of sticky navigation",
+    "click 후기 scroll and active underline",
+    "reviews heading is clear of sticky navigation",
+    "click 정보 scroll and active underline",
+    "information heading is clear of sticky navigation",
+    "manual scroll spy 후기",
+    "manual scroll spy 디자이너",
+    "manual scroll spy 가격",
+    "manual scroll spy 공지",
+    "nav returns to normal flow at page top",
+    "NOTICE expands",
+    "NOTICE six names in specified order",
+    "NOTICE closure labels",
+    "NOTICE collapses",
+    "two featured portraits and arrow asset",
+    "salon five rating bars and four highlight bars",
+    "salon reviews and explicit demo disclosure",
+    "two salon visit experience reviews",
+    "three disabled SNS channels with no outbound URL",
+    "four original interior photographs have sufficient source resolution",
+    "salon all reviews destination uses salon data",
+    "six designers in Figma groups and order",
+    "Figma Noto Sans KR name and group fonts loaded locally",
+    "corrected team count and Yoona closure",
+    "team CTA focuses designer selection",
+    "team 320px no horizontal overflow",
+    "team 375px no horizontal overflow",
+    "team 430px no horizontal overflow",
+    "/salons/arvo/designers HTTP 200",
+    "yoona booking excludes both closed weekdays",
+    "yoona booking belongs to Arvo",
+    "/salons/arvo/designers HTTP 200",
+    "sohee booking excludes both closed weekdays",
+    "sohee booking belongs to Arvo",
+    "/salons/arvo/designers HTTP 200",
+    "hana booking excludes both closed weekdays",
+    "hana booking belongs to Arvo",
+    "/salons/arvo/designers HTTP 200",
+    "soyul booking excludes both closed weekdays",
+    "soyul booking belongs to Arvo",
+    "/salons/arvo/designers HTTP 200",
+    "gyunghyun booking excludes both closed weekdays",
+    "gyunghyun booking belongs to Arvo",
+    "/salons/arvo/designers HTTP 200",
+    "jonghun booking excludes both closed weekdays",
+    "jonghun booking belongs to Arvo",
+    "/reservation/yoona/review HTTP 200",
+    "restored closed-day review cannot submit",
+    "collision only clears date and time",
+    "existing booking and SAVENOTE remain unchanged",
+    "Golden Path keeps edited note",
+    "Yoona Golden Path completes with an available date",
+    "/designers/yoona HTTP 200",
+    "yoona existing review bars retained",
+    "yoona original personal review content retained",
+    "yoona salon and designer REVIEWS styles identical",
+    "yoona designer works sticky and scroll spy preserved",
+    "yoona works heading not hidden by nav",
+    "yoona designer reviews sticky and scroll spy preserved",
+    "yoona reviews heading not hidden by nav",
+    "yoona designer salon sticky and scroll spy preserved",
+    "yoona salon heading not hidden by nav",
+    "yoona existing all-reviews navigation",
+    "/designers/sohee HTTP 200",
+    "sohee existing review bars retained",
+    "sohee original personal review content retained",
+    "sohee salon and designer REVIEWS styles identical",
+    "sohee designer works sticky and scroll spy preserved",
+    "sohee works heading not hidden by nav",
+    "sohee designer reviews sticky and scroll spy preserved",
+    "sohee reviews heading not hidden by nav",
+    "sohee designer salon sticky and scroll spy preserved",
+    "sohee salon heading not hidden by nav",
+    "sohee existing all-reviews navigation",
+    "/salons/arvo HTTP 200",
+    "salon 320px no horizontal overflow",
+    "salon 375px no horizontal overflow",
+    "salon 430px no horizontal overflow",
+    "reduced motion anchor clears nav",
+    "salon header opens existing SAVENOTE",
+    "salon SAVENOTE persists after refresh",
+    "/home HTTP 200",
+    "/home preserved route renders",
+    "/explore HTTP 200",
+    "/explore preserved route renders",
+    "/saved HTTP 200",
+    "/saved preserved route renders",
+    "/articles/care HTTP 200",
+    "/articles/care preserved route renders",
+    "/in-focus/soft-bob HTTP 200",
+    "/in-focus/soft-bob preserved route renders",
+    "/styles/airy HTTP 200",
+    "/styles/airy preserved route renders",
+    "/recommendation/intro HTTP 200",
+    "/recommendation/intro preserved route renders",
+    "no browser runtime errors"
+  ],
+  "metrics": {
+    "hero": {
+      "src": "/assets/figma/v1/4e00b.png",
+      "natural": [
+        1536,
+        1024
+      ],
+      "rect": {
+        "x": 0,
+        "y": 64,
+        "width": 430,
+        "height": 338,
+        "top": 64,
+        "right": 430,
+        "bottom": 402,
+        "left": 0
+      }
+    },
+    "interior": [
+      {
+        "src": "/assets/figma/v1/4e00b.png",
+        "natural": [
+          1536,
+          1024
+        ],
+        "rect": {
+          "x": 27,
+          "y": 3219.75,
+          "width": 382,
+          "height": 257,
+          "top": 3219.75,
+          "right": 409,
+          "bottom": 3476.75,
+          "left": 27
+        },
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/salon-arvo/0ff44.png",
+        "natural": [
+          1055,
+          1491
+        ],
+        "rect": {
+          "x": 27,
+          "y": 3484.75,
+          "width": 119,
+          "height": 175.96875,
+          "top": 3484.75,
+          "right": 146,
+          "bottom": 3660.71875,
+          "left": 27
+        },
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/salon-arvo/147b8.png",
+        "natural": [
+          1055,
+          1491
+        ],
+        "rect": {
+          "x": 154,
+          "y": 3484.75,
+          "width": 121,
+          "height": 175.96875,
+          "top": 3484.75,
+          "right": 275,
+          "bottom": 3660.71875,
+          "left": 154
+        },
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/salon-arvo/1b825.png",
+        "natural": [
+          1055,
+          1491
+        ],
+        "rect": {
+          "x": 283,
+          "y": 3484.75,
+          "width": 126,
+          "height": 175.96875,
+          "top": 3484.75,
+          "right": 409,
+          "bottom": 3660.71875,
+          "left": 283
+        },
+        "fit": "cover"
+      }
+    ],
+    "salonReviewStyles": [
+      [
+        "h2",
+        "\"Cormorant Garamond Variable\", serif",
+        "34px",
+        "700",
+        "44.2px",
+        "0px",
+        "0px",
+        "0px",
+        "44.1875px"
+      ],
+      [
+        "strong",
+        "\"Cormorant Garamond Variable\", serif",
+        "68px",
+        "700",
+        "64.6px",
+        "0px",
+        "0px",
+        "0px",
+        "64.5938px"
+      ],
+      [
+        "[role=progressbar]",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "5px"
+      ],
+      [
+        "article",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "1px",
+        "20px",
+        "32px",
+        "111.156px"
+      ],
+      [
+        "article header",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "18.1875px"
+      ],
+      [
+        "article p",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "10px",
+        "text-dependent"
+      ],
+      [
+        "a",
+        "Pretendard, sans-serif",
+        "14px",
+        "500",
+        "18.2px",
+        "0px",
+        "13px",
+        "0px",
+        "44.1875px"
+      ]
+    ],
+    "yoonaReviewStyles": [
+      [
+        "h2",
+        "\"Cormorant Garamond Variable\", serif",
+        "34px",
+        "700",
+        "44.2px",
+        "0px",
+        "0px",
+        "0px",
+        "44.1875px"
+      ],
+      [
+        "strong",
+        "\"Cormorant Garamond Variable\", serif",
+        "68px",
+        "700",
+        "64.6px",
+        "0px",
+        "0px",
+        "0px",
+        "64.5938px"
+      ],
+      [
+        "[role=progressbar]",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "5px"
+      ],
+      [
+        "article",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "1px",
+        "20px",
+        "32px",
+        "129.344px"
+      ],
+      [
+        "article header",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "18.1875px"
+      ],
+      [
+        "article p",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "10px",
+        "text-dependent"
+      ],
+      [
+        "a",
+        "Pretendard, sans-serif",
+        "14px",
+        "500",
+        "18.2px",
+        "0px",
+        "13px",
+        "0px",
+        "44.1875px"
+      ]
+    ],
+    "soheeReviewStyles": [
+      [
+        "h2",
+        "\"Cormorant Garamond Variable\", serif",
+        "34px",
+        "700",
+        "44.2px",
+        "0px",
+        "0px",
+        "0px",
+        "44.1875px"
+      ],
+      [
+        "strong",
+        "\"Cormorant Garamond Variable\", serif",
+        "68px",
+        "700",
+        "64.6px",
+        "0px",
+        "0px",
+        "0px",
+        "64.5938px"
+      ],
+      [
+        "[role=progressbar]",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "5px"
+      ],
+      [
+        "article",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "1px",
+        "20px",
+        "32px",
+        "129.344px"
+      ],
+      [
+        "article header",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "0px",
+        "18.1875px"
+      ],
+      [
+        "article p",
+        "Pretendard, sans-serif",
+        "14px",
+        "400",
+        "18.2px",
+        "0px",
+        "0px",
+        "10px",
+        "text-dependent"
+      ],
+      [
+        "a",
+        "Pretendard, sans-serif",
+        "14px",
+        "500",
+        "18.2px",
+        "0px",
+        "13px",
+        "0px",
+        "44.1875px"
+      ]
+    ]
+  },
+  "errors": []
+}

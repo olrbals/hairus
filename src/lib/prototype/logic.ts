@@ -1,4 +1,5 @@
 import {designers,services,type Kind} from './catalog.ts';
+import {isDesignerDayOff} from './arvo.ts';
 export type Answers=Record<string,string[]>;
 export type SaveNote={id:string;kind:Kind;reasons:string[];note:string;savedAt:string};
 export type BookingDraft={id:string;designerId:string;serviceId:string;date:string;time:string;note:string;noteEdited:boolean};
@@ -8,5 +9,7 @@ export function recommend(answers:Answers,preferences:Answers){return designers.
 export function hairNote(profile:Record<string,string|null>|null,preferences:Answers,serviceId:string){const service=services.find(s=>s.id===serviceId);return [`현재 헤어: ${profile?[profile.length,profile.cut,profile.texture].filter(Boolean).join(' · ')||'미입력':'아직 입력하지 않았어요.'}`,`선호하는 분위기: ${(preferences.mood||[]).join(', ')||'상담하며 정하고 싶어요.'}`,`평소 손질: ${(preferences.care||[]).join(', ')||'미입력'}`,`헤어 고민: ${(preferences.concerns||[]).join(', ')||'미입력'}`,`바꾸고 싶은 부분: ${(preferences.change||[]).join(', ')||'상담하며 정하고 싶어요.'}`,`희망 시술: ${service?.name||'미선택'}`,`시술 이력: ${profile?['cutHistory','permHistory','dyeHistory','bleachHistory'].map(k=>profile[k]).filter(Boolean).join(' · ')||'미입력':'미입력'}`,'모발 상태와 유지 관리 방법을 함께 상담받고 싶습니다.'].join('\n\n');}
 export function demoDates(now=new Date()){return Array.from({length:14},(_,i)=>{const d=new Date(now);d.setDate(d.getDate()+i+1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;});}
 export const demoTimes=['10:00','11:30','13:00','14:30','16:00','17:30'];
-export function validBooking(d:BookingDraft){return designers.some(i=>i.id===d.designerId)&&services.some(i=>i.id===d.serviceId)&&demoDates().includes(d.date)&&demoTimes.includes(d.time)&&d.note.trim().length>0;}
+export function availableBookingDates(designerId:string,now=new Date()){return demoDates(now).filter(date=>!isDesignerDayOff(designerId,date));}
+export function clearClosedBookingDate(draft:BookingDraft){return draft.date&&isDesignerDayOff(draft.designerId,draft.date)?{...draft,date:'',time:''}:draft;}
+export function validBooking(d:BookingDraft){return designers.some(i=>i.id===d.designerId)&&services.some(i=>i.id===d.serviceId)&&availableBookingDates(d.designerId).includes(d.date)&&demoTimes.includes(d.time)&&d.note.trim().length>0;}
 export function completeBooking(bookings:Booking[],draft:BookingDraft):Booking[]{if(bookings.some(b=>b.id===draft.id))return bookings;if(!validBooking(draft))throw new Error('시술, 예시 날짜·시간, 상담 노트를 확인해 주세요.');return [{...draft,createdAt:new Date().toISOString(),mode:'demo'},...bookings];}

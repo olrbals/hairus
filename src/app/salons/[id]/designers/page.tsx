@@ -1,2 +1,3 @@
 import {SalonDesigners} from '@/components/prototype/details';
-export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <SalonDesigners id={id}/>;}
+import {ArvoDesignersPage} from '@/components/prototype/salon-detail';
+export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return id==='arvo'?<ArvoDesignersPage/>:<SalonDesigners id={id}/>;}
