@@ -1,0 +1,38 @@
+{
+  "yoona": {
+    "before": [
+      430,
+      810
+    ],
+    "after": [
+      430,
+      810
+    ],
+    "rawDifferenceBounds": [
+      0,
+      726,
+      77,
+      810
+    ],
+    "ignored": "Next.js dev indicator: x 0-77 / y 726-810",
+    "contentDifferenceBounds": null
+  },
+  "sohee": {
+    "before": [
+      430,
+      810
+    ],
+    "after": [
+      430,
+      810
+    ],
+    "rawDifferenceBounds": [
+      0,
+      726,
+      77,
+      810
+    ],
+    "ignored": "Next.js dev indicator: x 0-77 / y 726-810",
+    "contentDifferenceBounds": null
+  }
+}
