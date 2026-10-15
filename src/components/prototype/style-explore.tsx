@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import {useMemo,useState} from 'react';
+import {useMemo,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
 import {asset,itemHref,styles,type Item} from '@/lib/prototype/catalog';
@@ -39,6 +39,15 @@ export function StyleExplore(){
  const [filters,setFilters]=useState<Filters>(emptyFilters);
  const [draft,setDraft]=useState<Filters>(emptyFilters);
  const [open,setOpen]=useState(false);
+ const imageInput=useRef<HTMLInputElement>(null);
+ const [imageError,setImageError]=useState('');
+ const chooseImage=(file?:File)=>{
+  if(!file)return;
+  if(!file.type.startsWith('image/')){setImageError('이미지 파일을 선택해 주세요.');return;}
+  if(file.size>10*1024*1024){setImageError('10MB 이하의 이미지를 선택해 주세요.');return;}
+  setImageError('');
+  router.push('/styles/airy');
+ };
  const appliedCount=filterCount(filters);
  const result=useMemo(()=>styles.filter(item=>{
   const searchable=`${item.name} ${item.english} ${item.tags.join(' ')}`.toLocaleLowerCase();
@@ -63,19 +72,21 @@ export function StyleExplore(){
      <Link href="/explore?category=designer">디자이너</Link>
      <Link href="/explore?category=salon">헤어샵</Link>
     </nav>
-    <label className={sheet.searchBox}>
+    <div className={sheet.searchBox}>
      <img src={asset('45201.svg')} alt="" aria-hidden="true"/>
      <input aria-label="스타일 검색" placeholder="원하는 헤어스타일을 검색하세요" value={query} onChange={event=>setQuery(event.target.value)}/>
-     <button type="button" disabled title="이미지 검색은 현재 데모에서 제공되지 않습니다" aria-label="이미지 검색은 현재 데모에서 제공되지 않습니다">
-      <img src={asset('e9d40.svg')} alt="" aria-hidden="true"/>
+     <input ref={imageInput} className={sheet.imageInput} type="file" accept="image/*" aria-label="참고 이미지 선택" onChange={event=>{chooseImage(event.target.files?.[0]);event.target.value='';}}/>
+     <button type="button" aria-label="사진첩에서 이미지 선택" title="이미지 선택" onClick={()=>imageInput.current?.click()}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 18 5.5-5.5 3.5 3.5 2.5-2.5 4.5 4.5"/></svg>
      </button>
-    </label>
+    </div>
+    {imageError&&<p className={sheet.imageError} role="alert">{imageError}</p>}
     <div className={sheet.quickFilters} aria-label="기장 빠른 필터">
      {['ALL','SHORT','MEDIUM','LONG'].map(value=><button key={value} type="button" aria-pressed={(value==='ALL'?filters.length==='전체':filters.length===lengthLabels[value])} onClick={()=>selectQuickLength(value)}>{value}</button>)}
     </div>
     <div className={sheet.resultBar}>
      <span>{result.length} styles</span>
-     <button type="button" onClick={openFilter}>FILTER{appliedCount?` ${appliedCount}`:''}</button>
+     <button type="button" onClick={openFilter} aria-label="스타일 필터 열기"><span>FILTER</span>{appliedCount>0&&<span className={sheet.filterCount} aria-label={`적용된 필터 ${appliedCount}개`}>{appliedCount}</span>}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M3 5h14M6 10h8M8 15h4"/></svg></button>
     </div>
     {result.length?<div className={sheet.grid}>{result.map(item=><StyleCard item={item} key={item.id}/>)}</div>:<div className={sheet.empty}><p>조건에 맞는 스타일이 없어요.</p><button type="button" onClick={()=>{setQuery('');setFilters(emptyFilters);}}>검색 조건 초기화</button></div>}
    </div>

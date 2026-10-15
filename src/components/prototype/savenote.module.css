@@ -1,0 +1,30 @@
+:global(.bottom-sheet--editor):has(.sheet) :global(.sheet-heading){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sheet{display:flex;flex-direction:column;gap:24px;padding:4px 0 8px;color:#222b3a}
+.sheet p{margin:0}
+.toggleNotice{position:fixed;inset:auto;top:0;left:50%;display:flex;flex-direction:column;align-items:center;gap:5px;width:max-content;max-width:calc(100vw - 48px);margin:0;padding:0;border:0;background:transparent;box-shadow:none;color:#fff;font-size:12px;line-height:1.45;letter-spacing:-.01em;text-align:center;pointer-events:none;transform:translateX(-50%);animation:noteNoticeIn .2s ease-out}
+.toggleNotice strong{font-size:12px;font-weight:600;line-height:1.45}
+.toggleNotice span{font-size:12px;color:rgba(255,255,255,.88);line-height:1.45}
+@keyframes noteNoticeIn{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(prefers-reduced-motion:reduce){.toggleNotice{animation:none}}
+.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.heading>div{min-width:0}
+.heading h3{margin:0;font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-.02em}
+.heading p{margin-top:4px;font-size:12px;line-height:1.3;letter-spacing:-.02em;color:rgba(0,0,0,.5)}
+.toggle{position:relative;flex:none;width:56px;height:32px;border:1px solid rgba(34,43,58,.22);border-radius:999px;background:rgba(34,43,58,.13);padding:3px;cursor:pointer;transition:background .2s,border-color .2s}
+.toggle[aria-checked=true]{background:rgba(34,43,58,.82);border-color:rgba(34,43,58,.32)}
+.toggleThumb{display:block;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.15);transition:transform .2s,background .2s,box-shadow .2s}
+.toggle[aria-checked=true] .toggleThumb{transform:translateX(24px);background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:0 2px 8px rgba(0,0,0,.16),inset 0 1px 2px rgba(255,255,255,.95)}
+.toggle:focus-visible{outline:2px solid #222b3a;outline-offset:3px}
+.savedItem{display:flex;align-items:center;gap:12px;padding:0 12px}
+.savedItem img{width:92px;height:120px;flex:none;border-radius:4px;object-fit:cover;background:rgba(0,0,0,.04)}
+.savedInfo{display:flex;min-width:0;flex-direction:column;gap:6px}.savedItem strong{font-size:20px;font-weight:500;line-height:1.3;letter-spacing:-.02em}.savedInfo span{font-size:12px;line-height:1.45;letter-spacing:-.02em;color:rgba(34,43,58,.58)}
+.form{display:flex;flex-direction:column;gap:16px}
+.intro{min-height:36px;display:flex;align-items:center;font-size:16px;font-weight:500;color:rgba(0,0,0,.7);letter-spacing:-.02em}
+.options{display:flex;flex-wrap:wrap;gap:12px 16px}
+.options button{min-height:48px;border:1px solid rgba(0,0,0,.16);border-radius:20px;padding:4px 16px;background:rgba(0,0,0,.08);color:rgba(0,0,0,.5);font-size:16px;line-height:1.3;letter-spacing:-.02em}
+.options button[aria-pressed=true]{border-color:rgba(255,255,255,.82);background:rgba(255,255,255,.56);color:#20201e;backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);box-shadow:0 3px 10px rgba(0,0,0,.09),inset 0 1px 2px rgba(255,255,255,.95),inset 0 -1px 2px rgba(0,0,0,.05)}
+.note{width:100%;height:48px;min-width:0;border:1px solid rgba(0,0,0,.16);border-radius:4px;background:#fff;padding:8px 12px;color:#222b3a;font:400 14px/1.3 Pretendard,sans-serif;letter-spacing:-.02em}
+.note::placeholder{color:rgba(0,0,0,.5)}
+.apply{width:100%;min-height:61px;border:0;border-radius:4px;background:#000;color:#fff;font-size:16px;font-weight:500;letter-spacing:-.02em;box-shadow:inset 0 1px 2px rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.06)}
+.remove{display:grid;place-items:center;width:100%;min-height:61px;border:1px solid rgba(0,0,0,.18);border-radius:4px;background:#fff;padding:0 16px;color:#20201e;font-size:16px;font-weight:500;letter-spacing:-.02em;line-height:1.3}
+@media(max-width:360px){.heading h3{font-size:21px}.options{gap:10px}.options button{padding-inline:12px;font-size:14px}.savedItem{padding-inline:0}}

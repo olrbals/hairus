@@ -48,11 +48,10 @@ export function PeopleExplore({category}:{category:ExploreKind}){
  const [query,setQuery]=useState('');
  const [open,setOpen]=useState(false);
  const [regionOpen,setRegionOpen]=useState(false);
- const [sortOpen,setSortOpen]=useState(false);
- const [sortOrder,setSortOrder]=useState('추천순');
  const groups=category==='designer'?designerGroups:salonGroups;
  const [filters,setFilters]=useState<FilterValues>(()=>allFilters(groups));
  const [draft,setDraft]=useState<FilterValues>(()=>allFilters(groups));
+ const appliedCount=Object.values(filters).filter(value=>value!=='전체').length;
  const items=category==='designer'?designers:salons;
  const results=useMemo(()=>items.filter(item=>`${item.name} ${item.english} ${item.tags.join(' ')} ${item.location||''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())),[items,query]);
  const openFilter=()=>{setDraft(filters);setRegionOpen(false);setOpen(true);};
@@ -73,9 +72,8 @@ export function PeopleExplore({category}:{category:ExploreKind}){
     <label className={sheet.searchBox}>
      <img src={asset('45201.svg')} alt="" aria-hidden="true"/>
      <input aria-label={`${label} 검색`} placeholder="이름이나 지역을 검색하세요" value={query} onChange={event=>setQuery(event.target.value)}/>
-     <button type="button" className={sheet.filterTrigger} aria-label={`${label} FILTER`} onClick={openFilter}><span/><span/><span/></button>
     </label>
-    <div className={sheet.listMeta}><span>{results.length}명의 {label}</span><div className={sheet.sort}><button type="button" aria-haspopup="menu" aria-expanded={sortOpen} onClick={()=>setSortOpen(current=>!current)}>{sortOrder}<span aria-hidden="true">⌄</span></button>{sortOpen&&<div className={sheet.sortMenu} role="menu">{['추천순','이름순'].map(option=><button type="button" role="menuitemradio" aria-checked={sortOrder===option} key={option} onClick={()=>{setSortOrder(option);setSortOpen(false);}}>{option}</button>)}</div>}</div></div>
+    <div className={sheet.listMeta}><span>{results.length} {category==='designer'?'DESIGNERS':'SALONS'}</span><button type="button" className={sheet.filterAction} aria-label={`${label} 필터 열기`} onClick={openFilter}><span>FILTER</span>{appliedCount>0&&<span className={sheet.filterCount} aria-label={`적용된 필터 ${appliedCount}개`}>{appliedCount}</span>}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M3 5h14M6 10h8M8 15h4"/></svg></button></div>
     {category==='designer'?<DesignerList items={results}/>:<SalonList items={results}/>} 
    </div>
   </main>
@@ -84,8 +82,8 @@ export function PeopleExplore({category}:{category:ExploreKind}){
    <div className={sheet.filterSheet}>
     <section className={sheet.locationGroup}>
      <h3>지역</h3>
-     <button type="button" className={sheet.location} aria-expanded={regionOpen} onClick={()=>setRegionOpen(current=>!current)}><span aria-hidden="true">⌖</span>{draft.region}<b aria-hidden="true">⌄</b></button>
-     {regionOpen&&<div className={sheet.regionOptions} role="listbox" aria-label="시도 선택">{provinces.map(province=><button type="button" role="option" aria-selected={draft.region===province} key={province} onClick={()=>{setDraft(current=>({...current,region:province}));setRegionOpen(false);}}>{province}</button>)}</div>}
+     <button type="button" className={sheet.location} aria-expanded={regionOpen} onClick={()=>setRegionOpen(current=>!current)}><span>{draft.region==='전체'?'전체 지역':draft.region}</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+     {regionOpen&&<div className={sheet.regionOptions} role="listbox" aria-label="시도 선택">{provinces.map(province=><button type="button" role="option" aria-selected={draft.region===province} key={province} onClick={()=>{setDraft(current=>({...current,region:province}));setRegionOpen(false);}}><span>{province}</span>{draft.region===province&&<svg aria-hidden="true" viewBox="0 0 16 16"><path d="m3 8 3.2 3.2L13 4.5"/></svg>}</button>)}</div>}
     </section>
     {groups.map(group=><section key={group.key} className={sheet.filterGroup}>
      <h3>{group.label}</h3>
