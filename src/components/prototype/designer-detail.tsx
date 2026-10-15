@@ -129,8 +129,11 @@ export function DesignerPage({id}:{id:string}){
 
     <section id="reviews" className={styles.reviews} aria-labelledby="reviews-title">
       <h2 id="reviews-title">REVIEWS</h2>
-      <div className={styles.rating}><strong>4.9</strong><span>/ 5.0</span><small>고객 후기 623개</small></div>
-      <div className={styles.tags}>{reviewTags.map(tag=><span key={tag}>{tag}</span>)}</div>
+      <div className={styles.rating}><strong>4.9</strong><span>/ 5.0</span><small>고객 후기 {reviewCount}개</small></div>
+      <div className={styles.reviewHighlights}>
+        <h3>고객들이 자주 언급한 장점</h3>
+        <ul>{reviewTags.map(tag=><li key={tag}>{tag}</li>)}</ul>
+      </div>
       <article><header><span>★ 5.0</span><time dateTime="2026-09-28">2026.09.28</time></header><small>레이어드 컷 · 긴머리</small><p>매번 원하는 스타일을 정확히 이해해주셔요 !<br/>{item.name}쌤 진짜 좋아요 유명해지세요 아니에요 유명해지지마세요 유명해주세요 아니 유명</p></article>
       <article><header><span>★ 5.0</span><time dateTime="2026-09-20">2026.09.20</time></header><small>C컬펌 · 긴머리</small><p>강한 컬은 부담스럽다고 말씀드렸는데 자연스럽게 맞춰주셨어요. 다음에도 {item.name}쌤한테 머리 할래요 ~~~~</p></article>
       <Link className={styles.textLink} href={`/designers/${item.id}/reviews`}>모든 후기 보기 →</Link>
