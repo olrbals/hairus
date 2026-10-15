@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import {useEffect,useState,type ReactNode} from 'react';
+import {useEffect,useRef,useState,type ReactNode} from 'react';
+import {createPortal} from 'react-dom';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
 import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
@@ -20,10 +21,28 @@ export function SaveButton({item}:{item:Item}){
  const [reasons,setReasons]=useState<string[]>([]);
  const [note,setNote]=useState('');
  const [showOffNotice,setShowOffNotice]=useState(false);
+ const offNoticeRef=useRef<HTMLDivElement>(null);
  useEffect(()=>{
   if(!showOffNotice)return;
   const timeout=window.setTimeout(()=>setShowOffNotice(false),2500);
   return ()=>window.clearTimeout(timeout);
+ },[showOffNotice]);
+ useEffect(()=>{
+  if(!showOffNotice)return;
+  const notice=offNoticeRef.current;
+  const sheet=document.querySelector<HTMLDialogElement>('dialog.bottom-sheet--editor[open]');
+  if(!notice||!sheet)return;
+  const positionNotice=()=>{
+   const sheetTop=sheet.getBoundingClientRect().top;
+   notice.style.top=`${Math.max(12,sheetTop-notice.getBoundingClientRect().height-18)}px`;
+  };
+  if(typeof notice.showPopover==='function')notice.showPopover();
+  positionNotice();
+  window.addEventListener('resize',positionNotice);
+  return ()=>{
+   window.removeEventListener('resize',positionNotice);
+   if(typeof notice.hidePopover==='function'&&notice.matches(':popover-open'))notice.hidePopover();
+  };
  },[showOffNotice]);
  const options=item.kind==='style'
   ?['나중에 도전','분위기 참고','나에게 어울림','상담할 때 보여줄 사진','스타일링 참고']
@@ -39,7 +58,6 @@ export function SaveButton({item}:{item:Item}){
    {saved?'♥':<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555551" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{display:'block'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>}
   </button>
   <BottomSheet open={open} onClose={()=>{setOpen(false);setShowOffNotice(false);}} title="SAVENOTE" variant="editor" headingAction={<span/>}>
-   {showOffNotice&&<div className={savenote.toggleNotice} role="status" aria-live="polite"><strong>OFF</strong><span>MY → 알림에서 다시 설정할 수 있어요.</span></div>}
    <div className={savenote.sheet}>
     <div className={savenote.heading}>
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
@@ -55,6 +73,7 @@ export function SaveButton({item}:{item:Item}){
     {saved&&<button type="button" className={savenote.remove} onClick={()=>{update(s=>({...s,saved:s.saved.filter(i=>!(i.kind===item.kind&&i.id===item.id))}));setOpen(false);}}>저장 해제</button>}
    </div>
   </BottomSheet>
+  {showOffNotice&&typeof document!=='undefined'&&createPortal(<div ref={offNoticeRef} popover="manual" className={savenote.toggleNotice} role="status" aria-live="polite"><strong>OFF</strong><span>MY → 알림에서 다시 설정할 수 있어요.</span></div>,document.body)}
  </>;
 }
 export function DemoNotice({children}:{children?:ReactNode}){return <p className="demo-notice">{children||'데모 콘텐츠 · 실제 서비스 정보와 다를 수 있어요.'}</p>;}
