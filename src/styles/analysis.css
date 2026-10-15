@@ -39,6 +39,7 @@
 /* 샘플 사진의 위아래 회색 여백 조정 */
 .captured-photo img { object-fit: cover; object-position: center; }
 .captured-screen .analysis-actions { margin-top: 60px; }
+.processing-screen .progress-content > .text-action { margin-top: 20px; }
 
 .captured-photo img[src$="b32c1.png"] {
   transform: scale(1.25);
