@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import {useMemo,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {SelectionChip} from '@/components/selection-chip';
 import {HeaderBackIcon} from '@/components/primitives';
 import {asset,itemHref,styles,type Item} from '@/lib/prototype/catalog';
 import {SaveButton} from './shared';
@@ -98,7 +99,7 @@ export function StyleExplore(){
     {filterGroups.map(({key,label,options})=><section key={key} className={sheet.filterGroup}>
      <h3>{label}</h3>
      <div className={`${sheet.filterOptions} filter-editor-chips`}>
-      {options.map(option=><button type="button" key={option} aria-pressed={draft[key]===option} onClick={()=>setDraft(current=>({...current,[key]:option}))}>{option}</button>)}
+      {options.map(option=><SelectionChip key={option} aria-pressed={draft[key]===option} onClick={()=>setDraft(current=>({...current,[key]:option}))}>{option}</SelectionChip>)}
      </div>
     </section>)}
     <button type="button" className={`${sheet.apply} primary-cta filter-sheet-apply`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
