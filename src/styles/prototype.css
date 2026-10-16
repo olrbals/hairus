@@ -965,14 +965,15 @@
 .mobile-shell .hairus-page-header button.proto-save{
   justify-content:flex-end;
 }
-/* Refined Figma saveOn vector: 25.14 × 21.55px, white inner shadow 60%.
-   saveOff stays 22 × 22px; outer button size and placement are unchanged. */
+/* Figma saveOn visible heart is 25.14 × 21.55px with a 60% white inner shadow.
+   Export PNG includes transparent padding (30 × 28px) so no part of the heart
+   or Glass/drop shadows is clipped. saveOff and hit-target placement unchanged. */
 .mobile-shell button > img.save-heart-icon.is-saved{
-  flex:0 0 25.14px;
-  width:25.14px;
-  height:21.55px;
-  min-width:25.14px;
-  min-height:21.55px;
+  flex:0 0 30px;
+  width:30px;
+  height:28px;
+  min-width:30px;
+  min-height:28px;
   aspect-ratio:auto;
 }
 
