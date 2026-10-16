@@ -90,18 +90,34 @@ export function PeopleExplore({category}:{category:ExploreKind}){
  </>;
 }
 
-function DesignerList({items}:{items:Item[]}){return <div className={sheet.designerList}>{items.map(item=>{
- const detail=designerDetails[item.id];
- return <article className={sheet.designerCard} key={item.id}>
-  <Link href={itemHref(item)} className={sheet.designerLink}>
+const linkedDesignerIds=new Set(['yoona','sohee']);
+const linkedSalonIds=new Set(['arvo']);
+
+function DesignerList({items}:{items:Item[]}){
+ return <div className={sheet.designerList}>{items.map(item=>{
+  const detail=designerDetails[item.id];
+  const content=<>
    <div className={sheet.designerSummary}><img src={detail?.avatar||item.image} alt=""/><div><h2>{item.name} 디자이너</h2><p>{detail?.location||item.location}</p><small>{detail?.specialty||item.tags.join(' · ')}</small></div></div>
    <div className={sheet.works}>{(detail?.works||[item.image,item.image,item.image]).map((image,index)=><img key={`${image}-${index}`} src={image} alt={`${item.name} 포트폴리오 ${index+1}`}/>)}</div>
-  </Link>
-  <SaveButton item={item}/>
- </article>;
- })}</div>;}
+  </>;
+  return <article className={sheet.designerCard} key={item.id}>
+   {linkedDesignerIds.has(item.id)
+    ?<Link href={itemHref(item)} className={sheet.designerLink}>{content}</Link>
+    :<div className={sheet.designerLink}>{content}</div>}
+   <SaveButton item={item}/>
+  </article>;
+ })}</div>;
+}
 
-function SalonList({items}:{items:Item[]}){return <div className={sheet.salonList}>{items.map(item=>{const detail=salonDetails[item.id];return <article className={sheet.salonCard} key={item.id}>
- <Link href={itemHref(item)} className={sheet.salonLink}><img src={item.image} alt={item.name}/><div className={sheet.rating}>★ {detail?.rating||'–'}</div><h2>{item.name}</h2><p>{detail?.location||item.location}</p></Link>
- <SaveButton item={item}/>
-</article>;})}</div>;}
+function SalonList({items}:{items:Item[]}){
+ return <div className={sheet.salonList}>{items.map(item=>{
+  const detail=salonDetails[item.id];
+  const content=<><img src={item.image} alt={item.name}/><div className={sheet.rating}>★ {detail?.rating||'–'}</div><h2>{item.name}</h2><p>{detail?.location||item.location}</p></>;
+  return <article className={sheet.salonCard} key={item.id}>
+   {linkedSalonIds.has(item.id)
+    ?<Link href={itemHref(item)} className={sheet.salonLink}>{content}</Link>
+    :<div className={sheet.salonLink}>{content}</div>}
+   <SaveButton item={item}/>
+  </article>;
+ })}</div>;
+}
