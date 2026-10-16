@@ -70,7 +70,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
    </div>
   </main>
   <BottomNav active="/explore"/>
-  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className={sheet.reset} onClick={reset}>초기화</button>}>
+  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close" onClick={()=>setOpen(false)} aria-label="필터 닫기">X</button>}>
    <div className={sheet.filterSheet}>
     <section className={sheet.locationGroup}>
      <h3>지역</h3>
@@ -84,6 +84,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
      </div>
     </section>)}
     <button type="button" className={`${sheet.apply} primary-cta`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
+    <button type="button" className="text-action clear-field" onClick={reset}>초기화</button>
    </div>
   </BottomSheet>
  </>;
