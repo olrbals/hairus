@@ -4,10 +4,10 @@ import type {ReviewData} from '@/lib/prototype/reviews';
 import styles from './reviews.module.css';
 
 // Shared markup and unchanged visual rules from the integrated designer detail.
-export function ReviewSection({data,allReviewsHref}:{data:ReviewData;allReviewsHref?:string}){
-  return <section id="reviews" className={styles.reviews} aria-labelledby="reviews-title">
+export function ReviewSection({data,allReviewsHref,variant}:{data:ReviewData;allReviewsHref?:string;variant?:'refined'}){
+  return <section id="reviews" className={`${styles.reviews}${variant==='refined'?` ${styles.refinedReviews}`:''}`} aria-labelledby="reviews-title">
       <h2 id="reviews-title">REVIEWS</h2>
-      {data.demoLabel&&<p className={styles.demoLabel}>{data.demoLabel}</p>}
+      {variant!=='refined'&&data.demoLabel&&<p className={styles.demoLabel}>{data.demoLabel}</p>}
       <div className={styles.rating}>
         <div className={styles.ratingSummary}>
           <div className={styles.ratingScore}><strong>{data.score}</strong><span aria-hidden="true">★</span></div>

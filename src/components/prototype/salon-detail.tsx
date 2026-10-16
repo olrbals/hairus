@@ -14,6 +14,7 @@ import designerStyles from './designer-detail.module.css';
 import styles from './salon-detail.module.css';
 
 const sections=[['notice','공지'],['price','가격'],['designers','디자이너'],['reviews','후기'],['information','정보']] as const;
+const salonSectionOffset=112; // 64px shared header + 48px section navigation.
 const localAsset=(name:string)=>`/assets/figma/salon-arvo/${name}`;
 
 function SalonHeader({title,back,save=false}:{title:string;back:string;save?:boolean}){
@@ -46,7 +47,7 @@ export function ArvoSalonPage(){
       let current:string='notice';
       for(const [id] of sections){
         const section=document.getElementById(id);
-        if(section&&section.getBoundingClientRect().top<=80)current=id;
+        if(section&&section.getBoundingClientRect().top<=salonSectionOffset+16)current=id;
       }
       if(window.scrollY>0&&window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2)current='information';
       setActive(previous=>previous===current?previous:current);
@@ -68,10 +69,10 @@ export function ArvoSalonPage(){
     // Preserve Next's history state and the previous page's back navigation.
     window.history.replaceState(window.history.state,'',`#${id}`);
     setActive(id);
-    window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-64,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+    window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-salonSectionOffset,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   }
   const firstDesigner=arvoTeam[0];
-  return <main id="main" className={styles.page} ref={pageRef}>
+  return <main id="main" className={`${styles.page} ${styles.salonPage}`} ref={pageRef}>
     <SalonHeader title="매장 · 방문 정보" back="/explore?category=salon" save/>
     <img className={styles.hero} src={arvoInterior[0].src} alt="아르보 성수의 햇빛이 드는 매장 내부" fetchPriority="high"/>
     <div className={styles.profile}>
@@ -92,7 +93,7 @@ export function ArvoSalonPage(){
       </div>
       <div className={styles.benefits}>
         <h3>방문 고객 혜택</h3>
-        {[['첫 방문 최대 30% 할인','커트 · 클리닉 제외'],['VIP 50만원 선 결제시, 시술 1회 무료','해당 시술에는 커트 · 클리닉만 포함 됩니다.']].map(([title,description])=><button key={title} type="button" className={styles.benefit} onClick={()=>setBenefitMessage('프로토타입 혜택입니다. 실제 쿠폰 발급은 준비 중이에요.')} aria-label={`${title} 혜택 안내`}><img src={localAsset('arvo-logo.png')} alt="ARVO" width="40" height="40"/><span><strong>{title}</strong><small>{description}</small></span><img src={localAsset('download.svg')} alt="" width="24" height="24"/></button>)}
+        {[['첫 방문 최대 30% 할인','커트 · 클리닉 제외'],['VIP 50만원 선 결제시, 시술 1회 무료','해당 시술에는 커트 · 클리닉만 포함 됩니다.']].map(([title,description])=><button key={title} type="button" className={styles.benefit} onClick={()=>setBenefitMessage('프로토타입 혜택입니다. 실제 쿠폰 발급은 준비 중이에요.')} aria-label={`${title} 혜택 안내`}><span className={styles.benefitLogo} role="img" aria-label="ARVO" data-figma-node="945:9579"><span>ARVO</span></span><span><strong>{title}</strong><small>{description}</small></span><img src={localAsset('download.svg')} alt="" width="24" height="24"/></button>)}
         {benefitMessage&&<p className={styles.benefitMessage} role="status">{benefitMessage}</p>}
       </div>
     </section>
@@ -108,37 +109,39 @@ export function ArvoSalonPage(){
       <Link className={styles.allDesigners} href="/salons/arvo/designers">전체 디자이너 6명 · 전문분야 보기 <img src={localAsset('arrow-right.svg')} alt="" width="16" height="16"/></Link>
     </section>
 
-    <ReviewSection data={arvoReviews} allReviewsHref="/salons/arvo/reviews"/>
+    <ReviewSection data={arvoReviews} allReviewsHref="/salons/arvo/reviews" variant="refined"/>
 
-    <section id="information" className={styles.information} aria-labelledby="information-title">
+    <section id="information" className={styles.information} data-figma-node="929:3737" aria-labelledby="information-title">
       <h2 id="information-title">INFORMATION</h2>
       <h3>매장 내부</h3>
-      <div className={styles.interior}><img src={arvoInterior[0].src} alt={arvoInterior[0].alt} width="382" height="257" loading="lazy"/><div>{arvoInterior.slice(1).map((photo,index)=><img key={photo.src} src={photo.src} alt={photo.alt} width={[119,121,126][index]} height="169" loading="lazy"/>)}</div></div>
-      <div className={styles.social}><h3>SNS</h3><p>채널 연결 준비 중이에요.</p><ul>
-        <li><button type="button" disabled><img src={localAsset('kakao.svg')} alt="" width="26" height="26"/><span>카카오톡 오픈 채팅</span><small>준비 중</small></button></li>
-        <li><button type="button" disabled><span className={styles.naver}><img src={localAsset('naver.svg')} alt="" width="9.63" height="9.63"/></span><span>네이버 블로그</span><small>준비 중</small></button></li>
-        <li><button type="button" disabled><img src={localAsset('instagram.png')} alt="" width="26" height="26"/><span>인스타그램</span><small>준비 중</small></button></li>
+      <div className={styles.interior}><img src={arvoInterior[0].src} alt={arvoInterior[0].alt} width="382" height="257" loading="lazy"/><div>{arvoInterior.slice(1).map((photo,index)=><img key={photo.src} src={photo.src} alt={photo.alt} width={[119,121,126][index]} height={[169,169,168][index]} loading="lazy"/>)}</div></div>
+      <div className={styles.social}><h3>SNS</h3><ul>
+        <li><button type="button" disabled><img src={localAsset('kakao-original.svg')} alt="" width="32" height="32"/><span>카카오톡 오픈 채팅</span></button></li>
+        <li><button type="button" disabled><span className={styles.naver}><img src={localAsset('naver-mark.svg')} alt="" width="14" height="14"/></span><span>네이버 블로그</span></button></li>
+        <li><button type="button" disabled><img src={localAsset('instagram.svg')} alt="" width="31.0085" height="31"/><span>인스타그램</span></button></li>
       </ul></div>
     </section>
     <footer className={styles.booking}><BookingLink/></footer>
   </main>;
 }
 
-function DesignerRow({person,recommended=false}:{person:ArvoDesigner;recommended?:boolean}){
+function DesignerRow({person}:{person:ArvoDesigner}){
   return <article className={styles.designerRow}>
-    <Link className={styles.designerIdentity} href={`/designers/${person.id}`}><img src={person.image} alt={`${person.name} ${person.title}`} width="64" height="76"/><span><span className={styles.designerName}><strong>{person.name} {person.title}</strong>{recommended&&<small>{offDaysLabel(person)}</small>}</span><span className={styles.specialty}>{person.specialty}</span></span></Link>
-    <Link className={styles.reserveDesigner} href={`/reservation/${person.id}/service`} aria-label={`${person.name} ${person.title} 예약하기`}>예약하기</Link>
+    <Link className={styles.designerIdentity} href={`/designers/${person.id}`}><img src={person.image} alt={`${person.name} ${person.title}`} width="64" height="76"/><span><span className={styles.designerName}><strong>{person.name} {person.title}</strong><small>{offDaysLabel(person)}</small></span><span className={styles.specialty}>{person.specialty}</span></span></Link>
+    {person.id==='yoona'
+      ?<Link className={styles.reserveDesigner} href={`/reservation/${person.id}/service`} aria-label={`${person.name} ${person.title} 예약하기`}>예약하기</Link>
+      :<button type="button" className={styles.reserveDesigner} disabled aria-label={`${person.name} ${person.title} 예약하기`}>예약하기</button>}
   </article>;
 }
 
 export function ArvoDesignersPage(){
-  const groups=[{title:'컬과 볼륨을 더하고 싶다면',ids:['sohee','hana']},{title:'층 · 끝선을 바꾸고 싶다면',ids:['soyul']},{title:'맨즈 스타일을 찾는다면',ids:['gyunghyun','jonghun']}];
-  return <main id="main" className={`${styles.page} ${styles.teamPage}`}>
+  const groups=[{title:'컬과 볼륨을 더하고 싶다면',ids:['sohee','hana']},{title:'층·끝선을 바꾸고 싶다면',ids:['soyul']},{title:'맨즈 스타일을 찾는다면',ids:['gyunghyun','jonghun']}];
+  return <main id="main" className={`${styles.page} ${styles.teamPage}`} data-figma-node="929:3947">
     <SalonHeader title="아르보 성수 디자이너" back="/salons/arvo"/>
     <div className={styles.teamContent}>
       <h1>같은 공간,<br/>서로 다른 강점</h1>
       <p className={styles.teamIntro}>아르보 성수 · 6명의 디자이너<br/>전문 분야를 보고 상담·예약을 시작해 보세요.</p>
-      <section className={styles.recommended}><h2>내 취향에서 먼저 살펴볼 디자이너</h2><DesignerRow person={findArvoDesigner('yoona')!} recommended/></section>
+      <section className={styles.recommended}><h2>내 취향에서 먼저 살펴볼 디자이너</h2><DesignerRow person={findArvoDesigner('yoona')!}/></section>
       {groups.map(group=><section className={styles.designerGroup} key={group.title}><h2>{group.title}</h2><div>{group.ids.map(id=><DesignerRow key={id} person={findArvoDesigner(id)!}/>)}</div></section>)}
     </div>
     <footer className={styles.teamBooking}><button type="button" className={`${styles.bookingLink} primary-cta`} onClick={()=>{document.querySelector(`.${styles.recommended}`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});document.querySelector<HTMLAnchorElement>(`.${styles.reserveDesigner}`)?.focus({preventScroll:true});}}>예약하기</button><p className={styles.srOnly}>디자이너별 예약하기를 선택해 주세요.</p></footer>

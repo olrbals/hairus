@@ -129,7 +129,7 @@ export function DesignerPage({id}:{id:string}){
       </details>)}</div>
     </section>
 
-    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsHref={`/designers/${item.id}/reviews`}/>
+    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsHref={`/designers/${item.id}/reviews`} variant="refined"/>
 
     {salon&&<section id="salon" className={styles.salon} aria-labelledby="salon-title">
       <h2 id="salon-title">THE SALON</h2>

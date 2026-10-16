@@ -53,3 +53,14 @@ test('salon examples remain explicitly marked and designer reviews retain their 
   assert.match(sohee.reviews[1].paragraphs.join(''),/소희쌤/);
   assert.equal(yoona.demoLabel,undefined);
 });
+
+test('Team displays the six approved names, ranks and OFF labels without changing booking closures',()=>{
+  assert.deepEqual(arvoTeam.map(person=>[person.name,person.title,offDaysLabel(person)]),[
+    ['소율','원장','화 · 토 OFF'],
+    ['소희','실장','월 · 목 OFF'],
+    ['하나','디자이너','수 · 목 OFF'],
+    ['경현','디자이너','화 · 일 OFF'],
+    ['윤아','디자이너','화 · 금 OFF'],
+    ['종훈','디자이너','월 · 수 OFF'],
+  ]);
+});

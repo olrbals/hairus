@@ -31,3 +31,7 @@
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
 .demoLabel{margin-top:8px;color:#616161;font-size:12px;line-height:1.5}
 @media(max-width:360px){.reviews{padding-inline:18px}}
+
+/* Opt-in for salon and designer details; standalone review-list pages stay unchanged. */
+.refinedReviews .ratingMeta{margin-top:12px}
+.refinedReviews .ratingScore>span{font-size:28px}
