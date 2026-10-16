@@ -1,30 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
 import {BottomNav} from '@/components/bottom-nav';
-import {HeaderBackIcon} from '@/components/primitives';
-import {EditorialBookmarkButton} from './editorial-bookmark';
 import {findEditorial} from '@/lib/prototype/editorials';
-import bookmark from './editorial-bookmark.module.css';
+import {PageHeader} from './page-header';
 import './in-focus-editorial.css';
 
 const imageBase = '/assets/figma/in-focus-detail/';
+const softBobEditorial = findEditorial('focus', 'soft-bob')!;
 
 export function InFocusEditorial() {
-  const router = useRouter();
-
   return <>
     <main id="main" className="ifd-page">
-      <header className="ifd-header hairus-page-header">
-        <button type="button" className="ifd-back hairus-header-back" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/home')}>
-          <HeaderBackIcon/>
-        </button>
-      </header>
+      <PageHeader title="IN FOCUS" showSaveButton saveTarget={softBobEditorial}/>
 
       <section className="ifd-opening" aria-labelledby="ifd-title">
-        <div className={`ifd-cover ${bookmark.cover}`}>
-          <EditorialBookmarkButton item={findEditorial('focus', 'soft-bob')!}/>
+        <div className="ifd-cover">
           <img className="ifd-cover-photo" src="/assets/figma/v1/83c13.png" alt="짧은 기장의 부드러운 웨이브 보브, 정면 모습" />
           <div className="ifd-cover-caption">
             <h1 id="ifd-title"><span>SOFTLY,</span><span>IN MOTION.</span></h1>
