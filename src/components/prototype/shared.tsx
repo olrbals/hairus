@@ -7,6 +7,7 @@ import {BottomSheet} from '@/components/bottom-sheet';
 import {SelectionChip} from '@/components/selection-chip';
 import {HeaderBackIcon} from '@/components/primitives';
 import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
+import {designerDetails} from '@/lib/prototype/people-presentation';
 import {usePrototype} from './store';
 import savenote from './savenote.module.css';
 import {saveNotePreview} from '@/lib/prototype/archive';
@@ -53,7 +54,12 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
   ?['예약하고 싶음','시술 결과 좋음','후기 좋음','취향 잘 맞음']
   :['방문하고 싶음','위치 좋음','매장 분위기 좋음','가격 괜찮음'];
  const displayName=item.kind==='designer'?`${item.name} 디자이너`:item.name;
- const itemInfo=item.kind==='salon'?item.location:item.kind==='designer'?[salons.find(salon=>salon.id===item.salonId)?.name,item.location].filter(Boolean).join(' · '):undefined;
+ const itemInfo=item.kind==='salon'?item.location:item.kind==='designer'
+  ?(item.id==='jisu'||item.id==='seeun')
+   ?designerDetails[item.id]?.location||item.location
+   :[salons.find(salon=>salon.id===item.salonId)?.name,item.location].filter(Boolean).join(' · ')
+  :undefined;
+ const savedImage=item.kind==='designer'&&item.id==='sohee'?designerDetails.sohee.avatar:item.image;
  const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
  const save=()=>{const entry={id:item.id,kind:item.kind,reasons,note,savedAt:saved?.savedAt||new Date().toISOString()};update(s=>({...s,saved:saved?s.saved.map(i=>i.kind===item.kind&&i.id===item.id?entry:i):[...s.saved,entry]}));setOpen(false);};
  const edit=()=>{setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);};
@@ -73,7 +79,7 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
      <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>{setShowOffNotice(saveNoteEnabled);update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}));}}><span className={savenote.toggleThumb}/></button>
     </div>
-    <div className={savenote.savedItem}><img src={item.image} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
+    <div className={savenote.savedItem}><img src={savedImage} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
      <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
      <div className={savenote.options}>{options.map(option=><SelectionChip key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</SelectionChip>)}</div>
