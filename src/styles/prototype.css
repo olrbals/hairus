@@ -924,29 +924,21 @@
 .bottom-sheet--default .sheet-drag{touch-action:none;cursor:grab}
 .bottom-sheet--default .sheet-drag .sheet-handle{margin-bottom:0}
 .bottom-sheet--default .sheet-heading{height:36px;padding:0 4px;flex-shrink:0}
-.bottom-sheet--default .sheet-close{
-  width:44px;
-  height:44px;
+/* Match the '닫음' text action in the analysis length editor. */
+.bottom-sheet--default .sheet-close.analysis-sheet-close-text{
+  width:auto;
+  min-width:auto;
+  height:auto;
   margin-block:-4px;
-  margin-right:-16px;
+  margin-right:0;
+  padding:0;
   border:0;
-  background:none;
-  color:#000b;
-  font-size:18px;
-}
-.bottom-sheet--default .clear-field{
-  align-self:center;
-  flex-shrink:0;
-  min-height:44px;
-  margin-top:4px;
-  padding:10px 0;
-  border:0;
-  background:none;
-  color:#222b3a;
+  background:transparent;
+  color:rgba(34,43,58,.8);
   font-size:12px;
   line-height:1.3;
-  text-decoration:underline;
-  text-underline-offset:4px;
+  white-space:nowrap;
+  display:inline-block;
 }
 
 /* EXPLORE filters — reuse the profile editor's chip geometry and states. */
