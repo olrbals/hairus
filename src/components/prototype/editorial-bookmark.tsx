@@ -45,7 +45,7 @@ export function EditorialBookmarkButton({item}: {item: Editorial}) {
   const saved = bookmarks.some(entry => entry.kind === item.kind && entry.id === item.id);
   return <>
     <button type="button" className={css.button} disabled={!ready} aria-label={`${item.title} ${saved ? '스크랩 해제' : '스크랩하기'}`} aria-pressed={saved} onClick={() => toggle(item)}>
-      <svg width="22" height="24" viewBox="0 0 22 24" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true"><path d="M5 3.5h12v17l-6-4-6 4z"/></svg>
+      <SaveHeart saved={saved}/>
     </button>
     {warning && <span className={css.warning} role="status">{warning}</span>}
   </>;
