@@ -70,7 +70,7 @@
 .salonPage>.booking{padding-top:40px}
 .srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .teamPage{color:#222b3a}
-.teamContent{padding:20px 24px 0}
+.teamContent{padding:20px 24px 52px}
 .teamContent>h1{font-size:28px;font-weight:600;line-height:1.3;}
 .teamIntro{margin-top:8px;font-size:12px;color:rgba(0,0,0,.7)}
 .recommended{margin-top:28px;scroll-margin-top:64px}
@@ -88,7 +88,6 @@
 .designerGroup{margin-top:24px}
 .designerGroup h2{margin:0 0 12px;font-size:20px;font-weight:600;line-height:1.3;}
 .designerGroup>div{display:grid;gap:12px}
-.teamBooking{padding:48px 19px max(20px,env(safe-area-inset-bottom))}
 @media(max-width:390px){.designerName{flex-wrap:wrap;gap:0 8px}.designerName small{font-size:11px}.priceGroup{font-size:12px}.priceGroup dl>div{gap:4px}}
 @media(max-width:360px){.sectionNav,.notice,.price,.designers,.teamContent{padding-inline:18px}.hoursRow{grid-template-columns:66px 1fr auto}.hoursRow>span:last-child{gap:10px}.daysOff{padding-left:66px}.benefit{padding:10px;gap:8px}.benefit strong{font-size:12px}.benefit small{font-size:11px}.designerIdentity{gap:8px}.designerIdentity>img{width:52px;height:66px}.reserveDesigner{min-width:62px}.specialty{font-size:11px}.teamContent>h1{font-size:26px}}
 @font-face{font-family:'Arvo Noto Sans KR';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/NotoSansKR-arvo-500.ttf') format('truetype')}

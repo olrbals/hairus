@@ -21,7 +21,7 @@ const expected=[['윤아','디자이너','화 · 금 OFF','31628.png'],['소희'
  try{
   for(const width of [430,390,360])for(const height of [932,874,740,640]){
    await page.setViewportSize({width,height});await go('/salons/arvo');await loadImages();
-   const initial=await page.locator('.hairus-page-header').boundingBox();near(initial.height,64,`${width}x${height} salon header height`);
+   check(await page.locator('.hairus-page-header>span').first().innerText()==='아르보 성수','Salon header title is Arvo Seongsu');const initial=await page.locator('.hairus-page-header').boundingBox();near(initial.height,64,`${width}x${height} salon header height`);
    for(const y of [0,800,1900]){
     await page.evaluate(y=>scrollTo(0,y),y);
     const header=await page.locator('.hairus-page-header').boundingBox();near(header.y,0,`${width}x${height} salon header sticky at scroll ${y}`);
@@ -60,7 +60,7 @@ const expected=[['윤아','디자이너','화 · 금 OFF','31628.png'],['소희'
    }
    await go('/salons/arvo/designers');await loadImages();await page.evaluate(()=>scrollTo(0,0));
    const header=await page.locator('.hairus-page-header').boundingBox();near(header.height,64,'Team approved header height');
-   const rows=page.locator('article[class*="_designerRow"]');check(await rows.count()===6,'Team contains exactly six existing designers');
+   check(await page.locator('main>footer,main .primary-cta').count()===0,'Team bottom booking CTA removed from rendering');const rows=page.locator('article[class*="_designerRow"]');check(await rows.count()===6,'Team contains exactly six existing designers');
    for(let i=0;i<expected.length;i++){
     const row=rows.nth(i),[name,rank,off,image]=expected[i];
     check(await row.locator('strong').innerText()===`${name} ${rank}`,`Correct name/rank for ${name}`);check(await row.locator('[class*="_designerName"] small').innerText()===off,`${name} OFF days correct`);
@@ -81,7 +81,7 @@ const expected=[['윤아','디자이너','화 · 금 OFF','31628.png'],['소희'
    console.log(`PASS ${width}x${height} salon + team`);
   }
   await page.setViewportSize({width:430,height:874});
-  await go('/salons/arvo/designers');await page.locator('main>footer button').click();check(await page.getByRole('link',{name:'윤아 디자이너 예약하기',exact:true}).evaluate(el=>el===document.activeElement),'Existing Team bottom CTA focuses Yoona booking');await page.getByRole('link',{name:'윤아 디자이너 예약하기',exact:true}).click();await page.waitForURL('**/reservation/yoona/service');check(true,'Yoona booking enters existing service flow');
+  await go('/salons/arvo/designers');check(await page.locator('main>footer,main .primary-cta').count()===0,'Team has no bottom booking CTA or footer');await page.getByRole('link',{name:'윤아 디자이너 예약하기',exact:true}).click();await page.waitForURL('**/reservation/yoona/service');check(true,'Yoona booking enters existing service flow');
   // Other pages retain their own booking availability; no global reservation lock.
   await go('/designers/sohee');check(await page.locator('a[href^="/reservation/sohee/"]').count()>0,'Sohee detail booking remains available outside Team');
   for(const route of ['/designers/yoona','/designers/sohee','/salons/arvo/reviews']){

@@ -73,7 +73,7 @@ export function ArvoSalonPage(){
   }
   const firstDesigner=arvoTeam[0];
   return <main id="main" className={`${styles.page} ${styles.salonPage}`} ref={pageRef}>
-    <SalonHeader title="매장 · 방문 정보" back="/explore?category=salon" save/>
+    <SalonHeader title="아르보 성수" back="/explore?category=salon" save/>
     <img className={styles.hero} src={arvoInterior[0].src} alt="아르보 성수의 햇빛이 드는 매장 내부" fetchPriority="high"/>
     <div className={styles.profile}>
       <h1>아르보 성수</h1>
@@ -144,7 +144,6 @@ export function ArvoDesignersPage(){
       <section className={styles.recommended}><h2>내 취향에서 먼저 살펴볼 디자이너</h2><DesignerRow person={findArvoDesigner('yoona')!}/></section>
       {groups.map(group=><section className={styles.designerGroup} key={group.title}><h2>{group.title}</h2><div>{group.ids.map(id=><DesignerRow key={id} person={findArvoDesigner(id)!}/>)}</div></section>)}
     </div>
-    <footer className={styles.teamBooking}><button type="button" className={`${styles.bookingLink} primary-cta`} onClick={()=>{document.querySelector(`.${styles.recommended}`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});document.querySelector<HTMLAnchorElement>(`.${styles.reserveDesigner}`)?.focus({preventScroll:true});}}>예약하기</button><p className={styles.srOnly}>디자이너별 예약하기를 선택해 주세요.</p></footer>
   </main>;
 }
 
