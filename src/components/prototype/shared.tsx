@@ -9,6 +9,7 @@ import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {usePrototype} from './store';
 import savenote from './savenote.module.css';
 import {saveNotePreview} from '@/lib/prototype/archive';
+import {SaveHeart} from './save-heart';
 export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header hairus-page-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back hairus-header-back" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
 export function Action({href,children,secondary=false}:{href:string;children:ReactNode;secondary?:boolean}){return <Link className={`button button--${secondary?'plain':'primary'}`} href={href}>{children}</Link>;}
 export function Card({item}:{item:Item}){return <article className={`proto-card ${item.kind}`}><Link href={itemHref(item)}><img src={item.image} alt={item.name} loading="lazy"/><h3>{item.name}</h3><p>{item.location||item.tags.join(' · ')}</p></Link><SaveButton item={item}/></article>;}
@@ -58,7 +59,7 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
  const preview=saved?saveNotePreview(saved):{visible:[],hiddenCount:0};
  return <>
   <button disabled={!ready} className="proto-save" aria-label={`${item.name} ${saved?'저장 메모 수정':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(!saved&&!saveNoteEnabled){update(s=>({...s,saved:[...s.saved,{id:item.id,kind:item.kind,reasons:[],note:'',savedAt:new Date().toISOString()}]}));return;}edit();}}>
-   {saved?'♥':<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555551" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{display:'block'}}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>}
+   <SaveHeart saved={!!saved}/>
   </button>
   {reasonClassName&&preview.visible.length>0&&<div className={reasonGroupClassName}>
    {preview.visible.map((reason,index)=><button key={index} type="button" className={reasonClassName} aria-label={`${item.name} 저장 메모 수정: ${reason}`} title={reason} onClick={edit}>{reason}</button>)}
