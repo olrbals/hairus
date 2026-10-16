@@ -921,6 +921,8 @@
 }
 .bottom-sheet--default::-webkit-scrollbar{display:none}
 .bottom-sheet--default .sheet-content{gap:28px}
+.bottom-sheet--default .sheet-drag{touch-action:none;cursor:grab}
+.bottom-sheet--default .sheet-drag .sheet-handle{margin-bottom:0}
 .bottom-sheet--default .sheet-heading{height:36px;padding:0 4px;flex-shrink:0}
 .bottom-sheet--default .sheet-close{
   width:44px;
