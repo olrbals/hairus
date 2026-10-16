@@ -2,7 +2,7 @@
 .header{height:64px;display:flex;align-items:center;padding-inline:24px}
 .back{display:grid;place-items:center;width:44px;height:44px;border:0;background:transparent;padding:0}
 .back img{display:block;width:44px;height:44px}
-.content{padding:12px 24px 32px}
+.content{padding:0px 24px 32px}
 .content>h1{margin:0 0 20px;font-family:var(--font-editorial);font-size:52px;font-weight:600;line-height:.92;}
 .categoryTabs{display:flex;align-items:stretch;justify-content:space-between;height:52px;margin:0 18px 18px;border-bottom:0}
 .categoryTabs a{position:relative;display:flex;flex:0 0 76.4px;align-items:center;justify-content:center;color:rgba(32,32,30,.46);font-size:15px;font-weight:400;line-height:1}
