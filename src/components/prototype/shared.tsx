@@ -4,6 +4,7 @@ import {useRouter} from 'next/navigation';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {SelectionChip} from '@/components/selection-chip';
 import {HeaderBackIcon} from '@/components/primitives';
 import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {usePrototype} from './store';
@@ -75,7 +76,7 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
     <div className={savenote.savedItem}><img src={item.image} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
      <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
-     <div className={savenote.options}>{options.map(option=><button type="button" key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</button>)}</div>
+     <div className={savenote.options}>{options.map(option=><SelectionChip key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</SelectionChip>)}</div>
      <textarea className={savenote.note} rows={1} aria-label="나만의 메모" placeholder="직접 적어보세요." value={note} maxLength={500} onChange={e=>setNote(e.target.value)}/>
     </div>
     <button type="button" className={`${savenote.apply} primary-cta`} onClick={save}>적용하기</button>
