@@ -96,7 +96,7 @@ export function StyleExplore(){
   <BottomNav active="/explore"/>
   <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close analysis-sheet-close-text" onClick={()=>setOpen(false)} aria-label="필터 닫기">닫음</button>}>
    <div className={sheet.filterSheet}>
-    {filterGroups.map(({key,label,options})=><section key={key} className={sheet.filterGroup}>
+    {filterGroups.map(({key,label,options})=><section key={key} className={`${sheet.filterGroup} explore-filter-group`}>
      <h3>{label}</h3>
      <div className={`${sheet.filterOptions} filter-editor-chips`}>
       {options.map(option=><SelectionChip key={option} aria-pressed={draft[key]===option} onClick={()=>setDraft(current=>({...current,[key]:option}))}>{option}</SelectionChip>)}
