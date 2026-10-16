@@ -57,7 +57,9 @@ export function InFocusEditorial() {
         </article>
 
         <article className="ifd-wave">
-          <img src={imageBase+'wave-close-up.png'} alt="부드러운 보브 웨이브의 머릿결 클로즈업" loading="lazy" />
+          <div className="ifd-wave-image">
+            <img src={imageBase+'wave-close-up.png'} alt="부드러운 보브 웨이브의 머릿결 클로즈업" loading="lazy" />
+          </div>
           <div className="ifd-wave-caption">
             <span className="ifd-ordinal">03 / WAVE</span>
             <h3>자유롭게 흐르는 컬</h3>
@@ -103,8 +105,8 @@ export function InFocusEditorial() {
       <footer className="ifd-epilogue">
         <span>EPILOGUE</span>
         <div>
-          <h2>GOOD HAIR,<br/>GOOD DAY.</h2>
-          <p>좋은 머릿결은 하루아침에 완성되지 않아요.<br/>오늘의 작은 습관이 쌓여, 좋은 머릿결을 유지합니다.</p>
+          <h2>THE BEAUTY<br/>IN BETWEEN.</h2>
+          <p>단정함과 자유로움, 그 사이 어딘가.<br/>서로 다른 매력이 만나 나만의 분위기를 완성합니다.</p>
         </div>
       </footer>
     </main>

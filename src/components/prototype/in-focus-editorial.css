@@ -29,7 +29,9 @@
 .ifd-detail-caption h3,.ifd-wave-caption h3{font-size:18px;line-height:1.3;font-weight:500;margin:0}
 .ifd-detail-caption p,.ifd-wave-caption p{font-size:14px;line-height:1.4;color:#666;font-weight:400;margin:8px 0 0;word-break:keep-all}
 .ifd-wave{display:flex;flex-direction:column;gap:8px}
-.ifd-wave>img{width:100%;height:208px}
+.ifd-wave-image{height:208px;overflow:hidden}
+/* Crop the source image's two black bottom rows without changing the display area. */
+.ifd-wave-image>img{width:100%;height:calc(100% + 2px);object-position:center top}
 .ifd-wave-caption{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
 .ifd-wave-caption p{margin-top:8px}
 .ifd-designer{margin-top:52px;min-height:830px;padding:28px 24px 2px;background:linear-gradient(to bottom,#000 0%,#000 65.584%,#fff 65.735%,#fff 100%)}
@@ -55,6 +57,6 @@
 .ifd-epilogue>span{font-size:12px;line-height:1.3}
 .ifd-epilogue>div{display:flex;flex-direction:column;gap:20px}
 .ifd-epilogue h2{font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:46px;font-weight:500;line-height:43px;margin:0}
-.ifd-epilogue p{font-size:16px;line-height:1.3;margin:0}
+.ifd-epilogue p{font-size:16px;line-height:1.3;margin:0;color:rgba(17,17,17,.9)}
 .mobile-shell:has(> .ifd-page){padding-bottom:0}
 @media(max-width:385px){.ifd-page{padding-bottom:140px}.ifd-cover-caption h1{font-size:47px}.ifd-cover-caption{margin-top:-47px}.ifd-details-heading h2,.ifd-designer-heading h2{font-size:32px}.ifd-detail-caption h3,.ifd-wave-caption h3{font-size:16px}.ifd-detail-caption p{font-size:12px}.ifd-designer-profile strong{font-size:42px}.ifd-designer-profile span{font-size:13px}.ifd-question p{font-size:12px}}
