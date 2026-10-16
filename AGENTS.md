@@ -11,3 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## HAIRUS typography
 
 All text uses `letter-spacing: -0.02em` (Figma -2%). Keep this shared rule in `src/app/globals.css`; do not add page-specific tracking overrides unless explicitly requested. This is a relative value, never `-2px`. Preserve SVG/icon artwork.
+
+## HAIRUS bottom-sheet selection chips
+
+Use `SelectionChip` from `src/components/selection-chip.tsx` for every text-selection chip inside a `BottomSheet`, including new screens. Figma nodes `1074:2674` and `1074:2681` are the source of truth: content-hugging width/height (not a fixed or minimum 48px height), 12px horizontal / 8px vertical padding, 20px radius, Pretendard 14px / 130% line height / -0.02em tracking, selected black and unselected subtle gray. Do not restyle these buttons in individual page stylesheets. Preserve each sheet's option labels, selection logic and chip-group spacing. Exclude image cards, swatches, dropdowns and toggles.
