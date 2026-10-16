@@ -110,7 +110,13 @@ function DesignerList({items}:{items:Item[]}){
 }
 
 function SalonList({items}:{items:Item[]}){
- return <div className={sheet.salonList}>{items.map(item=>{
+ const salonItems=[...items];
+ const moodonIndex=salonItems.findIndex(item=>item.id==='moodon');
+ const obHairIndex=salonItems.findIndex(item=>item.id==='ob-hair');
+ if(moodonIndex!==-1&&obHairIndex!==-1){
+  [salonItems[moodonIndex],salonItems[obHairIndex]]=[salonItems[obHairIndex],salonItems[moodonIndex]];
+ }
+ return <div className={sheet.salonList}>{salonItems.map(item=>{
   const detail=salonDetails[item.id];
   const content=<><img src={item.image} alt={item.name}/><div className={sheet.rating}>★ {detail?.rating||'–'}</div><h2>{item.name}</h2><p>{detail?.location||item.location}</p></>;
   return <article className={sheet.salonCard} key={item.id}>
