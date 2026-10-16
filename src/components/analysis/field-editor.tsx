@@ -1,6 +1,7 @@
 "use client";
 import {useState} from 'react';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {SelectionChip} from '@/components/selection-chip';
 import {Button} from '@/components/primitives';
 import {fields,type FieldKey} from '@/lib/analysis/profile';
 import {optionsForField,type ProfileOption} from '@/lib/analysis/profile-options';
@@ -24,12 +25,13 @@ export function FieldEditor({fieldKey,value,onClose,onSave,closeLabel}:{fieldKey
   ?`가장 최근 ${field.label.replace(' 이력','')} 시기를 선택해 주세요.`
   :field.kind==='swatches'?'이름과 대표색을 참고해 가장 가까운 항목을 선택해 주세요.'
   :`실제 ${field.label}과 가장 가까운 형태를 선택해 주세요.`;
+ const ChoiceButton=visual?'button':SelectionChip;
  return <BottomSheet open onClose={onClose} title={field.kind==='history'?field.label:`${field.label} 수정`} variant="editor" headingAction={closeLabel?<button type="button" className="sheet-close analysis-sheet-close-text" onClick={onClose} aria-label="수정 취소하고 닫기">{closeLabel}</button>:undefined}>
   <p className="editor-description">{description}</p>
   <div className={`profile-options ${visual?'visual-options':`chip-options ${field.kind==='length'?'length-options':''} ${field.kind==='history'?'history-options':''}`}`} role="group" aria-label={field.label}>
-   {optionsForField(fieldKey,value).map(option=><button key={option.value} type="button" aria-pressed={draft===option.value} onClick={()=>setDraft(option.value)} className={option.detail==='기존 입력값'?'legacy-option':undefined}>
+   {optionsForField(fieldKey,value).map(option=><ChoiceButton key={option.value} type="button" aria-pressed={draft===option.value} onClick={()=>setDraft(option.value)} className={option.detail==='기존 입력값'?'legacy-option':undefined}>
     <OptionContent option={option}/>
-   </button>)}
+   </ChoiceButton>)}
   </div>
   <Button onClick={()=>onSave(draft)}>저장하기</Button>
   <button className="text-action clear-field" type="button" onClick={()=>setDraft(null)}>미입력으로 두기</button>
