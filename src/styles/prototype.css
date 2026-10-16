@@ -976,3 +976,15 @@
   flex-wrap:wrap;
   gap:10px;
 }
+
+/* Shared header save alignment — Figma 945:9901: keep header inset, align the heart to the slot's right edge. */
+.mobile-shell .hairus-page-header .proto-save{
+  top:0;
+  right:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  width:44px;
+  height:44px;
+  padding:0;
+}
