@@ -2,7 +2,7 @@
 
 import {useRouter} from 'next/navigation';
 import {HeaderBackIcon} from '@/components/primitives';
-import {EditorialBookmarkButton} from './editorial-bookmark';
+import {EditorialBookmarkButton,EditorialHeartSaveButton} from './editorial-bookmark';
 import {findEditorial} from '@/lib/prototype/editorials';
 import './article-homecare.css';
 
@@ -29,11 +29,11 @@ export function HairCareArticle({issue=false}:{issue?:boolean}) {
     <header className="hc-header hairus-page-header">
       <button type="button" className="hc-back hairus-header-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><HeaderBackIcon/></button>
       <span>ARTICLE</span>
-      <span aria-hidden="true"/>
+      {issue?<div className="hc-header-save"><EditorialHeartSaveButton item={findEditorial('article', 'care')!}/></div>:<span aria-hidden="true"/>}
     </header>
 
     <section className="hc-cover" aria-label="THE ART OF HAIR CARE">
-      <EditorialBookmarkButton item={findEditorial('article', 'care')!}/>
+      {!issue&&<EditorialBookmarkButton item={findEditorial('article', 'care')!}/>}
       <img src={photos+'cover.png'} alt="욕실에서 긴 머리를 손질하는 여성" />
       <div className="hc-cover-content">
         <p>HAIRUS EDITORIAL / VOL. 01</p>

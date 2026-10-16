@@ -40,3 +40,16 @@ test('Invalid, duplicate, promotional and legacy SAVENOTE entries cannot become 
   assert.deepEqual(readEditorialBookmarks('{broken'), []);
   assert.deepEqual(readEditorialBookmarks(JSON.stringify({version:1,saved:[valid],bookings:[]})), []);
 });
+
+test('Editorial SAVENOTE data coexists with legacy bookmarks and is removed completely before resave', () => {
+  const care=findEditorial('article','care');
+  const note={kind:'article',id:'care',savedAt:'2026-10-16',reasons:['나중에 읽기'],note:'루틴 참고'};
+  const legacy={kind:'focus',id:'soft-bob',savedAt:'2026-10-15'};
+  const restored=readEditorialBookmarks(JSON.stringify([legacy,note]));
+  assert.deepEqual(restored,[legacy,note]);
+  const removed=toggleEditorialBookmark(restored,care);
+  assert.deepEqual(removed,[legacy]);
+  const resaved=toggleEditorialBookmark(removed,care,'2026-10-17');
+  assert.deepEqual(resaved[1],{kind:'article',id:'care',savedAt:'2026-10-17'});
+  assert.deepEqual(readEditorialBookmarks(JSON.stringify([{...note,reasons:[1]},{...note,note:2}])),[]);
+});

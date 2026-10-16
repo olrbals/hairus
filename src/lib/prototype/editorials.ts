@@ -2,7 +2,7 @@ import {articles, asset} from './catalog.ts';
 
 export type EditorialKind = 'article' | 'focus';
 export type Editorial = {kind: EditorialKind; id: string; title: string; label: string; image: string; href: string};
-export type EditorialBookmark = Pick<Editorial, 'kind' | 'id'> & {savedAt: string};
+export type EditorialBookmark = Pick<Editorial, 'kind' | 'id'> & {savedAt: string; reasons?: string[]; note?: string};
 
 // Only existing, readable editorials. Popup/event entries are deliberately excluded.
 export const editorials: Editorial[] = [
@@ -29,6 +29,8 @@ export function readEditorialBookmarks(raw: string | null): EditorialBookmark[] 
       const item = entry as Partial<EditorialBookmark>;
       if ((item.kind !== 'article' && item.kind !== 'focus') || typeof item.id !== 'string' || typeof item.savedAt !== 'string') return false;
       if (!editorials.some(editorial => editorial.kind === item.kind && editorial.id === item.id)) return false;
+      if (item.reasons !== undefined && (!Array.isArray(item.reasons) || !item.reasons.every(reason => typeof reason === 'string'))) return false;
+      if (item.note !== undefined && typeof item.note !== 'string') return false;
       const key = `${item.kind}:${item.id}`;
       if (seen.has(key)) return false;
       seen.add(key);
