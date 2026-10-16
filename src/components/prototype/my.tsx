@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {useEffect,useState} from 'react';
 import {readProfile,effectiveProfile,type Values} from '@/lib/analysis/profile';
 import {findItem,designers,salons,articles,events,type Kind} from '@/lib/prototype/catalog';
-import {readEntry} from '@/lib/entry-state';
+import {useNickname} from '@/lib/use-nickname';
 import {BottomNav} from '@/components/bottom-nav';
 import {usePrototype} from './store';
 import {Screen,Action,Card,DemoNotice} from './shared';
@@ -24,11 +24,10 @@ function Arrow({name,alt=''}:{name:string;alt?:string}){return <img className="m
 
 export function My({view}:{view?:string}){
  const {state,update,ready}=usePrototype();
- const [name,setName]=useState('게스트');
+ const name=useNickname();
  const [profile,setProfile]=useState<Values|null>(null);
 
  useEffect(()=>{
-  setName(readEntry().name||'게스트');
   const savedProfile=readProfile();
   setProfile(savedProfile?effectiveProfile(savedProfile):null);
  },[]);

@@ -1,6 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readEntry,writeEntry} from '../src/lib/entry-state.ts';
+import {displayNickname,entryChangedEvent,readEntry,writeEntry} from '../src/lib/entry-state.ts';
 test('손상된 저장소·임의 값은 안전한 기본 상태로 복구한다',()=>{globalThis.localStorage={getItem:()=>'{broken'};assert.equal(readEntry().loginMode,'guest');globalThis.localStorage={getItem:()=>JSON.stringify({version:1,onboardingStep:99,name:42,loginMode:'admin'})};assert.equal(readEntry().onboardingStep,1);assert.equal(readEntry().name,'');assert.equal(readEntry().loginMode,'guest');});
 test('진행·데모 모드·이름을 보존하고 건너뛰기에서 분석 결과를 만들지 않는다',()=>{let value=null;globalThis.localStorage={getItem:()=>value,setItem:(_key,next)=>{value=next;}};writeEntry({onboardingStep:3,onboardingDone:true});writeEntry({loginMode:'demo',name:'테스트'});writeEntry({analysis:'skipped'});const state=readEntry();assert.equal(state.name,'테스트');assert.equal(state.onboardingDone,true);assert.equal(state.analysis,'skipped');assert.equal('profile' in state,false);});
 test('브라우저 저장소 접근이 차단돼도 예외로 여정을 중단하지 않는다',()=>{globalThis.localStorage={getItem:()=>{throw Error('blocked')},setItem:()=>{throw Error('blocked')}};assert.doesNotThrow(()=>writeEntry({loginMode:'demo'}));});
+test('닉네임 공백을 정리하고 누락·공백·잘못된 값은 공통 사용자 이름을 쓴다',()=>{assert.equal(displayNickname(' 규민 '),'규민');for(const name of ['', ' \t\n ',null,undefined,42])assert.equal(displayNickname(name),'사용자');});
+test('닉네임 변경은 기존 로그인 상태를 보존하고 같은 탭 구독자에게 알린다',()=>{let stored=JSON.stringify({version:1,loginMode:'demo',onboardingDone:true,name:'이전'});const events=[];globalThis.localStorage={getItem:()=>stored,setItem:(_,next)=>{stored=next;}};globalThis.window={dispatchEvent:event=>events.push(event.type)};try{writeEntry({name:'규민'});assert.equal(displayNickname(readEntry().name),'규민');assert.equal(readEntry().loginMode,'demo');assert.equal(readEntry().onboardingDone,true);assert.deepEqual(events,[entryChangedEvent]);}finally{delete globalThis.window;}});
+test('서버 렌더링처럼 저장소가 없어도 안전하게 기본 닉네임을 읽는다',()=>{delete globalThis.localStorage;assert.equal(displayNickname(readEntry().name),'사용자');});

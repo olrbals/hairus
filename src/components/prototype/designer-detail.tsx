@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
-import {readEntry} from '@/lib/entry-state';
+import {useNickname} from '@/lib/use-nickname';
 import {asset,findItem,salons,services} from '@/lib/prototype/catalog';
 import {recommend} from '@/lib/prototype/logic';
 import {SaveButton} from './shared';
@@ -24,12 +24,11 @@ const designerSectionIds=['match','works','service','reviews','salon'] as const;
 export function DesignerPage({id}:{id:string}){
   const router=useRouter();
   const {state,update}=usePrototype();
-  const [userName,setUserName]=useState('');
+  const userName=useNickname();
   const [matchIndex,setMatchIndex]=useState(0);
   const [activeSection,setActiveSection]=useState<string>('match');
   const touchStartX=useRef<number|null>(null);
   const stepMatch=(direction:number)=>setMatchIndex(index=>(index+direction+matchComparisons.length)%matchComparisons.length);
-  useEffect(()=>setUserName(readEntry().name.trim()),[]);
   useEffect(()=>{
     // Keep the tab underline in sync with the section currently below the sticky nav.
     const updateActiveSection=()=>{
@@ -54,7 +53,7 @@ export function DesignerPage({id}:{id:string}){
   const hero=item.id==='sohee'?asset('a91f5.png'):item.image;
   const reviewCount=item.id==='sohee'?513:623;
   const introduction=`“ 작은 변화로도, 고객님의 가장 자연스러운 매력을 찾을 수 있도록 함께 고민하는 ${item.name} 디자이너입니다. ”`;
-  const userLabel=userName?`${userName}님이`:'고객님이';
+  const userLabel=`${userName}님이`;
   const matchComparison=matchComparisons[matchIndex];
 
   return <main id="main" className={styles.page}>
