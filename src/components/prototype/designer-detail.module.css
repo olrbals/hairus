@@ -1,7 +1,7 @@
 :global(.mobile-shell):has(.page){padding-bottom:0}
 .missing{min-height:100dvh;padding:80px 24px;display:flex;flex-direction:column;gap:24px;background:#fff}
 .missing a{display:flex;min-height:56px;align-items:center;justify-content:center;background:#000;color:#fff}
-.page{min-height:100dvh;background:#fff;color:#0e0e0e;font-size:14px;line-height:1.3;letter-spacing:-.02em}
+.page{min-height:100dvh;background:#fff;color:#0e0e0e;font-size:14px;line-height:1.3;}
 .page button,.page a{touch-action:manipulation}
 .header{height:64px;padding:0 24px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;background:#fff}
 .header>button{width:44px;height:44px;padding:0;border:0;background:transparent;display:grid;place-items:center}
@@ -26,8 +26,8 @@
 .hero{display:block;width:100%;height:528px;object-fit:cover;object-position:center top}
 .profile{padding:20px 24px 48px}
 .profile h1,.page section>h2,.sectionHeading h2,.works h2{font-family:var(--font-editorial);font-weight:700}
-.profile h1{font-size:52px;line-height:56px;letter-spacing:0}
-.page .profile>h2{margin-top:8px;font-family:var(--font-sans);font-size:18px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
+.profile h1{font-size:52px;line-height:56px;}
+.page .profile>h2{margin-top:8px;font-family:var(--font-sans);font-size:18px;font-weight:500;line-height:1.3;}
 .tags{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
 .profile>.tags{margin-top:12px}
 .profile>.tags span{padding-block:3px;font-size:11px}
@@ -40,7 +40,7 @@
 .sectionNav a[aria-current=location]{border-bottom:1px solid #0e0e0e;font-weight:600}
 .match,.works,.serviceSection,.reviews,.salon{scroll-margin-top:64px}
 .match{padding:24px 24px 24px}
-.match h2,.works h2,.sectionHeading h2,.reviews>h2,.salon>h2{font-size:34px;line-height:1.3;letter-spacing:-.02em}
+.match h2,.works h2,.sectionHeading h2,.reviews>h2,.salon>h2{font-size:34px;line-height:1.3;}
 .match>p,.sectionHeading p,.works>div>p{margin-top:4px;color:#616161;font-size:14px;line-height:1.3}
 .matchImages{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px;touch-action:pan-y}
 .matchImages figure{min-width:0;margin:0;display:flex;flex-direction:column}

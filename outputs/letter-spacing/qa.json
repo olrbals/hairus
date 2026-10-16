@@ -1,0 +1,1258 @@
+{
+  "routes": [
+    "/login",
+    "/onboarding/1",
+    "/onboarding/2",
+    "/onboarding/3",
+    "/welcome",
+    "/explore",
+    "/home",
+    "/my",
+    "/my/recent",
+    "/my/reservations",
+    "/my/settings",
+    "/saved",
+    "/analysis/camera",
+    "/analysis/captured",
+    "/analysis/edit",
+    "/analysis/guide",
+    "/analysis/processing",
+    "/analysis/result",
+    "/articles/issue",
+    "/designers/yoona",
+    "/designers/yoona/portfolio",
+    "/designers/yoona/reviews",
+    "/in-focus/soft-bob",
+    "/magazine",
+    "/",
+    "/preferences/complete",
+    "/preferences/loading",
+    "/preferences/intro",
+    "/preferences/1",
+    "/preferences/2",
+    "/preferences/3",
+    "/preferences/4",
+    "/recommendation/results",
+    "/recommendation/intro",
+    "/recommendation/1",
+    "/recommendation/2",
+    "/recommendation/3",
+    "/recommendation/4",
+    "/reservation/yoona/service",
+    "/reservation/yoona/schedule",
+    "/reservation/yoona/note",
+    "/reservation/yoona/review",
+    "/reservations/soft-bob",
+    "/salons/arvo/designers",
+    "/salons/arvo",
+    "/salons/arvo/reviews",
+    "/styles/airy",
+    "/ui",
+    "/articles/popup",
+    "/articles/care"
+  ],
+  "results": [
+    {
+      "width": 430,
+      "route": "/login",
+      "actual": "/login",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/onboarding/1",
+      "actual": "/onboarding/1",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/onboarding/2",
+      "actual": "/onboarding/2",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/onboarding/3",
+      "actual": "/onboarding/3",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/welcome",
+      "actual": "/welcome",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/explore",
+      "actual": "/explore",
+      "count": 146,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/home",
+      "actual": "/home",
+      "count": 160,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/my",
+      "actual": "/my",
+      "count": 26,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/my/recent",
+      "actual": "/my/recent",
+      "count": 9,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/my/reservations",
+      "actual": "/my/reservations",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/my/settings",
+      "actual": "/my/settings",
+      "count": 19,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/saved",
+      "actual": "/saved",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/camera",
+      "actual": "/analysis/camera",
+      "count": 11,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/captured",
+      "actual": "/analysis/captured",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/edit",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/guide",
+      "actual": "/analysis/guide",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/processing",
+      "actual": "/analysis/guide",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/result",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/issue",
+      "actual": "/articles/issue",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/yoona",
+      "actual": "/designers/yoona",
+      "count": 104,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/yoona/portfolio",
+      "actual": "/designers/yoona/portfolio",
+      "count": 66,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/yoona/reviews",
+      "actual": "/designers/yoona/reviews",
+      "count": 17,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/in-focus/soft-bob",
+      "actual": "/in-focus/soft-bob",
+      "count": 42,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/magazine",
+      "actual": "/magazine",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/",
+      "actual": "/",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/complete",
+      "actual": "/preferences/complete",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/loading",
+      "actual": "/preferences/loading",
+      "count": 6,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/intro",
+      "actual": "/preferences/intro",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/1",
+      "actual": "/preferences/1",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/2",
+      "actual": "/preferences/2",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/3",
+      "actual": "/preferences/3",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/4",
+      "actual": "/preferences/4",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/results",
+      "actual": "/recommendation/results",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/intro",
+      "actual": "/recommendation/intro",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/1",
+      "actual": "/recommendation/1",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/2",
+      "actual": "/recommendation/2",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/3",
+      "actual": "/recommendation/3",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/4",
+      "actual": "/recommendation/4",
+      "count": 27,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/reservation/yoona/service",
+      "actual": "/reservation/yoona/service",
+      "count": 24,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/reservation/yoona/schedule",
+      "actual": "/reservation/yoona/schedule",
+      "count": 68,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/reservation/yoona/note",
+      "actual": "/reservation/yoona/note",
+      "count": 31,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/reservation/yoona/review",
+      "actual": "/reservation/yoona/review",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/reservations/soft-bob",
+      "actual": "/reservations/soft-bob",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo/designers",
+      "actual": "/salons/arvo/designers",
+      "count": 32,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo",
+      "actual": "/salons/arvo",
+      "count": 135,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo/reviews",
+      "actual": "/salons/arvo/reviews",
+      "count": 34,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/styles/airy",
+      "actual": "/styles/airy",
+      "count": 41,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/ui",
+      "actual": "/ui",
+      "count": 25,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/popup",
+      "actual": "/articles/popup",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/care",
+      "actual": "/articles/care",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/login",
+      "actual": "/login",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/onboarding/1",
+      "actual": "/onboarding/1",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/onboarding/2",
+      "actual": "/onboarding/2",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/onboarding/3",
+      "actual": "/onboarding/3",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/welcome",
+      "actual": "/welcome",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/explore",
+      "actual": "/explore",
+      "count": 146,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/home",
+      "actual": "/home",
+      "count": 160,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/my",
+      "actual": "/my",
+      "count": 26,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/my/recent",
+      "actual": "/my/recent",
+      "count": 36,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/my/reservations",
+      "actual": "/my/reservations",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/my/settings",
+      "actual": "/my/settings",
+      "count": 19,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/saved",
+      "actual": "/saved",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/camera",
+      "actual": "/analysis/camera",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/captured",
+      "actual": "/analysis/captured",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/edit",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/guide",
+      "actual": "/analysis/guide",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/processing",
+      "actual": "/analysis/processing",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/result",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/issue",
+      "actual": "/articles/issue",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/yoona",
+      "actual": "/designers/yoona",
+      "count": 104,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/yoona/portfolio",
+      "actual": "/designers/yoona/portfolio",
+      "count": 66,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/yoona/reviews",
+      "actual": "/designers/yoona/reviews",
+      "count": 17,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/in-focus/soft-bob",
+      "actual": "/in-focus/soft-bob",
+      "count": 42,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/magazine",
+      "actual": "/magazine",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "actual": "/",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/complete",
+      "actual": "/preferences/complete",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/loading",
+      "actual": "/preferences/loading",
+      "count": 6,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/intro",
+      "actual": "/preferences/intro",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/1",
+      "actual": "/preferences/1",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/2",
+      "actual": "/preferences/2",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/3",
+      "actual": "/preferences/3",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/4",
+      "actual": "/preferences/4",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/results",
+      "actual": "/recommendation/results",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/intro",
+      "actual": "/recommendation/intro",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/1",
+      "actual": "/recommendation/1",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/2",
+      "actual": "/recommendation/2",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/3",
+      "actual": "/recommendation/3",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/4",
+      "actual": "/recommendation/4",
+      "count": 27,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/reservation/yoona/service",
+      "actual": "/reservation/yoona/service",
+      "count": 24,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/reservation/yoona/schedule",
+      "actual": "/reservation/yoona/schedule",
+      "count": 68,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/reservation/yoona/note",
+      "actual": "/reservation/yoona/note",
+      "count": 31,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/reservation/yoona/review",
+      "actual": "/reservation/yoona/review",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/reservations/soft-bob",
+      "actual": "/reservations/soft-bob",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo/designers",
+      "actual": "/salons/arvo/designers",
+      "count": 32,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo",
+      "actual": "/salons/arvo",
+      "count": 135,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo/reviews",
+      "actual": "/salons/arvo/reviews",
+      "count": 34,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/styles/airy",
+      "actual": "/styles/airy",
+      "count": 41,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/ui",
+      "actual": "/ui",
+      "count": 25,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/popup",
+      "actual": "/articles/popup",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/care",
+      "actual": "/articles/care",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/login",
+      "actual": "/login",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/onboarding/1",
+      "actual": "/onboarding/1",
+      "count": 15,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/onboarding/2",
+      "actual": "/onboarding/2",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/onboarding/3",
+      "actual": "/onboarding/3",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/welcome",
+      "actual": "/welcome",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/explore",
+      "actual": "/explore",
+      "count": 146,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/home",
+      "actual": "/home",
+      "count": 160,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/my",
+      "actual": "/my",
+      "count": 26,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/my/recent",
+      "actual": "/my/recent",
+      "count": 36,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/my/reservations",
+      "actual": "/my/reservations",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/my/settings",
+      "actual": "/my/settings",
+      "count": 19,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/saved",
+      "actual": "/saved",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/camera",
+      "actual": "/analysis/camera",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/captured",
+      "actual": "/analysis/captured",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/edit",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/guide",
+      "actual": "/analysis/guide",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/processing",
+      "actual": "/analysis/processing",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/result",
+      "actual": "/analysis/result",
+      "count": 8,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/issue",
+      "actual": "/articles/issue",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/yoona",
+      "actual": "/designers/yoona",
+      "count": 104,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/yoona/portfolio",
+      "actual": "/designers/yoona/portfolio",
+      "count": 66,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/yoona/reviews",
+      "actual": "/designers/yoona/reviews",
+      "count": 17,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/in-focus/soft-bob",
+      "actual": "/in-focus/soft-bob",
+      "count": 42,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/magazine",
+      "actual": "/magazine",
+      "count": 16,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/",
+      "actual": "/",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/complete",
+      "actual": "/preferences/complete",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/loading",
+      "actual": "/preferences/loading",
+      "count": 6,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/intro",
+      "actual": "/preferences/intro",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/1",
+      "actual": "/preferences/1",
+      "count": 12,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/2",
+      "actual": "/preferences/2",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/3",
+      "actual": "/preferences/3",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/4",
+      "actual": "/preferences/4",
+      "count": 20,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/results",
+      "actual": "/recommendation/results",
+      "count": 10,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/intro",
+      "actual": "/recommendation/intro",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/1",
+      "actual": "/recommendation/1",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/2",
+      "actual": "/recommendation/2",
+      "count": 14,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/3",
+      "actual": "/recommendation/3",
+      "count": 18,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/4",
+      "actual": "/recommendation/4",
+      "count": 27,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/reservation/yoona/service",
+      "actual": "/reservation/yoona/service",
+      "count": 24,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/reservation/yoona/schedule",
+      "actual": "/reservation/yoona/schedule",
+      "count": 68,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/reservation/yoona/note",
+      "actual": "/reservation/yoona/note",
+      "count": 31,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/reservation/yoona/review",
+      "actual": "/reservation/yoona/review",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/reservations/soft-bob",
+      "actual": "/reservations/soft-bob",
+      "count": 7,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo/designers",
+      "actual": "/salons/arvo/designers",
+      "count": 32,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo",
+      "actual": "/salons/arvo",
+      "count": 135,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo/reviews",
+      "actual": "/salons/arvo/reviews",
+      "count": 34,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/styles/airy",
+      "actual": "/styles/airy",
+      "count": 41,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/ui",
+      "actual": "/ui",
+      "count": 25,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/popup",
+      "actual": "/articles/popup",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/care",
+      "actual": "/articles/care",
+      "count": 35,
+      "bad": [],
+      "wide": false
+    }
+  ],
+  "errors": [],
+  "dialog": true
+}

@@ -1,9 +1,9 @@
 :global(.mobile-shell):has(.page){padding-bottom:0}
-.page{min-height:100dvh;background:#fff;color:#0e0e0e;font-size:14px;line-height:1.3;letter-spacing:-.02em}
+.page{min-height:100dvh;background:#fff;color:#0e0e0e;font-size:14px;line-height:1.3;}
 .page button,.page a{touch-action:manipulation}
 .hero{display:block;width:100%;height:auto;aspect-ratio:430/338;object-fit:cover}
 .profile{padding:20px 19.5px 44px}
-.profile h1{font-size:28px;font-weight:600;line-height:1.3;letter-spacing:-2px}
+.profile h1{font-size:28px;font-weight:600;line-height:1.3;}
 .profile>p{margin-top:8px;color:rgba(0,0,0,.7);font-size:12px;font-weight:500}
 .profile>a:not(.bookingLink){display:block;margin-top:8px;color:#616161;font-size:12px;font-weight:500}
 .profile .bookingLink{margin-top:24px}
@@ -12,14 +12,14 @@
 .sectionNav a{width:48px;display:grid;place-items:center;font-size:14px;text-align:center}
 .sectionNav a[aria-current=location]{border-bottom:1px solid #0e0e0e;font-weight:600}
 .page section[id]{scroll-margin-top:64px}
-.sectionHeading h2,.information>h2{font:700 34px/1.3 var(--font-editorial);letter-spacing:-.02em}
+.sectionHeading h2,.information>h2{font:700 34px/1.3 var(--font-editorial);}
 .sectionHeading p{margin-top:4px;color:#616161;font-size:14px}
 .notice{padding:20px 21px 24px 27px}
 .quickInfo{margin:32px 0 28px;padding:0 20px;display:flex;justify-content:space-between;color:rgba(0,0,0,.7);font-weight:500}
 .quickInfo dt{margin-bottom:4px;color:rgba(0,0,0,.35);font-size:12px}
 .quickInfo dd{margin:0;font-size:14px}
 .hours{padding:24px 8px;border-block:.8px solid rgba(0,0,0,.15)}
-.hoursRow{display:grid;grid-template-columns:76px 1fr auto;align-items:center;min-height:30px;width:100%;padding:4px 0;border:0;background:transparent;color:#0e0e0e;text-align:left;font-size:14px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
+.hoursRow{display:grid;grid-template-columns:76px 1fr auto;align-items:center;min-height:30px;width:100%;padding:4px 0;border:0;background:transparent;color:#0e0e0e;text-align:left;font-size:14px;font-weight:500;line-height:1.3;}
 .hoursRow>span:first-child{color:rgba(0,0,0,.5)}
 .hoursRow>span:last-child{display:flex;align-items:center;gap:16px;white-space:nowrap}
 .hoursRow i{font-style:normal;width:9px;text-align:center}
@@ -33,7 +33,7 @@
 .benefit{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:66px;padding:12px;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:#f4f4f4;text-align:left;box-shadow:var(--glass-shadow)}
 .benefit+.benefit{margin-top:8px}
 .benefit>img:first-child{flex:none;border-radius:8px}.benefit>img:last-child{flex:none;margin-left:auto}
-.benefit>span{min-width:0}.benefit strong{display:block;font-size:14px;font-weight:500;letter-spacing:-.02em}.benefit small{display:block;margin-top:4px;font-size:12px;color:rgba(0,0,0,.5);letter-spacing:-.02em}
+.benefit>span{min-width:0}.benefit strong{display:block;font-size:14px;font-weight:500;}.benefit small{display:block;margin-top:4px;font-size:12px;color:rgba(0,0,0,.5);}
 .benefitMessage{margin-top:8px;color:#616161;font-size:12px}
 .price{margin-top:20px;padding:24px 21px 24px 27px}
 .priceList{margin-top:20px}
@@ -47,7 +47,7 @@
 .featuredDesigners{margin-top:32px;display:grid;gap:24px}
 .featuredDesigner{display:flex;align-items:center;gap:20px;min-height:88px;overflow:hidden;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:#f3f3f5;box-shadow:var(--glass-shadow)}
 .featuredDesigner>img{display:block;flex:none;width:64px;height:88px;object-fit:cover;object-position:center;border-radius:8px}
-.featuredDesigner strong{display:block;color:#222b3a;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:13px;font-weight:500;line-height:20px;letter-spacing:0}
+.featuredDesigner strong{display:block;color:#222b3a;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:13px;font-weight:500;line-height:20px;}
 .featuredDesigner small{display:block;margin-top:4px;color:rgba(0,0,0,.7);font-size:12px}
 .allDesigners{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:20px;min-height:18px;font-size:12px;color:#616161}
 .information{margin-top:20px;padding:24px 21px 24px 27px}
@@ -64,7 +64,7 @@
 .srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .teamPage{color:#222b3a}
 .teamContent{padding:0 24px}
-.teamContent>h1{font-size:28px;font-weight:600;line-height:1.3;letter-spacing:-2px}
+.teamContent>h1{font-size:28px;font-weight:600;line-height:1.3;}
 .teamIntro{margin-top:24px;font-size:12px;color:rgba(0,0,0,.7)}
 .recommended{margin-top:24px;scroll-margin-top:24px}
 .recommended h2{margin:0 0 12px;font-size:12px;line-height:1.3;font-weight:400;color:rgba(0,0,0,.7)}
@@ -73,12 +73,12 @@
 .designerIdentity>img{display:block;flex:none;width:64px;height:76px;border-radius:12px;object-fit:cover}
 .designerIdentity>span{min-width:0}
 .designerName{display:flex;align-items:center;gap:10px}
-.designerName strong{font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:13px;font-weight:500;line-height:20px;letter-spacing:0;white-space:nowrap}
+.designerName strong{font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:13px;font-weight:500;line-height:20px;white-space:nowrap}
 .designerName small{font-size:12px;color:rgba(14,14,14,.5);white-space:nowrap}
 .specialty{display:block;margin-top:4px;font-size:12px;color:rgba(0,0,0,.7)}
 .reserveDesigner{display:flex;flex:none;align-items:center;justify-content:center;min-width:75px;min-height:34px;border:1px solid rgba(0,0,0,.12);background:#fafafa;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);font-size:12px;color:rgba(0,0,0,.7)}
 .designerGroup{margin-top:24px}
-.designerGroup h2{margin:0 0 20px;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:17px;font-weight:700;line-height:25px;letter-spacing:0}
+.designerGroup h2{margin:0 0 20px;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:17px;font-weight:700;line-height:25px;}
 .designerGroup>div{display:grid;gap:12px}
 .teamBooking{padding:48px 19px max(20px,env(safe-area-inset-bottom))}
 @media(max-width:390px){.designerName{flex-wrap:wrap;gap:0 8px}.designerName small{font-size:11px}.priceGroup{font-size:12px}.priceGroup dl>div{gap:4px}}
