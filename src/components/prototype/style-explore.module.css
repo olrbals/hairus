@@ -1,4 +1,4 @@
-.page{min-height:100dvh;background:#fff;padding-bottom:104px;color:#20201e}
+.page{min-height:100dvh;background:#fff;padding-bottom:52px;color:#20201e}
 .header{height:64px;display:flex;align-items:center;padding-inline:24px}
 .back{display:grid;place-items:center;width:44px;height:44px;border:0;background:transparent;padding:0}
 .back img{display:block;width:44px;height:44px}
