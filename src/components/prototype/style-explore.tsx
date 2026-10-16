@@ -108,7 +108,14 @@ export function StyleExplore(){
  </>;
 }
 
-function StyleCard({item}:{item:Item}){return <article className={sheet.card}>
- <Link href={itemHref(item)}><img src={item.image} alt={item.name}/><h2>{item.name}</h2></Link>
- <SaveButton item={item}/>
-</article>;}
+const linkedStyleIds=new Set(['airy','tassel','sand']);
+
+function StyleCard({item}:{item:Item}){
+ const content=<><img src={item.image} alt={item.name}/><h2>{item.name}</h2></>;
+ return <article className={sheet.card}>
+  {linkedStyleIds.has(item.id)
+   ?<Link href={itemHref(item)} className={sheet.cardContent}>{content}</Link>
+   :<div className={sheet.cardContent}>{content}</div>}
+  <SaveButton item={item}/>
+ </article>;
+}
