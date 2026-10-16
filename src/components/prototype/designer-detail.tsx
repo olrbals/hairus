@@ -21,6 +21,7 @@ const matchComparisons=[
   {work:'bd491.png',saved:'31628.png',tags:['짧은 기장','얼굴선 레이어','차분한 실루엣']},
 ];
 const designerSectionIds=['match','works','service','reviews','salon'] as const;
+const stickyNavigationOffset=64+68; // Header plus section navigation, including its 20px bottom padding.
 
 export function DesignerPage({id}:{id:string}){
   const router=useRouter();
@@ -36,7 +37,7 @@ export function DesignerPage({id}:{id:string}){
       let current='match';
       for(const sectionId of designerSectionIds){
         const section=document.getElementById(sectionId);
-        if(section&&section.getBoundingClientRect().top<=80)current=sectionId;
+        if(section&&section.getBoundingClientRect().top<=stickyNavigationOffset+4)current=sectionId;
       }
       // The salon is near the page end and may not reach the sticky bar on short pages.
       if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2&&document.getElementById('salon'))current='salon';
