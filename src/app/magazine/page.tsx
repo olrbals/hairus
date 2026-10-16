@@ -1,2 +1,2 @@
-import {Magazine} from '@/components/prototype/details';
-export default function Page(){return <Magazine/>;}
+import {MagazineIndex} from '@/components/prototype/magazine-index';
+export default function Page(){return <MagazineIndex/>;}

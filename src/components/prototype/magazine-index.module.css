@@ -1,0 +1,28 @@
+@font-face{font-family:'Magazine Noto Sans KR';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/NotoSansKR-magazine-500.ttf') format('truetype')}
+.page{background:#fff;color:#171717;min-height:100dvh;padding-bottom:56.4px;line-height:1.3}
+:global(.mobile-shell):has(> .page){padding-bottom:0}
+.content{padding:0 24px}
+.heading{margin-bottom:28px}
+.heading>p{font-family:'Magazine Noto Sans KR',var(--font-sans);font-size:10px;font-weight:500;line-height:16px;letter-spacing:2px;color:#666460}
+.heading h1{font-family:var(--font-editorial);font-size:60px;font-weight:400;line-height:1.3;letter-spacing:-2px}
+.stories{display:flex;flex-direction:column;gap:52px}
+.cover{display:flex;flex-direction:column;gap:16px}
+.coverImage{position:relative;aspect-ratio:382/312;overflow:hidden}
+.coverImage img{position:absolute;max-width:none;width:101.49%;height:225.63%;left:-1.49%;top:-43.15%}
+.coverCopy{display:flex;flex-direction:column;gap:8px}
+.volume{color:rgba(23,23,23,.8);font-size:12px;font-weight:400}
+.coverCopy h2{margin-top:4px;font-size:28px;font-weight:600;letter-spacing:-2px}
+.description{font-size:12px;font-weight:400;color:#777}
+.grid{border-top:.8px solid rgba(0,0,0,.3);padding-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.gridStory{min-width:0;display:flex;flex-direction:column;gap:12px}
+.gridImage{position:relative;aspect-ratio:188/250;overflow:hidden}
+.gridImage img{display:block;width:100%;height:100%;object-fit:cover}
+.gridStory .volume{font-size:10px}
+.gridStory h2{margin-top:4px;font-size:16px;font-weight:600}
+.colorImage img{position:absolute;max-width:none;width:142%;height:142.2%;left:-28.33%;top:-23.64%}
+.feature{border-top:.8px solid rgba(0,0,0,.3);padding-top:24px;display:flex;gap:12px;align-items:center}
+.featureImage{position:relative;flex:0 0 105px;height:111px;overflow:hidden}
+.featureImage img{position:absolute;max-width:none;left:0;top:-6.71%;width:100%;height:126.08%}
+.featureCopy{min-width:0;max-width:230px;display:flex;flex-direction:column;gap:8px}
+.featureCopy h2{margin-top:4px;font-size:20px;font-weight:600}
+@media(max-width:390px){.featureCopy .description{overflow-wrap:anywhere}}
