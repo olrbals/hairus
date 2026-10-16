@@ -947,7 +947,7 @@
   display:flex;
   flex-wrap:wrap;
   align-items:center;
-  gap:20px 16px;
+  gap:20px 12px;
 }
 
 /* Legacy Explore sample: preserve its existing 10px chip-list gap. */
