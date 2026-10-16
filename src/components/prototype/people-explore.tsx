@@ -73,12 +73,12 @@ export function PeopleExplore({category}:{category:ExploreKind}){
   <BottomNav active="/explore"/>
   <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close analysis-sheet-close-text" onClick={()=>setOpen(false)} aria-label="필터 닫기">닫음</button>}>
    <div className={sheet.filterSheet}>
-    <section className={sheet.locationGroup}>
+    <section className={`${sheet.locationGroup} explore-filter-group`}>
      <h3>지역</h3>
      <button type="button" className={sheet.location} aria-expanded={regionOpen} onClick={()=>setRegionOpen(current=>!current)}><span>{draft.region==='전체'?'전체 지역':draft.region}</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
      {regionOpen&&<div className={sheet.regionOptions} role="listbox" aria-label="시도 선택">{provinces.map(province=><button type="button" role="option" aria-selected={draft.region===province} key={province} onClick={()=>{setDraft(current=>({...current,region:province}));setRegionOpen(false);}}><span>{province}</span>{draft.region===province&&<svg aria-hidden="true" viewBox="0 0 16 16"><path d="m3 8 3.2 3.2L13 4.5"/></svg>}</button>)}</div>}
     </section>
-    {groups.map(group=><section key={group.key} className={sheet.filterGroup}>
+    {groups.map(group=><section key={group.key} className={`${sheet.filterGroup} explore-filter-group`}>
      <h3>{group.label}</h3>
      <div className={`${sheet.options} filter-editor-chips`}>
       {group.options.map(option=><SelectionChip key={option} aria-pressed={draft[group.key]===option} onClick={()=>setDraft(current=>({...current,[group.key]:current[group.key]===option?'전체':option}))}>{option}</SelectionChip>)}
