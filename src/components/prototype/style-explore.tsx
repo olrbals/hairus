@@ -97,11 +97,11 @@ export function StyleExplore(){
    <div className={sheet.filterSheet}>
     {filterGroups.map(({key,label,options})=><section key={key} className={sheet.filterGroup}>
      <h3>{label}</h3>
-     <div className={sheet.filterOptions}>
+     <div className={`${sheet.filterOptions} filter-editor-chips`}>
       {options.map(option=><button type="button" key={option} aria-pressed={draft[key]===option} onClick={()=>setDraft(current=>({...current,[key]:option}))}>{option}</button>)}
      </div>
     </section>)}
-    <button type="button" className={`${sheet.apply} primary-cta`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
+    <button type="button" className={`${sheet.apply} primary-cta filter-sheet-apply`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
     <button type="button" className="text-action clear-field" onClick={reset}>초기화</button>
    </div>
   </BottomSheet>
