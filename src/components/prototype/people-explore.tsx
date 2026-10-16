@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import {useMemo,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {SelectionChip} from '@/components/selection-chip';
 import {HeaderBackIcon} from '@/components/primitives';
 import {asset,designers,itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {SaveButton} from './shared';
@@ -80,7 +81,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
     {groups.map(group=><section key={group.key} className={sheet.filterGroup}>
      <h3>{group.label}</h3>
      <div className={`${sheet.options} filter-editor-chips`}>
-      {group.options.map(option=><button type="button" key={option} aria-pressed={draft[group.key]===option} onClick={()=>setDraft(current=>({...current,[group.key]:current[group.key]===option?'전체':option}))}>{option}</button>)}
+      {group.options.map(option=><SelectionChip key={option} aria-pressed={draft[group.key]===option} onClick={()=>setDraft(current=>({...current,[group.key]:current[group.key]===option?'전체':option}))}>{option}</SelectionChip>)}
      </div>
     </section>)}
     <button type="button" className={`${sheet.apply} primary-cta filter-sheet-apply`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
