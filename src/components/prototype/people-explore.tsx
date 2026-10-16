@@ -47,7 +47,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
  const items=category==='designer'?designers:salons;
  const results=useMemo(()=>items.filter(item=>`${item.name} ${item.english} ${item.tags.join(' ')} ${item.location||''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())),[items,query]);
  const openFilter=()=>{setDraft(filters);setRegionOpen(false);setOpen(true);};
- const reset=()=>{const cleared=allFilters(groups);setDraft(cleared);setFilters(cleared);setRegionOpen(false);};
+
  const label=category==='designer'?'디자이너':'헤어샵';
  return <>
   <main id="main" className={sheet.page}>
@@ -70,7 +70,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
    </div>
   </main>
   <BottomNav active="/explore"/>
-  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close" onClick={()=>setOpen(false)} aria-label="필터 닫기">X</button>}>
+  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close analysis-sheet-close-text" onClick={()=>setOpen(false)} aria-label="필터 닫기">닫음</button>}>
    <div className={sheet.filterSheet}>
     <section className={sheet.locationGroup}>
      <h3>지역</h3>
@@ -84,7 +84,6 @@ export function PeopleExplore({category}:{category:ExploreKind}){
      </div>
     </section>)}
     <button type="button" className={`${sheet.apply} primary-cta filter-sheet-apply`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
-    <button type="button" className="text-action clear-field" onClick={reset}>초기화</button>
    </div>
   </BottomSheet>
  </>;
