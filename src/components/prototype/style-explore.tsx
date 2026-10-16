@@ -58,7 +58,7 @@ export function StyleExplore(){
  }),[filters,query]);
  const selectQuickLength=(value:string)=>setFilters(current=>({...current,length:value==='ALL'?'전체':lengthLabels[value]}));
  const openFilter=()=>{setDraft(filters);setOpen(true);};
- const reset=()=>{setDraft(emptyFilters);setFilters(emptyFilters);};
+
  return <>
   <main id="main" className={sheet.page}>
    <header className={`${sheet.header} hairus-page-header`}>
@@ -93,7 +93,7 @@ export function StyleExplore(){
    </div>
   </main>
   <BottomNav active="/explore"/>
-  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close" onClick={()=>setOpen(false)} aria-label="필터 닫기">X</button>}>
+  <BottomSheet open={open} onClose={()=>setOpen(false)} title="필터" headingAction={<button type="button" className="sheet-close analysis-sheet-close-text" onClick={()=>setOpen(false)} aria-label="필터 닫기">닫음</button>}>
    <div className={sheet.filterSheet}>
     {filterGroups.map(({key,label,options})=><section key={key} className={sheet.filterGroup}>
      <h3>{label}</h3>
@@ -102,7 +102,6 @@ export function StyleExplore(){
      </div>
     </section>)}
     <button type="button" className={`${sheet.apply} primary-cta filter-sheet-apply`} onClick={()=>{setFilters(draft);setOpen(false);}}>적용하기</button>
-    <button type="button" className="text-action clear-field" onClick={reset}>초기화</button>
    </div>
   </BottomSheet>
  </>;
