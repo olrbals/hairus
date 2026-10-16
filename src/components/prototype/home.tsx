@@ -15,6 +15,10 @@ import {Action,Card} from './shared';
 import {HomePopup} from './home-popup';
 import {usePrototype} from './store';
 
+const discoverOrder = homeDiscoverStyles.filter(s=>s.id!=='fringe'&&s.id!=='discover-hush');
+discoverOrder.splice(5,0,homeDiscoverStyles.find(s=>s.id==='fringe')!);
+discoverOrder.push(homeDiscoverStyles.find(s=>s.id==='discover-hush')!);
+
 const magazineCopy = [
   {
     title: "머릿결에도 루틴이 필요해",
@@ -140,8 +144,8 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
       }
     }}
   >
-    {homeDiscoverStyles.map((s) => (
-      <Card key={s.id} item={s} />
+    {discoverOrder.map((s) => (
+      <Card key={s.id} item={s} linked={['airy','tassel','sand'].includes(s.id)} />
     ))}
   </div>
 
