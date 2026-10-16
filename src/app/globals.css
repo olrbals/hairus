@@ -21,3 +21,17 @@ html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
 .mobile-shell .hairus-page-header{position:sticky;top:0;z-index:20;background:#fff}
 .mobile-shell .hairus-header-back{display:flex;align-items:center;justify-content:flex-start;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;background:transparent;color:#222b3a}
 .mobile-shell .hairus-header-back img{display:block;width:44px;height:44px;max-width:none;object-fit:contain}
+
+/* Shared viewport-bottom CTA positioning, opt-in only for full-screen steps. */
+.mobile-shell .bottom-cta-screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+.mobile-shell .bottom-cta-screen > .bottom-cta-actions {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: 0;
+  flex-shrink: 0;
+}
