@@ -74,6 +74,6 @@
 .hairus-popup-detail :is(.pd-header,.pd-experience-copy p,.pd-benefit-actions p,.pd-benefit small,.pd-footer p,.pd-footer small,.pd-dialog h2,.pd-dialog p,.pd-dialog button){
  font-family:var(--font-sans);
  line-height:1.3;
- 
+
 }
 @media(max-width:390px){.pd-experience-media--save{height:auto}}
