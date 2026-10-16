@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {BottomNav} from '@/components/bottom-nav';
+import {HeaderBackIcon} from '@/components/primitives';
 import {EditorialBookmarkButton} from './editorial-bookmark';
 import {findEditorial} from '@/lib/prototype/editorials';
 import bookmark from './editorial-bookmark.module.css';
@@ -15,11 +16,9 @@ export function InFocusEditorial() {
 
   return <>
     <main id="main" className="ifd-page">
-      <header className="ifd-header">
-        <button type="button" className="ifd-back" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/home')}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="m15 5-7 7 7 7"/>
-          </svg>
+      <header className="ifd-header hairus-page-header">
+        <button type="button" className="ifd-back hairus-header-back" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/home')}>
+          <HeaderBackIcon/>
         </button>
       </header>
 

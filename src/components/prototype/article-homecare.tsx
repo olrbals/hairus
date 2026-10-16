@@ -1,6 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import {HeaderBackIcon} from '@/components/primitives';
 import {EditorialBookmarkButton} from './editorial-bookmark';
 import {findEditorial} from '@/lib/prototype/editorials';
 import './article-homecare.css';
@@ -25,8 +26,8 @@ export function HairCareArticle({issue=false}:{issue?:boolean}) {
   const router = useRouter();
 
   return <main id="main" className={`hc-article${issue?' hc-article--issue':''}`}>
-    <header className="hc-header">
-      <button type="button" className="hc-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><img src="/assets/figma/v1/30ced.svg" alt="" aria-hidden="true"/></button>
+    <header className="hc-header hairus-page-header">
+      <button type="button" className="hc-back hairus-header-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><HeaderBackIcon/></button>
       <span>ARTICLE</span>
       <span aria-hidden="true"/>
     </header>

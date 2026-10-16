@@ -3,7 +3,7 @@
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {BottomSheet} from '@/components/bottom-sheet';
-import {Button} from '@/components/primitives';
+import {Button,HeaderBackIcon} from '@/components/primitives';
 import {asset, matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
 import {usePrototype} from './store';
@@ -52,7 +52,7 @@ export function MatchingSurvey({step}: {step: string}) {
   if (!intro && !question) return <main id="main" className={css.page}><p>해당 단계를 찾을 수 없어요.</p><Button onClick={() => router.push('/recommendation/intro')}>설문 처음으로</Button></main>;
   if (intro) return <main id="main" className={css.intro} data-matching-survey><div className={css.introArt}><img src="/assets/figma/match-survey/intro.png" alt=""/><div className={css.introCopy}><div><h1>Meet Your Match</h1><p>The right style. The right designer.<br/>Just for you.</p></div><button type="button" disabled={!ready} onClick={()=>router.push('/recommendation/1')}>맞춤 추천 받기</button></div></div></main>;
   return <main id="main" className={css.page} data-matching-survey data-step={index+1} data-answered={selected.length>0}>
-    <header className={css.header}><button type="button" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><img src={asset('30ced.svg')} alt=""/></button></header>
+    <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
     {!intro && <div className={css.progress} aria-label={`${index + 1} / 5`}>{matchQuestions.map((q, i) => <span key={q.key} aria-current={i === index ? 'step' : undefined}/>)}</div>}
     <section className={css.question}>
       <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 1 && <p>집, 직장 등 미용실 가기 편한 위치를 선택해주세요</p>}{index === 3 && <p>최대 3개까지 선택 가능해요</p>}{index === 4 && <p>선택한 내용을 바탕으로<br/>나와 잘 맞는 디자이너를 찾아드려요.</p>}

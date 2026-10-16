@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import {useEffect,useState,useRef,type ReactNode} from 'react';
 import {useRouter} from 'next/navigation';
+import {HeaderBackIcon} from '@/components/primitives';
 import {designers,services,salons} from '@/lib/prototype/catalog';
 import {hairNote,demoDates,availableBookingDates,clearClosedBookingDate,demoTimes,validBooking,completeBooking,type BookingDraft} from '@/lib/prototype/logic';
 import {findArvoDesigner,offDaysLabel} from '@/lib/prototype/arvo';
@@ -21,7 +22,7 @@ function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" w
 function BookingPage({back,children,title='예약하기',historyBack=false}:{back:string;children:ReactNode;title?:string;historyBack?:boolean}){
  const router=useRouter();
   return <main id="main" className={styles.page}>
-    <header className={styles.header}><Link href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><Arrow/></Link><span>{title}</span><span aria-hidden="true"/></header>
+    <header className={`${styles.header} hairus-page-header`}><Link className="hairus-header-back" href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><HeaderBackIcon/></Link><span>{title}</span><span aria-hidden="true"/></header>
     {children}
   </main>;
 }

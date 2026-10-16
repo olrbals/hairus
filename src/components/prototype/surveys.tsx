@@ -5,7 +5,7 @@ import {asset,preferenceQuestions,matchQuestions,styles,itemHref} from '@/lib/pr
 import {toggleChoice,recommend} from '@/lib/prototype/logic';
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {useNickname} from '@/lib/use-nickname';
-import {Button} from '@/components/primitives';
+import {Button,HeaderBackIcon} from '@/components/primitives';
 import {Screen,Action,Chips,Card,DemoNotice} from './shared';
 import {usePrototype} from './store';
 import {MatchingSurvey} from './matching-survey';
@@ -16,9 +16,9 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
  const selected=state[kind][question.key]||[];const images=question.images;
  if(kind==='preferences'&&index===0){
   return <main id="main" className="preference-first-step" data-figma-node="939:8564">
-   <header className="preference-first-step__header">
-    <button type="button" className="preference-first-step__back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(`${prefix}/intro`)}>
-     <img src="/assets/figma/v1/30ced.svg" alt=""/>
+   <header className="preference-first-step__header hairus-page-header">
+    <button type="button" className="preference-first-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(`${prefix}/intro`)}>
+     <HeaderBackIcon/>
     </button>
     <div className="preference-first-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
      {questions.map((q,i)=><span key={q.key} className={i<=index?'active':undefined}/>)}
@@ -63,9 +63,9 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    ? question.options.flatMap((option,itemIndex)=>itemIndex===8?[{label:'손질 편의성',value:'손질 편의성 (스타일)'},{label:option,value:option}]:[{label:option,value:option}])
    : question.options.map(option=>({label:option,value:option}));
   return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':index===2?'939:8597':'939:8639'}>
-   <header className="preference-survey-step__header">
-    <button type="button" className="preference-survey-step__back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
-     <img src="/assets/figma/v1/30ced.svg" alt=""/>
+   <header className="preference-survey-step__header hairus-page-header">
+    <button type="button" className="preference-survey-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
+     <HeaderBackIcon/>
     </button>
     <div className="preference-survey-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
      {questions.map((item,itemIndex)=><span key={item.key} className={itemIndex<=index?'active':undefined}/>) }
@@ -102,9 +102,9 @@ export function ProfileComplete(){
   if(summary)setProfileSummary(summary);
  },[]);
  return <main id="main" className="preference-complete" data-figma-node="939:8783">
-  <header className="preference-complete__header">
-   <button type="button" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/preferences/4')}>
-    <img src="/assets/figma/v1/30ced.svg" alt=""/>
+  <header className="preference-complete__header hairus-page-header">
+   <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/preferences/4')}>
+    <HeaderBackIcon/>
    </button>
   </header>
   <section className="preference-complete__intro" aria-labelledby="preference-complete-title">

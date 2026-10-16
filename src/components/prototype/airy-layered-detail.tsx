@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {useRef, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {BottomNav} from '@/components/bottom-nav';
+import {HeaderBackIcon} from '@/components/primitives';
 import {styles} from '@/lib/prototype/catalog';
 import {SaveButton} from './shared';
 import './airy-layered-detail.css';
@@ -48,9 +49,9 @@ export function AiryLayeredDetail() {
 
   return <>
     <main id="main" className="airy-detail">
-      <header className="airy-header">
-        <button className="airy-back" type="button" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/explore')}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+      <header className="airy-header hairus-page-header">
+        <button className="airy-back hairus-header-back" type="button" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/explore')}>
+          <HeaderBackIcon/>
         </button>
         {item&&<div className="airy-save"><SaveButton item={item}/></div>}
       </header>

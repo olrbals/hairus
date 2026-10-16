@@ -1,0 +1,2466 @@
+{
+  "checks": 96,
+  "failures": [],
+  "audit": [
+    {
+      "width": 430,
+      "route": "/welcome",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/onboarding/1",
+      "initial": {
+        "top": 0,
+        "bottom": 80,
+        "height": 80,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 80
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 80
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/guide",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/camera",
+      "initial": {
+        "top": 24,
+        "bottom": 68,
+        "height": 44,
+        "position": "sticky",
+        "background": "rgb(32, 32, 30)",
+        "siblingTop": 136
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 44
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/analysis/result",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 114
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/intro",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/1",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/2",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/3",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/4",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/preferences/complete",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/recommendation/1",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/explore",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/explore?category=designer",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/explore?category=salon",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/saved",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/styles/airy",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/sohee",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/sohee/portfolio",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/designers/sohee/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo/designers",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/salons/arvo/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 116
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/reservation/sohee/service",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/my/recent",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/my/reservations",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/my/settings",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/magazine",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/care",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/issue",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/articles/popup",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 430,
+      "route": "/in-focus/soft-bob",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/welcome",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/onboarding/1",
+      "initial": {
+        "top": 0,
+        "bottom": 80,
+        "height": 80,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 80
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 80
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/guide",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/camera",
+      "initial": {
+        "top": 24,
+        "bottom": 68,
+        "height": 44,
+        "position": "sticky",
+        "background": "rgb(32, 32, 30)",
+        "siblingTop": 136
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 44
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/analysis/result",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 114
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/intro",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/1",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/2",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/3",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/4",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/preferences/complete",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/recommendation/1",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/explore",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/explore?category=designer",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/explore?category=salon",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/saved",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/styles/airy",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/sohee",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/sohee/portfolio",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/designers/sohee/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo/designers",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/salons/arvo/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 116
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/reservation/sohee/service",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/my/recent",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/my/reservations",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/my/settings",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/magazine",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/care",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/issue",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/articles/popup",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "/in-focus/soft-bob",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/welcome",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/onboarding/1",
+      "initial": {
+        "top": 0,
+        "bottom": 80,
+        "height": 80,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 80
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 80
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/guide",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/camera",
+      "initial": {
+        "top": 24,
+        "bottom": 68,
+        "height": 44,
+        "position": "sticky",
+        "background": "rgb(32, 32, 30)",
+        "siblingTop": 136
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 44
+      },
+      "canScroll": true,
+      "back": null,
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/analysis/result",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 114
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/intro",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/1",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/2",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/3",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/4",
+      "initial": {
+        "top": 0,
+        "bottom": 67,
+        "height": 67,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 147
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 67
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/preferences/complete",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 104
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/recommendation/1",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/explore",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/explore?category=designer",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/explore?category=salon",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/saved",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/styles/airy",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/sohee",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/sohee/portfolio",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/designers/sohee/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo/designers",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/salons/arvo/reviews",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 116
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/reservation/sohee/service",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/my/recent",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/my/reservations",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": false,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/my/settings",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/magazine",
+      "initial": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 72
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 72
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/care",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/issue",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/articles/popup",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 360,
+      "route": "/in-focus/soft-bob",
+      "initial": {
+        "top": 0,
+        "bottom": 64,
+        "height": 64,
+        "position": "sticky",
+        "background": "rgb(255, 255, 255)",
+        "siblingTop": 64
+      },
+      "scrolled": {
+        "top": 0,
+        "bottom": 64
+      },
+      "canScroll": true,
+      "back": {
+        "width": 44,
+        "height": 44,
+        "imageWidth": 44,
+        "imageHeight": 44,
+        "src": "/assets/figma/v1/30ced.svg"
+      },
+      "saveVisible": null,
+      "horizontalOverflow": false
+    }
+  ]
+}

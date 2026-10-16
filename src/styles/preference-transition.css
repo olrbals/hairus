@@ -130,7 +130,7 @@
   position:relative;
   min-height:max(874px,100svh);
   padding:0 24px calc(39px + env(safe-area-inset-bottom));
-  overflow:hidden;
+  overflow-x:clip;
   background:#fff;
   color:#222b3a;
 }
@@ -285,7 +285,7 @@
 .preference-complete{
   position:relative;
   min-height:max(874px,100svh);
-  overflow:hidden;
+  overflow-x:clip;
   background:#fff;
   color:#222b3a;
 }

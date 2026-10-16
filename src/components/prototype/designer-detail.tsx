@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
 import {useNickname} from '@/lib/use-nickname';
+import {HeaderBackIcon} from '@/components/primitives';
 import {asset,findItem,salons,services} from '@/lib/prototype/catalog';
 import {recommend} from '@/lib/prototype/logic';
 import {SaveButton} from './shared';
@@ -57,8 +58,8 @@ export function DesignerPage({id}:{id:string}){
   const matchComparison=matchComparisons[matchIndex];
 
   return <main id="main" className={styles.page}>
-    <header className={styles.header}>
-      <button type="button" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><img src={asset('30ced.svg')} alt=""/></button>
+    <header className={`${styles.header} hairus-page-header`}>
+      <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><HeaderBackIcon/></button>
       <span>디자이너</span>
       <div className={styles.saveControl}><SaveButton item={item}/></div>
     </header>

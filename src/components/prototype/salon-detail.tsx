@@ -9,6 +9,7 @@ import {arvoReviews} from '@/lib/prototype/reviews';
 import {ReviewSection} from './reviews';
 import {SaveButton} from './shared';
 import {usePrototype} from './store';
+import {HeaderBackIcon} from '@/components/primitives';
 import designerStyles from './designer-detail.module.css';
 import styles from './salon-detail.module.css';
 
@@ -17,8 +18,8 @@ const localAsset=(name:string)=>`/assets/figma/salon-arvo/${name}`;
 
 function SalonHeader({title,back,save=false}:{title:string;back:string;save?:boolean}){
   const router=useRouter();
-  return <header className={designerStyles.header}>
-    <button type="button" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(back)}><img src={asset('30ced.svg')} alt=""/></button>
+  return <header className={`${designerStyles.header} hairus-page-header`}>
+    <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>
     <span>{title}</span>
     {save?<div className={designerStyles.saveControl}><SaveButton item={findItem('salon','arvo')!}/></div>:<span/>}
   </header>;

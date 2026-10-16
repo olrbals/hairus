@@ -83,3 +83,7 @@
 .result-screen .profile-group > .privacy-note {
   margin-top: 4px;
 }
+
+.camera-screen > .hairus-page-header {
+  background: #20201e;
+}

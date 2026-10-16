@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import {useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
+import {HeaderBackIcon} from '@/components/primitives';
 import {setPhoto,validatePhoto,setSamplePhoto} from '@/lib/analysis/photo';
 export const asset=(name:string)=>`/assets/figma/analysis/${name}`;
-export function AnalysisHeader({href='/analysis/guide'}:{href?:string}){return <header className="analysis-header"><Link href={href} aria-label="이전 화면"><img src="/assets/figma/entry/back.svg" alt=""/></Link></header>;}
+export function AnalysisHeader({href='/analysis/guide'}:{href?:string}){return <header className="analysis-header hairus-page-header"><Link className="hairus-header-back" href={href} aria-label="이전 화면"><HeaderBackIcon/></Link></header>;}
 export function PhotoAlternatives({gallery=false}:{gallery?:boolean}){const input=useRef<HTMLInputElement>(null);const [error,setError]=useState('');const [busy,setBusy]=useState(false);const router=useRouter();return <div className={gallery?'photo-alternatives gallery-alternative':'photo-alternatives'}><input ref={input} type="file" accept="image/jpeg,image/png,image/webp" aria-label="사진 파일 선택" className="sr-only" tabIndex={-1} onChange={async e=>{const file=e.target.files?.[0];e.target.value='';if(!file)return;setBusy(true);setError('');try{await validatePhoto(file);setPhoto(file);router.push('/analysis/captured');}catch(err){setError(err instanceof Error?err.message:'사진을 읽지 못했어요.');}finally{setBusy(false);}}}/><button type="button" disabled={busy} onClick={()=>input.current?.click()} aria-label="사진 선택">{gallery?<img src={asset('ad0de.png')} alt=""/>:busy?'사진 확인 중…':'사진 선택'}</button>{!gallery&&<button type="button" onClick={()=>{setSamplePhoto();router.push('/analysis/captured');}}>샘플 사진으로 체험</button>}{error&&<p role="alert">{error}</p>}</div>;}

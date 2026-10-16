@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import {useMemo,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {HeaderBackIcon} from '@/components/primitives';
 import {asset,designers,itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {SaveButton} from './shared';
 import {designerDetails} from '@/lib/prototype/people-presentation';
@@ -50,8 +51,8 @@ export function PeopleExplore({category}:{category:ExploreKind}){
  const label=category==='designer'?'디자이너':'헤어샵';
  return <>
   <main id="main" className={sheet.page}>
-   <header className={sheet.header}>
-    <button type="button" className={sheet.back} aria-label="뒤로 가기" onClick={()=>window.history.length>1?router.back():router.push('/home')}><img src={asset('30ced.svg')} alt="" aria-hidden="true"/></button>
+   <header className={`${sheet.header} hairus-page-header`}>
+    <button type="button" className={`${sheet.back} hairus-header-back`} aria-label="뒤로 가기" onClick={()=>window.history.length>1?router.back():router.push('/home')}><HeaderBackIcon/></button>
    </header>
    <div className={sheet.content}>
     <h1>Discover</h1>

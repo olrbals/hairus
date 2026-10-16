@@ -16,3 +16,8 @@ html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
 
 /* HAIRUS typography: Figma -2%, relative to each text element's own font size. */
 :where(*:not(svg, svg *), ::before, ::after, ::placeholder){letter-spacing:-0.02em}
+
+/* Shared top navigation behavior and the .hc-header back control geometry. */
+.mobile-shell .hairus-page-header{position:sticky;top:0;z-index:20;background:#fff}
+.mobile-shell .hairus-header-back{display:flex;align-items:center;justify-content:flex-start;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;background:transparent;color:#222b3a}
+.mobile-shell .hairus-header-back img{display:block;width:44px;height:44px;max-width:none;object-fit:contain}

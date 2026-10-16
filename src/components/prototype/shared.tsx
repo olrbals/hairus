@@ -4,11 +4,12 @@ import {useRouter} from 'next/navigation';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {HeaderBackIcon} from '@/components/primitives';
 import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {usePrototype} from './store';
 import savenote from './savenote.module.css';
 import {saveNotePreview} from '@/lib/prototype/archive';
-export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back" onClick={()=>window.history.length>1?router.back():router.push(back)}>←</button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
+export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header hairus-page-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back hairus-header-back" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
 export function Action({href,children,secondary=false}:{href:string;children:ReactNode;secondary?:boolean}){return <Link className={`button button--${secondary?'plain':'primary'}`} href={href}>{children}</Link>;}
 export function Card({item}:{item:Item}){return <article className={`proto-card ${item.kind}`}><Link href={itemHref(item)}><img src={item.image} alt={item.name} loading="lazy"/><h3>{item.name}</h3><p>{item.location||item.tags.join(' · ')}</p></Link><SaveButton item={item}/></article>;}
 export function Cards({items}:{items:Item[]}){return <div className="proto-grid">{items.map(item=><Card item={item} key={`${item.kind}:${item.id}`}/>)}</div>;}
