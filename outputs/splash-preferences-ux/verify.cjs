@@ -45,7 +45,7 @@ const out='outputs/splash-preferences-ux';
     const css=getComputedStyle(primary);
     return {mainHeight:r.height,x:p.x,width:p.width,primaryY:p.y,primaryHeight:p.height,secondaryHeight:s.height,gap:s.top-p.bottom,bottom:r.bottom-s.bottom,radius:css.borderRadius,fontSize:css.fontSize,overlap:choices.getBoundingClientRect().bottom>p.top,overflow:document.documentElement.scrollWidth>innerWidth||(cardRect&&(cardRect.left<0||cardRect.right>innerWidth))};
    });geometry.push({viewportWidth:width,step,...g});
-   check(g.x===24&&g.width===width-48&&g.primaryHeight===56&&g.secondaryHeight===56&&g.gap===8&&Math.abs(g.bottom-41)<1&&g.radius==='0px'&&g.fontSize==='14px',`${width}px step ${step}: shared action geometry`);
+   check(g.x===24&&g.width===width-48&&g.primaryHeight===61&&g.secondaryHeight===56&&g.gap===8&&Math.abs(g.bottom-41)<1&&g.radius==='4px'&&g.fontSize==='16px',`${width}px step ${step}: shared action geometry`);
    check(!g.overlap&&!g.overflow,`${width}px step ${step}: no clipping or overlap`);
    check(await page.locator('img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)),`${width}px step ${step}: existing image assets loaded`);
    await page.screenshot({path:`${out}/preferences-${step}-${width}.png`,fullPage:true});

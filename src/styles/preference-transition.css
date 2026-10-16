@@ -477,15 +477,6 @@
  margin-top:auto;
  padding-top:32px;
 }
-.mobile-shell .preference-actions .button.button--primary:not(.button--glass):not(.button--plain){
- height:56px;
- min-height:56px;
- padding:0 24px;
- border-radius:0;
- font-size:14px;
- line-height:1.3;
- letter-spacing:-.28px;
-}
 .preference-actions .button--primary:disabled{opacity:.4;cursor:not-allowed}
 .preference-actions .button--plain{
  min-height:56px;
