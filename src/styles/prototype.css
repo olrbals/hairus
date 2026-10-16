@@ -947,8 +947,7 @@
   content:none;
   display:none;
 }
-.mobile-shell button.proto-save > img.save-heart-icon,
-.mobile-shell button.save-button > img.save-heart-icon{
+.mobile-shell button > img.save-heart-icon{
   display:block;
   flex:0 0 22px;
   width:22px;
