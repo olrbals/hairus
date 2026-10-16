@@ -21,10 +21,10 @@ function HairTip({children}:{children:React.ReactNode}) {
   </aside>;
 }
 
-export function HairCareArticle() {
+export function HairCareArticle({issue=false}:{issue?:boolean}) {
   const router = useRouter();
 
-  return <main id="main" className="hc-article">
+  return <main id="main" className={`hc-article${issue?' hc-article--issue':''}`}>
     <header className="hc-header">
       <button type="button" className="hc-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><img src="/assets/figma/v1/30ced.svg" alt="" aria-hidden="true"/></button>
       <span>ARTICLE</span>
