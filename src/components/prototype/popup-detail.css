@@ -41,7 +41,7 @@
 .pd-benefit-content h2{margin:0;color:#fff;font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-2px}
 .pd-benefit-actions{display:flex;flex-direction:column;gap:8px}
 .pd-benefit-actions p{margin:0;font-size:14px;font-weight:300;line-height:1.3;letter-spacing:-.28px}
-.pd-benefit button span:first-child{margin-right:auto}
+.pd-benefit button{position:relative;width:100%;height:39px;padding:4px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:0;background:rgba(255,255,255,.32);box-shadow:0 1px 4px rgba(0,0,0,.043),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);font-size:16px;font-weight:500;line-height:1.3;letter-spacing:-.32px}
 .pd-benefit button span:last-child{font-family:"Noto Sans KR",Pretendard,sans-serif;font-size:26px;font-weight:400;line-height:30px;letter-spacing:0}
 .pd-benefit small{font-size:8px;font-weight:400;line-height:1.3;letter-spacing:-.16px}
 .pd-benefit button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
@@ -64,14 +64,14 @@
 .pd-dialog p{font-size:14px;line-height:1.7;margin:0 0 28px}
 .pd-dialog button{cursor:pointer}
 .pd-dialog-close{position:absolute;right:16px;top:12px;border:0;background:none;font-size:26px}
-.pd-dialog-confirm{width:100%;height:46px;background:#111;color:white;border:0}
+.mobile-shell .pd-dialog .button.button--primary.pd-dialog-confirm{width:100%;height:46px;min-height:46px;padding:0 24px}
 @media(max-width:390px){.pd-header{padding-inline:18px}.pd-hero h1{font-size:36px}.pd-hero-brand{font-size:36px}.pd-hero-partner{font-size:30px}.pd-experience,.pd-coming{padding-inline:18px}.pd-experience-item{min-height:180px}.pd-experience-media{height:clamp(180px,48.37vw,208px)}.pd-experience-copy h3{font-size:18px}.pd-experience-copy p{font-size:clamp(12px,3.26vw,14px)}.pd-benefit-content{padding-inline:18px}.pd-benefit-actions p{font-size:13px}.pd-space-media{height:clamp(122px,33.95vw,146px)}}
 
 /* The popup is a full-bleed article; unlike tab views it has no bottom navigation. */
 .mobile-shell:has(> .hairus-popup-detail){padding-bottom:0}
 
 /* Korean text only; English editorial headings retain their existing fonts. */
-.hairus-popup-detail :is(.pd-header,.pd-experience-copy p,.pd-benefit-actions p,.pd-benefit small,.pd-benefit button span:first-child,.pd-footer p,.pd-footer small,.pd-dialog h2,.pd-dialog p,.pd-dialog button){
+.hairus-popup-detail :is(.pd-header,.pd-experience-copy p,.pd-benefit-actions p,.pd-benefit small,.pd-footer p,.pd-footer small,.pd-dialog h2,.pd-dialog p,.pd-dialog button){
  font-family:var(--font-sans);
  line-height:1.3;
  letter-spacing:-1.2px;

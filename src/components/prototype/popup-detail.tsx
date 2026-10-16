@@ -32,11 +32,11 @@ export function PopupDetail() {
     <section className="pd-benefits" aria-label="팝업 특별 혜택">
       <article className="pd-benefit">
         <img className="pd-benefit-image" src={base+'benefit1.png'} alt="차홍 데일리 밸런스 헤어 케어 제품"/>
-        <div className="pd-benefit-content"><h2>DOWNLOAD HAIRUS<br/>GET 15% OFF</h2><div className="pd-benefit-actions"><p>HAIRUS APP을 다운로드 받고<br/>팝업에서 차홍 제품 15% 할인을 받아보세요.</p><Button onClick={()=>setNotice('coupon')}><span>15% 할인 쿠폰 받기</span><span aria-hidden="true">⟶</span></Button><small>팝업 현장 구매 한정 · 일부 품목 및 중복 할인 제외</small></div></div>
+        <div className="pd-benefit-content"><h2>DOWNLOAD HAIRUS<br/>GET 15% OFF</h2><div className="pd-benefit-actions"><p>HAIRUS APP을 다운로드 받고<br/>팝업에서 차홍 제품 15% 할인을 받아보세요.</p><button type="button" onClick={()=>setNotice('coupon')}><span>15% 할인 쿠폰 받기</span><span aria-hidden="true">⟶</span></button><small>팝업 현장 구매 한정 · 일부 품목 및 중복 할인 제외</small></div></div>
       </article>
       <article className="pd-benefit">
         <img className="pd-benefit-image" src={base+'benefit2.jpg'} alt="차홍룸 디자이너 헤어 컨설팅 공간"/>
-        <div className="pd-benefit-content"><h2>MEET<br/>THE EXPERT</h2><div className="pd-benefit-actions"><p>나에게 어울리는 헤어 스타일링을 차홍룸 디자이너와.<br/>추첨을 통해 1:1 헤어 컨설팅을 제공합니다.</p><Button onClick={()=>setNotice('session')}><span>디자이너 세션 응모하기</span><span aria-hidden="true">⟶</span></Button><small>추첨을 통해 선정 · 당첨자 개별 안내</small></div></div>
+        <div className="pd-benefit-content"><h2>MEET<br/>THE EXPERT</h2><div className="pd-benefit-actions"><p>나에게 어울리는 헤어 스타일링을 차홍룸 디자이너와.<br/>추첨을 통해 1:1 헤어 컨설팅을 제공합니다.</p><button type="button" onClick={()=>setNotice('session')}><span>디자이너 세션 응모하기</span><span aria-hidden="true">⟶</span></button><small>추첨을 통해 선정 · 당첨자 개별 안내</small></div></div>
       </article>
     </section>
     <section className="pd-coming"><h2>Coming Soon</h2><p>11.06 — 11.20 / SEONGSU, SEOUL</p>
@@ -45,6 +45,6 @@ export function PopupDetail() {
       <span className="pd-space-caption">A SPACE FOR YOU</span>
     </section>
     <footer className="pd-footer"><h2>Your style,<br/>in real life</h2><p>HAIRUS를 성수에서 경험해보세요.</p><small>11.06 — 11.20 / SEONGSU, SEOUL<br/>12:00 — 20:00 · 예약 없이 자유롭게 입장</small></footer>
-    {notice&&<div className="pd-dialog-backdrop" onClick={()=>setNotice(null)}><section role="dialog" aria-modal="true" aria-label="팝업 혜택 안내" className="pd-dialog" onClick={e=>e.stopPropagation()}><button className="pd-dialog-close" onClick={()=>setNotice(null)} aria-label="닫기">×</button><h2>{notice==='coupon'?'15% 할인 쿠폰':'디자이너 세션'}</h2><p>{notice==='coupon'?'팝업 현장 구매 한정 혜택입니다. 실제 쿠폰 발급 기능은 준비 중입니다.':'1:1 헤어 컨설팅은 추첨을 통해 진행됩니다. 실제 응모 기능은 준비 중입니다.'}</p><button className="pd-dialog-confirm" onClick={()=>setNotice(null)}>확인</button></section></div>}
+    {notice&&<div className="pd-dialog-backdrop" onClick={()=>setNotice(null)}><section role="dialog" aria-modal="true" aria-label="팝업 혜택 안내" className="pd-dialog" onClick={e=>e.stopPropagation()}><button className="pd-dialog-close" onClick={()=>setNotice(null)} aria-label="닫기">×</button><h2>{notice==='coupon'?'15% 할인 쿠폰':'디자이너 세션'}</h2><p>{notice==='coupon'?'팝업 현장 구매 한정 혜택입니다. 실제 쿠폰 발급 기능은 준비 중입니다.':'1:1 헤어 컨설팅은 추첨을 통해 진행됩니다. 실제 응모 기능은 준비 중입니다.'}</p><Button className="pd-dialog-confirm" onClick={()=>setNotice(null)}>확인</Button></section></div>}
   </main>;
 }
