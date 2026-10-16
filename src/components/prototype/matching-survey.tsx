@@ -3,6 +3,7 @@
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {BottomSheet} from '@/components/bottom-sheet';
+import {SelectionChip} from '@/components/selection-chip';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import {asset, matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
@@ -66,6 +67,6 @@ export function MatchingSurvey({step}: {step: string}) {
       <p role="status" className={css.validation}>{message}</p>
     </>}
     <div className={css.actions}><Button data-final={index===4} disabled={!ready || !selected.length} onClick={() => router.push(index === 4 ? '/recommendation/results' : `/recommendation/${index + 2}`)}>{index === 4 ? '디자이너 추천 받기' : '다음'}</Button></div>
-    <BottomSheet open={locationOpen} onClose={() => setLocationOpen(false)} title="활동 지역 선택"><div className={css.regionOptions}>{matchQuestions[1].options.map(option => <button key={option} aria-pressed={selected.includes(option)} onClick={() => {choose(option); setLocationOpen(false);}}>{option}</button>)}</div></BottomSheet>
+    <BottomSheet open={locationOpen} onClose={() => setLocationOpen(false)} title="활동 지역 선택"><div className={css.regionOptions}>{matchQuestions[1].options.map(option => <SelectionChip key={option} aria-pressed={selected.includes(option)} onClick={() => {choose(option); setLocationOpen(false);}}>{option}</SelectionChip>)}</div></BottomSheet>
   </main>;
 }
