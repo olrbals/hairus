@@ -56,8 +56,7 @@
 .actions>button:disabled{opacity:.4;cursor:not-allowed}
 .page[data-step='3'][data-answered=true] .actions{bottom:52px}
 .regionOptions{display:flex;flex-wrap:wrap;gap:10px;padding-bottom:24px}
-.regionOptions button{min-height:44px;padding:10px 17px;border:1px solid #ddd;border-radius:30px;background:#fff;color:#666;font-size:14px}
-.regionOptions button[aria-pressed=true]{background:#000;border-color:#000;color:#fff}
+
 .intro{position:relative;min-height:100svh;background:#fff;color:#000}
 .introArt{position:relative;width:100%;aspect-ratio:430/775;overflow:hidden}
 .introArt>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
