@@ -259,9 +259,9 @@ className={`magazine-card magazine-card--${articles[index].id} ${
       오늘 당신을 위한 자리에 앉아보세요.
     </p>
   </div>
-  <Link className="home-seat-photo" href="/salons/arvo" aria-label="아르보 성수 살롱 자세히 보기">
+  <div className="home-seat-photo">
     <img src={asset("4401b.png")} alt="나를 위한 살롱의 자리" />
-  </Link>
+  </div>
   <div className="home-seat-designers">
     <header className="home-seat-designers-heading">
       <h3>Popular Designers</h3>
