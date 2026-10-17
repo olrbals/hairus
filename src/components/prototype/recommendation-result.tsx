@@ -39,10 +39,11 @@ export function RecommendationResults() {
       <div className={css.mainContent} data-figma-node="1107:3059">
         <h1 className={css.title} data-figma-node="1107:2940">YOUR MATCH</h1>
         <div className={css.matchBody} data-figma-node="1107:3058">
-          <div className={css.hero} data-figma-node="1107:3016">
+          {/* Featured match: black theme from photo through designer profile link. */}
+          <div className={css.featuredMatch} data-figma-node="1107:3016">
+            <div className={css.hero} data-figma-node="1107:3016">
             <img src={matchedDesigner.image} alt="윤아 디자이너" />
           </div>
-          <div className={css.matchDetails} data-figma-node="1107:3057">
             <div className={css.profileGroup} data-figma-node="1107:3102">
               <div className={css.profileInformation} data-figma-node="1107:3056">
                 <div className={css.identity} data-figma-node="1107:3018">
@@ -72,8 +73,8 @@ export function RecommendationResults() {
               <Link className={css.profileLink} href="/designers/yoona" data-figma-node="1107:3051">
                 <span data-figma-node="1107:3052">윤아 디자이너 프로필 바로가기</span>
               </Link>
-            </div>
-            <section className={css.others} aria-labelledby="other-designers-heading" data-figma-node="1107:3061">
+          </div>
+          <section className={css.others} aria-labelledby="other-designers-heading" data-figma-node="1107:3061">
               <div className={css.othersHeading} data-figma-node="1107:3062">
                 <h3 id="other-designers-heading" data-figma-node="1107:3063">Other Matched Designers</h3>
                 <p data-figma-node="1107:3064">나에게 추천된 다른 디자이너들도 확인 해보세요</p>
@@ -87,8 +88,7 @@ export function RecommendationResults() {
                     : <article key={designer.id} className={css.otherCard} data-figma-node={designer.node} aria-label={designer.name+' 디자이너 (탐색용 정보)'}>{details}</article>;
                 })}
               </div>
-            </section>
-          </div>
+          </section>
         </div>
       </div>
       <div className={css.footer} data-figma-node="1107:3108">
