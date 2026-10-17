@@ -6,7 +6,7 @@
 .mainContent {display:flex;flex-direction:column;gap:20px;min-width:0}
 .title {height:52px;font-family:var(--font-editorial);font-size:40px;font-weight:600;line-height:1.3;letter-spacing:-2px;color:#20201e}
 .matchBody {display:flex;flex-direction:column;gap:52px;min-width:0}
-.featuredMatch {display:flex;flex-direction:column;gap:8px;margin-inline:-24px;padding:0 24px 32px;background:#000;color:#fff}
+.featuredMatch {display:flex;flex-direction:column;gap:8px;margin-inline:-24px;padding:20px 24px 32px;background:#000;color:#fff}
 .hero {position:relative;width:100%;height:auto;aspect-ratio:382/470;overflow:hidden;background:#e9e9e9}
 .hero img {position:absolute;top:-.06%;left:.02%;display:block;width:100%;height:107.64%;max-width:none;object-fit:fill;pointer-events:none}
 .profileGroup {display:flex;flex-direction:column;gap:28px;min-width:0}
@@ -22,7 +22,7 @@
 .reasonCopy {display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
 .reasonLabel {font-size:12px;font-weight:500;line-height:1.3;color:#fff}
 .reasonCopy p {font-size:16px;font-weight:400;line-height:1.3;color:#ffffffb3;overflow-wrap:break-word;word-break:keep-all}
-.profileLink {display:flex;align-items:center;justify-content:center;min-height:46.6px;width:100%;padding:12px 10px;border:.8px solid #ffffff4d;background:#ffffff14;box-shadow:0 1px 2px #00000024,inset 0 1px 2px #ffffff35,inset 0 -1px 3px #00000016;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#fff;font-size:16px;font-weight:500;line-height:1.3;text-align:center}
+.profileLink {display:flex;align-items:center;justify-content:center;min-height:46.6px;width:100%;padding:12px 10px;border:.8px solid #ffffff4d;background:#ffffff;box-shadow:0 1px 2px #00000024,inset 0 1px 2px #ffffff35,inset 0 -1px 3px #00000016;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#20201e;font-size:16px;font-weight:500;line-height:1.3;text-align:center}
 .others {display:flex;flex-direction:column;gap:28px;min-width:0}
 .othersHeading {display:flex;flex-direction:column;gap:4px}
 .othersHeading h3 {display:flex;align-items:center;height:48px;font-family:var(--font-editorial);font-size:28px;font-weight:600;line-height:1.3;letter-spacing:-2px;color:#000}
