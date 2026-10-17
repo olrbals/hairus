@@ -57,10 +57,12 @@
 .works>div:first-child>p{color:#c7c7c7}
 .works>a{display:block;min-height:44px;margin-top:4px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
 .workGrid{height:346px;display:grid;grid-template-columns:247fr 127fr;gap:8px}
-.workGrid>img,.workGrid>div img{display:block;width:100%;height:100%;object-fit:cover}
-.workGrid>img{object-position:48% center}
+.workGrid>a>img,.workGrid>div img{display:block;width:100%;height:100%;object-fit:cover}
+.workGrid>a>img{object-position:48% center}
+.workGrid a{display:contents}
+.workGrid a:focus-visible img{outline:2px solid #fff;outline-offset:-4px}
 .workGrid>div{min-width:0;display:grid;grid-template-rows:1fr 1fr;gap:8px;overflow:hidden}
-.workGrid>div img:first-child{object-position:44% 20%}
+.workGrid>div a:first-child img{object-position:44% 20%}
 .serviceSection{margin-top:52px;padding:24px 24px}
 .serviceList{margin-top:20px}
 .service{border-top:.8px solid rgba(0,0,0,.3);padding:12px 0}

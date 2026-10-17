@@ -1,0 +1,17 @@
+.page {background:#fff;color:#20201e;container-type:inline-size}
+/* Match the Figma frame's final 98px of whitespace, scoped to this page only. */
+:global(.mobile-shell):has(> .page) {padding-bottom:calc(98px + env(safe-area-inset-bottom))}
+.header {height:64px;padding:10px 24px;display:flex;align-items:center}
+.sections {display:flex;flex-direction:column;gap:52px}
+.section {position:relative;display:flex;flex-direction:column;gap:28px;padding:24px 0}
+.section:first-child {padding-top:0;padding-bottom:29px}
+/* Figma uses an outside stroke; it must not add to the Auto Layout height. */
+.section:not(:first-child)::before {content:'';position:absolute;left:0;right:0;top:-.8px;border-top:.8px solid rgba(0,0,0,.3)}
+.section h2 {margin:0 24px;font-family:var(--font-editorial);font-weight:700;font-size:44px;line-height:48px}
+.track {--portfolio-unit:min(1px,calc((100cqw - 48px) / 382));position:relative;margin-left:24px;width:calc(100% - 24px);height:min(460px,calc((100cqw - 48px) * 460 / 382));overflow:hidden;touch-action:pan-y pinch-zoom;cursor:grab;user-select:none;-webkit-user-select:none}
+.track:active {cursor:grabbing}
+.track:focus-visible {outline:2px solid #20201e;outline-offset:-2px}
+.card {position:absolute;top:50%;left:0;margin:0;overflow:hidden;will-change:transform,width,height}
+.card img {position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;pointer-events:none}
+.card img[data-cropped=true] {object-fit:fill;right:auto;bottom:auto}
+.card figcaption {position:absolute;left:24px;bottom:24px;margin:0;color:#fff;font-family:var(--font-sans);font-size:20px;font-weight:500;line-height:26px;white-space:nowrap;pointer-events:none}

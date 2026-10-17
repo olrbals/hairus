@@ -1,0 +1,119 @@
+
+> hairus@0.2.0 test
+> node --test tests/*.test.mjs
+
+(node:76750) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/analysis/profile.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 13개 항목을 모두 편집하고 원본과 분리하여 복원한다 (28.858666ms)
+✔ 미입력과 원본 값은 구분되며 입력 길이를 제한한다 (0.395125ms)
+✔ 손상된 저장소와 차단된 저장소는 예외를 발생시키지 않는다 (1.070875ms)
+✔ 모의 서비스는 사진 없이 3단계를 거쳐 고정 예시를 생성한다 (3005.298042ms)
+✔ 로딩 중 나가면 취소되고 결과를 생성하지 않는다 (1.674833ms)
+✔ 카메라 거절·장치 없음·사용 중 오류에 복구 안내를 제공한다 (0.215375ms)
+✔ 허용하지 않는 파일과 큰 파일을 디코딩 전에 거절한다 (4.838333ms)
+✔ 카메라 허용 시 마이크 없이 연결하고 화면 이탈 시 트랙을 종료한다 (0.663167ms)
+✔ 권한 요청 중 이탈한 뒤 늦게 허용돼도 스트림을 바로 종료한다 (0.285042ms)
+(node:76751) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/archive.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Archive previews at most two chips, with memo first and an accurate overflow count (12.218083ms)
+✔ Editorial registry reuses existing articles/IN FOCUS and excludes popup promotions (0.385916ms)
+✔ Bookmarks toggle immediately by content type and ID and survive serialization (2.468917ms)
+✔ Invalid, duplicate, promotional and legacy SAVENOTE entries cannot become editorial bookmarks (2.168292ms)
+✔ Editorial SAVENOTE data coexists with legacy bookmarks and is removed completely before resave (0.510209ms)
+(node:76752) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/booking-presentation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ changing service and schedule preserves edited note, identity and unrelated selection through saving (3.729791ms)
+✔ only an unedited generated note is invalidated when the service changes (1.057209ms)
+✔ reading a note omits empty generated fields and preserves custom paragraphs and line breaks (1.30625ms)
+✔ calendar aligns weekdays and handles leap years and year boundaries without UTC date shifts (0.691291ms)
+(node:76754) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/entry-state.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 손상된 저장소·임의 값은 안전한 기본 상태로 복구한다 (1.709833ms)
+✔ 진행·데모 모드·이름을 보존하고 건너뛰기에서 분석 결과를 만들지 않는다 (9.953791ms)
+✔ 브라우저 저장소 접근이 차단돼도 예외로 여정을 중단하지 않는다 (99.219792ms)
+✔ 닉네임 공백을 정리하고 누락·공백·잘못된 값은 공통 사용자 이름을 쓴다 (4.025166ms)
+✔ 닉네임 변경은 기존 로그인 상태를 보존하고 같은 탭 구독자에게 알린다 (6.965291ms)
+✔ 서버 렌더링처럼 저장소가 없어도 안전하게 기본 닉네임을 읽는다 (0.427167ms)
+(node:76755) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/liquid-navigation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Liquid springs converge for adjacent/distant tabs in both directions with restrained overshoot (147.9185ms)
+✔ Glass connects with a concave neck then separates while the trailing droplet is still visible (11.960708ms)
+✔ Rapid reversals preserve all spring positions and velocities; latest target wins (1.902ms)
+✔ Same-tab reselection is a no-op; reduced-motion/reset has no trailing shape (0.892291ms)
+✔ Dropped frames remain finite and stable, and zero dt does not advance a spring (1.045792ms)
+(node:76756) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/magazine-carousel.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Magazine retains approved active/peek dimensions and an 8px gap throughout forward and reverse travel (266.840334ms)
+✔ Magazine first card enters from a reduced size and grows continuously over every infinite-loop boundary (0.572459ms)
+✔ Magazine card recycling occurs entirely outside the viewport (203.450041ms)
+(node:76757) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/logic.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ saved edits are authoritative and current color never implies dye history (5.022917ms)
+✔ recommendations vary with service, length, texture, face, neck, tone and history (1.154167ms)
+✔ optional wishes and separate memo survive serialization without altering preserved notes (0.393708ms)
+(node:76762) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/portfolio-carousel.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Portfolio maintains an 8px gap and uninterrupted recycling for all counts and responsive sizes (439.324875ms)
+✔ Every loop starts reduced, grows continuously, and finishes at the active size (0.272583ms)
+✔ Both portfolios retain all 17 ordered Figma slots and use nonempty local images (1.2355ms)
+(node:76767) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/analysis/profile.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ v1 원본과 수정값을 유지하고 condition을 탈색으로 추측하지 않는다 (8.575083ms)
+✔ 이미 독립된 탈색 키가 있으면 condition과 충돌하거나 덮어쓰지 않는다 (0.531459ms)
+✔ 커트·펌·염색·탈색 저장값과 명시적 미입력이 독립적으로 복원된다 (0.641958ms)
+✔ v2 저장값을 이전 v1보다 우선하고 손상된 필수 값은 거절한다 (0.735042ms)
+✔ 13개 항목의 선택지를 제공하고 기존 자유 입력을 선택 가능한 값으로 보존한다 (1.483917ms)
+✔ V1의 14개 필드와 기존 1년 이내 이력을 보존하고 상담 노트에 전달한다 (2.17525ms)
+✔ V1에서 허용하던 누락 필드는 미입력으로 복원하고 수정값은 유지한다 (0.651333ms)
+(node:76769) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/logic.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 선택 제한과 단일 선택 교체, 선택 해제 (32.149083ms)
+✔ 취향 설문 4번은 최대 3개까지 선택한다 (0.397125ms)
+✔ 추천 순위는 분위기와 상담 응답에 반응하고 수치 매칭률을 생성하지 않는다 (7.183417ms)
+✔ 상담 초안은 프로필, 취향, 시술을 함께 반영한다 (8.08225ms)
+✔ 예약 완료 검증, 중복 제출 방지 및 노트 원문 보존 (4.596334ms)
+✔ 기존 12개 필드 프로필을 이력 필드 추가 후에도 읽는다 (0.684083ms)
+(node:76770) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/regions.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Recommendation shares all 18 unchanged first-level Explore options and single selection (3.810584ms)
+✔ Recommendation new province values use existing salon addresses and retain legacy district scoring (1.40825ms)
+✔ Fourth consultation choice keeps three answers, deselection allows replacement without mutating input (0.409333ms)
+✔ Yoona match descriptions use supported preferences without inventing a match (5.441041ms)
+(node:76773) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/qm/Documents/hairus/src/lib/prototype/arvo.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/qm/Documents/hairus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ six existing Arvo identities share the specified weekly closures across a full fortnight (8.054834ms)
+✔ restored closed-day drafts clear only schedule and cannot be submitted (4.63975ms)
+✔ salon examples remain explicitly marked and designer reviews retain their original content (1.06425ms)
+✔ Team displays the six approved names, ranks and OFF labels without changing booking closures (0.78325ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3832.282292

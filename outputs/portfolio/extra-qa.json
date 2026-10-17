@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "short touch snaps back",
+    "cancelled touch snaps back",
+    "three rapid touch gestures queue correctly",
+    "sticky header stays at viewport top"
+  ]
+}

@@ -1,0 +1,64 @@
+
+> hairus@0.2.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config took 12ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1052ms
+  Running TypeScript ...
+  Finished TypeScript in 278ms ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/26) ...
+  Generating static pages using 7 workers (6/26)
+  Generating static pages using 7 workers (12/26)
+  Generating static pages using 7 workers (19/26)
+✓ Generating static pages using 7 workers (26/26) in 403ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /analysis/camera
+├ ○ /analysis/captured
+├ ○ /analysis/edit
+├ ○ /analysis/guide
+├ ○ /analysis/processing
+├ ○ /analysis/result
+├ ƒ /articles/[id]
+├ ƒ /designers/[id]
+├ ƒ /designers/[id]/portfolio
+├ ƒ /designers/[id]/reviews
+├ ƒ /explore
+├ ○ /home
+├ ƒ /in-focus/[id]
+├ ○ /login
+├ ○ /magazine
+├ ○ /my
+├ ○ /my/recent
+├ ○ /my/reservations
+├ ○ /my/settings
+├   /onboarding/[step]
+│ ├ ● /onboarding/1
+│ ├ ● /onboarding/2
+│ └ ● /onboarding/3
+├ ƒ /preferences/[step]
+├ ○ /preferences/complete
+├ ○ /preferences/loading
+├ ƒ /recommendation/[step]
+├ ○ /recommendation/results
+├ ƒ /reservation/[designerId]/[step]
+├ ƒ /reservations/[id]
+├ ƒ /salons/[id]
+├ ƒ /salons/[id]/designers
+├ ƒ /salons/[id]/reviews
+├ ○ /saved
+├ ƒ /styles/[id]
+├ ○ /ui
+└ ○ /welcome
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

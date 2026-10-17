@@ -112,8 +112,8 @@ export function DesignerPage({id}:{id:string}){
       <div><h2 id="works-title">SELECTED WORKS</h2><p>또 다른 스타일을 만나보세요</p></div>
       <Link href={`/designers/${item.id}/portfolio`}>VIEW ALL ↗</Link>
       <div className={styles.workGrid}>
-        <img src={asset('bd491.png')} alt="쇼트 레이어드 스타일"/>
-        <div><img src={asset('d7b6a.png')} alt="롱 레이어드 스타일 정면"/><img src={asset('f66bd.png')} alt="롱 레이어드 스타일 뒷모습"/></div>
+        <Link href={`/designers/${item.id}/portfolio`} aria-label={`${item.name} Portfolio — 쇼트 레이어드 스타일`}><img src={asset('bd491.png')} alt="쇼트 레이어드 스타일"/></Link>
+        <div><Link href={`/designers/${item.id}/portfolio`} aria-label={`${item.name} Portfolio — 롱 레이어드 스타일 정면`}><img src={asset('d7b6a.png')} alt="롱 레이어드 스타일 정면"/></Link><Link href={`/designers/${item.id}/portfolio`} aria-label={`${item.name} Portfolio — 롱 레이어드 스타일 뒷모습`}><img src={asset('f66bd.png')} alt="롱 레이어드 스타일 뒷모습"/></Link></div>
       </div>
     </section>
 

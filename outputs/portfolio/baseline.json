@@ -1,0 +1,68 @@
+{
+  "yoona": {
+    "html": "<section id=\"works\" class=\"designer-detail-module__W-wbAW__works\" aria-labelledby=\"works-title\"><div><h2 id=\"works-title\">SELECTED WORKS</h2><p>또 다른 스타일을 만나보세요</p></div><a href=\"/designers/yoona/portfolio\">VIEW ALL ↗</a><div class=\"designer-detail-module__W-wbAW__workGrid\"><img src=\"/assets/figma/v1/bd491.png\" alt=\"쇼트 레이어드 스타일\"><div><img src=\"/assets/figma/v1/d7b6a.png\" alt=\"롱 레이어드 스타일 정면\"><img src=\"/assets/figma/v1/f66bd.png\" alt=\"롱 레이어드 스타일 뒷모습\"></div></div></section>",
+    "height": 540.375,
+    "images": [
+      {
+        "src": "/assets/figma/v1/bd491.png",
+        "x": 24,
+        "y": 154.375,
+        "w": 247,
+        "h": 346,
+        "crop": "48% 50%",
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/v1/d7b6a.png",
+        "x": 279,
+        "y": 154.375,
+        "w": 127,
+        "h": 169.328125,
+        "crop": "44% 20%",
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/v1/f66bd.png",
+        "x": 279,
+        "y": 331.703125,
+        "w": 127,
+        "h": 168.671875,
+        "crop": "50% 50%",
+        "fit": "cover"
+      }
+    ]
+  },
+  "sohee": {
+    "html": "<section id=\"works\" class=\"designer-detail-module__W-wbAW__works\" aria-labelledby=\"works-title\"><div><h2 id=\"works-title\">SELECTED WORKS</h2><p>또 다른 스타일을 만나보세요</p></div><a href=\"/designers/sohee/portfolio\">VIEW ALL ↗</a><div class=\"designer-detail-module__W-wbAW__workGrid\"><img src=\"/assets/figma/v1/bd491.png\" alt=\"쇼트 레이어드 스타일\"><div><img src=\"/assets/figma/v1/d7b6a.png\" alt=\"롱 레이어드 스타일 정면\"><img src=\"/assets/figma/v1/f66bd.png\" alt=\"롱 레이어드 스타일 뒷모습\"></div></div></section>",
+    "height": 540.375,
+    "images": [
+      {
+        "src": "/assets/figma/v1/bd491.png",
+        "x": 24,
+        "y": 154.375,
+        "w": 247,
+        "h": 346,
+        "crop": "48% 50%",
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/v1/d7b6a.png",
+        "x": 279,
+        "y": 154.375,
+        "w": 127,
+        "h": 169.328125,
+        "crop": "44% 20%",
+        "fit": "cover"
+      },
+      {
+        "src": "/assets/figma/v1/f66bd.png",
+        "x": 279,
+        "y": 331.703125,
+        "w": 127,
+        "h": 168.671875,
+        "crop": "50% 50%",
+        "fit": "cover"
+      }
+    ]
+  }
+}
