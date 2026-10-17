@@ -42,8 +42,8 @@ export function RecommendationResults() {
           {/* Featured match: black theme from photo through designer profile link. */}
           <div className={css.featuredMatch} data-figma-node="1107:3016">
             <div className={css.hero} data-figma-node="1107:3016">
-            <img src={matchedDesigner.image} alt="윤아 디자이너" />
-          </div>
+              <img src={matchedDesigner.image} alt="윤아 디자이너" />
+            </div>
             <div className={css.profileGroup} data-figma-node="1107:3102">
               <div className={css.profileInformation} data-figma-node="1107:3056">
                 <div className={css.identity} data-figma-node="1107:3018">
@@ -73,6 +73,7 @@ export function RecommendationResults() {
               <Link className={css.profileLink} href="/designers/yoona" data-figma-node="1107:3051">
                 <span data-figma-node="1107:3052">윤아 디자이너 프로필 바로가기</span>
               </Link>
+            </div>
           </div>
           <section className={css.others} aria-labelledby="other-designers-heading" data-figma-node="1107:3061">
               <div className={css.othersHeading} data-figma-node="1107:3062">
