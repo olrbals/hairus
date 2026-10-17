@@ -1,0 +1,21 @@
+{
+  "base": "http://localhost:3019",
+  "checks": [
+    "existing designer CTA enters one-page reservation",
+    "initial service query selects category and removes stale query",
+    "Escape closes sheet",
+    "cancel preserves original note",
+    "cleared style stays empty instead of regenerating",
+    "delivery toggle supports keyboard",
+    "bleach duration remains unspecified",
+    "bleach confirmed cutoff 18:00",
+    "OFF with empty note completes",
+    "bleach price and ID preserved",
+    "completion respects OFF",
+    "legacy step entry scrolls below sticky area: schedule",
+    "legacy step entry scrolls below sticky area: note",
+    "legacy step entry scrolls below sticky area: review",
+    "unknown designer has recoverable screen",
+    "unknown designer fallback available"
+  ]
+}

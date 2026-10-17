@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
 import {useNickname} from '@/lib/use-nickname';
 import {HeaderBackIcon} from '@/components/primitives';
-import {asset,findItem,salons,services} from '@/lib/prototype/catalog';
+import {asset,findItem,salons,featuredServices} from '@/lib/prototype/catalog';
 import {recommend} from '@/lib/prototype/logic';
 import {SaveButton} from './shared';
 import {usePrototype} from './store';
@@ -119,7 +119,7 @@ export function DesignerPage({id}:{id:string}){
 
     <section id="service" className={styles.serviceSection} aria-labelledby="service-title">
       <div className={styles.sectionHeading}><h2 id="service-title">SERVICE &amp; PRICE</h2><p>시술과 가격을 확인해 보세요.</p></div>
-      <div className={styles.serviceList}>{services.map((service,index)=><details className={styles.service} key={service.id} open={index===0}>
+      <div className={styles.serviceList}>{featuredServices.map((service,index)=><details className={styles.service} key={service.id} open={index===0}>
         <summary><span>{service.name}</span><span>{service.price.toLocaleString()}원{index>0?' ~':''}<i aria-hidden="true"/></span></summary>
         <div className={styles.serviceBody}>
           <p>{service.description}</p>

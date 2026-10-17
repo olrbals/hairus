@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {arvoTeam,isDesignerDayOff,offDaysLabel} from '../src/lib/prototype/arvo.ts';
-import {availableBookingDates,clearClosedBookingDate,demoDates,demoTimes,validBooking,completeBooking} from '../src/lib/prototype/logic.ts';
+import {availableBookingDates,availableBookingTimes,clearClosedBookingDate,demoDates,demoTimes,isBookingDateFull,validBooking,completeBooking} from '../src/lib/prototype/logic.ts';
 import {arvoReviews,designerReviews} from '../src/lib/prototype/reviews.ts';
 import {designers} from '../src/lib/prototype/catalog.ts';
 
@@ -14,11 +14,12 @@ test('six existing Arvo identities share the specified weekly closures across a 
     const all=demoDates(now);
     const available=availableBookingDates(person.id,now);
     assert.equal(all.length,14);
-    assert.equal(available.length,10);
+    assert.equal(all.filter(day=>!isDesignerDayOff(person.id,day)).length,10);
+    assert.ok(available.length>0);
     for(const day of all){
       const weekday=new Date(day+'T12:00:00Z').getUTCDay();
       assert.equal(isDesignerDayOff(person.id,day),expected[person.id].includes(weekday));
-      assert.equal(available.includes(day),!expected[person.id].includes(weekday));
+      assert.equal(available.includes(day),!expected[person.id].includes(weekday)&&!isBookingDateFull(day));
     }
   }
   assert.equal(offDaysLabel(arvoTeam.find(person=>person.id==='yoona')),'화 · 금 OFF');
@@ -33,7 +34,8 @@ test('restored closed-day drafts clear only schedule and cannot be submitted',()
     assert.equal(validBooking(draft),false);
     assert.throws(()=>completeBooking([],draft));
     assert.deepEqual(clearClosedBookingDate(draft),{...draft,date:'',time:''});
-    const open={...draft,date:availableBookingDates(person.id)[0]};
+    const openDate=availableBookingDates(person.id)[0];
+    const open={...draft,date:openDate,time:availableBookingTimes('cut',openDate,person.id)[0]};
     assert.strictEqual(clearClosedBookingDate(open),open);
     assert.equal(validBooking(open),true);
     const bookings=completeBooking([],open);

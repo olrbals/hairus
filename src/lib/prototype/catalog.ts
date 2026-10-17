@@ -93,7 +93,27 @@ export const homeDiscoverStyles: Item[] = [
   },
 ];
 
-export const services=[{id:'cut',name:'여성 디자인 컷',price:40000,minutes:60,description:'얼굴선과 모발의 흐름을 고려해 손질하기 편한 길이로 정돈해요.'},{id:'perm',name:'디자인 펌',price:180000,minutes:150,description:'원하는 웨이브와 모발 상태를 상담하고 자연스러운 컬을 제안해요.'},{id:'color',name:'전체 염색',price:120000,minutes:120,description:'현재 컬러와 원하는 분위기에 맞춰 색상을 상담해요.'}];
+// Verified Figma reservation MENU, node 1119:3149:
+// https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=1119-3149
+// Keep cut/perm/color IDs for existing links, drafts and saved appointments.
+export const serviceCategories=['컷','열펌','염색','탈색','클리닉','기타'] as const;
+export type ServiceCategory=(typeof serviceCategories)[number];
+export type BookingService={id:string;name:string;category:ServiceCategory;price:number;minutes:number|null;lastBooking:string|null;description:string};
+export const services:BookingService[]=[
+ {id:'cut-men',name:'남성 일반컷',category:'컷',price:30000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
+ {id:'cut-men-design',name:'남성 디자인 컷',category:'컷',price:40000,minutes:60,lastBooking:'20:00',description:'디자인 변화가 있는 커트'},
+ {id:'cut-women',name:'여성 일반컷',category:'컷',price:30000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
+ {id:'cut',name:'여성 디자인 컷',category:'컷',price:40000,minutes:60,lastBooking:'20:00',description:'디자인 변화가 있는 커트'},
+ {id:'cut-bangs',name:'여성 앞머리 컷',category:'컷',price:10000,minutes:30,lastBooking:'20:00',description:'앞머리의 길이와 흐름을 정돈하는 커트 · 샴푸 추가 시 +10,000원'},
+ ...[['perm-short','숏펌',160000],['perm','단발펌',180000],['perm-medium','미디움펌',220000],['perm-long','롱펌',250000],['perm-super-long','슈퍼롱펌',280000]].map(([id,name,price])=>({id:String(id),name:String(name),category:'열펌' as const,price:Number(price),minutes:150,lastBooking:'18:00',description:'기장과 모발 상태에 맞춰 자연스러운 컬과 볼륨을 디자인해요.'})),
+ ...[['color','숏 헤어',120000],['color-bob','단발 헤어',140000],['color-medium','미디움 헤어',170000],['color-long','롱 헤어',200000],['color-super-long','슈퍼롱 헤어',230000]].map(([id,name,price])=>({id:String(id),name:String(name),category:'염색' as const,price:Number(price),minutes:120,lastBooking:'18:00',description:'현재 컬러와 원하는 분위기에 맞춰 색상을 상담해요.'})),
+ // User-confirmed cutoff: 18:00. Bleach duration remains unspecified.
+ ...[['bleach-short','숏 헤어',140000],['bleach-bob','단발 헤어',160000],['bleach-medium','미디움 헤어',200000],['bleach-long','롱 헤어',250000],['bleach-super-long','슈퍼롱 헤어',280000]].map(([id,name,price])=>({id:String(id),name:String(name),category:'탈색' as const,price:Number(price),minutes:null,lastBooking:'18:00',description:'모발 상태와 원하는 밝기를 상담하여 탈색 범위를 정해요.'})),
+ {id:'clinic',name:'모발 & 두피',category:'클리닉',price:70000,minutes:60,lastBooking:'20:00',description:'모발과 두피 상태에 맞춘 집중 케어'},
+ {id:'consulting',name:'이미지 헤어 컨설팅',category:'기타',price:30000,minutes:60,lastBooking:'20:00',description:'얼굴형과 취향, 일상에 어울리는 헤어 디자인 상담'},
+];
+export function bookingServiceName(service:BookingService){return ['염색','탈색','클리닉'].includes(service.category)?`${service.name} ${service.category}`:service.name;}
+
 export const articles=[{id:'care',title:'THE ART OF HAIR CARE',subtitle:'머릿결을 돌보는 작은 습관',image:asset('0dc76.png'),body:'좋은 헤어는 매일의 작은 습관에서 시작됩니다. 머리를 감은 뒤 수건으로 가볍게 물기를 누르고, 두피부터 부드럽게 말려보세요. 나의 모발과 생활에 맞는 손질 방법은 디자이너와의 상담으로 찾아갈 수 있습니다.'},{id:'story',title:'BEYOND THE CHAIR',subtitle:'스타일을 만드는 사람들의 이야기',image:asset('48a15.png'),body:'한 사람의 헤어에는 취향과 일상이 담깁니다. 디자이너는 원하는 이미지뿐 아니라 아침에 머리를 손질하는 시간과 습관에도 귀를 기울입니다. 상담에서 평소 어려웠던 점을 함께 이야기해 보세요.'},{id:'color',title:'THE COLOR RITUAL',subtitle:'나를 표현하는 색',image:asset('6b945.png'),body:'컬러를 고르는 일은 새로운 분위기를 상상하는 일입니다. 지금의 모발 이력, 유지하고 싶은 톤과 관리 주기를 상담 노트에 기록해 보세요.'},{id:'fringe',title:'THE FRINGE THEORY',subtitle:'작은 변화, 새로운 표정',image:asset('5f044.png'),body:'얼굴 주변의 짧은 선이 전체 인상을 바꿉니다. 앞머리와 옆머리의 길이를 결정하기 전, 가르마와 평소 손질 습관을 함께 살펴보세요.'}];
 export type Question={key:string;title:string;max:number;options:string[];images?:string[]};
 export const preferenceQuestions:Question[]=[
@@ -111,3 +131,5 @@ export const matchQuestions:Question[]=[
 ];
 
 export const events=[{id:'popup',title:'HAIRUS × CHAHONG ROOM',subtitle:'취향이 만나는 공간',image:asset('20198.png'),body:'Figma에 제안된 팝업 행사 콘셉트를 체험하는 페이지입니다. 실제 행사 일정이나 참가 예약은 제공하지 않아요. 공간을 둘러보고, 마음에 드는 디자이너와 스타일을 찾아보세요.'},{id:'issue',title:'A NEW ISSUE',subtitle:'새로운 헤어 이야기를 만나다',image:asset('88ad2.png'),body:'HAIRUS가 제안하는 새로운 헤어 이야기. 프로토타입에 담긴 에디토리얼과 스타일을 둘러보고, 나의 취향에 맞는 디자이너를 찾아보세요.'}];
+
+export const featuredServices=['cut','perm','color'].map(id=>services.find(service=>service.id===id)!);

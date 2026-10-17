@@ -1,9 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {calendarCells,noteSections,selectBookingDate,selectBookingService,bookingDateLabel} from '../src/lib/prototype/booking-presentation.ts';
-import {hairNote,availableBookingDates,completeBooking} from '../src/lib/prototype/logic.ts';
+import {hairNote,availableBookingDates,availableBookingTimes,completeBooking} from '../src/lib/prototype/logic.ts';
 
-const draft={id:'preserved',designerId:'yoona',serviceId:'cut',date:availableBookingDates('yoona')[0],time:'11:30',note:'현재 헤어: 단발\n\n디자이너에게 전하고 싶은 말: 앞머리는 유지해 주세요.\n사진도 함께 볼게요.',noteEdited:true};
+const draft={id:'preserved',designerId:'yoona',serviceId:'cut',date:availableBookingDates('yoona')[0],time:'18:00',note:'현재 헤어: 단발\n\n디자이너에게 전하고 싶은 말: 앞머리는 유지해 주세요.\n사진도 함께 볼게요.',noteEdited:true};
 test('changing service and schedule preserves edited note, identity and unrelated selection through saving',()=>{
   const changed=selectBookingService(draft,'perm');
   assert.deepEqual(changed,{...draft,serviceId:'perm'});
@@ -11,7 +11,7 @@ test('changing service and schedule preserves edited note, identity and unrelate
   assert.strictEqual(selectBookingDate(draft,draft.date),draft);
   const scheduled=selectBookingDate(changed,availableBookingDates('yoona')[1]);
   assert.deepEqual(scheduled,{...changed,date:availableBookingDates('yoona')[1],time:''});
-  const stored=JSON.parse(JSON.stringify({...scheduled,time:'13:00'}));
+  const stored=JSON.parse(JSON.stringify({...scheduled,time:availableBookingTimes(scheduled.serviceId,scheduled.date,scheduled.designerId)[0]}));
   const bookings=completeBooking([],stored);
   assert.equal(bookings[0].note,draft.note);
   assert.equal(bookings[0].id,draft.id);

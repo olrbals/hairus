@@ -1,13 +1,17 @@
-export type NoteInput={wishes?:Record<string,string>;memo?:string;preserved?:string};
+import {services} from './catalog.ts';
+export type NoteInput={wishes?:Record<string,string>;memo?:string;preserved?:string;bookingProfile?:Partial<Record<import('../analysis/profile.ts').FieldKey,string|null>>};
 type Profile=Record<string,string|null>|null;
 const known=(value:string|null|undefined)=>value&&!/^(미입력|미선택|모름|알 수 없음)$/.test(value)?value:'';
+const serviceKind=(id:string)=>{const category=services.find(service=>service.id===id)?.category;return category==='컷'?'cut':category==='열펌'?'perm':category==='염색'?'color':id;};
 export function wishQuestions(service:string){
+ service=serviceKind(service);
  const bangs={key:'bangs',label:'앞머리',options:['유지','자르기','사이드뱅','고민 중']};
  const length={key:'length',label:'기장',options:['유지','변화','고민 중']};
  const perm={key:'perm',label:'펌',options:['자연스러운 컬','뿌리 볼륨 중시','확실한 컬','상담 후 결정']};
  return service==='cut'?[bangs,length]:service==='perm'?[perm,length]:[];
 }
 export function styleSuggestion(profile:Profile,service:string,wishes:Record<string,string>={}){
+ service=serviceKind(service);
  const p=profile||{};const long=/롱|긴/.test(p.length||'');const short=/쇼트|단발/.test(p.length||'');
  const layered=/레이어|높|많/.test((p.cut||'')+' '+(p.layer||''));
  if(service==='cut'){

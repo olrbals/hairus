@@ -4,6 +4,7 @@ import {BottomSheet} from '@/components/bottom-sheet';
 import {SelectionChip} from '@/components/selection-chip';
 import {saveNotePreview} from '@/lib/prototype/archive';
 import {SaveHeart} from './save-heart';
+import {GlassToggle} from './glass-toggle';
 import {usePrototype} from './store';
 import savenote from './savenote.module.css';
 
@@ -63,7 +64,7 @@ export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,opti
    <div className={savenote.sheet}>
     <div className={savenote.heading}>
      <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
-     <button type="button" className={savenote.toggle} role="switch" aria-checked={saveNoteEnabled} aria-label="저장할 때 SAVENOTE 자동 열기" onClick={()=>{setShowOffNotice(saveNoteEnabled);update(s=>({...s,saveNoteEnabled:!(s.saveNoteEnabled!==false)}));}}><span className={savenote.toggleThumb}/></button>
+     <GlassToggle checked={saveNoteEnabled} label="저장할 때 SAVENOTE 자동 열기" onChange={enabled=>{setShowOffNotice(!enabled);update(s=>({...s,saveNoteEnabled:enabled}));}}/>
     </div>
     <div className={savenote.savedItem}><img src={savedImage} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
