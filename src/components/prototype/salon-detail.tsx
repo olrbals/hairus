@@ -17,12 +17,12 @@ const sections=[['notice','공지'],['price','가격'],['designers','디자이�
 const salonSectionOffset=112; // 64px shared header + 48px section navigation.
 const localAsset=(name:string)=>`/assets/figma/salon-arvo/${name}`;
 
-function SalonHeader({title,back,save=false}:{title:string;back:string;save?:boolean}){
+function SalonHeader({title,back,save=false,calendar=false}:{title:string;back:string;save?:boolean;calendar?:boolean}){
   const router=useRouter();
   return <header className={`${designerStyles.header} hairus-page-header`}>
     <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>
     <span>{title}</span>
-    {save?<div className={designerStyles.saveControl}><SaveButton item={findItem('salon','arvo')!}/></div>:<span/>}
+    {calendar?<Link className={styles.teamCalendar} href="/reservation/yoona/service" aria-label="예약 시작하기"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18M7 15h2m3 0h2m3 0h1M7 18h2m3 0h2"/></svg></Link>:save?<div className={designerStyles.saveControl}><SaveButton item={findItem('salon','arvo')!}/></div>:<span/>}
   </header>;
 }
 
@@ -109,7 +109,7 @@ export function ArvoSalonPage(){
       <Link className={styles.allDesigners} href="/salons/arvo/designers">전체 디자이너 6명 · 전문분야 보기 <img src={localAsset('arrow-right.svg')} alt="" width="16" height="16"/></Link>
     </section>
 
-    <ReviewSection data={arvoReviews} allReviewsHref="/salons/arvo/reviews" variant="refined"/>
+    <ReviewSection data={arvoReviews} allReviewsHref="/salons/arvo/reviews" variant="refined" countLabel="고객 후기 2,004개"/>
 
     <section id="information" className={styles.information} data-figma-node="929:3737" aria-labelledby="information-title">
       <h2 id="information-title">INFORMATION</h2>
@@ -137,7 +137,7 @@ function DesignerRow({person}:{person:ArvoDesigner}){
 export function ArvoDesignersPage(){
   const groups=[{title:'컬과 볼륨을 더하고 싶다면',ids:['sohee','hana']},{title:'층·끝선을 바꾸고 싶다면',ids:['soyul']},{title:'맨즈 스타일을 찾는다면',ids:['gyunghyun','jonghun']}];
   return <main id="main" className={`${styles.page} ${styles.teamPage}`} data-figma-node="929:3947">
-    <SalonHeader title="아르보 성수 디자이너" back="/salons/arvo"/>
+    <SalonHeader title="아르보 성수 디자이너" back="/salons/arvo" calendar/>
     <div className={styles.teamContent}>
       <h1>같은 공간,<br/>서로 다른 강점</h1>
       <p className={styles.teamIntro}>아르보 성수 · 6명의 디자이너<br/>전문 분야를 보고 상담·예약을 시작해 보세요.</p>

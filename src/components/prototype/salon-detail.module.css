@@ -51,18 +51,18 @@
 .featuredDesigners{margin-top:32px;display:grid;gap:12px}
 .featuredDesigner{display:flex;align-items:center;gap:20px;min-height:88px;overflow:hidden;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:#f3f3f5;box-shadow:var(--glass-shadow)}
 .featuredDesigner>img{display:block;flex:none;width:64px;height:88px;object-fit:cover;object-position:center;border-radius:8px}
-.featuredDesigner strong{display:block;color:#222b3a;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:13px;font-weight:500;line-height:20px;}
+.featuredDesigner strong{display:block;color:#222b3a;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:14px;font-weight:500;line-height:20px;}
 .featuredDesigner small{display:block;margin-top:4px;color:rgba(0,0,0,.7);font-size:12px}
 .allDesigners{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:20px;min-height:18px;font-size:12px;color:#616161}
 .information{margin-top:20px;padding:24px}
 .information>h2{color:#0e0e0e}
-.information>h3{margin:20px 0;font-size:16px;font-weight:500;color:rgba(14,14,14,.8)}
+.information>h3{margin:32px 0 20px;font-size:16px;font-weight:500;line-height:1.3;color:#0e0e0e}
 .interior>img{display:block;width:100%;height:auto;aspect-ratio:263/177;object-fit:contain}
 .interior>div{display:grid;grid-template-columns:119fr 121fr 126fr;gap:8px;margin-top:8px;aspect-ratio:382/170;grid-template-rows:minmax(0,1fr);align-items:center}
 .interior>div img{display:block;min-width:0;min-height:0;width:100%;height:calc(100% - 1px);object-fit:cover}
 .interior>div img:last-child{height:calc(100% - 2px)}
-.social{margin-top:20px}.social h3{margin:0;font-size:20px;font-weight:600;line-height:1.3}
-.social ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:20px}
+.social{margin-top:32px}.social h3{margin:0;font-size:16px;font-weight:500;line-height:1.3;color:#0e0e0e}
+.social ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
 .social button:disabled{display:flex;align-items:center;gap:12px;padding:0;border:0;background:transparent;color:#000;opacity:1;text-align:left;font-size:14px;font-weight:500;line-height:1.3}
 .social button>img{display:block;flex:none}
 .naver{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:#03c75a}
@@ -94,3 +94,6 @@
 @font-face{font-family:'Arvo Noto Sans KR';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/NotoSansKR-arvo-700.ttf') format('truetype')}
 
 @font-face{font-family:'Arvo Reenie Beanie';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/ReenieBeanie-arvo.ttf') format('truetype')}
+
+.teamCalendar{display:flex;align-items:center;justify-content:flex-end;width:44px;height:44px;color:#20201e}
+.teamCalendar svg{display:block;flex:none;width:24px;height:24px}

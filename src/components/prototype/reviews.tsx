@@ -4,14 +4,14 @@ import type {ReviewData} from '@/lib/prototype/reviews';
 import styles from './reviews.module.css';
 
 // Shared markup and unchanged visual rules from the integrated designer detail.
-export function ReviewSection({data,allReviewsHref,variant}:{data:ReviewData;allReviewsHref?:string;variant?:'refined'}){
+export function ReviewSection({data,allReviewsHref,variant,countLabel}:{data:ReviewData;allReviewsHref?:string;variant?:'refined';countLabel?:string}){
   return <section id="reviews" className={`${styles.reviews}${variant==='refined'?` ${styles.refinedReviews}`:''}`} aria-labelledby="reviews-title">
       <h2 id="reviews-title">REVIEWS</h2>
       {variant!=='refined'&&data.demoLabel&&<p className={styles.demoLabel}>{data.demoLabel}</p>}
       <div className={styles.rating}>
         <div className={styles.ratingSummary}>
           <div className={styles.ratingScore}><strong>{data.score}</strong><span aria-hidden="true">★</span></div>
-          <div className={styles.ratingMeta}><span>/ 5.0</span><small>고객 후기 {data.count}개</small></div>
+          <div className={styles.ratingMeta}><span>/ 5.0</span><small>{countLabel??`고객 후기 ${data.count}개`}</small></div>
         </div>
         <div className={styles.ratingDistribution} aria-label="별점별 후기 분포">
           {data.distribution.map(({stars,percent})=><div key={stars} className={styles.ratingDistributionRow}>
