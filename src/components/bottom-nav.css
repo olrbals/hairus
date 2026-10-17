@@ -1,0 +1,7 @@
+/* Only the persistent navigation replaces the original per-link pseudo indicator. */
+.bottom-nav[hidden],.liquid-indicator[hidden]{display:none}
+.bottom-nav--liquid a[aria-current=page]::before{content:none}
+.bottom-nav--liquid a{z-index:1}
+.liquid-indicator{position:absolute;inset:0;pointer-events:none}
+.liquid-indicator__rest{position:absolute;left:0;top:4px;height:54px;border-radius:27px;border:1px solid var(--glass-border);background:rgba(255,255,255,.07);box-shadow:var(--glass-shadow)}
+.liquid-indicator__surface{position:absolute;inset:0;overflow:visible;opacity:0}
