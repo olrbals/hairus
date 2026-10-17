@@ -1,12 +1,12 @@
 'use client';
 import {useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {asset,preferenceQuestions,matchQuestions,styles,itemHref} from '@/lib/prototype/catalog';
-import {toggleChoice,recommend} from '@/lib/prototype/logic';
+import {asset,preferenceQuestions,matchQuestions} from '@/lib/prototype/catalog';
+import {toggleChoice} from '@/lib/prototype/logic';
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {useNickname} from '@/lib/use-nickname';
 import {Button,HeaderBackIcon} from '@/components/primitives';
-import {Screen,Action,Chips,Card,DemoNotice} from './shared';
+import {Screen,Action} from './shared';
 import {usePrototype} from './store';
 import {MatchingSurvey} from './matching-survey';
 import {PreferenceActions} from './preference-actions';
@@ -141,4 +141,5 @@ export function ProfileComplete(){
   <PreferenceActions onNext={()=>router.push('/home')} previousHref="/preferences/1" previousLabel="다시 하기">홈으로 가기</PreferenceActions>
  </main>;
 }
-export function RecommendationResults(){const {state,ready}=usePrototype();const ranked=recommend(state.matching,state.preferences);if(!ready)return <Screen title="Your Match"><p>응답을 불러오는 중이에요.</p></Screen>;if(!matchQuestions.every(q=>state.matching[q.key]?.length))return <Screen title="Your Match"><p>추천 설문을 마치면 선택한 답변에 맞춘 결과를 볼 수 있어요.</p><Action href="/recommendation/intro">추천 설문 시작하기</Action></Screen>;const top=ranked[0];return <Screen title="Your Match"><DemoNotice>설문과 샘플 디자이너 특징을 비교한 규칙 기반 데모 추천이에요. AI 매칭률은 제공하지 않아요.</DemoNotice><h2>당신의 취향에서 시작한 추천</h2><p>{(state.preferences.mood||[]).join(' · ')||'새로운 스타일'}를 위한 첫 번째 만남</p><Card item={top.designer}/><section><h2 className="section-title">WHY WE MATCH</h2>{top.reasons.map(r=><p className="reason" key={r}>{r}</p>)}{state.matching.avoid?.length>0&&<p className="reason">상담에서 미리 나눌 내용: {state.matching.avoid.join(', ')}. 해당 경험이 없을 것이라고 보장하는 추천은 아니에요.</p>}<p className="muted">현재 샘플은 성수 지역 여성 디자이너 2명이에요. 다른 지역·성별을 선택했다면 정확한 조건 일치 결과는 없으며, 취향 비교용 후보를 보여드려요.</p></section><h2 className="section-title">SELECTED WORKS</h2><div className="proto-grid">{styles.filter(s=>s.designerId===top.designer.id).slice(0,2).map(s=><Card key={s.id} item={s}/>)}</div><Action href={itemHref(top.designer)}>디자이너 상세 보기</Action><Action href={`/reservation/${top.designer.id}/service`}>예약하기 · 데모</Action><h2 className="section-title">ALSO FOR YOU</h2>{ranked.slice(1).map(r=><Card key={r.designer.id} item={r.designer}/>)}<Action secondary href="/recommendation/1">추천 설문 다시 하기</Action></Screen>;}
+// Figma yourMatch 1107:2934 is implemented in its dedicated screen component.
+export {RecommendationResults} from './recommendation-result';

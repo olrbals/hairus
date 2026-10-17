@@ -22,3 +22,17 @@ test('Fourth consultation choice keeps three answers, deselection allows replace
  assert.deepEqual(toggleChoice(removed,q.options[3],q.max),[...before.slice(1),q.options[3]]);
  assert.deepEqual(before,q.options.slice(0,3));
 });
+
+test('Yoona match descriptions use supported preferences without inventing a match',async()=>{
+ const {getYoonaMatchReasons}=await import('../src/lib/prototype/match-reasons.ts');
+ const empty=getYoonaMatchReasons({},{});
+ assert.match(empty.style,/윤아/);
+ assert.match(empty.consultation,/윤아/);
+ const tailored=getYoonaMatchReasons({strength:['손질하기 쉬운 결과'],consult:['취향 존중']},{mood:['내추럴']});
+ assert.match(tailored.style,/손질/);
+ assert.match(tailored.consultation,/취향을 존중/);
+ const unrelated=getYoonaMatchReasons({consult:['단호한']},{mood:['모던 · 시크']});
+ assert.deepEqual(unrelated,empty);
+ const conversational=getYoonaMatchReasons({consult:['충분한 대화']},{});
+ assert.notEqual(conversational.consultation,empty.consultation);
+});
