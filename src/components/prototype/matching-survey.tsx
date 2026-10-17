@@ -2,10 +2,12 @@
 
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
+import {useNickname} from '@/lib/use-nickname';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import {asset, matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
 import {usePrototype} from './store';
+import {PageHeader} from './page-header';
 import css from './matching-survey.module.css';
 import regionStyle from './people-explore.module.css';
 import '@/styles/preference-transition.css';
@@ -34,6 +36,7 @@ const descriptions: Record<string, string> = {
 
 export function MatchingSurvey({step}: {step: string}) {
   const router = useRouter();
+  const nickname = useNickname();
   const {state, update, ready} = usePrototype();
   const [locationOpen, setLocationOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -52,7 +55,53 @@ export function MatchingSurvey({step}: {step: string}) {
       [question.key]: question.key==='avoid'&&option==='특별한 경험 없음'?(current.matching.avoid?.includes(option)?[]:[option]):toggleChoice((current.matching[question.key] || []).filter(value=>question.key!=='avoid'||value!=='특별한 경험 없음'), option, question.max)}}));
   };
   if (!intro && !question) return <main id="main" className={css.page}><p>해당 단계를 찾을 수 없어요.</p><Button onClick={() => router.push('/recommendation/intro')}>설문 처음으로</Button></main>;
-  if (intro) return <main id="main" className={css.intro} data-matching-survey><div className={css.introArt}><img src="/assets/figma/match-survey/intro.png" alt=""/><div className={css.introCopy}><div><h1>Meet Your Match</h1><p>The right style. The right designer.<br/>Just for you.</p></div><button type="button" disabled={!ready} onClick={()=>router.push('/recommendation/1')}>맞춤 추천 받기</button></div></div></main>;
+
+  // Figma matchIntro 1107:2841 (430 × 874). Keep the shared PageHeader and primary Button.
+  if (intro) return <main id="main" className={css.intro} data-matching-survey data-figma-node="1107:2841">
+    <div className={css.introHeader} data-figma-node="1107:2847">
+      <PageHeader backFallbackHref="/home"/>
+    </div>
+    <div className={css.introLayout} data-figma-node="1107:2843">
+      <section className={css.introHeading} aria-labelledby="matching-intro-title" data-figma-node="1107:2848">
+        <p className={css.introEyebrow} data-figma-node="1107:2849">FIND YOUR MATCH</p>
+        <div className={css.introHeadingText} data-figma-node="1107:2850">
+          <h1 id="matching-intro-title" className={css.introTitle} data-figma-node="1107:2851">
+            {nickname}님에게 잘 맞는<br/>디자이너를 찾아볼까요 ?
+          </h1>
+          <p className={css.introDescription} data-figma-node="1107:2853">
+            몇 가지 간단한 질문을 통해<br/>잘 맞는 디자이너를 찾아드릴게요.
+          </p>
+        </div>
+      </section>
+      <section className={css.introJourney} aria-label="디자이너 추천 과정" data-figma-node="1107:2890">
+        <div className={css.introCountWrap} data-figma-node="1107:2854">
+          <div className={css.introCount} data-figma-node="1107:2855">
+            <p className={css.introNumber} data-figma-node="1107:2856">05</p>
+            <p className={css.introCountLabel} data-figma-node="1107:2857">QUESTIONS · ABOUT 1 MIN</p>
+          </div>
+        </div>
+        <ol className={css.introSteps} data-figma-node="1107:2867">
+          <li className={css.introStep} data-figma-node="1107:2868">
+            <span className={css.introStepNumber} aria-hidden="true" data-figma-node="1107:2870">01</span>
+            <div className={css.introStepCopy} data-figma-node="1107:2871">
+              <span className={css.introStepLabel} data-figma-node="1107:2872">YOUR PREFERENCES</span>
+              <p className={css.introStepDescription} data-figma-node="1107:2874">선호하는 조건과 상담 방식을 선택해요.</p>
+            </div>
+          </li>
+          <li className={css.introStep} data-figma-node="1107:2875">
+            <span className={css.introStepNumber} aria-hidden="true" data-figma-node="1107:2877">02</span>
+            <div className={css.introStepCopy} data-figma-node="1107:2878">
+              <span className={css.introStepLabel} data-figma-node="1107:2879">YOUR MATCH</span>
+              <p className={css.introStepDescription} data-figma-node="1107:2881">나에게 잘 맞는 디자이너를 만나보세요.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+    </div>
+    <div className={css.introActions} data-figma-node="1107:2858">
+      <Button disabled={!ready} onClick={() => router.push('/recommendation/1')}>시작하기</Button>
+    </div>
+  </main>;
   return <main id="main" className={css.page} data-matching-survey data-step={index+1} data-answered={selected.length>0}>
     <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
     {!intro && <div className={css.progress} aria-label={`${index + 1} / 5`}>{matchQuestions.map((q, i) => <span key={q.key} aria-current={i === index ? 'step' : undefined}/>)}</div>}
