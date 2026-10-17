@@ -2,13 +2,13 @@
 
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {BottomSheet} from '@/components/bottom-sheet';
-import {SelectionChip} from '@/components/selection-chip';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import {asset, matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
 import {usePrototype} from './store';
 import css from './matching-survey.module.css';
+import regionStyle from './people-explore.module.css';
+import '@/styles/preference-transition.css';
 
 const titles = [
   '선호하는 디자이너의 성별을\n알려주세요',
@@ -37,6 +37,7 @@ export function MatchingSurvey({step}: {step: string}) {
   const {state, update, ready} = usePrototype();
   const [locationOpen, setLocationOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [limitAttempt,setLimitAttempt] = useState(0);
   const index = Number(step) - 1;
   const intro = step === 'intro';
   const question = matchQuestions[index];
@@ -44,7 +45,7 @@ export function MatchingSurvey({step}: {step: string}) {
   const choose = (option: string) => {
     if (!question) return;
     if (!selected.includes(option) && selected.length >= question.max && question.max > 1 && !(question.key==='avoid'&&option==='특별한 경험 없음')) {
-      setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`); return;
+      setLimitAttempt(attempt=>attempt+1);setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`); return;
     }
     setMessage('');
     update(current => ({...current, matching: {...current.matching,
@@ -56,17 +57,17 @@ export function MatchingSurvey({step}: {step: string}) {
     <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
     {!intro && <div className={css.progress} aria-label={`${index + 1} / 5`}>{matchQuestions.map((q, i) => <span key={q.key} aria-current={i === index ? 'step' : undefined}/>)}</div>}
     <section className={css.question}>
-      <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 1 && <p>집, 직장 등 미용실 가기 편한 위치를 선택해주세요</p>}{index === 3 && <p>최대 3개까지 선택 가능해요</p>}{index === 4 && <p>선택한 내용을 바탕으로<br/>나와 잘 맞는 디자이너를 찾아드려요.</p>}
+      <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 1 && <p>집, 직장 등 미용실 가기 편한 위치를 선택해주세요</p>}{index === 3 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>최대 3개까지 선택 가능해요</p>}{index === 4 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>선택한 내용을 바탕으로<br/>나와 잘 맞는 디자이너를 찾아드려요.</p>}
     </section>
     {!intro && <>
       {index === 0 ? <div className={css.gender}>{question.options.slice(0,2).map((option,i) => <button key={option} disabled={!ready} aria-pressed={selected.includes(option)} className={css.person} onClick={() => choose(option)}><span className={css.portrait}><span className={css.portraitFill}><img src={`/assets/figma/match-survey/${i===0?'female':'male'}.png`} alt=""/></span></span>{option}</button>)}</div>
-      : index === 1 ? <div className={css.location}><button type="button" disabled={!ready} data-selected={selected.length>0} aria-label="활동 지역 선택" aria-haspopup="dialog" onClick={() => setLocationOpen(true)}><img src={asset('7ecd5.svg')} alt=""/><span>{selected[0] || '지역을 선택해주세요'}</span><img src={asset('4a10a.svg')} alt=""/></button></div>
+      : index === 1 ? <div className={css.location}><button type="button" disabled={!ready} data-selected={selected.length>0} aria-label="활동 지역 선택" aria-expanded={locationOpen} aria-controls="recommendation-regions" onClick={() => setLocationOpen(open=>!open)}><img src={asset('7ecd5.svg')} alt=""/><span>{selected[0] || '지역을 선택해주세요'}</span><img src={asset('4a10a.svg')} alt=""/></button>{locationOpen&&<div id="recommendation-regions" className={regionStyle.regionOptions} role="listbox" aria-label="시도 선택">{matchQuestions[1].options.map(option=><button type="button" role="option" aria-selected={selected.includes(option)} key={option} onClick={()=>{if(!selected.includes(option))choose(option);setLocationOpen(false);}}><span>{option}</span>{selected.includes(option)&&<svg aria-hidden="true" viewBox="0 0 16 16"><path d="m3 8 3.2 3.2L13 4.5"/></svg>}</button>)}</div>}</div>
       : index === 2 ? <div className={css.strengths}>{question.options.map((option,i) => <button key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={() => choose(option)}><img src={`/assets/figma/match-survey/${['experience','consultation','styling'][i]}.png`} alt=""/><span><strong>{option}</strong><small>{descriptions[option]}</small></span></button>)}</div>
       : index === 4 ? <><div className={css.avoidCards}>{avoidCards.map(([option,description,icon])=><button key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={()=>choose(option)}><img src={asset(icon)} alt=""/><strong>{option}</strong><small>{description}</small></button>)}</div><button className={css.noExperience} disabled={!ready} type="button" aria-pressed={selected.includes('특별한 경험 없음')} onClick={()=>choose('특별한 경험 없음')}>특별한 경험 없음</button></>
-      : <div className={css.choices}>{consultRows.map((row,i)=><div className={css.choiceRow} key={i}>{row.map(option => <button key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={() => choose(option)}>{option}</button>)}</div>)}</div>}
-      <p role="status" className={css.validation}>{message}</p>
+      : <div className="preference-survey-step__chips chip-options" role="group" aria-label={question.title}>{consultRows.flat().map(option=><button type="button" key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={()=>choose(option)}>{option}</button>)}</div>}
+      <p role="status" className={index>=3?'preference-survey-step__validation':css.validation}>{message&&<span key={limitAttempt}>{message}<span className="sr-only"> (초과 선택 {limitAttempt}회)</span></span>}</p>
     </>}
     <div className={css.actions}><Button data-final={index===4} disabled={!ready || !selected.length} onClick={() => router.push(index === 4 ? '/recommendation/results' : `/recommendation/${index + 2}`)}>{index === 4 ? '디자이너 추천 받기' : '다음'}</Button></div>
-    <BottomSheet open={locationOpen} onClose={() => setLocationOpen(false)} title="활동 지역 선택"><div className={css.regionOptions}>{matchQuestions[1].options.map(option => <SelectionChip key={option} aria-pressed={selected.includes(option)} onClick={() => {choose(option); setLocationOpen(false);}}>{option}</SelectionChip>)}</div></BottomSheet>
+
   </main>;
 }

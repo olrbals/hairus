@@ -26,7 +26,7 @@ const salonGroups:FilterGroup[]=[
  {key:'designerCount',label:'디자이너',options:['전체','1인','5인 미만','대규모']},
  {key:'rating',label:'평점',options:['전체','4.5 이상','4.0 이상','3.5 이상','3.0 이상']},
 ];
-const provinces=['전체','서울특별시','부산광역시','대구광역시','인천광역시','광주광역시','대전광역시','울산광역시','세종특별자치시','경기도','강원특별자치도','충청북도','충청남도','전북특별자치도','전라남도','경상북도','경상남도','제주특별자치도'];
+import {provinces} from '@/lib/prototype/regions';
 const salonDetails:Record<string,{rating:string;location:string}>={
  arvo:{rating:'4.87',location:'서울 성동구 성수동  ·  성수역 도보 3분'},
  moodon:{rating:'4.84',location:'서울 서초구 논현동  ·  신논현역 도보 5분'},
