@@ -100,9 +100,9 @@ export const serviceCategories=['컷','열펌','염색','탈색','클리닉','�
 export type ServiceCategory=(typeof serviceCategories)[number];
 export type BookingService={id:string;name:string;category:ServiceCategory;price:number;minutes:number|null;lastBooking:string|null;description:string};
 export const services:BookingService[]=[
- {id:'cut-men',name:'남성 일반컷',category:'컷',price:30000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
- {id:'cut-men-design',name:'남성 디자인 컷',category:'컷',price:40000,minutes:60,lastBooking:'20:00',description:'디자인 변화가 있는 커트'},
- {id:'cut-women',name:'여성 일반컷',category:'컷',price:30000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
+ {id:'cut-men',name:'남성 일반컷',category:'컷',price:28000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
+ {id:'cut-men-design',name:'남성 디자인 컷',category:'컷',price:35000,minutes:60,lastBooking:'20:00',description:'디자인 변화가 있는 커트'},
+ {id:'cut-women',name:'여성 일반컷',category:'컷',price:35000,minutes:60,lastBooking:'20:00',description:'기존 디자인을 다듬는 커트'},
  {id:'cut',name:'여성 디자인 컷',category:'컷',price:40000,minutes:60,lastBooking:'20:00',description:'디자인 변화가 있는 커트'},
  {id:'cut-bangs',name:'여성 앞머리 컷',category:'컷',price:10000,minutes:30,lastBooking:'20:00',description:'앞머리의 길이와 흐름을 정돈하는 커트 · 샴푸 추가 시 +10,000원'},
  ...[['perm-short','숏펌',160000],['perm','단발펌',180000],['perm-medium','미디움펌',220000],['perm-long','롱펌',250000],['perm-super-long','슈퍼롱펌',280000]].map(([id,name,price])=>({id:String(id),name:String(name),category:'열펌' as const,price:Number(price),minutes:150,lastBooking:'18:00',description:'기장과 모발 상태에 맞춰 자연스러운 컬과 볼륨을 디자인해요.'})),
