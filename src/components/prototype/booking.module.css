@@ -138,7 +138,7 @@
 /* Category buttons use the shared SelectionChip component and its active state. */
 .services{gap:0;border-top:1px solid #ccc}
 .service{min-height:0;padding:18px 0;border:0;border-bottom:1px solid #e5e5e5;border-radius:0;gap:12px}
-.service[aria-pressed=true]{border-color:#e5e5e5;box-shadow:none}
+.service[aria-pressed=true]{box-shadow:none}
 .serviceInfo{flex:1;min-width:0;gap:8px}
 .serviceHeading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .serviceHeading strong,.serviceHeading>span{font-size:14px;font-weight:500}

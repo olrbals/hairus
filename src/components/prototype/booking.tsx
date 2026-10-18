@@ -6,7 +6,7 @@ import {useRouter} from 'next/navigation';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import {designers,services,salons,serviceCategories,bookingServiceName,type ServiceCategory} from '@/lib/prototype/catalog';
 import {hairNote,demoDates,availableBookingDates,clearClosedBookingDate,demoTimes,availableBookingTimes,isBookingDateFull,validBooking,completeBooking,type BookingDraft} from '@/lib/prototype/logic';
-import {findArvoDesigner,offDaysLabel} from '@/lib/prototype/arvo';
+import {findArvoDesigner,offDaysLabel,isDesignerDayOff} from '@/lib/prototype/arvo';
 import {bookingDateLabel,bookingVisitLabel,calendarCells,noteSections,selectBookingDate,selectBookingService} from '@/lib/prototype/booking-presentation';
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {usePrototype} from './store';
@@ -49,7 +49,7 @@ function NotePreview({draft,editHref}:{draft:BookingDraft;editHref?:string}){
 // Verified Figma calendar 1110:2681, sticky profile/nav 1119:3148,
 // and MY RESERVATION 1113:2856. CTA follows the shared component by user request.
 // https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=1110-2658
-function BookingCalendar({dates,windowDates,value,onSelect}:{dates:string[];windowDates:string[];value:string;onSelect:(date:string)=>void}){
+function BookingCalendar({dates,windowDates,value,designerId,onSelect}:{dates:string[];windowDates:string[];value:string;designerId:string;onSelect:(date:string)=>void}){
  const months=[...new Set(windowDates.map(date=>date.slice(0,7)))];
  const initial=windowDates.includes(value)?value.slice(0,7):windowDates[0]?.slice(0,7);
  const [view,setView]=useState(initial||'');
@@ -62,7 +62,7 @@ function BookingCalendar({dates,windowDates,value,onSelect}:{dates:string[];wind
   <div className={styles.weekdays} aria-hidden="true">{['월','화','수','목','금','토','일'].map(day=><span key={day}>{day}</span>)}</div>
   <div className={styles.days}>{calendarCells(month,1).map((date,index)=>{
    if(!date)return <span key={`empty-${index}`}/>;
-   const full=windowDates.includes(date)&&isBookingDateFull(date);
+   const full=windowDates.includes(date)&&!isDesignerDayOff(designerId,date)&&isBookingDateFull(date);
    return <button type="button" key={date} disabled={!dates.includes(date)} aria-label={`${bookingDateLabel(date)}${full?' 예약 마감':!dates.includes(date)?' 선택 불가':''}`} aria-pressed={value===date} data-full={full} onClick={()=>onSelect(date)}><span>{Number(date.slice(-2))}</span>{full&&<small>마감</small>}</button>;
   })}</div>
  </section>;
@@ -173,7 +173,7 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
    <section id="booking-schedule" className={styles.reservationSection} tabIndex={-1} aria-label="방문 날짜와 시간">
     <SectionTitle title="DATE" description="방문할 날짜와 시간을 선택해 주세요."/>
     <div className={styles.schedule}>
-     <BookingCalendar dates={dates} windowDates={windowDates} value={draft.date} onSelect={date=>patchDraft(current=>selectBookingDate(current,date))}/>
+     <BookingCalendar dates={dates} windowDates={windowDates} value={draft.date} designerId={designerId} onSelect={date=>patchDraft(current=>selectBookingDate(current,date))}/>
      <p className={styles.hint}>{person?`정기 휴무 ${offDaysLabel(person).replace(' OFF','')}`:'선택 가능한 날짜를 확인해 주세요.'}</p>
      <div className={styles.timeSection}><h3 className={styles.visuallyHidden}>시간 선택</h3><p className={styles.dateCaption}>{!service?'시술과 날짜를 먼저 선택해 주세요.':!draft.date?'날짜를 먼저 선택해 주세요.':`${service.minutes?`약 ${service.minutes}분 소요 · `:''}마지막 예약 ${service.lastBooking}`}</p><div className={styles.times} role="group" aria-label="예약 시간 선택">{demoTimes.map(time=><button type="button" key={time} disabled={!times.includes(time)} aria-pressed={draft.time===time} onClick={()=>patchDraft(current=>({...current,time}))}>{time}</button>)}</div></div>
      <div className={styles.visitPreview} aria-live="polite"><span>방문 예정일</span><strong>{bookingVisitLabel(draft.date,draft.time)}</strong></div>
