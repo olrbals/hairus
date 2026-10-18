@@ -12,11 +12,15 @@ test('six existing Arvo identities share the specified weekly closures across a 
     assert.ok(designers.some(designer=>designer.id===person.id));
     const now=new Date(2026,9,15,12);
     const all=demoDates(now);
+    const fortnight=all.slice(0,14);
     const available=availableBookingDates(person.id,now);
-    assert.equal(all.length,14);
-    assert.equal(all.filter(day=>!isDesignerDayOff(person.id,day)).length,10);
+    // The booking calendar now spans a year; retain the original fortnight closure check.
+    assert.equal(all.length,365);
+    assert.equal(fortnight.length,14);
+    assert.equal(fortnight.filter(day=>!isDesignerDayOff(person.id,day)).length,10);
     assert.ok(available.length>0);
-    for(const day of all){
+    assert.ok(available.some(day=>day>'2026-11-15'));
+    for(const day of fortnight){
       const weekday=new Date(day+'T12:00:00Z').getUTCDay();
       assert.equal(isDesignerDayOff(person.id,day),expected[person.id].includes(weekday));
       assert.equal(available.includes(day),!expected[person.id].includes(weekday)&&!isBookingDateFull(day));
