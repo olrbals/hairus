@@ -11,7 +11,7 @@ test('changing service and schedule preserves edited note, identity and unrelate
   assert.strictEqual(selectBookingDate(draft,draft.date),draft);
   const scheduled=selectBookingDate(changed,availableBookingDates('yoona')[1]);
   assert.deepEqual(scheduled,{...changed,date:availableBookingDates('yoona')[1],time:''});
-  const stored=JSON.parse(JSON.stringify({...scheduled,time:availableBookingTimes(scheduled.serviceId,scheduled.date,scheduled.designerId)[0]}));
+  const stored=JSON.parse(JSON.stringify({...scheduled,time:availableBookingTimes(scheduled.selectedServiceIds||[scheduled.serviceId],scheduled.date,scheduled.designerId)[0]}));
   const bookings=completeBooking([],stored);
   assert.equal(bookings[0].note,draft.note);
   assert.equal(bookings[0].id,draft.id);
