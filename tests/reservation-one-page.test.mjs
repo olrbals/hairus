@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {services,serviceCategories,bookingServiceName} from '../src/lib/prototype/catalog.ts';
-import {availableBookingDates,availableBookingTimes,demoDates,isBookingDateFull,validBooking,completeBooking,hairNote} from '../src/lib/prototype/logic.ts';
+import {availableBookingDates,availableBookingTimes,bookingServicesTotal,bookingServicesLabel,demoDates,isBookingDateFull,validBooking,completeBooking,hairNote} from '../src/lib/prototype/logic.ts';
 import {selectBookingService,selectBookingDate,updateNoteSection,bookingVisitLabel} from '../src/lib/prototype/booking-presentation.ts';
 
 const date=availableBookingDates('yoona').find(day=>Number(day.slice(-2))%2===1);
@@ -29,7 +29,7 @@ test('duration and cutoff invalidate late times, while a compatible service keep
  assert.ok(!availableBookingTimes('bleach-short',date,'yoona').includes('18:30'));
  const changed=selectBookingService(draft,'perm');
  assert.equal(changed.time,'');assert.equal(changed.note,draft.note);assert.equal(changed.date,date);
- assert.equal(selectBookingService(draft,'clinic').time,'20:00');
+ assert.equal(selectBookingService(draft,'clinic').time,''); // Multiple services must fit before closing.
  assert.equal(selectBookingDate(draft,availableBookingDates('yoona')[1]).time,'');
 });
 test('closed dates and stable occupied slots are rejected again during submission',()=>{
@@ -69,6 +69,7 @@ test('section edits preserve handwritten paragraphs and generated advice support
 test('service selected a second time clears selection and chosen time',()=>{
  const second=selectBookingService(draft,'cut');
  assert.equal(second.serviceId,'');
+ assert.deepEqual(second.selectedServiceIds,[]);
  assert.equal(second.time,'');
  assert.equal(second.date,date);
 });
@@ -83,4 +84,23 @@ test('artificially full days stop after November 15, while future months remain 
  assert.equal(available.includes('2026-11-09'),false);
  assert.equal(available.includes('2026-11-18'),true);
  assert.equal(available.includes('2026-11-17'),false); // Yoona is off Tuesday
+});
+
+test('a selected cut is kept after choosing color, and deselection preserves the remaining service',()=>{
+ const first={...draft,time:''};
+ const both=selectBookingService(first,'color');
+ assert.deepEqual(both.selectedServiceIds,['cut','color']);
+ assert.equal(both.serviceId,'cut');
+ assert.equal(bookingServicesTotal(both),160000);
+ assert.match(bookingServicesLabel(both),/여성 디자인 컷/);
+ assert.match(bookingServicesLabel(both),/염색/);
+ assert.ok(!availableBookingTimes(both.selectedServiceIds,both.date,both.designerId).includes('20:00'));
+ const time=availableBookingTimes(both.selectedServiceIds,both.date,both.designerId)[0];
+ assert.ok(time);
+ const saved=completeBooking([],{...both,time})[0];
+ assert.equal(saved.estimatedPrice,160000);
+ assert.deepEqual(saved.selectedServiceIds,['cut','color']);
+ const withoutColor=selectBookingService(both,'color');
+ assert.deepEqual(withoutColor.selectedServiceIds,['cut']);
+ assert.equal(withoutColor.serviceId,'cut');
 });

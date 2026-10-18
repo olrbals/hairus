@@ -1,4 +1,4 @@
-import {availableBookingTimes,type BookingDraft} from './logic.ts';
+import {availableBookingTimes,selectedBookingServiceIds,type BookingDraft} from './logic.ts';
 import {services,bookingServiceName} from './catalog.ts';
 
 // Presentation only: the stored note remains the original, editable string.
@@ -12,10 +12,13 @@ export function noteSections(note:string){
   }).filter(section=>section.value&&(!section.label||!emptyValues.includes(section.value)));
 }
 export function selectBookingService(draft:BookingDraft,serviceId:string):BookingDraft{
-  if(draft.serviceId===serviceId)return {...draft,serviceId:'',time:'',...(!draft.noteEdited?{note:''}:{})};
-  const service=services.find(item=>item.id===serviceId);
-  const note=draft.noteEdited?draft.note.split(/\n\s*\n/).map(paragraph=>paragraph.startsWith('희망 시술:')&&service?`희망 시술: ${bookingServiceName(service)}`:paragraph).join('\n\n'):'';
-  return {...draft,serviceId,note,...(draft.time&&!availableBookingTimes(serviceId,draft.date,draft.designerId).includes(draft.time)?{time:''}:{})};
+ if(!services.some(service=>service.id===serviceId))return draft;
+ const current=selectedBookingServiceIds(draft);
+ const ids=current.includes(serviceId)?current.filter(id=>id!==serviceId):[...current,serviceId];
+ const selected=ids.map(id=>services.find(service=>service.id===id)!);
+ const note=draft.noteEdited?draft.note.split(/\n\s*\n/).map(paragraph=>paragraph.startsWith('희망 시술:')?`희망 시술: ${selected.map(bookingServiceName).join(' · ')}`:paragraph).join('\n\n'):'';
+ const time=draft.time&&availableBookingTimes(ids,draft.date,draft.designerId).includes(draft.time)?draft.time:'';
+ return {...draft,serviceId:ids[0]||'',selectedServiceIds:ids,time,note};
 }
 export function selectBookingDate(draft:BookingDraft,date:string):BookingDraft{
   return draft.date===date?draft:{...draft,date,time:''};

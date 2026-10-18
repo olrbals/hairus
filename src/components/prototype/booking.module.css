@@ -136,9 +136,11 @@
 .sectionTitle p{font-size:14px;line-height:21px;color:#666}
 .categories{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 /* Category buttons use the shared SelectionChip component and its active state. */
-.services{gap:0;border-top:1px solid #ccc}
+.services{gap:0;border-top:0}
 .service{min-height:0;padding:18px 0;border:0;border-bottom:1px solid #e5e5e5;border-radius:0;gap:12px}
-.service[aria-pressed=true]{box-shadow:none}
+.service:last-child{border-bottom:0}
+.service[aria-pressed=true]{border-bottom-color:#e5e5e5;box-shadow:none}
+.service[aria-pressed=true] .serviceHeading strong,.service[aria-pressed=true] .serviceHeading>span{font-weight:700}
 .serviceInfo{flex:1;min-width:0;gap:8px}
 .serviceHeading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .serviceHeading strong,.serviceHeading>span{font-size:14px;font-weight:500}
@@ -149,6 +151,13 @@
 .service[aria-pressed=true] .selection{border-color:#000;background:#000}
 .selection svg{width:18px;height:18px}
 .serviceSelected{font-size:12px;color:#555}
+.servicePreviewList{display:flex;flex-direction:column;gap:8px}
+.servicePreviewList>div{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.servicePreviewList span{color:#20201e;font-size:14px}
+.servicePreviewList strong{font-size:14px;font-weight:500;white-space:nowrap}
+.servicePreviewTotal{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid #e8e8e8}
+.servicePreviewTotal span{font-size:12px;color:#666}
+.servicePreviewTotal strong{font-size:16px;font-weight:600}
 .schedule{padding-inline:12px;gap:12px}
 .calendar{border:0;padding:0;border-radius:0}
 .monthHeading{margin-bottom:20px}

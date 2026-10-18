@@ -6,8 +6,8 @@ import {hairNote,availableBookingDates,availableBookingTimes,completeBooking} fr
 const draft={id:'preserved',designerId:'yoona',serviceId:'cut',date:availableBookingDates('yoona')[0],time:'18:00',note:'현재 헤어: 단발\n\n디자이너에게 전하고 싶은 말: 앞머리는 유지해 주세요.\n사진도 함께 볼게요.',noteEdited:true};
 test('changing service and schedule preserves edited note, identity and unrelated selection through saving',()=>{
   const changed=selectBookingService(draft,'perm');
-  assert.deepEqual(changed,{...draft,serviceId:'perm'});
-  assert.deepEqual(selectBookingService(draft,'cut'),{...draft,serviceId:'',time:''});
+  assert.deepEqual(changed,{...draft,serviceId:'cut',selectedServiceIds:['cut','perm'],time:''});
+  assert.deepEqual(selectBookingService(draft,'cut'),{...draft,serviceId:'',selectedServiceIds:[],time:''});
   assert.strictEqual(selectBookingDate(draft,draft.date),draft);
   const scheduled=selectBookingDate(changed,availableBookingDates('yoona')[1]);
   assert.deepEqual(scheduled,{...changed,date:availableBookingDates('yoona')[1],time:''});
@@ -15,12 +15,13 @@ test('changing service and schedule preserves edited note, identity and unrelate
   const bookings=completeBooking([],stored);
   assert.equal(bookings[0].note,draft.note);
   assert.equal(bookings[0].id,draft.id);
-  assert.equal(bookings[0].serviceId,'perm');
+  assert.equal(bookings[0].serviceId,'cut');
+  assert.deepEqual(bookings[0].selectedServiceIds,['cut','perm']);
 });
 test('only an unedited generated note is invalidated when the service changes',()=>{
   const generated={...draft,note:hairNote(null,{},'cut'),noteEdited:false};
   assert.equal(selectBookingService(generated,'perm').note,'');
-  assert.deepEqual(selectBookingService(generated,'cut'),{...generated,serviceId:'',time:'',note:''});
+  assert.deepEqual(selectBookingService(generated,'cut'),{...generated,serviceId:'',selectedServiceIds:[],time:'',note:''});
 });
 test('reading a note omits empty generated fields and preserves custom paragraphs and line breaks',()=>{
   const note=hairNote(null,{mood:['내추럴'],care:['자연 건조']},'cut');
