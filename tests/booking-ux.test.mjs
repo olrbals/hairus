@@ -7,7 +7,7 @@ const draft={id:'preserved',designerId:'yoona',serviceId:'cut',date:availableBoo
 test('changing service and schedule preserves edited note, identity and unrelated selection through saving',()=>{
   const changed=selectBookingService(draft,'perm');
   assert.deepEqual(changed,{...draft,serviceId:'perm'});
-  assert.strictEqual(selectBookingService(draft,'cut'),draft);
+  assert.deepEqual(selectBookingService(draft,'cut'),{...draft,serviceId:'',time:''});
   assert.strictEqual(selectBookingDate(draft,draft.date),draft);
   const scheduled=selectBookingDate(changed,availableBookingDates('yoona')[1]);
   assert.deepEqual(scheduled,{...changed,date:availableBookingDates('yoona')[1],time:''});
@@ -20,7 +20,7 @@ test('changing service and schedule preserves edited note, identity and unrelate
 test('only an unedited generated note is invalidated when the service changes',()=>{
   const generated={...draft,note:hairNote(null,{},'cut'),noteEdited:false};
   assert.equal(selectBookingService(generated,'perm').note,'');
-  assert.strictEqual(selectBookingService(generated,'cut'),generated);
+  assert.deepEqual(selectBookingService(generated,'cut'),{...generated,serviceId:'',time:'',note:''});
 });
 test('reading a note omits empty generated fields and preserves custom paragraphs and line breaks',()=>{
   const note=hairNote(null,{mood:['내추럴'],care:['자연 건조']},'cut');

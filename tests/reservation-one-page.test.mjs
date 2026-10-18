@@ -33,7 +33,7 @@ test('duration and cutoff invalidate late times, while a compatible service keep
  assert.equal(selectBookingDate(draft,availableBookingDates('yoona')[1]).time,'');
 });
 test('closed dates and stable occupied slots are rejected again during submission',()=>{
- const full=demoDates().find(isBookingDateFull);
+ const full=demoDates(new Date(2026,9,18)).find(isBookingDateFull);
  assert.ok(full);assert.ok(!availableBookingDates('yoona').includes(full));
  assert.deepEqual(availableBookingTimes('cut',full,'yoona'),[]);
  assert.ok(!validBooking({...draft,date:full}));
