@@ -4,5 +4,64 @@ import {useRouter} from "next/navigation";
 import {useEffect} from "react";
 import {writeEntry} from "@/lib/entry-state";
 import {Button} from "@/components/primitives";
-const stories=[{title:"My Hair",eyebrow:"01 / UNDERSTAND",heading:"지금의 나를, 먼저.",body:"현재 헤어의 특징을 살펴보고, 나만의 헤어 프로필로 정리해요.",note:"나를 이해하는 헤어 경험"},{title:"My Taste",eyebrow:"02 / DISCOVER",heading:"취향은 발견하는 것.",body:"눈길이 가는 스타일을 모아보세요. 나다운 헤어의 방향이 조금씩 선명해져요.",note:"마음에 드는 순간을 아카이브"},{title:"Hair Note",eyebrow:"03 / CONNECT",heading:"나의 취향을, 디자이너에게.",body:"원하는 스타일과 디테일을 담아, 나에게 맞는 디자이너와 상담을 준비해요.",note:"취향이 대화로 이어지는 순간"}];
-export function Onboarding({step}:{step:1|2|3}){const router=useRouter();const story=stories[step-1];useEffect(()=>{writeEntry({onboardingStep:step});},[step]);function finish(){writeEntry({onboardingDone:true});router.push('/login');}return <main id="main" className="entry-screen onboarding" key={step}><header className="entry-header hairus-page-header"><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button onClick={finish}>건너뛰기</button></header><div className="onboarding-story"><p className="eyebrow">{story.eyebrow}</p><h1>{story.title}</h1><div className="editorial-rule"/><p className="editorial-note">{story.note}</p><h2>{story.heading}</h2><p className="onboarding-body">{story.body}</p></div><footer className="onboarding-footer"><nav aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={`/onboarding/${n}`} aria-current={n===step?'step':undefined} aria-label={`온보딩 ${n}`}>{String(n).padStart(2,'0')}</Link>)}</nav><div className="entry-actions">{step>1&&<Link className="back-text" href={`/onboarding/${step-1}`}>이전</Link>}<Button onClick={()=>step===3?finish():router.push(`/onboarding/${step+1}`)}>{step===3?'시작하기':'다음'}</Button></div></footer></main>;}
+import styles from "./onboarding.module.css";
+
+const stories = [
+  {title:"Understand My Hair", body:<>나의 헤어 정보를 분석하고,<br/>나에게 맞는 스타일을 추천받아요.</>},
+  {title:"Explore Your Style", body:<>다양한 헤어스타일을 탐색하고,<br/>마음에 드는 스타일을 발견해요.</>},
+  {title:"The Hair Note", body:<>나의 헤어 정보를 담아,<br/>예약까지 간편하게 이어가요.</>},
+];
+const asset = "/assets/figma/onboarding/";
+
+// Editorial examples only: never read or write user hair or appointment data.
+function HairProfilePreview() {
+  return <div className={styles.profilePreview}>
+    <div className={`${styles.card} ${styles.natural}`}>
+      <div className={styles.naturalCopy}><h2>NATURAL</h2><p>자연스러운 결이 만들어내는<br/>편안하고 세련된 분위기</p>
+        <div className={styles.keywords}>{["# 내추럴","# 퓨어","# 웨이브"].map(label=><span key={label}>{label}</span>)}</div>
+      </div>
+      <div className={styles.naturalImage}><img src={`${asset}natural.png`} alt="자연스러운 긴 웨이브 헤어"/></div>
+    </div>
+    <div className={`${styles.card} ${styles.about}`}>
+      <h3>ABOUT ME</h3><p className={styles.aboutSummary}>계란형 · 긴 기장 · 반곱슬 · 흑갈색 모</p><h3>A NOTE FOR YOU</h3>
+      <div className={styles.noteRow}><div className={styles.noteImage}><img src={`${asset}note.png`} alt=""/></div>
+        <p>자연스러운 결이 가장 큰 매력이에요.<br/>긴 머리에 부드러운 레이어와 웨이브를 더해보세요. 차분한 흑갈색이 내추럴한 분위기를 더욱 살려줄 거예요.</p>
+      </div>
+    </div>
+  </div>;
+}
+function StylePreview() {
+  return <div className={styles.stylePreview}>
+    {[{image:"airy.png",label:"에어리 레이어드 컷",crop:styles.airy},{image:"tassel.png",label:"테슬컷",crop:styles.tassel}].map(style=>
+      <figure key={style.image} className={`${styles.card} ${styles.styleCard}`}>
+        <div className={`${styles.styleImage} ${style.crop}`}><img src={`${asset}${style.image}`} alt={style.label}/></div><figcaption>{style.label}</figcaption>
+      </figure>)}
+  </div>;
+}
+function HairNotePreview() {
+  return <div className={styles.hairNotePreview}>
+    <div className={`${styles.card} ${styles.hairNote}`}><h2>HAIR NOTE</h2><dl>
+      <div><dt>MY HAIR</dt><dd>긴 레이어드 · 반곱슬 · 흑갈색</dd></div>
+      <div><dt>DESIRED STYLE</dt><dd>에어리 레이어드 컷</dd></div>
+      <div><dt>MY REQUEST</dt><dd>자연스러운 볼륨과 가벼운 레이어드</dd></div>
+    </dl></div>
+    <div className={`${styles.card} ${styles.appointment}`}><h3>MY APPOINTMENT</h3>
+      <p className={styles.designer}>소희 디자이너</p><p className={styles.salon}>아르보 성수</p>
+      <p className={styles.date}>11월 24일 <span>오후 4:00</span></p><p className={styles.ready}>예약 준비 완료</p>
+    </div>
+  </div>;
+}
+export function Onboarding({step}:{step:1|2|3}) {
+  const router=useRouter(); const story=stories[step-1];
+  useEffect(()=>{writeEntry({onboardingStep:step});},[step]);
+  function finish(){writeEntry({onboardingDone:true});router.push("/login");}
+  return <main id="main" className={`entry-screen ${styles.screen}`}>
+    <header className={styles.header}><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button type="button" onClick={finish}>건너뛰기</button></header>
+    <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas}>{step===1?<HairProfilePreview/>:step===2?<StylePreview/>:<HairNotePreview/>}</div></div>
+    <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
+    <footer className={styles.footer}>
+      <nav className={styles.progress} aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={`/onboarding/${n}`} aria-current={n===step?'step':undefined} aria-label={`온보딩 ${n}`}><span/></Link>)}</nav>
+      <Button variant="glass" className={styles.next} onClick={()=>step===3?finish():router.push(`/onboarding/${step+1}`)}>{step===3?'시작하기':'다음'}</Button>
+    </footer>
+  </main>;
+}
