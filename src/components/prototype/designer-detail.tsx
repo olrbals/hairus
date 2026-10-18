@@ -10,6 +10,7 @@ import {recommend} from '@/lib/prototype/logic';
 import {SaveButton} from './shared';
 import {usePrototype} from './store';
 import styles from './designer-detail.module.css';
+import bookingStyles from './booking.module.css';
 import {ReviewSection} from './reviews';
 import {designerReviews} from '@/lib/prototype/reviews';
 
@@ -57,8 +58,9 @@ export function DesignerPage({id}:{id:string}){
   const introduction=`“ 작은 변화로도, 고객님의 가장 자연스러운 매력을 찾을 수 있도록 함께 고민하는 ${item.name} 디자이너입니다. ”`;
   const userLabel=`${userName}님이`;
   const matchComparison=matchComparisons[matchIndex];
+  const fixedBooking=item.id==='yoona'||item.id==='sohee';
 
-  return <main id="main" className={styles.page}>
+  return <main id="main" className={`${styles.page} ${fixedBooking?bookingStyles.detailPage:''}`}>
     <header className={`${styles.header} hairus-page-header`}>
       <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><HeaderBackIcon/></button>
       <span>{item.id==='yoona'?'윤아 디자이너':'디자이너'}</span>
@@ -138,6 +140,6 @@ export function DesignerPage({id}:{id:string}){
       <Link className={styles.textLink} href={`/salons/${salon.id}`}>자세히 보기 →</Link>
     </section>}
 
-    <div className={styles.booking}><Link className="primary-cta" href={`/reservation/${item.id}/service`}>예약하기</Link></div>
+    <div className={fixedBooking?`${bookingStyles.footer} ${bookingStyles.detailFooter}`:styles.booking}><Link className="primary-cta" href={`/reservation/${item.id}/service`}>예약하기</Link></div>
   </main>;
 }

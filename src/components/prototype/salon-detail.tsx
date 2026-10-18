@@ -12,6 +12,7 @@ import {usePrototype} from './store';
 import {HeaderBackIcon} from '@/components/primitives';
 import designerStyles from './designer-detail.module.css';
 import styles from './salon-detail.module.css';
+import bookingStyles from './booking.module.css';
 
 const sections=[['notice','공지'],['price','가격'],['designers','디자이너'],['reviews','후기'],['information','정보']] as const;
 const salonSectionOffset=112; // 64px shared header + 48px section navigation.
@@ -72,14 +73,13 @@ export function ArvoSalonPage(){
     window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-salonSectionOffset,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   }
   const firstDesigner=arvoTeam[0];
-  return <main id="main" className={`${styles.page} ${styles.salonPage}`} ref={pageRef}>
+  return <main id="main" className={`${styles.page} ${styles.salonPage} ${bookingStyles.detailPage}`} ref={pageRef}>
     <SalonHeader title="아르보 성수" back="/explore?category=salon" save/>
     <img className={styles.hero} src={arvoInterior[0].src} alt="아르보 성수의 햇빛이 드는 매장 내부" fetchPriority="high"/>
     <div className={styles.profile}>
       <h1>아르보 성수</h1>
       <p>성수역 2번 출구 도보 3분 · 서울시 성동구 연무장길</p>
       <a href="#reviews" onClick={event=>goToSection(event,'reviews')}>★ 4.89&nbsp; · &nbsp;리뷰 2,004<span className={styles.srOnly}> · 데모 수치</span></a>
-      <BookingLink/>
     </div>
     <nav className={styles.sectionNav} aria-label="매장 상세 섹션">{sections.map(([id,label])=><a key={id} href={`#${id}`} aria-current={active===id?'location':undefined} onClick={event=>goToSection(event,id)}>{label}</a>)}</nav>
 
@@ -121,7 +121,7 @@ export function ArvoSalonPage(){
         <li><button type="button" disabled><img src={localAsset('instagram.svg')} alt="" width="31.0085" height="31"/><span>인스타그램</span></button></li>
       </ul></div>
     </section>
-    <footer className={styles.booking}><BookingLink/></footer>
+    <footer className={`${bookingStyles.footer} ${bookingStyles.detailFooter}`}><BookingLink/></footer>
   </main>;
 }
 

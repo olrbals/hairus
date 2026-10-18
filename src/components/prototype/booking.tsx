@@ -7,7 +7,7 @@ import {Button,HeaderBackIcon} from '@/components/primitives';
 import {designers,services,salons,serviceCategories,bookingServiceName,type ServiceCategory} from '@/lib/prototype/catalog';
 import {hairNote,demoDates,availableBookingDates,clearClosedBookingDate,demoTimes,availableBookingTimes,isBookingDateFull,selectedBookingServiceIds,selectedBookingServices,bookingServicesTotal,bookingServicesLabel,validBooking,completeBooking,type BookingDraft} from '@/lib/prototype/logic';
 import {findArvoDesigner,offDaysLabel,isDesignerDayOff} from '@/lib/prototype/arvo';
-import {bookingDateLabel,bookingVisitLabel,calendarCells,noteSections,selectBookingDate,selectBookingService} from '@/lib/prototype/booking-presentation';
+import {bookingDateLabel,bookingVisitLabel,calendarCells,selectBookingDate,selectBookingService} from '@/lib/prototype/booking-presentation';
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {usePrototype} from './store';
 import styles from './booking.module.css';
@@ -31,19 +31,6 @@ function DesignerIdentity({id}:{id:string}){
   const designer=designers.find(person=>person.id===id);
   if(!designer)return null;
   return <div className={styles.designer}><img src={designer.image} alt="" width="64" height="86"/><div><strong>{designer.name} 디자이너</strong><span>{salons.find(salon=>salon.id===designer.salonId)?.name||(findArvoDesigner(id)?'아르보 성수':'')} · {designer.location}</span></div></div>;
-}
-function NoteContent({note}:{note:string}){
-  const sections=noteSections(note);
-  return <dl className={styles.noteFields}>{sections.map((section,index)=><div key={index}>{section.label&&<dt>{section.label}</dt>}<dd>{section.value}</dd></div>)}</dl>;
-}
-function NotePreview({draft,editHref}:{draft:BookingDraft;editHref?:string}){
-  if(draft.shareNote===false)return <section className={styles.noteCard} aria-label="HAIR NOTE 전달 여부"><h2 className={styles.editorial}>HAIR NOTE</h2><p>디자이너에게 전달하지 않아요.</p></section>;
-  const preview=noteSections(draft.note).map(section=>section.label?`${section.label}: ${section.value}`:section.value).join('\n');
-  return <section className={styles.noteCard} aria-label="상담 노트 미리보기">
-    <div className={styles.cardHeading}><h2 className={styles.editorial}>HAIR NOTE</h2>{editHref&&<Link className={styles.edit} href={editHref} aria-label="노트 수정">수정</Link>}</div>
-    <p className={styles.preview}>{preview||'상담 노트를 작성해 주세요.'}</p>
-    {draft.note&&<details className={styles.noteDetails}><summary>노트 전체 보기</summary><NoteContent note={draft.note}/></details>}
-  </section>;
 }
 // Verified Figma calendar 1110:2681, sticky profile/nav 1119:3148,
 // and MY RESERVATION 1113:2856. CTA follows the shared component by user request.
@@ -202,7 +189,7 @@ export function BookingSummary({draft,editPrefix}:{draft:BookingDraft;editPrefix
   const service=services.find(service=>service.id===draft.serviceId);
   const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||(findArvoDesigner(draft.designerId)?'아르보 성수':'');
   return <section className={styles.summary} aria-label="예약 요약">
-    <div className={styles.summaryIdentity}><span className={styles.eyebrow}>YOUR APPOINTMENT</span><h2>{designer?.name} 디자이너</h2>{salon&&<p>{salon}</p>}</div>
+    <div className={styles.summaryIdentity}><span className={styles.eyebrow}>MY APPOINTMENT</span><h2>{designer?.name} 디자이너</h2>{salon&&<p>{salon}</p>}</div>
     <dl>
       <div><dt>시술</dt><dd><strong>{draft.serviceName||(selectedBookingServices(draft).length?bookingServicesLabel(draft):'시술 선택 전')}</strong>{editPrefix&&<Link className={styles.edit} href={`${editPrefix}/service?return=review`} aria-label="시술 수정">수정</Link>}</dd></div>
       <div><dt>일정</dt><dd><span>{bookingDateLabel(draft.date)}<strong className={styles.summaryTime}>{draft.time}</strong></span>{editPrefix&&<Link className={styles.edit} href={`${editPrefix}/schedule?return=review`} aria-label="일정 수정">수정</Link>}</dd></div>
@@ -217,12 +204,11 @@ export function BookingComplete({id}:{id:string}){
   const booking=state.bookings.find(booking=>booking.id===id);
   return <BookingPage title="예약 완료" back="/my/reservations"><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
-      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약 정보를 저장했어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
+      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>
-      <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>시술 금액과 결제는 방문 상담 후 안내받으세요.</p></div>
-      <NotePreview draft={booking}/>
-      <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my/reservations">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
-    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/my/reservations">MY 예약 내역 보기</Link></>}
+      <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>최종 시술 금액은 상담 후 결정됩니다.</p></div>
+      <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
+    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/my">MY 예약 내역 보기</Link></>}
   </div></BookingPage>;
 }
 
