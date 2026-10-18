@@ -15,6 +15,8 @@
 .progress span{display:block;width:8px;height:8px;border-radius:50%;background:#d9d9d9}
 .progress [aria-current="step"] span{background:#000}
 .footer .next{width:100%;height:56px;min-height:56px;border-radius:4px;font-size:14px;font-weight:500;line-height:1.3;padding:0 24px;background:#f6f6f6}
+/* Only onboarding 03 uses the shared black primary CTA; steps 01 and 02 remain glass. */
+.footer .nextPrimary{background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .card{border:1px solid rgba(255,252,242,.24);background:rgba(255,255,255,.9);box-shadow:var(--glass-shadow);border-radius:8px}
 .profilePreview{width:353px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
 .natural{width:298px;height:159px;position:relative;padding:12px}

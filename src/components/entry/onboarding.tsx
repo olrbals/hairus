@@ -61,7 +61,7 @@ export function Onboarding({step}:{step:1|2|3}) {
     <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
     <footer className={styles.footer}>
       <nav className={styles.progress} aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={`/onboarding/${n}`} aria-current={n===step?'step':undefined} aria-label={`온보딩 ${n}`}><span/></Link>)}</nav>
-      <Button variant="glass" className={styles.next} onClick={()=>step===3?finish():router.push(`/onboarding/${step+1}`)}>{step===3?'시작하기':'다음'}</Button>
+      <Button variant={step===3?"primary":"glass"} className={step===3?`${styles.next} ${styles.nextPrimary}`:styles.next} onClick={()=>step===3?finish():router.push(`/onboarding/${step+1}`)}>{step===3?'시작하기':'다음'}</Button>
     </footer>
   </main>;
 }
