@@ -37,3 +37,6 @@
 .styleEditor>span{font-size:12px;font-weight:600;color:#333}
 .styleEditor textarea{display:block;box-sizing:border-box;width:100%;height:auto;min-height:0;padding:12px;border:1px solid #dedede;border-radius:4px;background:#fff;color:#555;font:400 14px/1.3 Pretendard,sans-serif;letter-spacing:-.02em;resize:none;overflow:hidden;white-space:pre-wrap}
 .styleEditor textarea:focus-visible{outline:2px solid #20201e;outline-offset:1px}
+
+/* Same spacing as the Explore filter sheet's apply action. */
+.sheet :global(.button){margin-top:32px}

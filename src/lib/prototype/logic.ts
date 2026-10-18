@@ -8,7 +8,14 @@ export type Booking=BookingDraft&{createdAt:string;mode:'demo'};
 // Preserve old single-service drafts while storing new multi-service selections.
 export function selectedBookingServiceIds(draft:Pick<BookingDraft,'serviceId'|'selectedServiceIds'>):string[]{
  const source=Array.isArray(draft.selectedServiceIds)?draft.selectedServiceIds:(draft.serviceId?[draft.serviceId]:[]);
- return [...new Set(source)].filter(id=>services.some(service=>service.id===id));
+ const selected:string[]=[];
+ for(const id of [...new Set(source)]){
+  const service=services.find(item=>item.id===id);
+  if(!service)continue;
+  const sameCategory=selected.findIndex(existing=>services.find(item=>item.id===existing)?.category===service.category);
+  if(sameCategory>=0)selected[sameCategory]=id;else selected.push(id);
+ }
+ return selected;
 }
 export function selectedBookingServices(draft:Pick<BookingDraft,'serviceId'|'selectedServiceIds'>){
  return selectedBookingServiceIds(draft).map(id=>services.find(service=>service.id===id)!);

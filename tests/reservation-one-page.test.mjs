@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {services,serviceCategories,bookingServiceName} from '../src/lib/prototype/catalog.ts';
-import {availableBookingDates,availableBookingTimes,bookingServicesTotal,bookingServicesLabel,demoDates,isBookingDateFull,validBooking,completeBooking,hairNote} from '../src/lib/prototype/logic.ts';
+import {availableBookingDates,availableBookingTimes,bookingServicesTotal,bookingServicesLabel,selectedBookingServiceIds,demoDates,isBookingDateFull,validBooking,completeBooking,hairNote} from '../src/lib/prototype/logic.ts';
 import {selectBookingService,selectBookingDate,updateNoteSection,bookingVisitLabel} from '../src/lib/prototype/booking-presentation.ts';
 
 const date=availableBookingDates('yoona').find(day=>Number(day.slice(-2))%2===1);
@@ -134,4 +134,7 @@ test('from 2026-11-16 sample occupied times are released, service cutoffs and of
  assert.ok(!later.includes('20:30'));
  assert.ok(!availableBookingTimes('perm',after,'yoona',now).includes('19:00'));
  assert.deepEqual(availableBookingTimes('cut','2026-11-17','yoona',now),[]);
+});
+test('legacy selections from one category show only the latest selected service',()=>{
+ assert.deepEqual(selectedBookingServiceIds({serviceId:'cut-men',selectedServiceIds:['cut-men','color','cut-men-design']}),['cut-men-design','color']);
 });
