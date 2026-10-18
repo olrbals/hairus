@@ -49,35 +49,35 @@ export function My({view}:{view?:string}){
   <section className="my-user-info" aria-label="사용자 정보">
    <img className="my-avatar" src={myAsset('avatar.png')} alt=""/>
    <div>
-    <h2>{name==='사용자'?'사용자닉네임':name}</h2>
+    <h2>{name}</h2>
     <p className="my-edit-label"><span>내 정보 수정</span><Arrow name="edit-chevron.svg"/></p>
    </div>
   </section>
 
   <div className="my-dashboard-sections">
-  <Link className="my-profile-card" href={profile?'/analysis/result?from=my':'/analysis/guide'} data-figma-node="939:9458">
-   <div className="my-profile-main">
+  <div className="my-profile-card" data-figma-node="939:9458">
+   <Link className="my-profile-main" href={profile?'/analysis/result?from=my':'/analysis/guide'}>
     <div className="my-card-label"><span>MY HAIR PROFILE</span><Arrow name="profile-arrow.svg"/></div>
     {profile?<div className="my-profile-copy"><h2><span>{profileTitle||'헤어 정보 미입력'}</span>{profileSubtitle&&<span>{profileSubtitle}</span>}</h2><p>{profileMeta.join(' · ')}</p></div>:<div className="my-profile-copy"><h2><span>긴 레이어드</span><span>자연스러운 웨이브</span></h2><p>허리 기장 · 반곱슬 · 흑갈색</p></div>}
-   </div>
+   </Link>
    <div className="my-preference"><p className="my-card-label">MY PREFERENCE</p><div className="my-tag-list">{preferenceTags.map(tag=><span key={tag}># {tag}</span>)}</div></div>
-  </Link>
+  </div>
 
   <section className="my-upcoming">
-   <Link className="my-section-link" href="/my/reservations"><span>다가오는 예약</span><Arrow name="section-chevron.svg"/></Link>
-   {booking?<Link className="my-booking-card" href={`/reservations/${booking.id}`}><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></Link>:<div className="my-booking-card"><strong>11월 04일 · 오후 2:00</strong><p>윤아 디자이너 · 아르보 성수</p></div>}
+   <div className="my-section-link"><span>다가오는 예약</span><Arrow name="section-chevron.svg"/></div>
+   {booking?<div className="my-booking-card"><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></div>:<div className="my-booking-card"><strong>11월 04일 · 오후 2:00</strong><p>윤아 디자이너 · 아르보 성수</p></div>}
   </section>
 
   <section className="my-menu-section" aria-labelledby="my-activity">
    <div className="my-menu-title"><h2 id="my-activity">MY ACTIVITY</h2><p>나의 활동</p></div>
    <Link className="my-menu-row" href="/my/reservations"><span>예약 내역</span><Arrow name="row-chevron.svg"/></Link>
-   <Link className="my-menu-row" href="/my/recent"><span>최근 조회한 콘텐츠</span><Arrow name="row-chevron.svg"/></Link>
+   <div className="my-menu-row"><span>최근 조회한 콘텐츠</span><Arrow name="row-chevron.svg"/></div>
   </section>
 
   <section className="my-menu-section" aria-labelledby="my-settings">
    <div className="my-menu-title"><h2 id="my-settings">SETTINGS</h2><p>설정</p></div>
-   <Link className="my-menu-row" href="/my/settings"><span>알림</span><Arrow name="row-chevron.svg"/></Link>
-   <Link className="my-menu-row" href="/my/settings"><span>결제 수단</span><Arrow name="row-chevron.svg"/></Link>
+   <div className="my-menu-row"><span>알림</span><Arrow name="row-chevron.svg"/></div>
+   <div className="my-menu-row"><span>결제 수단</span><Arrow name="row-chevron.svg"/></div>
   </section>
- </div></div></div></main><BottomNav active="/my"/></>;
+ </div></div></div></main><BottomNav active="/my" disabled/></>;
 }
