@@ -72,6 +72,7 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
    <div className={styles.sheet}>
     <p className={styles.sheetIntro}>예약에 전달할 내용만 수정해 주세요.</p>
     {editor==='hair'||editor==='history'?(editor==='hair'?hairFields:historyFields).map(([key,label])=><fieldset key={key}><legend>{label}</legend><div className={styles.chips}>{optionsForField(key,fields[key]??null).map(option=><SelectionChip key={option.value} aria-pressed={fields[key]===option.value} onClick={()=>chooseField(key,option.value)}>{option.label}</SelectionChip>)}</div></fieldset>):editor==='style'&&wishQuestions(draft.serviceId).map(question=><fieldset key={question.key}><legend>{question.label}</legend><div className={styles.chips}>{question.options.map(option=><SelectionChip key={option} aria-pressed={wishes[question.key]===option} onClick={()=>{const next={...wishes,[question.key]:wishes[question.key]===option?'':option};setWishes(next);setText(styleRequest({...profile,...fields} as Values,draft.serviceId,next));}}>{option}</SelectionChip>)}</div></fieldset>)}
+    {editor==='style'&&<label className={styles.styleEditor}><span>디자이너에게 전달할 내용</span><textarea aria-label="DESIRED STYLE 내용 직접 수정" rows={5} maxLength={3000} value={text} onChange={event=>setText(event.target.value)}/></label>}
     {editor==='style'&&<button type="button" className={styles.rebuild} onClick={()=>setText(styleRequest({...profile,...fields} as Values,draft.serviceId,wishes))}>선택한 내용으로 다시 구성</button>}
     <Button onClick={save}>저장하기</Button>
    </div>
