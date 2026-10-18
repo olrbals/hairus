@@ -1,2 +1,47 @@
-.my-dashboard{display:flex;flex-direction:column;gap:40px;padding-bottom:88px}.my-user-info{display:flex;align-items:center;gap:12px;min-height:50px}.my-user-info .my-avatar{width:50px;height:50px;flex:none;display:block;border-radius:50%}.my-user-info h2{font-size:16px!important;font-weight:500!important;line-height:21px!important;}.my-edit-label{display:flex;align-items:center;gap:8px;margin-top:4px;color:#0008;font-size:12px;line-height:16px}.my-arrow{display:block;flex:none}.my-profile-card{display:block;min-height:244px;overflow:hidden;border:1px solid rgba(255,255,255,.48);border-radius:16px;background:rgba(255,255,255,.07);box-shadow:inset 0 1px 1px #fff8,0 4px 12px #0000000d;padding:21px 17px 16px}.my-profile-main{min-height:126px;padding-bottom:16px;border-bottom:1px solid #00000014}.my-card-label{display:flex;align-items:center;justify-content:space-between;margin:0;color:#0008;font-size:12px;font-weight:600;line-height:16px;}.my-profile-copy{margin-top:12px}.my-profile-copy h2{max-width:250px;font-size:22px!important;font-weight:600!important;line-height:29px!important;}.my-profile-copy p{margin-top:8px;color:#0008;font-size:12px;line-height:16px;}.my-preference{padding-top:16px}.my-tag-list{display:flex;gap:12px;overflow:hidden;margin-top:12px}.my-tag-list span{display:block;flex:none;max-width:calc((100% - 24px)/3);overflow:hidden;border:1px solid #00000026;border-radius:18px;padding:7px 16px;white-space:nowrap;text-overflow:ellipsis;color:#000b;font-size:12px;font-weight:500;line-height:18px;}.my-empty-preference{margin-top:12px;color:#0008;font-size:12px;line-height:18px}.my-upcoming{display:flex;flex-direction:column;gap:16px}.my-section-link{display:flex;align-items:center;justify-content:space-between;min-height:16px;color:#0008;font-size:14px;font-weight:500;line-height:16px;}.my-booking-card,.my-booking-empty{display:block;min-height:81px;border:1px solid #00000029;border-radius:4px;padding:16px 25px}.my-booking-card strong{display:block;font-size:22px;font-weight:600;line-height:29px;}.my-booking-card p,.my-booking-empty{margin:4px 0 0;color:#0008;font-size:12px;line-height:16px;}.my-booking-empty{margin:0;display:flex;align-items:center}.my-menu-section{display:flex;flex-direction:column}.my-menu-title{margin-bottom:20px}.my-menu-title h2{font-family:var(--font-editorial);font-size:20px!important;font-weight:700!important;line-height:24px!important;}.my-menu-title p{margin-top:2px;color:#0008;font-size:12px;line-height:16px;}.my-menu-row{display:flex;align-items:center;justify-content:space-between;min-height:64px;border-bottom:1px solid #00000029;color:#000c;font-size:14px;font-weight:500;line-height:20px;}.my-menu-row:last-child{border-bottom:0}.my-menu-row .my-arrow{margin-right:1px}@media(max-width:360px){.my-dashboard{gap:34px}.my-profile-card{padding-inline:15px}.my-tag-list{gap:8px}.my-tag-list span{padding-inline:12px}.my-booking-card,.my-booking-empty{padding-inline:16px}}
-.my-page{font-size:14px;line-height:1.6}.my-page-content{padding:24px 23px 0}.my-page-content>h1{margin:0 0 36px;font-family:var(--font-editorial);font-size:44px;font-weight:600;line-height:1.1}.my-profile-copy h2 span{display:block}
+/* Figma 939:9093, 939:9185 and 945:9545. Tracking comes from globals.css. */
+.mobile-shell:has(.my-page){padding-bottom:0}
+.my-page{min-height:100dvh;background:#fff;color:#20201e;font-family:var(--font-sans);font-size:14px;line-height:1.3}
+.my-page-content{padding:0 23px 88px}
+.my-page-content>h1{height:78px;margin:0 1px 24px;padding:24px 0 12px;font-family:var(--font-editorial);font-size:32px;font-weight:700;line-height:1.3}
+.my-dashboard{display:flex;flex-direction:column;gap:28px}
+.my-dashboard-sections{display:flex;flex-direction:column;gap:40px}
+.my-user-info{display:flex;align-items:center;gap:12px;height:50px}
+.my-user-info .my-avatar{display:block;flex:none;width:50px;height:50px;border-radius:50%}
+.my-user-info h2{margin:0;font-size:16px;font-weight:500;line-height:21px;color:#000}
+.my-edit-label{display:flex;align-items:center;gap:8px;height:16px;margin-top:4px;color:rgba(0,0,0,.5);font-size:12px;line-height:1.3}
+.my-edit-label>span:first-child{width:57px;flex:none}
+.my-arrow-slot{position:relative;display:flex;flex:none;align-items:center;justify-content:center}
+.my-arrow-slot>span{position:relative;display:block;width:100%;height:100%}
+.my-arrow{position:absolute;display:block;max-width:none}
+.my-arrow-slot--edit-chevron{width:4px;height:8px}
+.my-arrow-slot--edit-chevron .my-arrow{left:-.28284px;top:-.282845px}
+.my-arrow-slot--section-chevron{width:4px;height:8px}
+.my-arrow-slot--section-chevron .my-arrow,.my-arrow-slot--row-chevron .my-arrow{left:-.5px;top:-.5px}
+.my-arrow-slot--row-chevron{width:6px;height:12px}
+.my-arrow-slot--profile-arrow{width:9.532294px;height:7.289402px}
+.my-arrow-slot--profile-arrow>span{width:12px;height:0;flex:none;transform:rotate(-37.41deg)}
+.my-arrow-slot--profile-arrow .my-arrow{left:0;top:-4.418375px}
+/* Match the rendered tint of Figma's refractive glass lens on white. */
+.my-profile-card{display:flex;flex-direction:column;gap:20px;height:244px;padding:20px 16px;border:1px solid rgba(255,255,255,.48);border-radius:16px;background:#f6f6f6;box-shadow:var(--glass-shadow);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.my-profile-main{display:flex;flex:none;flex-direction:column;gap:12px;height:126px;padding-bottom:16px;border-bottom:.8px solid rgba(0,0,0,.08)}
+.my-card-label{display:flex;flex:none;align-items:center;justify-content:space-between;min-height:16px;margin:0;color:rgba(0,0,0,.5);font-size:12px;font-weight:600;line-height:1.3}
+.my-profile-copy{flex:none;min-height:82px}
+.my-profile-copy h2{margin:0;color:rgba(0,0,0,.8);font-size:22px;font-weight:600;line-height:29px}
+.my-profile-copy h2 span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.my-profile-copy p{margin-top:8px;color:rgba(0,0,0,.5);font-size:12px;line-height:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.my-preference{display:flex;flex:none;flex-direction:column;gap:12px;padding-bottom:16px}
+.my-tag-list{display:flex;gap:12px}
+.my-tag-list span{display:block;flex:0 1 auto;min-width:0;max-width:100%;overflow:hidden;padding:8px 16px;border:1px solid rgba(255,255,255,.48);border-radius:12px;background:rgba(0,0,0,.12);box-shadow:var(--glass-shadow);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:rgba(0,0,0,.7);font-size:12px;font-weight:500;line-height:16px;white-space:nowrap;text-overflow:ellipsis}
+.my-upcoming{display:flex;flex-direction:column;gap:12px}
+.my-section-link{display:flex;align-items:center;justify-content:space-between;min-height:16px;color:rgba(0,0,0,.5);font-size:12px;font-weight:600;line-height:1.3}
+.my-booking-card{display:flex;flex-direction:column;gap:4px;height:81px;padding:16px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.16)}
+.my-booking-card strong{display:block;color:rgba(0,0,0,.8);font-size:22px;font-weight:600;line-height:29px}
+.my-booking-card p{margin:0;color:rgba(0,0,0,.5);font-size:12px;line-height:16px}
+.my-menu-section{display:flex;flex-direction:column}
+.my-menu-title{height:46px;margin-bottom:20px}
+.my-menu-title h2{margin:0;font-family:var(--font-editorial);font-size:20px;font-weight:700;line-height:26px}
+.my-menu-title p{margin-top:4px;color:#666460;font-size:12px;line-height:16px}
+.my-menu-row{display:flex;align-items:flex-start;justify-content:space-between;height:35px;padding-bottom:16px;border-bottom:1px solid rgba(0,0,0,.16);color:rgba(0,0,0,.8);font-size:14px;font-weight:500;line-height:18px}
+.my-menu-row+.my-menu-row{height:26px;margin-top:12px;padding-bottom:8px;border-bottom:0}
+.my-menu-row .my-arrow-slot{margin-top:3px}
+@media(max-width:360px){.my-tag-list{gap:8px}}

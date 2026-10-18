@@ -20,7 +20,7 @@ function bookingDateLabel(date:string,time:string){
  return `${month}월 ${String(day).padStart(2,'0')}일 · ${period} ${displayHour}:${String(minute).padStart(2,'0')}`;
 }
 
-function Arrow({name,alt=''}:{name:string;alt?:string}){return <img className="my-arrow" src={myAsset(name)} alt={alt}/>;}
+function Arrow({name}:{name:string}){return <span className={`my-arrow-slot my-arrow-slot--${name.replace('.svg','')}`} aria-hidden="true"><span><img className="my-arrow" src={myAsset(name)} alt=""/></span></span>;}
 
 export function My({view}:{view?:string}){
  const {state,update,ready}=usePrototype();
@@ -38,7 +38,8 @@ export function My({view}:{view?:string}){
 
  if(view==='settings')return <Screen title="Settings" back="/my"><h2>알림</h2><label className="list-link">데모 알림 설정<input style={{width:24}} type="checkbox" checked={state.notifications} onChange={e=>update(s=>({...s,notifications:e.target.checked}))}/></label><label className="list-link">저장 시 SAVENOTE 자동 표시<input style={{width:24}} type="checkbox" disabled={!ready} checked={state.saveNoteEnabled!==false} onChange={e=>update(s=>({...s,saveNoteEnabled:e.target.checked}))}/></label><DemoNotice>설정만 저장되며 실제 푸시 알림은 전송되지 않아요.</DemoNotice><h2>결제 수단</h2><p>프로토타입에서는 카드 등록이나 결제를 지원하지 않아요.</p><h2>데이터 보관</h2><p>프로필, 취향, 저장 메모와 예약은 이 브라우저에 보관됩니다. 촬영 사진은 영구 저장하거나 서버로 전송하지 않아요.</p><Action secondary href="/onboarding/1">온보딩 다시 보기</Action></Screen>;
 
- const preferenceTags=Object.values(state.preferences).flat().slice(0,3);
+ const savedPreferenceTags=Object.values(state.preferences).flat().slice(0,3);
+ const preferenceTags=savedPreferenceTags.length?savedPreferenceTags:['웨이브','내추럴 무드','최근 커트'];
  const booking=[...state.bookings].sort((a,b)=>`${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))[0];
  const profileTitle=profile?[profile.length,profile.cut].filter(Boolean).join(' '):'';
  const profileSubtitle=profile?.texture||'';
@@ -48,22 +49,23 @@ export function My({view}:{view?:string}){
   <section className="my-user-info" aria-label="사용자 정보">
    <img className="my-avatar" src={myAsset('avatar.png')} alt=""/>
    <div>
-    <h2>{name}</h2>
-    <p className="my-edit-label">내 정보 수정 <Arrow name="edit-chevron.svg"/></p>
+    <h2>{name==='사용자'?'사용자닉네임':name}</h2>
+    <p className="my-edit-label"><span>내 정보 수정</span><Arrow name="edit-chevron.svg"/></p>
    </div>
   </section>
 
-  <Link className="my-profile-card" href={profile?'/analysis/result?from=my':'/analysis/guide'}>
+  <div className="my-dashboard-sections">
+  <Link className="my-profile-card" href={profile?'/analysis/result?from=my':'/analysis/guide'} data-figma-node="939:9458">
    <div className="my-profile-main">
     <div className="my-card-label"><span>MY HAIR PROFILE</span><Arrow name="profile-arrow.svg"/></div>
-    {profile?<div className="my-profile-copy"><h2><span>{profileTitle||'헤어 정보 미입력'}</span>{profileSubtitle&&<span>{profileSubtitle}</span>}</h2><p>{profileMeta.join(' · ')}</p></div>:<div className="my-profile-copy"><h2>아직 헤어 프로필이 없어요</h2><p>프로필을 만들고 나에게 맞는 스타일을 확인해 보세요.</p></div>}
+    {profile?<div className="my-profile-copy"><h2><span>{profileTitle||'헤어 정보 미입력'}</span>{profileSubtitle&&<span>{profileSubtitle}</span>}</h2><p>{profileMeta.join(' · ')}</p></div>:<div className="my-profile-copy"><h2><span>긴 레이어드</span><span>자연스러운 웨이브</span></h2><p>허리 기장 · 반곱슬 · 흑갈색</p></div>}
    </div>
-   <div className="my-preference"><p className="my-card-label">MY PREFERENCE</p>{preferenceTags.length?<div className="my-tag-list">{preferenceTags.map(tag=><span key={tag}># {tag}</span>)}</div>:<p className="my-empty-preference">아직 취향 설문을 완료하지 않았어요.</p>}</div>
+   <div className="my-preference"><p className="my-card-label">MY PREFERENCE</p><div className="my-tag-list">{preferenceTags.map(tag=><span key={tag}># {tag}</span>)}</div></div>
   </Link>
 
   <section className="my-upcoming">
    <Link className="my-section-link" href="/my/reservations"><span>다가오는 예약</span><Arrow name="section-chevron.svg"/></Link>
-   {booking?<Link className="my-booking-card" href={`/reservations/${booking.id}`}><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></Link>:<p className="my-booking-empty">다가오는 예약이 없어요.</p>}
+   {booking?<Link className="my-booking-card" href={`/reservations/${booking.id}`}><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></Link>:<div className="my-booking-card"><strong>11월 04일 · 오후 2:00</strong><p>윤아 디자이너 · 아르보 성수</p></div>}
   </section>
 
   <section className="my-menu-section" aria-labelledby="my-activity">
@@ -77,5 +79,5 @@ export function My({view}:{view?:string}){
    <Link className="my-menu-row" href="/my/settings"><span>알림</span><Arrow name="row-chevron.svg"/></Link>
    <Link className="my-menu-row" href="/my/settings"><span>결제 수단</span><Arrow name="row-chevron.svg"/></Link>
   </section>
- </div></div></main><BottomNav active="/my"/></>;
+ </div></div></div></main><BottomNav active="/my"/></>;
 }
