@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {BottomSheet} from '@/components/bottom-sheet';
 import {Button} from '@/components/primitives';
 import {SelectionChip} from '@/components/selection-chip';
@@ -27,6 +27,13 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
  const [editor,setEditor]=useState<Editor|null>(null);
  const [fields,setFields]=useState<Partial<Values>>({});
  const [text,setText]=useState('');
+ const styleTextareaRef=useRef<HTMLTextAreaElement>(null);
+ useEffect(()=>{
+  const textarea=styleTextareaRef.current;
+  if(editor!=='style'||!textarea)return;
+  textarea.style.height='auto';
+  textarea.style.height=`${textarea.scrollHeight}px`;
+ },[editor,text]);
  const [wishes,setWishes]=useState<Record<string,string>>({});
  useEffect(()=>{const saved=readProfile();setProfile(saved?effectiveProfile(saved):null);},[profileRevision]);
  const sections=noteSections(draft.note);
@@ -42,12 +49,39 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
  const context=sections.filter(section=>['YOUR WISH','나의 취향','선호하는 분위기','평소 손질','헤어 고민'].includes(section.label)).map(section=>`${section.label} · ${section.value}`).join('\n');
  const request=sectionValue(['REQUEST','더 전하고 싶은 이야기'])??draft.noteInput?.memo??'';
  function openEditor(kind:Editor){
-  setFields({...profile});
-  // Restored overrides remain available even though the original profile is unchanged.
   const saved=draft.noteInput?.bookingProfile;
-  if(saved)setFields(current=>({...current,...saved}));
+  const nextFields:Partial<Values>={...profile,...saved};
+  // Reflect the current HAIR NOTE text, even when it differs from the saved profile.
+  if(kind==='hair'){
+   const displayed=hair.split(' · ').map(part=>part.trim());
+   for(const [key] of hairFields){
+    const existing=nextFields[key]??null;
+    const matched=optionsForField(key,existing).find(option=>
+     displayed.includes(option.value)||displayed.includes(option.label)||
+     displayed.includes(option.value.replace(/\\s*\\([^)]*\\)/g,'')));
+    if(matched)nextFields[key]=matched.value;
+   }
+  }
+  if(kind==='history'){
+   const lines=history.split('\\n').map(line=>line.trim());
+   for(const [key,label] of historyFields){
+    const line=lines.find(value=>value.startsWith(label+' · '));
+    if(line)nextFields[key]=line.slice((label+' · ').length).trim();
+   }
+  }
+  setFields(nextFields);
   setText(kind==='hair'?hair:kind==='history'?history:desired);
-  setWishes(effectiveStyleWishes({...profile,...saved} as Values,draft.serviceId,draft.noteInput?.wishes));
+  const initialWishes=effectiveStyleWishes(nextFields as Values,draft.serviceId,draft.noteInput?.wishes);
+  if(kind==='style'){
+   // Legacy notes can contain explicit wish fields without noteInput.wishes.
+   const noteWishes=sectionValue(['YOUR WISH'])||'';
+   for(const question of wishQuestions(draft.serviceId)){
+    if(draft.noteInput?.wishes?.[question.key])continue;
+    const found=question.options.find(option=>noteWishes.includes(`${question.label}: ${option}`));
+    if(found)initialWishes[question.key]=found;
+   }
+  }
+  setWishes(initialWishes);
   setEditor(kind);
  }
  function save(){
@@ -71,9 +105,9 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
   <BottomSheet open={editor!==null} onClose={()=>setEditor(null)} title={editor?editorTitles[editor]:'HAIR NOTE'} variant="default" headingAction={<button type="button" className={styles.sheetClose} onClick={()=>setEditor(null)}>닫음</button>}>
    <div className={styles.sheet}>
     <p className={styles.sheetIntro}>예약에 전달할 내용만 수정해 주세요.</p>
-    {editor==='hair'||editor==='history'?(editor==='hair'?hairFields:historyFields).map(([key,label])=><fieldset key={key}><legend>{label}</legend><div className={styles.chips}>{optionsForField(key,fields[key]??null).map(option=><SelectionChip key={option.value} aria-pressed={fields[key]===option.value} onClick={()=>chooseField(key,option.value)}>{option.label}</SelectionChip>)}</div></fieldset>):editor==='style'&&wishQuestions(draft.serviceId).map(question=><fieldset key={question.key}><legend>{question.label}</legend><div className={styles.chips}>{question.options.map(option=><SelectionChip key={option} aria-pressed={wishes[question.key]===option} onClick={()=>{const next={...wishes,[question.key]:wishes[question.key]===option?'':option};setWishes(next);setText(styleRequest({...profile,...fields} as Values,draft.serviceId,next));}}>{option}</SelectionChip>)}</div></fieldset>)}
-    {editor==='style'&&<label className={styles.styleEditor}><span>디자이너에게 전달할 내용</span><textarea aria-label="DESIRED STYLE 내용 직접 수정" rows={5} maxLength={3000} value={text} onChange={event=>setText(event.target.value)}/></label>}
-    {editor==='style'&&<button type="button" className={styles.rebuild} onClick={()=>setText(styleRequest({...profile,...fields} as Values,draft.serviceId,wishes))}>선택한 내용으로 다시 구성</button>}
+    {editor==='hair'||editor==='history'?(editor==='hair'?hairFields:historyFields).map(([key,label])=><div className={styles.filterGroup} key={key}><h3>{label}</h3><div className={styles.chips}>{optionsForField(key,fields[key]??null).map(option=><SelectionChip key={option.value} aria-pressed={fields[key]===option.value} onClick={()=>chooseField(key,option.value)}>{option.label}</SelectionChip>)}</div></div>):editor==='style'&&wishQuestions(draft.serviceId).map(question=><div className={styles.filterGroup} key={question.key}><h3>{question.label}</h3><div className={styles.chips}>{question.options.map(option=><SelectionChip key={option} aria-pressed={wishes[question.key]===option} onClick={()=>{const next={...wishes,[question.key]:wishes[question.key]===option?'':option};setWishes(next);setText(styleRequest({...profile,...fields} as Values,draft.serviceId,next));}}>{option}</SelectionChip>)}</div></div>)}
+    {editor==='style'&&<label className={styles.styleEditor}><span>디자이너에게 전달할 내용</span><textarea ref={styleTextareaRef} aria-label="DESIRED STYLE 내용 직접 수정" rows={1} maxLength={3000} value={text} onChange={event=>setText(event.target.value)}/></label>}
+
     <Button onClick={save}>저장하기</Button>
    </div>
   </BottomSheet>

@@ -43,7 +43,9 @@ export function availableBookingTimes(serviceIds:string|readonly string[],date:s
  // Do not invent bleach duration; combine only known service minutes.
  const unknownDuration=selected.some(service=>service.minutes===null);
  const knownMinutes=selected.reduce((sum,service)=>sum+(service.minutes??0),0);
- const occupied=Number(date.slice(-2))%2===0?['10:30','11:00','14:00','15:30']:['11:00','12:30','14:00','16:00'];
+ // Sample blocked slots exist only through November 15, 2026.
+ // Later dates remain subject to opening hours, total duration and regular days off.
+ const occupied=date>BOOKING_FULL_DATE_THROUGH?[]:Number(date.slice(-2))%2===0?['10:30','11:00','14:00','15:30']:['11:00','12:30','14:00','16:00'];
  // The latest one-hour service starts at 20:00, giving a 21:00 finish boundary.
  return demoTimes.filter(time=>{
   if(time>latestStart)return false;

@@ -104,3 +104,34 @@ test('a selected cut is kept after choosing color, and deselection preserves the
  assert.deepEqual(withoutColor.selectedServiceIds,['cut']);
  assert.equal(withoutColor.serviceId,'cut');
 });
+
+test('each service category is single-select while different categories stay selected',()=>{
+ const first=selectBookingService(draft,'cut-men');
+ assert.deepEqual(first.selectedServiceIds,['cut-men']);
+ const changed=selectBookingService(first,'cut-men-design');
+ assert.deepEqual(changed.selectedServiceIds,['cut-men-design']);
+ const withColor=selectBookingService(changed,'color');
+ assert.deepEqual(withColor.selectedServiceIds,['cut-men-design','color']);
+ assert.equal(bookingServicesTotal(withColor),155000);
+ const anotherCut=selectBookingService(withColor,'cut-women');
+ assert.deepEqual(anotherCut.selectedServiceIds,['cut-women','color']);
+ const removed=selectBookingService(anotherCut,'cut-women');
+ assert.deepEqual(removed.selectedServiceIds,['color']);
+ const removedColor=selectBookingService(removed,'color');
+ assert.deepEqual(removedColor.selectedServiceIds,[]);
+});
+test('from 2026-11-16 sample occupied times are released, service cutoffs and off days remain',()=>{
+ const now=new Date(2026,9,18);
+ const before='2026-11-14';
+ const after='2026-11-16';
+ assert.ok(availableBookingDates('yoona',now).includes(after));
+ const early=availableBookingTimes('cut',before,'yoona',now);
+ assert.ok(!early.includes('10:30'));
+ const later=availableBookingTimes('cut',after,'yoona',now);
+ assert.ok(later.includes('10:30'));
+ assert.ok(later.includes('11:00'));
+ assert.ok(later.includes('20:00'));
+ assert.ok(!later.includes('20:30'));
+ assert.ok(!availableBookingTimes('perm',after,'yoona',now).includes('19:00'));
+ assert.deepEqual(availableBookingTimes('cut','2026-11-17','yoona',now),[]);
+});

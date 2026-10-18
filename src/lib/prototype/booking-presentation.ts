@@ -14,7 +14,11 @@ export function noteSections(note:string){
 export function selectBookingService(draft:BookingDraft,serviceId:string):BookingDraft{
  if(!services.some(service=>service.id===serviceId))return draft;
  const current=selectedBookingServiceIds(draft);
- const ids=current.includes(serviceId)?current.filter(id=>id!==serviceId):[...current,serviceId];
+ const category=services.find(service=>service.id===serviceId)!.category;
+ const categoryIndex=current.findIndex(id=>services.find(service=>service.id===id)?.category===category);
+ const ids=current.includes(serviceId)
+  ?current.filter(id=>id!==serviceId)
+  :categoryIndex===-1?[...current,serviceId]:current.map((id,index)=>index===categoryIndex?serviceId:id);
  const selected=ids.map(id=>services.find(service=>service.id===id)!);
  const note=draft.noteEdited?draft.note.split(/\n\s*\n/).map(paragraph=>paragraph.startsWith('희망 시술:')?`희망 시술: ${selected.map(bookingServiceName).join(' · ')}`:paragraph).join('\n\n'):'';
  const time=draft.time&&availableBookingTimes(ids,draft.date,draft.designerId).includes(draft.time)?draft.time:'';
