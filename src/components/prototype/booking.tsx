@@ -12,11 +12,12 @@ import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
 import {usePrototype} from './store';
 import styles from './booking.module.css';
 import {HairNoteEditorial} from './hair-note-editorial';
+import {SelectionChip} from '@/components/selection-chip';
 import {SaveButton} from './shared';
 
 const steps=['service','schedule','note','review'];
 const labels=['시술','방문일','헤어노트','예약 확인'];
-const stickyHeight=64+86+52;
+const stickyHeight=64+86+68;
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
@@ -163,11 +164,11 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
   <div className={`${styles.content} ${styles.onePageContent}`} id="booking-content">
    <section id="booking-service" className={styles.reservationSection} tabIndex={-1} aria-label="시술 선택">
     <SectionTitle title="SERVICE" description="방문하여 받을 시술을 선택해 주세요."/>
-    <div className={styles.categories} role="group" aria-label="시술 카테고리">{serviceCategories.map(value=><button type="button" key={value} aria-pressed={category===value} onClick={()=>setCategory(value)}>{value}</button>)}</div>
+    <div className={styles.categories} role="group" aria-label="시술 카테고리">{serviceCategories.map(value=><SelectionChip key={value} aria-pressed={category===value} onClick={()=>setCategory(value)}>{value}</SelectionChip>)}</div>
     <div className={styles.services} role="group" aria-label={`${category} 시술 선택`}>{services.filter(item=>item.category===category).map(item=><button type="button" className={styles.service} key={item.id} aria-pressed={draft.serviceId===item.id} onClick={()=>{
-     const next=selectBookingService(draft,item.id);patchDraft(current=>selectBookingService(current,item.id));if(draft.time&&!next.time)setError('시술이 변경되어 기존 시간 선택을 해제했어요. 예약 가능한 시간을 다시 선택해 주세요.');
+     const next=selectBookingService(draft,item.id);patchDraft(current=>selectBookingService(current,item.id));if(draft.time&&!next.time&&next.serviceId)setError('시술이 변경되어 기존 시간 선택을 해제했어요. 예약 가능한 시간을 다시 선택해 주세요.');
     }}><span className={styles.serviceInfo}><span className={styles.serviceHeading}><strong>{item.name}</strong><span>{item.price.toLocaleString('ko-KR')}원</span></span><span className={styles.serviceDescription}>{item.description}</span><small>{item.minutes?`약 ${item.minutes}분`:'소요 시간 상담 후 안내'} · 마지막 예약 {item.lastBooking}</small></span><span className={styles.selection} aria-hidden="true">{draft.serviceId===item.id&&<Check/>}</span></button>)}</div>
-    <p className={styles.serviceSelected} aria-live="polite">{service?`${bookingServiceName(service)} · ${service.price.toLocaleString('ko-KR')}원`:'한 가지 시술을 선택해 주세요.'}</p>
+    {service?<div className={styles.visitPreview} aria-live="polite"><span>선택한 시술</span><strong>{bookingServiceName(service)} · {service.price.toLocaleString('ko-KR')}원</strong></div>:<p className={styles.serviceSelected} aria-live="polite">한 가지 시술을 선택해 주세요.</p>}
    </section>
    <section id="booking-schedule" className={styles.reservationSection} tabIndex={-1} aria-label="방문 날짜와 시간">
     <SectionTitle title="DATE" description="방문할 날짜와 시간을 선택해 주세요."/>

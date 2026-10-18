@@ -125,20 +125,20 @@
 .designer img{width:64px;height:86px;border-radius:12px}
 .designer strong{font-size:16px}
 .designer span{color:#666;font-size:12px}
-.sectionNav{position:sticky;top:150px;z-index:28;height:52px;padding:0 24px;display:flex;justify-content:space-between;background:#fff}
-.sectionNav a{height:52px;display:grid;place-items:center;min-width:0;width:20%;font-size:12px;color:#8c8c8c;border-bottom:1px solid transparent}
-.sectionNav a[aria-current=location]{border-color:#0e0e0e;color:#0e0e0e;font-weight:500}
-.onePageContent{gap:68px;padding-top:20px;padding-bottom:calc(140px + env(safe-area-inset-bottom))}
-.reservationSection{display:flex;flex-direction:column;gap:20px;scroll-margin-top:222px;min-width:0;outline:none}
+/* Matches the designer detail W-wbAW_sectionNav appearance (68px with a 20px bottom inset). */
+.sectionNav{position:sticky;top:150px;z-index:28;height:68px;padding:0 24px 20px;display:flex;align-items:stretch;justify-content:space-between;background:#fff}
+.sectionNav a{display:grid;place-items:center;min-width:48px;width:auto;padding-inline:4px;font-size:14px;color:#0e0e0e;border-bottom:1px solid transparent;text-align:center;white-space:nowrap}
+.sectionNav a[aria-current=location]{border-color:#0e0e0e;font-weight:600}
+.onePageContent{gap:68px;padding-top:20px;padding-bottom:calc(129px + env(safe-area-inset-bottom))}
+.reservationSection{display:flex;flex-direction:column;gap:20px;scroll-margin-top:242px;min-width:0;outline:none}
 .sectionTitle{display:flex;flex-direction:column;gap:6px}
 .sectionTitle h2{font-family:var(--font-editorial);font-size:36px;font-weight:700;line-height:39px;margin:0;white-space:nowrap}
 .sectionTitle p{font-size:14px;line-height:21px;color:#666}
 .categories{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.categories button{padding:9px 15px;border:0;border-radius:20px;background:#f4f4f4;color:#777;font-size:13px}
-.categories button[aria-pressed=true]{background:#000;color:#fff}
+/* Category buttons use the shared SelectionChip component and its active state. */
 .services{gap:0;border-top:1px solid #ccc}
 .service{min-height:0;padding:18px 0;border:0;border-bottom:1px solid #e5e5e5;border-radius:0;gap:12px}
-.service[aria-pressed=true]{border-color:#b8b8b8;box-shadow:none}
+.service[aria-pressed=true]{border-color:#e5e5e5;box-shadow:none}
 .serviceInfo{flex:1;min-width:0;gap:8px}
 .serviceHeading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .serviceHeading strong,.serviceHeading>span{font-size:14px;font-weight:500}
@@ -162,7 +162,8 @@
 .days button,.days>span{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;height:38px;margin:0;padding:0;border-radius:0;background:transparent}
 .days button>span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%}
 .days button[aria-pressed=true]{background:transparent;color:#fff}
-.days button[aria-pressed=true]>span{background:#000}
+/* Figma 1117:2729 — 34px black glass selection chip, white semibold numeral. */
+.days button[aria-pressed=true]>span{background:#000;border-radius:50%;font-size:16px;font-weight:600;line-height:1.3;color:#fff;box-shadow:0 1px 4px #0000000b,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
 .days button:disabled{color:#a5a5a5}
 .days button[data-full=true]{gap:0}
 .days button[data-full=true]>span{height:22px}
@@ -186,9 +187,10 @@
 .footer{z-index:31}
 .footer .message{margin-bottom:12px;color:#555}
 .visuallyHidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-@media(max-width:360px){.sectionTitle h2{font-size:34px}.serviceHeading{gap:6px}.categories{gap:6px}.categories button{padding-inline:13px}.times{gap:16px 8px}.schedule{padding-inline:8px}}
+@media(max-width:360px){.sectionTitle h2{font-size:34px}.serviceHeading{gap:6px}.categories{gap:6px}.times{gap:16px 8px}.schedule{padding-inline:8px}}
 
 .headerActions{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end}
 /* Give the last section enough scroll room to align its title below the sticky stack. */
-.reservationSection:last-child{min-height:max(0px,calc(100svh - 362px - env(safe-area-inset-bottom)))}
+/* With the fixed 61px CTA and 16px footer inset, this leaves a 52px reading gap. */
+.reservationSection:last-child{min-height:0}
 @media(max-width:360px){.categories button{padding-inline:10px}}

@@ -6,7 +6,7 @@ import {Button} from '@/components/primitives';
 import {SelectionChip} from '@/components/selection-chip';
 import {readProfile,effectiveProfile,type Values,type FieldKey} from '@/lib/analysis/profile';
 import {optionsForField} from '@/lib/analysis/profile-options';
-import {styleSuggestion,wishQuestions} from '@/lib/prototype/personalized-note';
+import {styleRequest,effectiveStyleWishes,wishQuestions} from '@/lib/prototype/personalized-note';
 import {noteSections,updateNoteSection} from '@/lib/prototype/booking-presentation';
 import type {BookingDraft} from '@/lib/prototype/logic';
 import {GlassToggle} from './glass-toggle';
@@ -38,7 +38,7 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
  const hair=sectionValue(['MY HAIR','현재 헤어'])??hairFields.map(([key])=>clean(profile?.[key])?.replace(/\s*\([^)]*\)/g,'')).filter(Boolean).join(' · ');
  const history=sectionValue(['RECENT SERVICE','시술 이력'])??historyFields.filter(([key])=>clean(profile?.[key])).map(([key,label])=>`${label} · ${profile?.[key]}`).join('\n');
  const custom=sections.filter(section=>!section.label).map(section=>section.value).join('\n\n');
- const desired=sectionValue(['DESIRED STYLE','스타일 제안'])??(custom||styleSuggestion(profile,draft.serviceId,draft.noteInput?.wishes));
+ const desired=(draft.noteEdited?sectionValue(['DESIRED STYLE','스타일 제안']):sectionValue(['DESIRED STYLE']))??(draft.noteEdited&&custom?custom:styleRequest({...profile,...draft.noteInput?.bookingProfile} as Values,draft.serviceId,draft.noteInput?.wishes));
  const context=sections.filter(section=>['YOUR WISH','나의 취향','선호하는 분위기','평소 손질','헤어 고민'].includes(section.label)).map(section=>`${section.label} · ${section.value}`).join('\n');
  const request=sectionValue(['REQUEST','더 전하고 싶은 이야기'])??draft.noteInput?.memo??'';
  function openEditor(kind:Editor){
@@ -47,7 +47,7 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
   const saved=draft.noteInput?.bookingProfile;
   if(saved)setFields(current=>({...current,...saved}));
   setText(kind==='hair'?hair:kind==='history'?history:desired);
-  setWishes({...draft.noteInput?.wishes});
+  setWishes(effectiveStyleWishes({...profile,...saved} as Values,draft.serviceId,draft.noteInput?.wishes));
   setEditor(kind);
  }
  function save(){
@@ -68,12 +68,11 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
    {([{key:'hair',label:'MY HAIR',value:hair,placeholder:'헤어 정보를 추가해 주세요.'},{key:'history',label:'RECENT SERVICE',value:history,placeholder:'시술 이력을 추가해 주세요.'},{key:'style',label:'DESIRED STYLE',value:desired,placeholder:'원하는 스타일을 알려주세요.'}] as const).map(item=><div className={styles.field} key={item.key}><div><h4>{item.label}</h4><p>{item.value||item.placeholder}</p>{item.key==='style'&&context&&<p className={styles.context}>{context}</p>}</div><button type="button" className={styles.edit} aria-label={`${item.label} 수정`} onClick={()=>openEditor(item.key)}>수정 <img src="/assets/figma/reservation/chevron-right.svg" alt="" width="10" height="10"/></button></div>)}
    <label className={styles.request}><span>REQUEST</span><textarea aria-label="디자이너에게 요청 사항" rows={1} maxLength={Math.max(50,request.length)} placeholder="요청 사항을 50자 이내로 작성해 주세요." value={request} onChange={event=>{const memo=event.target.value;onChange(current=>({...updateNoteSection(current,['REQUEST','더 전하고 싶은 이야기'],'REQUEST',memo),noteInput:{...current.noteInput,memo}}));}}/></label>
   </section>
-  <BottomSheet open={editor!==null} onClose={()=>setEditor(null)} title={editor?editorTitles[editor]:'HAIR NOTE'} variant="editor">
+  <BottomSheet open={editor!==null} onClose={()=>setEditor(null)} title={editor?editorTitles[editor]:'HAIR NOTE'} variant="default" headingAction={<button type="button" className={styles.sheetClose} onClick={()=>setEditor(null)}>닫음</button>}>
    <div className={styles.sheet}>
     <p className={styles.sheetIntro}>예약에 전달할 내용만 수정해 주세요.</p>
-    {editor==='hair'||editor==='history'?(editor==='hair'?hairFields:historyFields).map(([key,label])=><fieldset key={key}><legend>{label}</legend><div className={styles.chips}>{optionsForField(key,fields[key]??null).map(option=><SelectionChip key={option.value} aria-pressed={fields[key]===option.value} onClick={()=>chooseField(key,option.value)}>{option.label}</SelectionChip>)}</div></fieldset>):editor==='style'&&wishQuestions(draft.serviceId).map(question=><fieldset key={question.key}><legend>{question.label}</legend><div className={styles.chips}>{question.options.map(option=><SelectionChip key={option} aria-pressed={wishes[question.key]===option} onClick={()=>{const next={...wishes,[question.key]:wishes[question.key]===option?'':option};setWishes(next);setText(styleSuggestion({...profile,...fields} as Values,draft.serviceId,next));}}>{option}</SelectionChip>)}</div></fieldset>)}
-    <label className={styles.editorLabel}>전달할 내용<textarea aria-label="전달할 내용" rows={4} maxLength={3000} value={text} onChange={event=>setText(event.target.value)}/></label>
-    {editor==='style'&&<button type="button" className={styles.rebuild} onClick={()=>setText(styleSuggestion({...profile,...fields} as Values,draft.serviceId,wishes))}>프로필로 상담 내용 다시 구성</button>}
+    {editor==='hair'||editor==='history'?(editor==='hair'?hairFields:historyFields).map(([key,label])=><fieldset key={key}><legend>{label}</legend><div className={styles.chips}>{optionsForField(key,fields[key]??null).map(option=><SelectionChip key={option.value} aria-pressed={fields[key]===option.value} onClick={()=>chooseField(key,option.value)}>{option.label}</SelectionChip>)}</div></fieldset>):editor==='style'&&wishQuestions(draft.serviceId).map(question=><fieldset key={question.key}><legend>{question.label}</legend><div className={styles.chips}>{question.options.map(option=><SelectionChip key={option} aria-pressed={wishes[question.key]===option} onClick={()=>{const next={...wishes,[question.key]:wishes[question.key]===option?'':option};setWishes(next);setText(styleRequest({...profile,...fields} as Values,draft.serviceId,next));}}>{option}</SelectionChip>)}</div></fieldset>)}
+    {editor==='style'&&<button type="button" className={styles.rebuild} onClick={()=>setText(styleRequest({...profile,...fields} as Values,draft.serviceId,wishes))}>선택한 내용으로 다시 구성</button>}
     <Button onClick={save}>저장하기</Button>
    </div>
   </BottomSheet>

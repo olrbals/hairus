@@ -12,10 +12,13 @@ export function hairNote(profile:Record<string,string|null>|null,preferences:Ans
  return composePersonalizedNote(profile,preferences,serviceId,input)+'\n\n희망 시술: '+(service?bookingServiceName(service):'상담 후 결정');
 }
 
-export function demoDates(now=new Date()){return Array.from({length:14},(_,i)=>{const d=new Date(now);d.setDate(d.getDate()+i+1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;});}
+// Provide month navigation across the upcoming year rather than a rolling two-week window.
+export function demoDates(now=new Date()){return Array.from({length:365},(_,i)=>{const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i+1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;});}
 export const demoTimes=Array.from({length:22},(_,index)=>`${String(10+Math.floor(index/2)).padStart(2,'0')}:${index%2?'30':'00'}`);
-// Stable example occupancy, shared by the calendar, slot picker and submission.
-export function isBookingDateFull(date:string){return /^\d{4}-\d{2}-\d{2}$/.test(date)&&Number(date.slice(-2))%9===0;}
+// Artificially closed dates end after November 15, 2026. Regular designer days off still apply.
+// Date strings compare safely in YYYY-MM-DD format, independent of browser timezone.
+export const BOOKING_FULL_DATE_THROUGH='2026-11-15';
+export function isBookingDateFull(date:string){return /^\d{4}-\d{2}-\d{2}$/.test(date)&&date<=BOOKING_FULL_DATE_THROUGH&&Number(date.slice(-2))%9===0;}
 const timeInMinutes=(time:string)=>Number(time.slice(0,2))*60+Number(time.slice(3));
 export function availableBookingTimes(serviceId:string,date:string,designerId:string,now=new Date()){
  const service=services.find(item=>item.id===serviceId);

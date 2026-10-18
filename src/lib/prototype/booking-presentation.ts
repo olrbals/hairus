@@ -12,7 +12,7 @@ export function noteSections(note:string){
   }).filter(section=>section.value&&(!section.label||!emptyValues.includes(section.value)));
 }
 export function selectBookingService(draft:BookingDraft,serviceId:string):BookingDraft{
-  if(draft.serviceId===serviceId)return draft;
+  if(draft.serviceId===serviceId)return {...draft,serviceId:'',time:'',...(!draft.noteEdited?{note:''}:{})};
   const service=services.find(item=>item.id===serviceId);
   const note=draft.noteEdited?draft.note.split(/\n\s*\n/).map(paragraph=>paragraph.startsWith('희망 시술:')&&service?`희망 시술: ${bookingServiceName(service)}`:paragraph).join('\n\n'):'';
   return {...draft,serviceId,note,...(draft.time&&!availableBookingTimes(serviceId,draft.date,draft.designerId).includes(draft.time)?{time:''}:{})};

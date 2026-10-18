@@ -65,3 +65,22 @@ test('section edits preserve handwritten paragraphs and generated advice support
  assert.match(hairNote(null,{},'cut-men'),/커트/);
  assert.equal(bookingVisitLabel('2026-11-30','15:00'),'11월 30일 · 오후 3:00');
 });
+
+test('service selected a second time clears selection and chosen time',()=>{
+ const second=selectBookingService(draft,'cut');
+ assert.equal(second.serviceId,'');
+ assert.equal(second.time,'');
+ assert.equal(second.date,date);
+});
+test('artificially full days stop after November 15, while future months remain navigable',()=>{
+ const reference=new Date(2026,9,18);
+ const days=demoDates(reference);
+ assert.ok(days.includes('2026-11-16'));
+ assert.ok(days.includes('2027-01-15'));
+ assert.equal(isBookingDateFull('2026-11-09'),true);
+ assert.equal(isBookingDateFull('2026-11-18'),false);
+ const available=availableBookingDates('yoona',reference);
+ assert.equal(available.includes('2026-11-09'),false);
+ assert.equal(available.includes('2026-11-18'),true);
+ assert.equal(available.includes('2026-11-17'),false); // Yoona is off Tuesday
+});

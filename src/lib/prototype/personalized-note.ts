@@ -34,13 +34,40 @@ export function styleSuggestion(profile:Profile,service:string,wishes:Record<str
  }
  return '원하는 스타일과 평소 손질 방법을 디자이너와 상담해 결정해 보세요.';
 }
+/** Draft an appointment request in the customer's voice, not advice addressed to them. */
+export function effectiveStyleWishes(profile:Profile,service:string,wishes:Record<string,string>={}):Record<string,string>{
+ const type=serviceKind(service);const next={...wishes};
+ if(type==='cut'){next.length ||= '유지';next.bangs ||= '유지';}
+ if(type==='perm'){next.length ||= '유지';next.perm ||= '자연스러운 컬';}
+ return next;
+}
+export function styleRequest(profile:Profile,service:string,wishes:Record<string,string>={}){
+ const p=profile||{};const choice=effectiveStyleWishes(profile,service,wishes);
+ const category=services.find(item=>item.id===service)?.category;
+ const length=known(p.length);const texture=known(p.texture);const color=known(p.color);
+ const intro=length?`현재 ${length} 스타일인데, `:'';
+ if(category==='컷'){
+  const change=choice.length==='변화'?'기장에도 변화를 주면서':'지금 기장을 최대한 살리면서';
+  const bangs=choice.bangs==='자르기'?'앞머리도 새롭게 잘라 주세요.':choice.bangs==='사이드뱅'?'앞머리는 자연스러운 사이드뱅으로 연결하고 싶어요.':choice.bangs==='고민 중'?'앞머리 방향은 상담 후 결정하고 싶어요.':'앞머리는 현재 느낌을 유지하고 싶어요.';
+  return `${intro}${change} 얼굴 주변이 자연스럽게 정돈되는 커트를 받고 싶어요. ${bangs}`;
+ }
+ if(category==='열펌'){
+  const curl=choice.perm==='뿌리 볼륨 중시'?'뿌리 볼륨이 잘 살아나도록':choice.perm==='확실한 컬'?'컬이 분명하게 보이도록':choice.perm==='상담 후 결정'?'제 모발 상태에 맞는 컬을 상담하면서':'자연스럽게 흐르는 컬이 나오도록';
+  return `${intro}${curl} 펌을 하고 싶어요. ${texture?`제 모발은 ${texture}인 편이라 `:''}평소 손질도 어렵지 않게 부탁드려요.`;
+ }
+ if(category==='염색'||category==='탈색'){
+  return `${color?`현재 헤어 컬러는 ${color}이고, `:''}원하는 밝기와 분위기에 맞춰 ${category==='탈색'?'탈색':'염색'}하고 싶어요. 시술 이력과 모발 상태를 함께 확인해 주시면 좋겠어요.`;
+ }
+ if(category==='클리닉')return `${intro}제 머릿결과 두피 상태를 확인한 뒤 필요한 케어를 받고 싶어요. 집에서 관리하기도 편했으면 좋겠어요.`;
+ return `${intro}현재 모발 상태와 원하는 분위기를 함께 상담하고 싶어요. 손질이 편한 방향으로 부탁드려요.`;
+}
 export function composePersonalizedNote(profile:Profile,preferences:Record<string,string[]>,service:string,input:NoteInput={}){
  const p=profile||{};const sections:string[]=[];
  const hair=['length','color','texture','cut','layer','bangs'].map(key=>known(p[key])).filter(Boolean);
  if(hair.length)sections.push('현재 헤어: '+hair.join(' · '));
  const history=[['cutHistory','커트'],['permHistory','펌'],['dyeHistory','염색'],['bleachHistory','탈색']].flatMap(([key,label])=>known(p[key])?[`${label}: ${p[key]}`]:[]);
  if(history.length)sections.push('시술 이력: '+history.join(' · '));
- sections.push('스타일 제안: '+styleSuggestion(profile,service,input.wishes));
+ sections.push('DESIRED STYLE: '+styleRequest(profile,service,input.wishes));
  for(const [key,label] of [['mood','선호하는 분위기'],['care','평소 손질'],['concerns','헤어 고민']])if(preferences[key]?.length)sections.push(label+': '+preferences[key].join(' · '));
  const wishes=wishQuestions(service).flatMap(q=>q.options.includes(input.wishes?.[q.key]||'')?[`${q.label}: ${input.wishes![q.key]}`]:[]);
  if(wishes.length)sections.push('YOUR WISH: '+wishes.join(' · '));
