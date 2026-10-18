@@ -58,12 +58,12 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
     const existing=nextFields[key]??null;
     const matched=optionsForField(key,existing).find(option=>
      displayed.includes(option.value)||displayed.includes(option.label)||
-     displayed.includes(option.value.replace(/\\s*\\([^)]*\\)/g,'')));
+     displayed.includes(option.value.replace(/\s*\([^)]*\)/g,'')));
     if(matched)nextFields[key]=matched.value;
    }
   }
   if(kind==='history'){
-   const lines=history.split('\\n').map(line=>line.trim());
+   const lines=history.split('\n').map(line=>line.trim());
    for(const [key,label] of historyFields){
     const line=lines.find(value=>value.startsWith(label+' · '));
     if(line)nextFields[key]=line.slice((label+' · ').length).trim();
