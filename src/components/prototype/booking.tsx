@@ -13,7 +13,6 @@ import {usePrototype} from './store';
 import styles from './booking.module.css';
 import {HairNoteEditorial} from './hair-note-editorial';
 import {SelectionChip} from '@/components/selection-chip';
-import {SaveButton} from './shared';
 
 const steps=['service','schedule','note','review'];
 const labels=['시술','방문일','헤어노트','예약 확인'];
@@ -164,7 +163,7 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
  const latestBooking=selectedServices.map(item=>item.lastBooking).filter((time):time is string=>!!time).sort()[0]||'—';
  const times=availableBookingTimes(selectedIds,draft.date,designerId);
  const person=findArvoDesigner(designerId);
- return <BookingPage back={`/designers/${designerId}`} actions={<SaveButton item={designer}/>}>
+ return <BookingPage back={`/designers/${designerId}`}>
   <DesignerIdentity id={designerId}/>
   <nav className={styles.sectionNav} aria-label="예약 섹션">{steps.map((id,index)=><a key={id} href={`#booking-${id}`} aria-current={activeSection===id?'location':undefined} onClick={event=>{event.preventDefault();goTo(id);}}>{labels[index]}</a>)}</nav>
   <div className={`${styles.content} ${styles.onePageContent}`} id="booking-content">
