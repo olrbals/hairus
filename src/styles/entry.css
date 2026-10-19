@@ -10,3 +10,8 @@
 
 /* Skip moves into the header; keep the single primary CTA full-width. */
 .welcome-screen .welcome-actions{grid-template-columns:minmax(0,1fr)}
+
+/* Square social login and name input, 2026-10-19. */
+.entry-screen .social-login{border-radius:0}
+.welcome-screen .name-field label{font-size:18px}
+.welcome-screen .name-field input{font-size:16px;border-radius:0}
