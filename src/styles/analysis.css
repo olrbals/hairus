@@ -153,7 +153,10 @@
 }
 
 /* RESULT · Quiet flat edit buttons and accessible hex/named-color swatches. */
+.result-screen .profile-field>span{padding-bottom:8px}
 .result-screen .profile-field>button{
+ min-height:32px;
+ padding:8px 12px;
  border:0;
  border-radius:0;
  background:#f6f6f6;
