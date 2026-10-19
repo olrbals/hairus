@@ -54,7 +54,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
   const goNext=()=>{
    if(index===questions.length-1){
     update(s=>({...s,preferenceComplete:true}));
-    router.push('/preferences/loading');
+    router.push('/preferences/complete');
    }else router.push(`${prefix}/${index+2}`);
   };
   const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:question.title;
@@ -85,7 +85,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    <PreferenceActions disabled={!ready||selected.length===0} onNext={goNext} previousHref={`${prefix}/${index}`}>{index===questions.length-1?'헤어 프로필 완성하기':'다음'}</PreferenceActions>
   </main>;
  }
- return <Screen title={kind==='preferences'?'My Preference':'Meet Your Match'} back={prefix+'/intro'}><div className="progress" aria-label={`${index+1} / ${questions.length}`}>{questions.map((q,i)=><span key={q.key} className={i<=index?'active':''}/>)}</div><div className="question"><p className="eyebrow">0{index+1} / 0{questions.length}</p><h2>{question.title}</h2><p>{question.max===1?'가장 가까운 한 가지를 선택해 주세요.':`최대 ${question.max}개까지 선택할 수 있어요.`}</p></div><div className={images?`image-choices ${images.length===6?'three':''}`:'chips survey-chips'}>{question.options.map((option,i)=><button disabled={!ready} key={option} aria-pressed={selected.includes(option)} onClick={()=>{if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}setMessage('');update(s=>{let next=toggleChoice(s[kind][question.key]||[],option,question.max);if(option==='특별한 고민 없음')next=['특별한 고민 없음'];else next=next.filter(v=>v!=='특별한 고민 없음');return {...s,[kind]:{...s[kind],[question.key]:next}};});}}>{images&&<span><img src={asset(images[i])} alt=""/></span>}{option}</button>)}</div><p role="status" className="validation">{message}</p><div className="survey-actions"><Button disabled={!ready||selected.length===0} onClick={()=>{if(index===questions.length-1){if(kind==='preferences')update(s=>({...s,preferenceComplete:true}));router.push(kind==='preferences'?'/preferences/loading':'/recommendation/results');}else router.push(`${prefix}/${index+2}`);}}>{index===questions.length-1?'결과 보기':'다음'}</Button><Action secondary href={index?`${prefix}/${index}`:`${prefix}/intro`}>이전 단계</Action></div></Screen>;}
+ return <Screen title={kind==='preferences'?'My Preference':'Meet Your Match'} back={prefix+'/intro'}><div className="progress" aria-label={`${index+1} / ${questions.length}`}>{questions.map((q,i)=><span key={q.key} className={i<=index?'active':''}/>)}</div><div className="question"><p className="eyebrow">0{index+1} / 0{questions.length}</p><h2>{question.title}</h2><p>{question.max===1?'가장 가까운 한 가지를 선택해 주세요.':`최대 ${question.max}개까지 선택할 수 있어요.`}</p></div><div className={images?`image-choices ${images.length===6?'three':''}`:'chips survey-chips'}>{question.options.map((option,i)=><button disabled={!ready} key={option} aria-pressed={selected.includes(option)} onClick={()=>{if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}setMessage('');update(s=>{let next=toggleChoice(s[kind][question.key]||[],option,question.max);if(option==='특별한 고민 없음')next=['특별한 고민 없음'];else next=next.filter(v=>v!=='특별한 고민 없음');return {...s,[kind]:{...s[kind],[question.key]:next}};});}}>{images&&<span><img src={asset(images[i])} alt=""/></span>}{option}</button>)}</div><p role="status" className="validation">{message}</p><div className="survey-actions"><Button disabled={!ready||selected.length===0} onClick={()=>{if(index===questions.length-1){if(kind==='preferences')update(s=>({...s,preferenceComplete:true}));router.push(kind==='preferences'?'/preferences/complete':'/recommendation/results');}else router.push(`${prefix}/${index+2}`);}}>{index===questions.length-1?'결과 보기':'다음'}</Button><Action secondary href={index?`${prefix}/${index}`:`${prefix}/intro`}>이전</Action></div></Screen>;}
 export function ProfileComplete(){
  const router=useRouter();
  const name=useNickname();
@@ -136,7 +136,7 @@ export function ProfileComplete(){
     </section>
    </div>
   </article>
-  <PreferenceActions onNext={()=>router.push('/home')} previousHref="/preferences/1" previousLabel="다시 하기">홈으로 가기</PreferenceActions>
+  <div className="preference-actions"><Button onClick={()=>router.push('/home')}>홈으로 가기</Button></div>
  </main>;
 }
 // Figma yourMatch 1107:2934 is implemented in its dedicated screen component.
