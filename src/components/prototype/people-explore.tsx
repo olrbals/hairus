@@ -46,7 +46,7 @@ export function PeopleExplore({category}:{category:ExploreKind}){
  const [draft,setDraft]=useState<FilterValues>(()=>allFilters(groups));
  const appliedCount=Object.values(filters).filter(value=>value!=='전체').length;
  const items=category==='designer'?designers:salons;
- const results=useMemo(()=>items.filter(item=>`${item.name} ${item.english} ${item.tags.join(' ')} ${item.location||''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())),[items,query]);
+ const results=useMemo(()=>items.filter(item=>(category!=='designer'||item.id!=='jonghun')&&`${item.name} ${item.english} ${item.tags.join(' ')} ${item.location||''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())),[items,category,query]);
  const openFilter=()=>{setDraft(filters);setRegionOpen(false);setOpen(true);};
 
  const label=category==='designer'?'디자이너':'헤어샵';
