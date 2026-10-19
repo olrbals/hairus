@@ -225,3 +225,7 @@
 
 @media(prefers-reduced-motion:reduce){.question p[data-limit-exceeded=true]{color:#222b3a;text-decoration:underline;text-underline-offset:4px}}
 /* The flex-based CTA follows long chip groups without overlapping them. */
+
+/* Flat recommendation controls. Image legibility overlays are preserved. */
+.location>button,.strengths>button,.avoidCards>button,.actions>button{border-radius:12px}
+.actions>button:not([data-final=true]){border:0;background:#000;color:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}

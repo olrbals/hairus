@@ -944,3 +944,10 @@
   aspect-ratio:auto;
 }
 
+/* 2026-10-19 flat shared survey chips and visual-only save controls. */
+.mobile-shell .chips button{border-radius:12px;box-shadow:none}
+.mobile-shell .survey-chips{gap:12px 8px}
+.mobile-shell .survey-chips button{min-height:44px;padding:8px 12px;border-radius:12px;background:#f6f6f6;color:#20201e;font-size:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mobile-shell .survey-chips button[aria-pressed=true]{border-color:#000;background:#000;color:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mobile-shell .match-banner-cta{border:1px solid #d8d8d8;border-radius:12px;background:#fff;color:#20201e;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mobile-shell button > svg.save-heart-icon{display:block;flex:0 0 22px;width:22px;height:22px;min-width:22px;min-height:22px;fill:#20201e;stroke:#20201e;box-shadow:none}

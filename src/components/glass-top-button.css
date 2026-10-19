@@ -5,3 +5,8 @@
 .glass-top-button__surface svg{position:relative;z-index:1}
 .glass-top-button:active .glass-top-button__surface{background-color:rgba(255,255,255,.18)}
 @media(prefers-reduced-motion:reduce){.glass-top-button{transition:none}}
+
+/* Flat TOP button, keeping the existing 44px target and scroll behavior. */
+.glass-top-button,.glass-top-button__surface{border-radius:12px}
+.glass-top-button__surface{border:1px solid #dedede;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.glass-top-button:active .glass-top-button__surface{background:#f1f1f1}
