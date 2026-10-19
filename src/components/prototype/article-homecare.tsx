@@ -8,6 +8,18 @@ import './article-homecare.css';
 
 const photos = '/assets/figma/article-homecare/';
 
+type ArticleId = 'care' | 'story' | 'color' | 'fringe';
+
+const articleHeroes: Record<ArticleId, {image: string; alt: string; volume: string; label: string; title: React.ReactNode}> = {
+  care: {image: `${photos}cover.png`, alt: '욕실에서 긴 머리를 손질하는 여성', volume: 'VOL. 01', label: 'THE ART OF HAIR CARE', title: <>THE ART OF<br/>HAIR CARE</>},
+  // Figma 920:4205 — https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=920-4205
+  story: {image: '/assets/figma/v1/48a15.png', alt: '브러시와 드라이기로 볼륨을 만드는 모습', volume: 'VOL. 02', label: 'BEYOND THE DRY', title: <>BEYOND<br/>THE DRY</>},
+  // Figma 920:4269 — https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=920-4269
+  color: {image: '/assets/figma/v1/6b945.png', alt: '금빛으로 염색한 머리를 반묶음한 모습', volume: 'VOL. 03', label: 'THE COLOR RITUAL', title: <>THE COLOR<br/>RITUAL</>},
+  // Figma 920:4333 — https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=920-4333
+  fringe: {image: '/assets/figma/v1/5f044.png', alt: '앞머리와 얼굴 주변의 헤어스타일', volume: 'VOL. 04', label: 'THE FRINGE THEORY', title: <>THE FRINGE<br/>THEORY</>},
+};
+
 function StepHeading({number,title}:{number:string;title:string}) {
   return <div className="hc-step-heading">
     <span className="hc-eyebrow">{number}</span>
@@ -22,21 +34,22 @@ function HairTip({children}:{children:React.ReactNode}) {
   </aside>;
 }
 
-export function HairCareArticle({issue=false}:{issue?:boolean}) {
+export function HairCareArticle({articleId='care', issue=false}:{articleId?:ArticleId; issue?:boolean}) {
   const router = useRouter();
+  const hero = articleHeroes[articleId];
 
   return <main id="main" className={`hc-article${issue?' hc-article--issue':''}`}>
     <header className="hc-header hairus-page-header">
       <button type="button" className="hc-back hairus-header-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><HeaderBackIcon/></button>
       <span>ARTICLE</span>
-      <div className="hc-header-save"><EditorialHeartSaveButton item={findEditorial('article', 'care')!}/></div>
+      <div className="hc-header-save"><EditorialHeartSaveButton item={findEditorial('article', articleId)!}/></div>
     </header>
 
-    <section className="hc-cover" aria-label="THE ART OF HAIR CARE">
-      <img src={photos+'cover.png'} alt="욕실에서 긴 머리를 손질하는 여성" />
+    <section className="hc-cover" aria-label={hero.label}>
+      <img src={hero.image} alt={hero.alt} />
       <div className="hc-cover-content">
-        <p>HAIRUS EDITORIAL / VOL. 01</p>
-        <h1>THE ART OF<br/>HAIR CARE</h1>
+        <p>HAIRUS EDITORIAL / {hero.volume}</p>
+        <h1>{hero.title}</h1>
       </div>
     </section>
 
