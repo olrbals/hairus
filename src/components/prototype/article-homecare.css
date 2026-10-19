@@ -8,6 +8,7 @@
 .hc-back img{width:44px;height:44px;max-width:none;object-fit:contain}
 .hc-cover{height:540px;position:relative;overflow:hidden;color:white;background:#454545}
 .hc-cover>img{position:absolute;inset:0;width:100%;height:100%}
+.hc-cover--fringe>img{object-position:center top;transform:scale(1.15);transform-origin:center top}
 .hc-cover:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(68,68,68,.18) 0%,rgba(0,0,0,.6) 73.565%,rgba(0,0,0,.6) 100%)}
 .hc-cover-content{position:absolute;z-index:1;left:24px;right:24px;top:360px;color:#fff;display:flex;flex-direction:column;gap:12px}
 .hc-cover-content>p{font-size:12px;font-weight:400;line-height:1.3;}

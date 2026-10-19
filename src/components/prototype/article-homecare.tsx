@@ -45,7 +45,7 @@ export function HairCareArticle({articleId='care', issue=false}:{articleId?:Arti
       <div className="hc-header-save"><EditorialHeartSaveButton item={findEditorial('article', articleId)!}/></div>
     </header>
 
-    <section className="hc-cover" aria-label={hero.label}>
+    <section className={`hc-cover${articleId==='fringe'?' hc-cover--fringe':''}`} aria-label={hero.label}>
       <img src={hero.image} alt={hero.alt} />
       <div className="hc-cover-content">
         <p>HAIRUS EDITORIAL / {hero.volume}</p>

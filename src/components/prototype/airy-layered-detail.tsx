@@ -143,7 +143,7 @@ export function AiryLayeredDetail({styleId='airy'}:{styleId?:StyleDetailId}) {
         </div>
         <div className="airy-more-scroll" ref={moreRef} tabIndex={0} aria-label="다른 스타일 가로 탐색">
           {detail.moreStyles.map(style=>
-            style.id==='straight' ? <div className="airy-more-card" key={style.id}><div className="airy-more-image"><img src={style.image} alt={style.name} loading="lazy" draggable={false}/></div><span>{style.name}</span></div> : <Link className="airy-more-card" href={`/styles/${style.id}`} key={style.id}>
+            style.id==='straight' || (styleId!=='airy' && style.id==='hush') ? <div className="airy-more-card" key={style.id}><div className="airy-more-image"><img src={style.image} alt={style.name} loading="lazy" draggable={false}/></div><span>{style.name}</span></div> : <Link className="airy-more-card" href={`/styles/${style.id}`} key={style.id}>
               <div className="airy-more-image"><img src={style.image} alt={style.name} loading="lazy" draggable={false}/></div>
               <span>{style.name}</span>
             </Link>
