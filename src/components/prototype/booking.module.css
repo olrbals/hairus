@@ -197,3 +197,6 @@
 /* With the fixed 61px CTA and 16px footer inset, this leaves a 52px reading gap. */
 .reservationSection:last-child{min-height:0}
 @media(max-width:360px){.categories button{padding-inline:10px}}
+
+/* Legacy booking preference chips also follow shared pill radius. */
+.wishes button{border-radius:var(--hairus-chip-radius,999px)}

@@ -517,3 +517,6 @@
 .preference-bta__actions{grid-template-columns:minmax(0,1fr)}
 /* Step 03 should show the upper area of its original image, not its middle. */
 .preference-bta__steps li:nth-child(3) img{object-position:center top}
+
+/* Preference survey and completed-profile keywords share the pill geometry. */
+.preference-survey-step__chips.chip-options button,.preference-complete__tags span{border-radius:var(--hairus-chip-radius,999px)}

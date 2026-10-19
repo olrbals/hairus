@@ -46,3 +46,6 @@
 .magazineCard h2{margin:8px 0 0;font-family:var(--font-editorial);font-size:32px;font-weight:600;line-height:1.05}
 .empty{display:grid;gap:24px;padding:64px 12px;color:#666460;font-size:14px;line-height:1.5;text-align:center}
 @media(max-width:360px){.content>h1{font-size:48px}.works{gap:8px;padding-inline:0}.works img{width:calc((100% - 16px)/3);height:auto;aspect-ratio:100/133}.identity{gap:12px}.identity h2{font-size:15px}}
+
+/* Saved-item reason labels are informational chips, not CTA buttons. */
+.reason{border-radius:var(--hairus-chip-radius,999px)}

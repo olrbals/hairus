@@ -101,3 +101,6 @@
 /* Result: compact the requested section rhythm only on the result page. */
 .result-screen > .analysis-heading{margin-top:28px}
 .result-screen .result-content{margin-top:28px;gap:48px}
+
+/* Processing progress labels are pill-shaped status chips. */
+.processing-screen .progress-content li{border-radius:var(--hairus-chip-radius,999px)}
