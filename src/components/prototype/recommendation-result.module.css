@@ -51,4 +51,4 @@
 .profileLink{border:1px solid #dedede;border-radius:12px;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;transition:background-color 180ms ease}
 @media(hover:hover) and (pointer:fine){.profileLink:hover{transform:none;background:#f6f6f6;box-shadow:none}}
 .profileLink:active{transform:none;background:#eee;box-shadow:none}
-:global(.mobile-shell) .homeButton:global(.button.button--primary:not(.button--glass):not(.button--plain)){border-radius:12px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+:global(.mobile-shell) .homeButton:global(.button.button--primary:not(.button--glass):not(.button--plain)){border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}

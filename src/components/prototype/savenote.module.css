@@ -31,4 +31,5 @@
 
 /* Flat SaveNote switch and actions; switching mechanics remain unchanged. */
 .toggleThumb,.toggle[aria-checked=true] .toggleThumb{border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-.apply,.remove{border-radius:12px;box-shadow:none}
+.apply{border-radius:0;box-shadow:none}
+.remove{border-radius:12px;box-shadow:none}

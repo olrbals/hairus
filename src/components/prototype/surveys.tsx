@@ -40,7 +40,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    <PreferenceActions disabled={!ready||selected.length===0} onNext={()=>router.push(`${prefix}/2`)} previousHref={`${prefix}/intro`}>다음</PreferenceActions>
   </main>;
  }
- if(kind==='preferences'&&index>=1&&index<=3){
+ if(kind==='preferences'&&index>=1&&index<=2){
   const selectOption=(option:string)=>{
    if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setLimitAttempt(attempt=>attempt+1);setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}
    setMessage('');
@@ -57,12 +57,10 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
     router.push('/preferences/loading');
    }else router.push(`${prefix}/${index+2}`);
   };
-  const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:index===3?<>지금 가장 바꾸고 싶은<br/>부분은 무엇인가요?</>:question.title;
-  const description=index===1||index===3?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
-  const renderedOptions=index===3
-   ? question.options.flatMap((option,itemIndex)=>itemIndex===8?[{label:'손질 편의성',value:'손질 편의성 (스타일)'},{label:option,value:option}]:[{label:option,value:option}])
-   : question.options.map(option=>({label:option,value:option}));
-  return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':index===2?'939:8597':'939:8639'}>
+  const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:question.title;
+  const description=index===1?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
+  const renderedOptions=question.options.map(option=>({label:option,value:option}));
+  return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':'939:8597'}>
    <header className="preference-survey-step__header hairus-page-header">
     <button type="button" className="preference-survey-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
      <HeaderBackIcon/>
@@ -103,7 +101,7 @@ export function ProfileComplete(){
  },[]);
  return <main id="main" className="preference-complete" data-figma-node="939:8783">
   <header className="preference-complete__header hairus-page-header">
-   <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/preferences/4')}>
+   <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/preferences/3')}>
     <HeaderBackIcon/>
    </button>
   </header>

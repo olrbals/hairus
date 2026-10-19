@@ -55,3 +55,7 @@ html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
 
 /* Shared text-chip curvature; standard buttons retain their own 12px radius. */
 :root{--hairus-chip-radius:32px}
+
+/* All shared primary CTAs are square; secondary controls and 32px chips keep their own shapes. */
+.mobile-shell .button.button--primary:not(.button--glass):not(.button--plain),
+.mobile-shell .primary-cta.primary-cta{border-radius:0}

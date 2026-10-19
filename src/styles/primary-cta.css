@@ -28,4 +28,4 @@
 }
 
 /* Flat CTA shape overrides the earlier Figma inset-glass treatment. */
-.mobile-shell .button.button--primary:not(.button--glass):not(.button--plain),.mobile-shell .primary-cta.primary-cta{border-radius:12px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mobile-shell .button.button--primary:not(.button--glass):not(.button--plain),.mobile-shell .primary-cta.primary-cta{border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}

@@ -24,8 +24,8 @@
 .preference-first-step__back img{display:block;width:44px;height:44px}
 .preference-first-step__progress{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20.6667px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
   height:3px;
 }
 .preference-first-step__progress span{height:3px;border-radius:1px;background:#e6eaf1}
@@ -124,7 +124,7 @@
   .preference-first-step__image img{transition:none}
 }
 
-/* Figma 939:8528 / 939:8597 / 939:8639 — preference questions 2–4. */
+/* Figma 939:8528 / 939:8597 — preference questions 2–3. */
 .mobile-shell:has(.preference-survey-step){padding-bottom:0}
 .preference-survey-step{
   position:relative;
@@ -147,8 +147,8 @@
 .preference-survey-step__back img{display:block;width:44px;height:44px}
 .preference-survey-step__progress{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20.6667px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
   height:3px;
 }
 .preference-survey-step__progress span{height:3px;border-radius:1px;background:#e6eaf1}
