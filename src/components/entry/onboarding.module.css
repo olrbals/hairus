@@ -41,10 +41,10 @@
 .card{border:1px solid rgba(0,0,0,.24);background:#fff;border-radius:0;box-shadow:none}
 
 /* 01 — the phone sits behind independent, intentionally wider UI layers. */
-.profilePreview{position:relative;width:353px;height:374px;transform:scale(min(1,calc(100cqh / 374px / var(--preview-scale))))}
-.phone{position:absolute;z-index:0;top:8px;left:59px;width:235px;height:348px;border:1px solid #20201e;border-radius:30px;background:#fff}
+.profilePreview{position:relative;width:369px;height:374px;transform:scale(min(1,calc(100cqh / 374px / var(--preview-scale))))}
+.phone{position:absolute;z-index:0;top:8px;left:calc((100% - 235px) / 2);width:235px;height:348px;border:1px solid #20201e;border-radius:30px;background:#fff}
 .speaker{display:block;width:48px;height:6px;margin:17px auto 0;border-radius:999px;background:#20201e}
-.profileCard{position:absolute;z-index:1;top:66px;left:8px;width:337px;padding:14px 20px}
+.profileCard{position:absolute;z-index:1;top:66px;left:calc((100% - 337px) / 2);width:337px;padding:14px 20px}
 .profileCard h2{font:600 23px/30px var(--font-editorial)}
 .profileMood{font-size:10px;font-weight:600;line-height:13px;margin-top:8px}
 .profileSummary{font-size:13px;line-height:18px;margin-top:4px;color:var(--color-muted);white-space:nowrap}
