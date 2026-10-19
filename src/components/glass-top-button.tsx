@@ -63,6 +63,6 @@ function PageTopButton() {
   return <button ref={button} type="button" className="glass-top-button" data-visible={visible}
     aria-label="페이지 맨 위로" aria-hidden={!visible} tabIndex={visible ? 0 : -1}
     onClick={() => window.scrollTo({top:0, behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'})}>
-    <span className="glass-top-button__surface" style={{backdropFilter:'blur(24px) saturate(170%)',WebkitBackdropFilter:'blur(24px) saturate(170%)'}}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span>
+    <span className="glass-top-button__surface" style={{backdropFilter:'blur(24px) saturate(170%)',WebkitBackdropFilter:'blur(24px) saturate(170%)'}}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span>
   </button>;
 }
