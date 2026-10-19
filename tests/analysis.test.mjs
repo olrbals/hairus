@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {fields,newProfile,effectiveProfile,editProfile,persistProfile,readProfile} from '../src/lib/analysis/profile.ts';
 import {mockAnalysisService} from '../src/lib/analysis/service.ts';
+import {swatchForField} from '../src/lib/analysis/profile-options.ts';
 import {cameraError,validatePhoto} from '../src/lib/analysis/photo.ts';
 test('13개 항목을 모두 편집하고 원본과 분리하여 복원한다',()=>{let stored='';globalThis.localStorage={getItem:()=>stored,setItem:(_k,v)=>stored=v};let p=newProfile();const original=structuredClone(p.original);for(const f of fields)p=editProfile(p,f.key,`${f.label} 테스트`);assert.equal(fields.length,13);assert.deepEqual(p.original,original);assert.equal(persistProfile(p),true);for(const f of fields)assert.equal(effectiveProfile(readProfile())[f.key],`${f.label} 테스트`);assert.equal(stored.includes('blob:'),false);assert.equal(original.dyeHistory,null);assert.equal(original.permHistory,null);assert.equal(original.cutHistory,null);assert.equal(original.bleachHistory,null);});
 test('미입력과 원본 값은 구분되며 입력 길이를 제한한다',()=>{const p=editProfile(newProfile(),'face',null);assert.equal(effectiveProfile(p).face,null);assert.equal(p.original.face,'계란형');assert.equal(editProfile(p,'cut','a'.repeat(300)).edits.cut.length,160);});
@@ -13,3 +14,13 @@ test('허용하지 않는 파일과 큰 파일을 디코딩 전에 거절한다'
 
 test('카메라 허용 시 마이크 없이 연결하고 화면 이탈 시 트랙을 종료한다',async()=>{const {acquireCamera}=await import('../src/lib/analysis/photo.ts');let stopped=0;let options;const stream={getTracks:()=>[{stop:()=>stopped++}]};const c=new AbortController();const actual=await acquireCamera({getUserMedia:async args=>{options=args;return stream;}},'user',c.signal);assert.equal(actual,stream);assert.equal(options.audio,false);assert.equal(options.video.facingMode.ideal,'user');c.abort();assert.equal(stopped,1);});
 test('권한 요청 중 이탈한 뒤 늦게 허용돼도 스트림을 바로 종료한다',async()=>{const {acquireCamera}=await import('../src/lib/analysis/photo.ts');let resolve;let stopped=0;const c=new AbortController();const pending=acquireCamera({getUserMedia:()=>new Promise(r=>resolve=r)},'environment',c.signal);c.abort();resolve({getTracks:()=>[{stop:()=>stopped++}]});await assert.rejects(pending,{name:'AbortError'});assert.equal(stopped,1);});
+
+test('결과 버튼은 이름으로 선택한 색과 직접 선택한 HEX를 모두 미리보기로 표시한다',()=>{
+ assert.equal(swatchForField('color','흑갈색'),'#33251f');
+ assert.equal(swatchForField('skin','뉴트럴'),'#d8b5a0');
+ assert.equal(swatchForField('color','#FFFFFF'),'#FFFFFF');
+ assert.equal(swatchForField('skin','#abcdef'),'#abcdef');
+ assert.equal(swatchForField('color','알 수 없는 색'),null);
+ assert.equal(swatchForField('length','#FFFFFF'),null);
+ assert.equal(swatchForField('skin',null),null);
+});

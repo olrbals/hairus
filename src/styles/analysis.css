@@ -151,3 +151,26 @@
  .result-screen .result-top .analysis-heading h1{font-size:24px}
  .result-screen .result-top .analysis-heading>p{font-size:13px}
 }
+
+/* RESULT · Quiet flat edit buttons and accessible hex/named-color swatches. */
+.result-screen .profile-field>button{
+ border:0;
+ border-radius:0;
+ background:#f6f6f6;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+.result-screen .profile-field>button::before{
+ content:none;
+ border:0;
+}
+.result-screen .profile-field>button:active{background:#eee}
+.result-screen .profile-value-swatch{
+ display:inline-block;
+ flex:0 0 16px;
+ width:16px;
+ height:16px;
+ border:1px solid #d8d8d8;
+ border-radius:0;
+}

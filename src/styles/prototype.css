@@ -961,6 +961,7 @@
 .mobile-shell .prototype > .match-banner .match-banner-copy{
  align-items:flex-start;
  text-align:left;
+ transform:translateY(-20px);
 }
 .mobile-shell .prototype > .match-banner .match-banner-copy h2{
  white-space:nowrap;
@@ -986,6 +987,7 @@
  box-shadow:none;
  backdrop-filter:none;
  -webkit-backdrop-filter:none;
+ transform:translateY(-10px);
 }
 .mobile-shell .prototype > .match-banner .match-banner-cta-arrow{
  display:inline-block;

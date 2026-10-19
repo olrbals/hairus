@@ -7,7 +7,7 @@
 .tabs{border-bottom:0;justify-content:space-between;align-items:stretch;height:52px;margin:0 8px 16px;display:flex}
 .tabs button{position:relative;display:flex;flex:0 1 76.4px;min-width:0;align-items:center;justify-content:center;border:0;background:transparent;padding:0;color:rgba(32,32,30,.46);font-size:15px;font-weight:400;line-height:1}
 .tabs button[aria-selected=true]{color:#20201e;font-weight:500}.tabs button[aria-selected=true]::after{position:absolute;right:0;bottom:0;left:0;height:1px;background:#20201e;content:''}
-.search{border:1px solid #00000073;border-radius:8px;align-items:center;gap:12px;height:58px;padding:0 10px;display:flex;width:100%}
+.search{border:1px solid #00000073;border-radius:0;align-items:center;gap:12px;height:58px;padding:0 10px;display:flex;width:100%}
 .search>img{width:24px;height:24px;flex:none}
 .search input{min-width:0;flex:1;width:100%;height:100%;border:0;outline:0;background:transparent;color:#20201e;font:400 14px/1.3 Pretendard,sans-serif}
 .search:focus-within{outline:2px solid #666460;outline-offset:3px}

@@ -28,6 +28,12 @@ export const profileOptions:Record<FieldKey,readonly ProfileOption[]>={
  ],
  cutHistory:historyOptions,permHistory:historyOptions,dyeHistory:historyOptions,bleachHistory:historyOptions,
 };
+/** Named profile colors use the approved palette; a custom #RRGGBB uses its exact shade. */
+export function swatchForField(key:FieldKey,value:string|null):string|null{
+ if((key!=='color'&&key!=='skin')||!value)return null;
+ if(/^#[0-9a-fA-F]{6}$/.test(value))return value;
+ return profileOptions[key].find(option=>option.value===value)?.swatch??null;
+}
 export function optionsForField(key:FieldKey,current:string|null):readonly ProfileOption[]{
  const options=profileOptions[key];
  // Preserve older free text without forcing it into a newly introduced category.
