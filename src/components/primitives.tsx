@@ -1,5 +1,7 @@
 import type {ButtonHTMLAttributes, ReactNode} from "react";
 export function Button({variant="primary",className="",...props}:ButtonHTMLAttributes<HTMLButtonElement>&{variant?:"primary"|"glass"|"plain"}) {return <button type="button" className={`button button--${variant} ${className}`} {...props}/>;}
+/** Small shared, accessible header action for skipping an optional step. */
+export function HeaderSkipButton({onClick}:{onClick:()=>void}) {return <button type="button" className="hairus-header-skip" onClick={onClick}>건너뛰기</button>;}
 export function HeaderBackIcon() {return <img src="/assets/figma/v1/30ced.svg" alt="" aria-hidden="true"/>;}
 export function SectionHeading({title,description,action}: {title:string;description:string;action?:ReactNode}) {return <header className="section-heading"><h2>{title}</h2><p>{description}</p>{action}</header>;}
 export function Icon({name}:{name:"home"|"explore"|"saved"|"my"|"bookmark"}) {return <img src={`/assets/figma/${name}.svg`} alt="" aria-hidden="true"/>;}

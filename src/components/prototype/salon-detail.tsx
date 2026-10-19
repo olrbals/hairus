@@ -109,7 +109,7 @@ export function ArvoSalonPage(){
       <Link className={styles.allDesigners} href="/salons/arvo/designers">전체 디자이너 6명 · 전문분야 보기 <img src={localAsset('arrow-right.svg')} alt="" width="16" height="16"/></Link>
     </section>
 
-    <ReviewSection data={arvoReviews} allReviewsHref="/salons/arvo/reviews" variant="refined" countLabel="고객 후기 2,004개"/>
+    <ReviewSection data={arvoReviews} allReviewsDisabled variant="refined" countLabel="고객 후기 2,004개"/>
 
     <section id="information" className={styles.information} data-figma-node="929:3737" aria-labelledby="information-title">
       <h2 id="information-title">INFORMATION</h2>

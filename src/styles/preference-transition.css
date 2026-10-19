@@ -24,8 +24,8 @@
 .preference-first-step__back img{display:block;width:44px;height:44px}
 .preference-first-step__progress{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20.6667px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
   height:3px;
 }
 .preference-first-step__progress span{height:3px;border-radius:1px;background:#e6eaf1}
@@ -124,7 +124,7 @@
   .preference-first-step__image img{transition:none}
 }
 
-/* Figma 939:8528 / 939:8597 / 939:8639 — preference questions 2–4. */
+/* Figma 939:8528 / 939:8597 — preference questions 2–3. */
 .mobile-shell:has(.preference-survey-step){padding-bottom:0}
 .preference-survey-step{
   position:relative;
@@ -147,8 +147,8 @@
 .preference-survey-step__back img{display:block;width:44px;height:44px}
 .preference-survey-step__progress{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20.6667px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
   height:3px;
 }
 .preference-survey-step__progress span{height:3px;border-radius:1px;background:#e6eaf1}
@@ -504,3 +504,19 @@
   text-underline-offset:4px;
  }
 }
+
+/* Compact flat preference choices; image circles and page layout remain untouched. */
+.preference-survey-step__chips{gap:12px 8px}
+.preference-survey-step__chips.chip-options button{min-height:44px;padding:8px 12px;border:1px solid #dedede;border-radius:12px;background:#f6f6f6;color:#20201e;font-size:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.preference-survey-step__chips.chip-options button[aria-pressed=true]{border-color:#000;background:#000;color:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+@media(max-width:400px){.preference-survey-step__chips.chip-options button{padding:8px 12px;font-size:14px}}
+.preference-complete__card{border:1px solid #e5e5e5;background:#f6f6f6;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.preference-complete__tags span{border:1px solid #d8d8d8;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* Preference intro: single full-width primary CTA; skip is in the shared header. */
+.preference-bta__actions{grid-template-columns:minmax(0,1fr)}
+/* Step 03 should show the upper area of its original image, not its middle. */
+.preference-bta__steps li:nth-child(3) img{object-position:center top}
+
+/* Preference survey and completed-profile keywords share the pill geometry. */
+.preference-survey-step__chips.chip-options button,.preference-complete__tags span{border-radius:var(--hairus-chip-radius,999px)}

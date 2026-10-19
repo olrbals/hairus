@@ -41,3 +41,10 @@ button.chip.chip[aria-pressed='true'] {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
+
+/* Shared chip: 12px corners, compact content, no inset or glass lighting. */
+button.chip.chip{min-height:44px;padding:8px 12px;border:1px solid #dedede;border-radius:12px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+button.chip.chip[aria-pressed='true']{border-color:#000;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* All shared SelectionChip instances: filters, SaveNote, booking category, Hair Note. */
+button.chip.chip{border-radius:var(--hairus-chip-radius,999px)}

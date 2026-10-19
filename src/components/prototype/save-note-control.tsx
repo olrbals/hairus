@@ -16,8 +16,8 @@ type Props = {
  buttonClassName?:string; reasonClassName?:string; reasonGroupClassName?:string;
 };
 
-// Both catalog saves and editorial bookmarks use the same current-state policy.
-// A past save (or the legacy automatic-note preference) never skips a new note.
+// Both catalog saves and editorial bookmarks use the same SaveNote toggle.
+// When disabled, saving is immediate with an empty note and no bottom sheet.
 export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,options,saved,ready,onSave,onRemove,buttonClassName='proto-save',reasonClassName,reasonGroupClassName}:Props){
  const {state,update}=usePrototype();
  const saveNoteEnabled=state.saveNoteEnabled!==false;
@@ -49,10 +49,10 @@ export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,opti
   };
  },[showOffNotice]);
  const save=()=>{onSave({reasons,note});setOpen(false);};
- const edit=()=>{setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);};
+ const edit=()=>{if(!saveNoteEnabled)return;setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);};
  const preview=saved?saveNotePreview({reasons:saved.reasons||[],note:saved.note||''}):{visible:[],hiddenCount:0};
  return <>
-  <button type="button" disabled={!ready} className={buttonClassName} aria-label={`${name} ${saved?'저장 해제':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(saved){onRemove();setOpen(false);}else edit();}}>
+  <button type="button" disabled={!ready} className={buttonClassName} aria-label={`${name} ${saved?'저장 해제':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(saved){onRemove();setOpen(false);}else if(!saveNoteEnabled){onSave({reasons:[],note:''});setOpen(false);}else edit();}}>
    <SaveHeart saved={!!saved}/>
   </button>
   {reasonClassName&&preview.visible.length>0&&<div className={reasonGroupClassName}>

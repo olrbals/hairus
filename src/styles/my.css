@@ -45,3 +45,11 @@
 .my-menu-row+.my-menu-row{height:26px;margin-top:12px;padding-bottom:8px;border-bottom:0}
 .my-menu-row .my-arrow-slot{margin-top:3px}
 @media(max-width:360px){.my-tag-list{gap:8px}}
+
+/* Flat MY dashboard: preserve profile/booking information and geometry. */
+.my-profile-card{border:1px solid #e5e5e5;border-radius:12px;background:#f6f6f6;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.my-tag-list span{padding:8px 12px;border:1px solid #dedede;border-radius:12px;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.my-booking-card{border:1px solid #d8d8d8;border-radius:12px;box-shadow:none}
+
+/* Flat MY preference keywords use the same pill radius. */
+.my-tag-list span{border-radius:var(--hairus-chip-radius,999px)}

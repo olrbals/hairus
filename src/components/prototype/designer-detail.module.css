@@ -31,8 +31,7 @@
 .page .profile>h2{margin-top:8px;font-family:var(--font-sans);font-size:18px;font-weight:500;line-height:1.3;}
 .tags{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
 .profile>.tags{margin-top:12px}
-.profile>.tags span{padding-block:3px;font-size:11px}
-.tags span{position:relative;display:block;padding:2px 12px;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:rgba(0,0,0,.08);box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);font-size:8px;font-weight:500;line-height:18px;color:rgba(0,0,0,.8);white-space:nowrap}
+.tags span{position:relative;display:block;max-width:100%;padding:4px 12px;border:0;border-radius:var(--hairus-chip-radius,32px);background:#20201e;color:#fff;font-size:12px;font-weight:500;line-height:1.3;white-space:normal;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .identity{margin-top:8px;color:#616161}
 .identity a{display:inline-flex;align-items:center;min-height:44px;padding:0;font-size:12px;font-weight:500}
 .identity p{font-size:14px;line-height:1.3}
@@ -52,8 +51,7 @@
 .matchPager button:focus-visible{outline:2px solid currentColor;outline-offset:-4px}
 .matchPager>span{min-width:42px;text-align:center}
 .match>.tags{padding-left:0}
-.match>.tags span{padding-block:3px;font-size:11px;line-height:18px;white-space:normal;max-width:100%}
-.works{margin-top:52px;padding:40px 24px;background:#0e0e0e;color:#fff}
+.works{margin-top:24px;padding:24px 24px;background:#0e0e0e;color:#fff}
 .works>div:first-child>p{color:#c7c7c7}
 .works>a{display:block;min-height:44px;margin-top:4px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
 .workGrid{height:346px;display:grid;grid-template-columns:247fr 127fr;gap:8px}
@@ -63,7 +61,7 @@
 .workGrid a:focus-visible img{outline:2px solid #fff;outline-offset:-4px}
 .workGrid>div{min-width:0;display:grid;grid-template-rows:1fr 1fr;gap:8px;overflow:hidden}
 .workGrid>div a:first-child img{object-position:44% 20%}
-.serviceSection{margin-top:52px;padding:24px 24px}
+.serviceSection{margin-top:24px;padding:24px 24px}
 .serviceList{margin-top:20px}
 .service{border-top:.8px solid rgba(0,0,0,.3);padding:12px 0}
 .service:first-child{border-top:0;padding-top:0}
@@ -81,10 +79,13 @@
 .serviceBody>a,.booking>a{display:flex;align-items:center;justify-content:center;border-radius:4px;background:#000;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
 .serviceBody>a{min-height:44px;font-size:12px}
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
-.salon{margin-top:52px;padding:24px 24px}
+.salon{padding:24px 24px}
 .salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:18px;object-fit:cover}
 .salon h3{margin:18px 0 0;font-size:20px;font-weight:500}
 .salon>p{margin-top:6px;color:#616161;font-size:14px}
 .booking{padding:28px 12px 40px}
 .booking>a{min-height:61px;font-size:16px;font-weight:500}
-@media(max-width:360px){.header,.profile,.sectionNav,.match,.works,.serviceSection,.reviews,.salon{padding-inline:18px}.hero{height:auto;aspect-ratio:430/528}.profile h1{font-size:46px}.matchImages img{height:auto;aspect-ratio:190/276}.workGrid{height:auto;aspect-ratio:382/346}.tags{gap:6px}.tags span{padding-inline:10px}}
+@media(max-width:360px){.header,.profile,.sectionNav,.match,.works,.serviceSection,.reviews,.salon{padding-inline:18px}.hero{height:auto;aspect-ratio:430/528}.profile h1{font-size:46px}.matchImages img{height:auto;aspect-ratio:190/276}.workGrid{height:auto;aspect-ratio:382/346}.tags{gap:6px}}
+
+/* The review component is reused by salons; remove its top margin only on designer detail pages. */
+.page > :global(section#reviews){margin-top:0}

@@ -5,3 +5,6 @@
 .liquid-indicator{position:absolute;inset:0;pointer-events:none}
 .liquid-indicator__rest{position:absolute;left:0;top:4px;height:54px;border-radius:27px;border:1px solid var(--glass-border);background:rgba(255,255,255,.07);box-shadow:var(--glass-shadow)}
 .liquid-indicator__surface{position:absolute;inset:0;overflow:visible;opacity:0}
+
+/* Keep the nav indicator movement, remove its lens depth. */
+.bottom-nav--liquid .liquid-indicator__rest{border:0;border-radius:12px;background:#f1f1f1;box-shadow:none}
