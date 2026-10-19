@@ -79,5 +79,5 @@ export function My({view}:{view?:string}){
    <div className="my-menu-row"><span>알림</span><Arrow name="row-chevron.svg"/></div>
    <div className="my-menu-row"><span>결제 수단</span><Arrow name="row-chevron.svg"/></div>
   </section>
- </div></div></div></main><BottomNav active="/my" disabled/></>;
+ </div></div></div></main><BottomNav active="/my"/></>;
 }
