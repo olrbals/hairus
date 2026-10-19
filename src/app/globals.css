@@ -54,4 +54,4 @@ html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
 }
 
 /* Shared text-chip curvature; standard buttons retain their own 12px radius. */
-:root{--hairus-chip-radius:999px}
+:root{--hairus-chip-radius:32px}
