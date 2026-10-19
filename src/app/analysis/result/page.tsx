@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {AnalysisHeader} from '@/components/analysis/shared';
+import {AnalysisHeader,asset} from '@/components/analysis/shared';
 import {FieldEditor} from '@/components/analysis/field-editor';
 import {swatchForField} from '@/lib/analysis/profile-options';
 import {Button} from '@/components/primitives';
