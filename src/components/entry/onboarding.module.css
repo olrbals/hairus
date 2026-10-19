@@ -1,9 +1,9 @@
 /* Figma onboarding01 (1126:3162) anchors all three screens: 430 × 875. */
-.screen.screen{position:relative;display:block;min-height:640px;height:100svh;padding:0;color:var(--color-ink);overflow:hidden;overflow-wrap:normal;touch-action:pan-y}
-.slidePage{position:absolute;inset:0;display:flex;flex-direction:column;width:100%;height:100%;padding:0 21px 0 24px;background:#fff}
+.screen.screen{position:relative;display:block;min-height:0;height:100svh;padding:0;color:var(--color-ink);overflow:hidden;overflow-wrap:normal;touch-action:pan-y}
+.slidePage{position:absolute;inset:0;display:grid;grid-template-rows:62px minmax(0,1fr) 106px auto;width:100%;height:100%;padding:0 21px 0 24px;background:#fff}
 .slideIncoming{z-index:2;animation:onboardingSlideIn 520ms cubic-bezier(.22,.7,.2,1) both}
 .slideOut{animation:onboardingSlideOut 520ms cubic-bezier(.22,.7,.2,1) both}
-.slideLogin{padding:0}
+.slideLogin{display:block;padding:0}
 .slideLogin :global(.login-screen){width:100%;height:100%;min-height:0}
 @keyframes onboardingSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
 @keyframes onboardingSlideOut{from{transform:translateX(0)}to{transform:translateX(-100%)}}
@@ -14,9 +14,10 @@
 .header{height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 0}
 .header :global(.wordmark){font-size:32px;font-weight:600;line-height:1.3;color:#000}
 .header button{border:0;background:none;padding:12px 0 12px 12px;font-size:14px;font-weight:400;line-height:1.3;color:rgba(0,0,0,.5)}
-.visual{flex:1;min-height:0;display:grid;place-items:center;position:relative;container-type:inline-size}
-/* Keep the overflowing editorial layers within the canvas at every mobile width. */
-.canvas{width:385px;height:360px;position:absolute;top:calc(50% - 170px);left:50%;margin-left:-192.5px;transform:scale(min(1,calc(100cqw / 385px),calc((100svh - 400px) / 360px)));transform-origin:center center}
+.visual{min-width:0;min-height:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);padding-block:24px 28px}
+.visualViewport{width:100%;height:100%;min-width:0;min-height:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;overflow:clip;container-type:size}
+/* Every preview shares one centered stage; only the artwork inside it differs. */
+.canvas{--preview-scale:min(1,calc(100cqw / 385px));width:385px;height:456px;display:grid;place-items:center;transform:scale(var(--preview-scale));transform-origin:center}
 .copy{height:106px;flex:none}
 .copy h1{font:700 40px/52px var(--font-editorial);margin:0;white-space:nowrap}
 .copy>p{margin-top:12px;font-size:16px;font-weight:400;line-height:1.3;color:var(--color-ink)}
@@ -34,49 +35,51 @@
 @keyframes indicatorGrow{from{width:8px}to{width:24px}}
 @keyframes indicatorShrink{from{width:24px}to{width:8px}}
 .footer .next{width:100%;height:56px;min-height:56px;border-radius:0;font-size:14px;font-weight:500;line-height:1.3;padding:0 24px}
-.footer .nextOutlined{border:1px solid #000;border-radius:0;background:transparent;color:#000;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.footer .nextOutlined{border:1px solid #000;border-radius:0;background:#fff;color:#000;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 /* Outrank the shared 61px primary CTA without changing login or other screens. */
 .screen.screen .footer button.next.nextPrimary{height:56px;min-height:56px;padding:0 24px;font-size:14px;font-weight:500;line-height:1.3;background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .card{border:1px solid rgba(0,0,0,.24);background:#fff;border-radius:0;box-shadow:none}
 
 /* 01 — the phone sits behind independent, intentionally wider UI layers. */
-.profilePreview{position:relative;width:353px;height:360px;margin:0 auto}
-.phone{position:absolute;z-index:0;top:4px;left:59px;width:235px;height:348px;border:1px solid #20201e;border-radius:30px;background:#fff}
+.profilePreview{position:relative;width:353px;height:374px;transform:scale(min(1,calc(100cqh / 374px / var(--preview-scale))))}
+.phone{position:absolute;z-index:0;top:8px;left:59px;width:235px;height:348px;border:1px solid #20201e;border-radius:30px;background:#fff}
 .speaker{display:block;width:48px;height:6px;margin:17px auto 0;border-radius:999px;background:#20201e}
-.profileCard{position:absolute;z-index:1;top:66px;left:8px;width:337px;padding:18px 20px}
+.profileCard{position:absolute;z-index:1;top:66px;left:8px;width:337px;padding:14px 20px}
 .profileCard h2{font:600 23px/30px var(--font-editorial)}
-.profileMood{font-size:10px;font-weight:600;line-height:13px;margin-top:10px}
-.profileSummary{font-size:13px;line-height:18px;margin-top:6px;color:var(--color-muted);white-space:nowrap}
+.profileMood{font-size:10px;font-weight:600;line-height:13px;margin-top:8px}
+.profileSummary{font-size:13px;line-height:18px;margin-top:4px;color:var(--color-muted);white-space:nowrap}
 .profileKeywords{display:flex;gap:12px;font-size:10px;line-height:13px;margin-top:10px;color:var(--color-muted)}
-.recommendedStyles{position:absolute;z-index:2;top:239px;left:0;width:100%}
-.recommendedStyles>p{font-size:10px;font-weight:500;line-height:13px;margin:0 0 10px 12px}
-.styleImages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.styleImages img{display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:center}
+.recommendedStyles{position:absolute;z-index:2;top:226px;left:0;width:100%}
+.recommendedStyles>p{width:max-content;padding-right:6px;background:#fff;font-size:10px;font-weight:500;line-height:13px;margin:0 0 10px}
+.styleImages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:#fff}
+.styleImage{aspect-ratio:1;overflow:hidden;border:1px solid #e7e7e4;background:#f4f4f2}
+.styleImage img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
 
-/* 02 — Figma portraits and specialties, with a slightly larger first recommendation. */
-.designerPreview{width:353px;margin:28px auto 0;display:flex;flex-direction:column;gap:14px;align-items:center}
-.designerCard{display:flex;align-items:center;width:333px;min-height:78px;border-color:#20201e;gap:12px}
-.designerCard>img{display:block;flex:none;width:64px;height:76px;object-fit:cover;object-position:center}
+/* 02 — outer cards may crop on short screens; the central card keeps readable type. */
+.designerPreview{width:353px;height:440px;display:grid;grid-template-rows:repeat(5,minmax(0,1fr));place-items:center;isolation:isolate}
+.designerCard{position:relative;display:flex;align-items:center;width:353px;height:108px;gap:16px;border-color:#20201e;background:#fff}
+.designerCard>img{display:block;flex:none;width:82px;height:106px;object-fit:cover;object-position:center}
 .designerIdentity{min-width:0;padding:10px 12px 10px 0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
 .designerName{font-size:16px;font-weight:500;line-height:1.3}
 .specialty{font-size:14px;line-height:1.3;color:var(--color-muted);white-space:nowrap}
-.bestMatch{width:353px;min-height:108px;gap:16px}
-.bestMatch>img{width:82px;height:106px}
+.designerCard[data-distance="1"]{z-index:1;transform:scale(.88);border-color:#cfcfcd;opacity:.85}
+.designerCard[data-distance="2"]{z-index:0;transform:scale(.76);border-color:#d8d8d6;filter:blur(2.5px);opacity:.6}
+.bestMatch{z-index:2}
 .matchLabel{display:block;padding:4px 6px;background:#000;color:#fff;font-size:10px;font-weight:500;line-height:13px;margin-bottom:4px}
 
 /* 03 — retain the original flat cards, type hierarchy and lower-right overlap. */
-.canvasHairNote{height:456px;top:calc(50% - 240px);transform:scale(min(1,calc(100cqw / 385px),calc((100svh - 405px) / 456px)))}
-.hairNotePreview{width:353px;height:456px;margin:auto;position:relative}
-.hairNote{position:relative;z-index:2;width:308px;padding:24px}
+.hairNotePreview{width:353px;transform:scale(min(1,calc(100cqh / 447px / var(--preview-scale))));display:grid;grid-template-columns:129fr 179fr 45fr;grid-template-rows:auto 16px auto;isolation:isolate}
+.hairNote{grid-area:1/1/3/3;z-index:2;min-width:0;padding:24px}
 .hairNote h2{font:600 26px/34px var(--font-editorial);margin-bottom:22px}
 .hairNote dl{display:flex;flex-direction:column;gap:18px}
 .hairNote dt,.appointment h3{font-size:12px;font-weight:600;line-height:16px;color:rgba(0,0,0,.8)}
 .hairNote dd{font-size:14px;font-weight:500;line-height:20px;color:rgba(0,0,0,.65);margin:8px 0 0}
-.appointment{position:absolute;z-index:3;right:0;top:254px;width:224px;padding:20px}
-.designer{font-size:16px;line-height:22px;font-weight:500;margin-top:14px}
+.appointment{grid-area:2/2/4/4;z-index:1;min-width:0;padding:20px}
+.designer{font-size:16px;line-height:22px;font-weight:500;margin-top:12px}
 .salon{font-size:12px;line-height:16px;color:rgba(0,0,0,.6);margin-top:6px}
-.date{font-size:14px;line-height:20px;margin-top:14px}
+.date{font-size:14px;line-height:20px;margin-top:12px}
 .date span{margin-left:8px;color:rgba(0,0,0,.6)}
 .ready{border-top:1px solid rgba(0,0,0,.08);padding-top:12px;margin-top:14px;font-size:12px;line-height:16px;color:rgba(0,0,0,.5)}
+@media(max-height:700px){.visual{padding-block:12px 16px}.footer{margin-top:28px}}
 @media(max-width:389px){.copy h1{font-size:36px}}
 @media(prefers-reduced-motion:reduce){.slideIncoming,.slideOut,.slideIncoming .progress a{animation:none}.progress a,.progress span{transition:none}}

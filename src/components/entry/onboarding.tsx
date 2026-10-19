@@ -4,6 +4,7 @@ import {useRouter} from "next/navigation";
 import {useEffect,useRef,useState} from "react";
 import {writeEntry} from "@/lib/entry-state";
 import {Button} from "@/components/primitives";
+import {arvoTeam} from "@/lib/prototype/arvo";
 import styles from "./onboarding.module.css";
 import {LoginScreen} from "./login-screen";
 
@@ -13,6 +14,9 @@ const stories = [
   {title:"The Hair Note", body:<>나의 헤어 정보를 담아,<br/>예약까지 간편하게 이어가요.</>},
 ];
 const asset = "/assets/figma/v1/";
+const previewDesigners = ["yoona","hana","sohee","gyunghyun","jonghun"]
+  .map(id=>arvoTeam.find(designer=>designer.id===id))
+  .filter(designer=>designer!==undefined);
 
 // Editorial examples only: never read or write user hair or appointment data.
 function HairProfilePreview() {
@@ -27,26 +31,21 @@ function HairProfilePreview() {
     <div className={styles.recommendedStyles}>
       <p>STYLES FOR YOU</p>
       <div className={styles.styleImages}>
-        <img src={`${asset}5582e.png`} alt="에어리 레이어드 스타일" draggable={false}/>
-        <img src={`${asset}05be4.png`} alt="테슬컷 스타일" draggable={false}/>
-        <img src={`${asset}03042.png`} alt="샌드펌 스타일" draggable={false}/>
+        <div className={styles.styleImage}><img src={`${asset}5582e.png`} alt="에어리 레이어드 스타일" draggable={false}/></div>
+        <div className={styles.styleImage}><img src={`${asset}05be4.png`} alt="테슬컷 스타일" draggable={false}/></div>
+        <div className={styles.styleImage}><img src={`${asset}03042.png`} alt="샌드펌 스타일" draggable={false}/></div>
       </div>
     </div>
   </div>;
 }
 function DesignerPreview() {
-  // Figma 1161:2726: preserve the three portraits and specialties.
-  const designers=[
-    {name:"소희 실장",specialty:"보브컷 · 히피펌 전문",image:"a91f5.png"},
-    {name:"하나 디자이너",specialty:"C컬펌 · 컬러리스트",image:"63467.png"},
-    {name:"경현 디자이너",specialty:"허쉬컷 · 리프펌 전문",image:"3a62b.png"},
-  ];
+  // Static editorial coverflow; identities come from the existing salon team.
   return <div className={styles.designerPreview}>
-    {designers.map((designer,index)=><div key={designer.name} className={`${styles.card} ${styles.designerCard} ${index===0?styles.bestMatch:""}`}>
-      <img src={asset+designer.image} alt={designer.name} draggable={false}/>
+    {previewDesigners.map((designer,index)=><div key={designer.id} data-distance={Math.abs(index-2)} className={`${styles.card} ${styles.designerCard} ${designer.id==="sohee"?styles.bestMatch:""}`}>
+      <img src={designer.image} alt={`${designer.name} ${designer.title}`} draggable={false}/>
       <div className={styles.designerIdentity}>
-        {index===0&&<span className={styles.matchLabel}>BEST MATCH</span>}
-        <p className={styles.designerName}>{designer.name}</p>
+        {designer.id==="sohee"&&<span className={styles.matchLabel}>BEST MATCH</span>}
+        <p className={styles.designerName}>{designer.name} {designer.title}</p>
         <p className={styles.specialty}>{designer.specialty}</p>
       </div>
     </div>)}
@@ -72,7 +71,7 @@ function OnboardingPanel({step,progressStep=step,previousStep,onSkip,onNext,onSe
  const story=stories[step-1];
  return <>
   <header className={styles.header}><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button type="button" onClick={onSkip}>건너뛰기</button></header>
-  <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas+(step===3?" "+styles.canvasHairNote:"")}>{step===1?<HairProfilePreview/>:step===2?<DesignerPreview/>:<HairNotePreview/>}</div></div>
+  <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.visualViewport}><div className={styles.canvas}>{step===1?<HairProfilePreview/>:step===2?<DesignerPreview/>:<HairNotePreview/>}</div></div></div>
   <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
   <footer className={styles.footer}>
    <nav className={styles.progress} aria-label="온보딩 단계">{([1,2,3] as const).map(n=><Link key={n} href={"/onboarding/"+n} aria-current={n===progressStep?"step":undefined} data-previous={n===previousStep||undefined} aria-label={"온보딩 "+n} onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();onSelect(n);}}><span/></Link>)}</nav>
