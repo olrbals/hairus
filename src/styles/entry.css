@@ -15,3 +15,10 @@
 .entry-screen .social-login{border-radius:0}
 .welcome-screen .name-field label{font-size:18px}
 .welcome-screen .name-field input{font-size:16px;border-radius:0}
+
+/* Follow-up: reveal crisp black outlines on hover and keyboard focus. */
+@media(hover:hover) and (pointer:fine){
+ .entry-screen .login-methods .social-login:hover{border-color:#000}
+}
+.entry-screen .login-methods .social-login:focus-visible{border-color:#000}
+.welcome-screen .name-field input{background:#fff;border:.8px solid #000}

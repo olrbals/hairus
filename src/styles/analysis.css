@@ -135,3 +135,19 @@
 .mobile-shell .captured-screen .analysis-actions .button.button--primary:not(.button--glass):not(.button--plain){
  height:56px;min-height:56px;padding:0 8px;font-size:14px;
 }
+
+/* 2026-10-19 follow-up: heading and photo share one horizontal alignment. */
+.result-screen .result-top{
+ display:grid;grid-template-columns:minmax(0,1fr) 142px;align-items:start;
+ gap:16px;margin:28px 9px 0;
+}
+.result-screen .result-top .analysis-heading{min-width:0;margin:0}
+.result-screen .result-top .summary-photo{width:142px;height:199px;min-height:199px}
+.result-screen .result-content{margin-top:28px;gap:48px}
+.result-screen .profile-field>button{border-radius:0}
+.result-screen .profile-field>button::before{border-radius:0}
+@media(max-width:380px){
+ .result-screen .result-top{gap:12px}
+ .result-screen .result-top .analysis-heading h1{font-size:24px}
+ .result-screen .result-top .analysis-heading>p{font-size:13px}
+}
