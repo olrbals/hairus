@@ -32,6 +32,6 @@ export function ReviewSection({data,allReviewsHref,allReviewsDisabled=false,vari
         </li>)}</ul>
       </div>
       {data.reviews.map(review=><article key={review.id}><header><span>★ {review.rating}</span><time dateTime={review.date}>{review.date.replaceAll('-','.')}</time></header><small>{review.visit}</small><p>{review.paragraphs.map((paragraph,index)=><Fragment key={index}>{index>0&&<br/>}{paragraph}</Fragment>)}</p></article>)}
-      {allReviewsDisabled?<span className={styles.textLink}>모든 후기 보기 →</span>:allReviewsHref&&<Link className={styles.textLink} href={allReviewsHref}>모든 후기 보기 →</Link>}
+      {allReviewsDisabled?<span className={`${styles.textLink} ${styles.textLinkDisabled}`}>모든 후기 보기 →</span>:allReviewsHref&&<Link className={styles.textLink} href={allReviewsHref}>모든 후기 보기 →</Link>}
     </section>;
 }
