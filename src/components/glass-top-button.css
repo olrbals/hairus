@@ -1,12 +1,41 @@
-.glass-top-button{position:fixed;z-index:18;right:max(16px,calc((100vw - 430px)/2 + 16px));bottom:calc(var(--top-button-bottom,16px) + env(safe-area-inset-bottom));width:44px;height:44px;padding:4px;border:0;border-radius:50%;background:transparent;color:#20201e;display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 180ms ease,visibility 180ms ease}
+.glass-top-button{
+ position:fixed;
+ z-index:18;
+ right:max(24px,calc((100vw - 430px)/2 + 24px));
+ bottom:calc(var(--top-button-bottom,16px) + env(safe-area-inset-bottom));
+ width:44px;
+ height:44px;
+ padding:0;
+ border:1px solid #20201e;
+ border-radius:50%;
+ background:#fff;
+ color:#20201e;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+ display:grid;
+ place-items:center;
+ opacity:0;
+ visibility:hidden;
+ pointer-events:none;
+ transition:opacity 180ms ease,visibility 180ms ease;
+}
 .glass-top-button[data-visible=true]{opacity:1;visibility:visible;pointer-events:auto}
-/* Glass surface from .match-banner-cta; TOP geometry stays unchanged. */
-.glass-top-button__surface{position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.48);box-shadow:0 1px 4px rgba(0,0,0,.043),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
-.glass-top-button__surface svg{position:relative;z-index:1}
-.glass-top-button:active .glass-top-button__surface{background-color:rgba(255,255,255,.18)}
+.glass-top-button__surface{
+ display:grid;
+ place-items:center;
+ width:100%;
+ height:100%;
+ border:0;
+ border-radius:50%;
+ background:transparent;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+.glass-top-button__surface svg{display:block}
+.glass-top-button:active{background:#f1f1f1}
+@media(hover:hover) and (pointer:fine){
+ .glass-top-button:hover{background:#f7f7f7}
+}
 @media(prefers-reduced-motion:reduce){.glass-top-button{transition:none}}
-
-/* Flat TOP button, keeping the existing 44px target and scroll behavior. */
-.glass-top-button,.glass-top-button__surface{border-radius:12px}
-.glass-top-button__surface{border:1px solid #dedede;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-.glass-top-button:active .glass-top-button__surface{background:#f1f1f1}
