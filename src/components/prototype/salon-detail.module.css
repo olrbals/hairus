@@ -15,7 +15,7 @@
 .salonPage section[id]{scroll-margin-top:112px}
 .sectionHeading h2,.information>h2{font:700 34px/1.3 var(--font-editorial);}
 .sectionHeading p{margin-top:4px;color:#616161;font-size:14px}
-.notice{padding:20px 21px 24px 27px}
+.notice{padding:24px}
 .quickInfo{margin:32px 0 28px;padding:0 20px;display:flex;justify-content:space-between;color:rgba(0,0,0,.7);font-weight:500}
 .quickInfo dt{margin-bottom:4px;color:rgba(0,0,0,.35);font-size:12px}
 .quickInfo dd{margin:0;font-size:14px}
@@ -31,14 +31,14 @@
 .daysOff dt{color:#616161}.daysOff dd{margin:0;white-space:nowrap}
 .benefits{margin-top:28px}
 .benefits h3{margin:0 0 8px;font-size:14px;color:rgba(0,0,0,.5);font-weight:500}
-.benefit{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:66px;padding:12px;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:#f4f4f4;text-align:left;box-shadow:var(--glass-shadow)}
+.benefit{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:66px;padding:12px;border:.8px solid #777777;border-radius:12px;background:transparent;text-align:left;box-shadow:none}
 .benefit+.benefit{margin-top:8px}
 .benefitLogo{display:flex;flex:0 0 40px;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:#dfd8d8}
 .benefitLogo>span{font:400 24px/1.3 'Arvo Reenie Beanie',cursive;color:rgba(0,0,0,.8);white-space:nowrap;text-align:center}
 .benefit>img:last-child{flex:none;margin-left:auto}
 .benefit>span{min-width:0}.benefit strong{display:block;font-size:14px;font-weight:500;}.benefit small{display:block;margin-top:4px;font-size:12px;color:rgba(0,0,0,.5);}
 .benefitMessage{margin-top:8px;color:#616161;font-size:12px}
-.price{margin-top:20px;padding:24px 21px 24px 27px}
+.price{padding:24px}
 .priceList{margin-top:20px}
 .priceGroup{display:flex;gap:0;border-top:.8px solid rgba(0,0,0,.3);padding:16px 0;margin-top:4px;font-size:14px;font-weight:500}
 .priceGroup:first-child{border-top:0;margin-top:0;padding:24px 0}
@@ -46,14 +46,14 @@
 .priceGroup dl{flex:1;min-width:0;margin:0;display:flex;flex-direction:column;gap:8px}
 .priceGroup dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .priceGroup dt{min-width:0}.priceGroup dd{flex:none;margin:0;text-align:right;white-space:nowrap}
-.designers{margin-top:20px;padding:24px 21px 24px 27px;background:#fefefe}
+.designers{padding:24px;background:#fefefe}
 .featuredDesigners{margin-top:32px;display:grid;gap:12px}
 .featuredDesigner{display:flex;align-items:center;gap:20px;min-height:88px;overflow:hidden;border:1px solid rgba(255,255,255,.48);border-radius:8px;background:#f3f3f5;box-shadow:var(--glass-shadow)}
 .featuredDesigner>img{display:block;flex:none;width:64px;height:88px;object-fit:cover;object-position:center;border-radius:8px}
 .featuredDesigner strong{display:block;color:#222b3a;font-family:'Arvo Noto Sans KR',var(--font-sans);font-size:14px;font-weight:500;line-height:20px;}
 .featuredDesigner small{display:block;margin-top:4px;color:rgba(0,0,0,.7);font-size:12px}
 .allDesigners{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:20px;min-height:18px;font-size:12px;color:#616161}
-.information{margin-top:20px;padding:24px}
+.information{padding:24px}
 .information>h2{color:#0e0e0e}
 .information>h3{margin:32px 0 20px;font-size:16px;font-weight:500;line-height:1.3;color:#0e0e0e}
 .interior>img{display:block;width:100%;height:auto;aspect-ratio:263/177;object-fit:contain}
@@ -87,7 +87,7 @@
 .designerGroup h2{margin:0 0 12px;font-size:20px;font-weight:600;line-height:1.3;}
 .designerGroup>div{display:grid;gap:12px}
 @media(max-width:390px){.designerName{flex-wrap:wrap;gap:0 8px}.designerName small{font-size:11px}.priceGroup{font-size:12px}.priceGroup dl>div{gap:4px}}
-@media(max-width:360px){.sectionNav,.notice,.price,.designers,.teamContent{padding-inline:18px}.hoursRow{grid-template-columns:66px 1fr auto}.hoursRow>span:last-child{gap:10px}.daysOff{padding-left:66px}.benefit{padding:10px;gap:8px}.benefit strong{font-size:12px}.benefit small{font-size:11px}.designerIdentity{gap:8px}.designerIdentity>img{width:52px;height:66px}.reserveDesigner{min-width:62px}.specialty{font-size:11px}.teamContent>h1{font-size:26px}}
+@media(max-width:360px){.sectionNav,.teamContent{padding-inline:18px}.hoursRow{grid-template-columns:66px 1fr auto}.hoursRow>span:last-child{gap:10px}.daysOff{padding-left:66px}.benefit{padding:12px;gap:12px}.benefit strong{font-size:12px}.benefit small{font-size:11px}.designerIdentity{gap:8px}.designerIdentity>img{width:52px;height:66px}.reserveDesigner{min-width:62px}.specialty{font-size:11px}.teamContent>h1{font-size:26px}}
 @font-face{font-family:'Arvo Noto Sans KR';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/NotoSansKR-arvo-500.ttf') format('truetype')}
 @font-face{font-family:'Arvo Noto Sans KR';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/NotoSansKR-arvo-700.ttf') format('truetype')}
 
@@ -95,3 +95,6 @@
 
 .teamCalendar{display:flex;align-items:center;justify-content:flex-end;width:44px;height:44px;color:#20201e}
 .teamCalendar svg{display:block;flex:none;width:24px;height:24px}
+
+/* The review component is shared with designer detail and review-list pages. */
+.salonPage > :global(#reviews){margin-top:0}
