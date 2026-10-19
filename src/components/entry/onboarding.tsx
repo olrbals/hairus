@@ -82,7 +82,7 @@ export function Onboarding({step}:{step:Step}){
    <OnboardingPanel step={step} onSkip={finish} onNext={()=>advance(next)}/>
   </div>
   {incoming!==null&&<div className={styles.slidePage+" "+styles.slideIncoming+" "+(incoming==="login"?styles.slideLogin:"")} aria-hidden="true" inert
-   onAnimationEnd={event=>{if(event.target===event.currentTarget&&event.animationName==="onboardingSlideIn")navigate(incoming);}}>
+   onAnimationEnd={event=>{if(event.target===event.currentTarget&&event.animationName.includes("onboardingSlideIn"))navigate(incoming);}}>
    {incoming==="login"?<LoginScreen asSlide/>:<OnboardingPanel step={incoming} onSkip={finish} onNext={()=>{}}/>}
   </div>}
  </main>;
