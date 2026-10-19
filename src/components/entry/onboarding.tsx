@@ -1,40 +1,56 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import {writeEntry} from "@/lib/entry-state";
 import {Button} from "@/components/primitives";
 import styles from "./onboarding.module.css";
 import {LoginScreen} from "./login-screen";
 
 const stories = [
-  {title:"Understand My Hair", body:<>나의 헤어 정보를 분석하고,<br/>나에게 맞는 스타일을 추천받아요.</>},
-  {title:"Explore Your Style", body:<>다양한 헤어스타일을 탐색하고,<br/>마음에 드는 스타일을 발견해요.</>},
+  {title:"Understand & Explore", body:<>나의 헤어를 분석하고,<br/>취향에 맞는 스타일을 발견해요.</>},
+  {title:"Meet Your Match", body:<>나의 헤어와 취향에 맞는<br/>디자이너를 추천받아요.</>},
   {title:"The Hair Note", body:<>나의 헤어 정보를 담아,<br/>예약까지 간편하게 이어가요.</>},
 ];
-const asset = "/assets/figma/onboarding/";
+const asset = "/assets/figma/v1/";
 
 // Editorial examples only: never read or write user hair or appointment data.
 function HairProfilePreview() {
   return <div className={styles.profilePreview}>
-    <div className={`${styles.card} ${styles.natural}`}>
-      <div className={styles.naturalCopy}><h2>NATURAL</h2><p>자연스러운 결이 만들어내는<br/>편안하고 세련된 분위기</p>
-        <div className={styles.keywords}>{["# 내추럴","# 퓨어","# 웨이브"].map(label=><span key={label}>{label}</span>)}</div>
-      </div>
-      <div className={styles.naturalImage}><img src={`${asset}natural.png`} alt="자연스러운 긴 웨이브 헤어"/></div>
+    <div className={styles.phone} aria-hidden="true"><span className={styles.speaker}/></div>
+    <div className={`${styles.card} ${styles.profileCard}`}>
+      <h2>MY HAIR PROFILE</h2>
+      <p className={styles.profileMood}>NATURAL</p>
+      <p className={styles.profileSummary}>계란형 · 긴 기장 · 반곱슬 · 흑갈색 모</p>
+      <p className={styles.profileKeywords}># 내추럴<span> # 퓨어</span><span> # 웨이브</span></p>
     </div>
-    <div className={`${styles.card} ${styles.about}`}>
-      <h3>ABOUT ME</h3><p className={styles.aboutSummary}>계란형 · 긴 기장 · 반곱슬 · 흑갈색 모</p><h3>A NOTE FOR YOU</h3>
-      <div className={styles.noteRow}><div className={styles.noteImage}><img src={`${asset}note.png`} alt=""/></div>
-        <p>자연스러운 결이 가장 큰 매력이에요.<br/>긴 머리에 부드러운 레이어와 웨이브를 더해보세요. 차분한 흑갈색이 내추럴한 분위기를 더욱 살려줄 거예요.</p>
+    <div className={styles.recommendedStyles}>
+      <p>STYLES FOR YOU</p>
+      <div className={styles.styleImages}>
+        <img src={`${asset}5582e.png`} alt="에어리 레이어드 스타일" draggable={false}/>
+        <img src={`${asset}05be4.png`} alt="테슬컷 스타일" draggable={false}/>
+        <img src={`${asset}03042.png`} alt="샌드펌 스타일" draggable={false}/>
       </div>
     </div>
   </div>;
 }
-function StylePreview() {
-  // Figma 736:2662 — https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=736-2662
-  // Reuses the HOME Weekly Editorial asset.
-  return <div className={styles.stylePreview}><img src="/assets/figma/v1/88ad2.png" alt="HAIRUS Weekly Editorial"/></div>;
+function DesignerPreview() {
+  // Figma 1161:2726: preserve the three portraits and specialties.
+  const designers=[
+    {name:"소희 실장",specialty:"보브컷 · 히피펌 전문",image:"a91f5.png"},
+    {name:"하나 디자이너",specialty:"C컬펌 · 컬러리스트",image:"63467.png"},
+    {name:"경현 디자이너",specialty:"허쉬컷 · 리프펌 전문",image:"3a62b.png"},
+  ];
+  return <div className={styles.designerPreview}>
+    {designers.map((designer,index)=><div key={designer.name} className={`${styles.card} ${styles.designerCard} ${index===0?styles.bestMatch:""}`}>
+      <img src={asset+designer.image} alt={designer.name} draggable={false}/>
+      <div className={styles.designerIdentity}>
+        {index===0&&<span className={styles.matchLabel}>BEST MATCH</span>}
+        <p className={styles.designerName}>{designer.name}</p>
+        <p className={styles.specialty}>{designer.specialty}</p>
+      </div>
+    </div>)}
+  </div>;
 }
 function HairNotePreview() {
   return <div className={styles.hairNotePreview}>
@@ -50,16 +66,16 @@ function HairNotePreview() {
   </div>;
 }
 type Step=1|2|3;
-type Destination=2|3|"login";
+type Destination=Step|"login";
 
-function OnboardingPanel({step,onSkip,onNext}:{step:Step;onSkip:()=>void;onNext:()=>void}){
+function OnboardingPanel({step,progressStep=step,previousStep,onSkip,onNext,onSelect}:{step:Step;progressStep?:Step;previousStep?:Step;onSkip:()=>void;onNext:()=>void;onSelect:(step:Step)=>void}){
  const story=stories[step-1];
  return <>
   <header className={styles.header}><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button type="button" onClick={onSkip}>건너뛰기</button></header>
-  <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas+(step===3?" "+styles.canvasHairNote:"")}>{step===1?<HairProfilePreview/>:step===2?<StylePreview/>:<HairNotePreview/>}</div></div>
+  <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas+(step===3?" "+styles.canvasHairNote:"")}>{step===1?<HairProfilePreview/>:step===2?<DesignerPreview/>:<HairNotePreview/>}</div></div>
   <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
   <footer className={styles.footer}>
-   <nav className={styles.progress} aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={"/onboarding/"+n} aria-current={n===step?"step":undefined} aria-label={"온보딩 "+n}><span/></Link>)}</nav>
+   <nav className={styles.progress} aria-label="온보딩 단계">{([1,2,3] as const).map(n=><Link key={n} href={"/onboarding/"+n} aria-current={n===progressStep?"step":undefined} data-previous={n===previousStep||undefined} aria-label={"온보딩 "+n} onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();onSelect(n);}}><span/></Link>)}</nav>
    <Button variant={step===3?"primary":"glass"} className={styles.next+" "+(step===3?styles.nextPrimary:styles.nextOutlined)} onClick={onNext}>{step===3?"시작하기":"다음"}</Button>
   </footer>
  </>;
@@ -68,22 +84,26 @@ function OnboardingPanel({step,onSkip,onNext}:{step:Step;onSkip:()=>void;onNext:
 export function Onboarding({step}:{step:Step}){
  const router=useRouter();
  const [incoming,setIncoming]=useState<Destination|null>(null);
+ const touchStart=useRef<{x:number;y:number}|null>(null);
  useEffect(()=>{writeEntry({onboardingStep:step});setIncoming(null);},[step]);
  function finish(){writeEntry({onboardingDone:true});router.push("/login");}
  function navigate(destination:Destination){if(destination==="login")finish();else router.push("/onboarding/"+destination);}
  function advance(destination:Destination){
-  if(incoming!==null)return;
+  if(incoming!==null||destination===step)return;
   if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){navigate(destination);return;}
   setIncoming(destination);
  }
  const next:Destination=step===3?"login":((step+1) as 2|3);
- return <main id="main" className={"entry-screen "+styles.screen}>
+ return <main id="main" className={"entry-screen "+styles.screen} data-direction={typeof incoming==="number"&&incoming<step?"back":"forward"}
+  onTouchStart={event=>{if((event.target as Element).closest("a,button")){touchStart.current=null;return;}const touch=event.touches[0];touchStart.current={x:touch.clientX,y:touch.clientY};}}
+  onTouchCancel={()=>{touchStart.current=null;}}
+  onTouchEnd={event=>{const start=touchStart.current;touchStart.current=null;if(!start)return;const touch=event.changedTouches[0],dx=touch.clientX-start.x,dy=touch.clientY-start.y;if(Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.5)return;if(dx<0)advance(next);else if(step>1)advance((step-1) as Step);}}>
   <div className={styles.slidePage+" "+(incoming!==null?styles.slideOut:"")} aria-hidden={incoming!==null} inert={incoming!==null}>
-   <OnboardingPanel step={step} onSkip={finish} onNext={()=>advance(next)}/>
+   <OnboardingPanel step={step} progressStep={typeof incoming==="number"?incoming:step} onSkip={finish} onNext={()=>advance(next)} onSelect={advance}/>
   </div>
   {incoming!==null&&<div className={styles.slidePage+" "+styles.slideIncoming+" "+(incoming==="login"?styles.slideLogin:"")} aria-hidden="true" inert
    onAnimationEnd={event=>{if(event.target===event.currentTarget&&event.animationName.includes("onboardingSlideIn"))navigate(incoming);}}>
-   {incoming==="login"?<LoginScreen asSlide/>:<OnboardingPanel step={incoming} onSkip={finish} onNext={()=>{}}/>}
+   {incoming==="login"?<LoginScreen asSlide/>:<OnboardingPanel step={incoming} previousStep={step} onSkip={finish} onNext={()=>{}} onSelect={()=>{}}/>}
   </div>}
  </main>;
 }
