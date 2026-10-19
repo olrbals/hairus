@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import {writeEntry} from "@/lib/entry-state";
 import {Button} from "@/components/primitives";
 import styles from "./onboarding.module.css";
+import {LoginScreen} from "./login-screen";
 
 const stories = [
   {title:"Understand My Hair", body:<>나의 헤어 정보를 분석하고,<br/>나에게 맞는 스타일을 추천받아요.</>},
@@ -48,17 +49,41 @@ function HairNotePreview() {
     </div>
   </div>;
 }
-export function Onboarding({step}:{step:1|2|3}) {
-  const router=useRouter(); const story=stories[step-1];
-  useEffect(()=>{writeEntry({onboardingStep:step});},[step]);
-  function finish(){writeEntry({onboardingDone:true});router.push("/login");}
-  return <main id="main" className={`entry-screen ${styles.screen}`}>
-    <header className={styles.header}><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button type="button" onClick={finish}>건너뛰기</button></header>
-    <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas}>{step===1?<HairProfilePreview/>:step===2?<StylePreview/>:<HairNotePreview/>}</div></div>
-    <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
-    <footer className={styles.footer}>
-      <nav className={styles.progress} aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={`/onboarding/${n}`} aria-current={n===step?'step':undefined} aria-label={`온보딩 ${n}`}><span/></Link>)}</nav>
-      <Button variant={step===3?"primary":"glass"} className={step===3?`${styles.next} ${styles.nextPrimary}`:styles.next} onClick={()=>step===3?finish():router.push(`/onboarding/${step+1}`)}>{step===3?'시작하기':'다음'}</Button>
-    </footer>
-  </main>;
+type Step=1|2|3;
+type Destination=2|3|"login";
+
+function OnboardingPanel({step,onSkip,onNext}:{step:Step;onSkip:()=>void;onNext:()=>void}){
+ const story=stories[step-1];
+ return <>
+  <header className={styles.header}><Link href="/ui" className="wordmark" aria-label="HAIRUS UI 샘플">HAIRUS</Link><button type="button" onClick={onSkip}>건너뛰기</button></header>
+  <div className={styles.visual} aria-label="서비스 미리보기 예시"><div className={styles.canvas+(step===3?" "+styles.canvasHairNote:"")}>{step===1?<HairProfilePreview/>:step===2?<StylePreview/>:<HairNotePreview/>}</div></div>
+  <div className={styles.copy}><h1>{story.title}</h1><p>{story.body}</p></div>
+  <footer className={styles.footer}>
+   <nav className={styles.progress} aria-label="온보딩 단계">{[1,2,3].map(n=><Link key={n} href={"/onboarding/"+n} aria-current={n===step?"step":undefined} aria-label={"온보딩 "+n}><span/></Link>)}</nav>
+   <Button variant={step===3?"primary":"glass"} className={styles.next+" "+(step===3?styles.nextPrimary:styles.nextOutlined)} onClick={onNext}>{step===3?"시작하기":"다음"}</Button>
+  </footer>
+ </>;
+}
+
+export function Onboarding({step}:{step:Step}){
+ const router=useRouter();
+ const [incoming,setIncoming]=useState<Destination|null>(null);
+ useEffect(()=>{writeEntry({onboardingStep:step});setIncoming(null);},[step]);
+ function finish(){writeEntry({onboardingDone:true});router.push("/login");}
+ function navigate(destination:Destination){if(destination==="login")finish();else router.push("/onboarding/"+destination);}
+ function advance(destination:Destination){
+  if(incoming!==null)return;
+  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){navigate(destination);return;}
+  setIncoming(destination);
+ }
+ const next:Destination=step===3?"login":((step+1) as 2|3);
+ return <main id="main" className={"entry-screen "+styles.screen}>
+  <div className={styles.slidePage+" "+(incoming!==null?styles.slideOut:"")} aria-hidden={incoming!==null} inert={incoming!==null}>
+   <OnboardingPanel step={step} onSkip={finish} onNext={()=>advance(next)}/>
+  </div>
+  {incoming!==null&&<div className={styles.slidePage+" "+styles.slideIncoming+" "+(incoming==="login"?styles.slideLogin:"")} aria-hidden="true" inert
+   onAnimationEnd={event=>{if(event.target===event.currentTarget&&event.animationName==="onboardingSlideIn")navigate(incoming);}}>
+   {incoming==="login"?<LoginScreen asSlide/>:<OnboardingPanel step={incoming} onSkip={finish} onNext={()=>{}}/>}
+  </div>}
+ </main>;
 }
