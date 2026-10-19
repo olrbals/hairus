@@ -52,7 +52,7 @@
 .recommendedStyles{position:absolute;z-index:2;top:226px;left:0;width:100%}
 .recommendedStyles>p{width:max-content;padding-right:6px;background:#fff;font-size:10px;font-weight:500;line-height:13px;margin:0 0 10px}
 .styleImages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:#fff}
-.styleImage{aspect-ratio:1;overflow:hidden;border:1px solid #e7e7e4;background:#f4f4f2}
+.styleImage{aspect-ratio:1;overflow:hidden;border:1px solid #e7e7e4;background:transparent}
 .styleImage img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
 
 /* 02 — outer cards may crop on short screens; the central card keeps readable type. */
