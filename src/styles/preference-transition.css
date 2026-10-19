@@ -344,7 +344,6 @@
   border-radius:8px;
   background:rgba(255,254,245,.6);
   box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06);
-  backdrop-filter:blur(8px);
 }
 .preference-complete__hero{position:relative;width:350px;height:215px}
 .preference-complete__copy{position:absolute;z-index:3;top:6px;left:4px;width:188px}
@@ -510,7 +509,7 @@
 .preference-survey-step__chips.chip-options button{min-height:44px;padding:8px 12px;border:1px solid #dedede;border-radius:12px;background:#f6f6f6;color:#20201e;font-size:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .preference-survey-step__chips.chip-options button[aria-pressed=true]{border-color:#000;background:#000;color:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 @media(max-width:400px){.preference-survey-step__chips.chip-options button{padding:8px 12px;font-size:14px}}
-.preference-complete__card{border:1px solid #e5e5e5;background:#f6f6f6;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.preference-complete__card{border:1px solid #e5e5e5;background:#f6f6f6;box-shadow:none}
 .preference-complete__tags span{border:1px solid #d8d8d8;background:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 
 /* Preference intro: single full-width primary CTA; skip is in the shared header. */
@@ -520,3 +519,34 @@
 
 /* Preference survey and completed-profile keywords share the pill geometry. */
 .preference-survey-step__chips.chip-options button,.preference-complete__tags span{border-radius:var(--hairus-chip-radius,999px)}
+
+/* 2026-10-19: matching left/right preference buttons. */
+.preference-first-step .preference-actions,.preference-survey-step .preference-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.preference-first-step .preference-actions>.button,.preference-survey-step .preference-actions>.button{width:100%;min-width:0;height:56px;min-height:56px;padding:0 8px;border-radius:0;font-size:14px}
+.preference-first-step .preference-actions>.button--plain,.preference-survey-step .preference-actions>.button--plain{display:flex;justify-content:center;align-items:center;border:1px solid #000;border-radius:0;background:#fff;color:#000;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.preference-complete .preference-complete__card{background:#fffef8;border:1px solid #e8e6dc;box-shadow:none}
+.preference-complete .preference-actions{display:grid;grid-template-columns:minmax(0,1fr)}
+
+/* Shared primary CTA specifies 61px; preference pairs override at this scope. */
+.mobile-shell .preference-first-step .preference-actions>.button.button--primary:not(.button--glass):not(.button--plain),
+.mobile-shell .preference-survey-step .preference-actions>.button.button--primary:not(.button--glass):not(.button--plain){
+ height:56px;min-height:56px;padding:0 8px;font-size:14px;
+}
+
+/* Preference intro: match the first survey's 2-column CTA style. */
+.preference-bta .preference-bta__actions{
+ grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+ bottom:calc(41px + env(safe-area-inset-bottom));
+}
+.preference-bta .preference-bta__actions>.button{
+ width:100%;min-width:0;height:56px;min-height:56px;padding:0 8px;
+ border-radius:0;font-size:14px;
+}
+.preference-bta .preference-bta__actions>.button--glass{
+ border:1px solid #000;background:#fff;color:#000;
+ box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.mobile-shell .preference-bta .preference-bta__actions>.button.button--primary:not(.button--glass):not(.button--plain){
+ height:56px;min-height:56px;padding:0 8px;font-size:14px;
+}
+.preference-complete .preference-complete__card{border-radius:0}

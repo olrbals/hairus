@@ -8,17 +8,17 @@ import {HeaderBackIcon} from '@/components/primitives';
 import {asset, findItem, itemHref, salons, type Item, type Kind} from '@/lib/prototype/catalog';
 import {designerDetails} from '@/lib/prototype/people-presentation';
 import {findEditorial, type Editorial} from '@/lib/prototype/editorials';
-import {Action, SaveButton} from './shared';
+import {SaveButton} from './shared';
 import {usePrototype} from './store';
 import {EditorialBookmarkButton, useEditorialBookmarks} from './editorial-bookmark';
 import css from './saved.module.css';
 
 type Category = Kind | 'magazine';
-const categories: {id: Category; label: string; empty: string; href: string}[] = [
-  {id: 'style', label: '스타일', empty: '아직 저장한 스타일이 없어요.', href: '/explore'},
-  {id: 'designer', label: '디자이너', empty: '아직 저장한 디자이너가 없어요.', href: '/explore?category=designer'},
-  {id: 'salon', label: '헤어샵', empty: '아직 저장한 헤어샵이 없어요.', href: '/explore?category=salon'},
-  {id: 'magazine', label: '매거진', empty: '아직 스크랩한 매거진이 없어요.', href: '/magazine'},
+const categories: {id: Category; label: string; empty: string}[] = [
+  {id: 'style', label: '스타일', empty: '아직 저장한 스타일이 없어요.'},
+  {id: 'designer', label: '디자이너', empty: '아직 저장한 디자이너가 없어요.'},
+  {id: 'salon', label: '헤어샵', empty: '아직 저장한 헤어샵이 없어요.'},
+  {id: 'magazine', label: '매거진', empty: '아직 스크랩한 매거진이 없어요.'},
 ];
 
 export function Saved() {
@@ -52,7 +52,7 @@ export function Saved() {
         </div>
         <label className={css.search}><img src={asset('45201.svg')} alt="" aria-hidden="true"/><input type="search" aria-label={`저장한 ${category.label} 검색`} placeholder={`저장한 ${category.label} 검색`} value={query} onChange={event => setQuery(event.target.value)}/></label>
         <div id="archive-panel" role="tabpanel" aria-labelledby={`archive-tab-${kind}`} className={css.panel}>
-          {!loaded ? <p role="status" className={css.empty}>저장한 항목을 불러오는 중이에요.</p> : !count ? <div className={css.empty}><p>{category.empty}</p><Action href={category.href}>{category.label} 둘러보기</Action></div> : !resultCount ? <div className={css.empty}><p>검색 결과가 없어요.</p><button type="button" className="button button--primary" onClick={() => setQuery('')}>검색 초기화</button></div> : kind === 'magazine' ? <div className={css.magazines}>{magazineResults.map(item => <article key={`${item.kind}:${item.id}`} className={css.magazineCard}>
+          {!loaded ? <p role="status" className={css.empty}>저장한 항목을 불러오는 중이에요.</p> : !count ? <div className={css.empty}><p>{category.empty}</p></div> : !resultCount ? <div className={css.empty}><p>검색 결과가 없어요.</p><button type="button" className="button button--primary" onClick={() => setQuery('')}>검색 초기화</button></div> : kind === 'magazine' ? <div className={css.magazines}>{magazineResults.map(item => <article key={`${item.kind}:${item.id}`} className={css.magazineCard}>
             <Link href={item.href}><img src={item.image} alt={item.title}/><span>{item.label}</span><h2>{item.title}</h2></Link>
             <EditorialBookmarkButton item={item}/>
           </article>)}</div> : <div className={kind === 'style' ? css.styles : css.list}>{results.map(item => <SavedCard key={`${item.kind}:${item.id}`} item={item}/>)}</div>}

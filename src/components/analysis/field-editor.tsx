@@ -1,40 +1,38 @@
 "use client";
-import {useState} from 'react';
-import {BottomSheet} from '@/components/bottom-sheet';
-import {SelectionChip} from '@/components/selection-chip';
-import {Button} from '@/components/primitives';
+import {useEffect,useRef,useState} from 'react';
 import {fields,type FieldKey} from '@/lib/analysis/profile';
-import {optionsForField,type ProfileOption} from '@/lib/analysis/profile-options';
-import {asset} from './shared';
+import {optionsForField} from '@/lib/analysis/profile-options';
 
-const positions=[[-37.21,-11.7],[-160.15,-12.03],[-287.26,-12.03],[-37.21,-115.84],[-159.42,-115.58],[-285.79,-116.17]];
-function OptionContent({option}:{option:ProfileOption}){
- const position=option.faceIndex===undefined?null:positions[option.faceIndex];
- return <>
-  {position&&<span className="face-crop"><img src={asset('e2454.png')} alt="" style={{left:`${position[0]}%`,top:`${position[1]}%`}}/></span>}
-  {option.swatch&&<span className="profile-swatch" aria-hidden="true" style={{backgroundColor:option.swatch}}/>}
-  <span>{option.label}</span>
-  {option.detail&&<small>{option.detail}</small>}
- </>;
-}
-export function FieldEditor({fieldKey,value,onClose,onSave,closeLabel}:{fieldKey:FieldKey;value:string|null;onClose:()=>void;onSave:(value:string|null)=>void;closeLabel?:string}){
- const field=fields.find(f=>f.key===fieldKey)!;
- const [draft,setDraft]=useState<string|null>(value);
- const visual=field.kind==='face'||field.kind==='swatches';
- const description=field.kind==='history'
-  ?`가장 최근 ${field.label.replace(' 이력','')} 시기를 선택해 주세요.`
-  :field.kind==='swatches'?'이름과 대표색을 참고해 가장 가까운 항목을 선택해 주세요.'
-  :`실제 ${field.label}과 가장 가까운 형태를 선택해 주세요.`;
- const ChoiceButton=visual?'button':SelectionChip;
- return <BottomSheet open onClose={onClose} title={field.kind==='history'?field.label:`${field.label} 수정`} variant="editor" headingAction={closeLabel?<button type="button" className="sheet-close analysis-sheet-close-text" onClick={onClose} aria-label="수정 취소하고 닫기">{closeLabel}</button>:undefined}>
-  <p className="editor-description">{description}</p>
-  <div className={`profile-options ${visual?'visual-options':`chip-options ${field.kind==='length'?'length-options':''} ${field.kind==='history'?'history-options':''}`}`} role="group" aria-label={field.label}>
-   {optionsForField(fieldKey,value).map(option=><ChoiceButton key={option.value} type="button" aria-pressed={draft===option.value} onClick={()=>setDraft(option.value)} className={option.detail==='기존 입력값'?'legacy-option':undefined}>
-    <OptionContent option={option}/>
-   </ChoiceButton>)}
+/** Anchored dropdown editor; color fields additionally expose the native picker. */
+export function FieldEditor({fieldKey,value,onClose,onSave}:{fieldKey:FieldKey;value:string|null;onClose:()=>void;onSave:(value:string|null)=>void}){
+ const field=fields.find(item=>item.key===fieldKey)!;
+ const options=optionsForField(fieldKey,value);
+ const isColor=fieldKey==='color'||fieldKey==='skin';
+ const initialColor=value?.startsWith('#')&&/^#[0-9a-fA-F]{6}$/.test(value)?value:options.find(item=>item.value===value)?.swatch||(fieldKey==='skin'?'#d8b5a0':'#33251f');
+ const [customColor,setCustomColor]=useState(initialColor);
+ const popup=useRef<HTMLDivElement>(null);
+ useEffect(()=>{
+  popup.current?.querySelector<HTMLButtonElement>('button')?.focus();
+  const outside=(event:PointerEvent)=>{if(event.target instanceof Node&&!popup.current?.parentElement?.contains(event.target))onClose();};
+  const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'){event.preventDefault();onClose();}};
+  document.addEventListener('pointerdown',outside);
+  document.addEventListener('keydown',escape);
+  return ()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);};
+ },[onClose]);
+ return <div className="profile-dropdown" ref={popup} role="group" aria-label={field.label+' 수정'}>
+  <div className="profile-dropdown__options">
+   {options.map(option=><button key={option.value} type="button" className="profile-dropdown__option" aria-pressed={option.value===value} onClick={()=>onSave(option.value)}>
+    {option.swatch&&<span className="profile-dropdown__swatch" style={{backgroundColor:option.swatch}} aria-hidden="true"/>}<span>{option.label}</span>
+   </button>)}
   </div>
-  <Button onClick={()=>onSave(draft)}>저장하기</Button>
-  <button className="text-action clear-field" type="button" onClick={()=>setDraft(null)}>미입력으로 두기</button>
-  <span className="sr-only" role="status">{draft===null?'미입력으로 선택했어요. 저장하기를 눌러 적용해 주세요.':`${draft} 선택됨`}</span>
- </BottomSheet>;
+  {isColor&&<div className="profile-dropdown__custom">
+   <label htmlFor={'picker-'+fieldKey}>직접 색상 선택</label>
+   <div className="profile-dropdown__picker">
+    <input id={'picker-'+fieldKey} type="color" value={customColor} onChange={event=>setCustomColor(event.target.value)} aria-label={field.label+' 직접 색상 선택'}/>
+    <span>{customColor.toUpperCase()}</span>
+    <button type="button" onClick={()=>onSave(customColor)}>적용</button>
+   </div>
+  </div>}
+  <button className="profile-dropdown__clear" type="button" onClick={()=>onSave(null)}>미입력으로 두기</button>
+ </div>;
 }

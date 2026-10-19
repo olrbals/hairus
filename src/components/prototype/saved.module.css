@@ -7,7 +7,7 @@
 .tabs{border-bottom:0;justify-content:space-between;align-items:stretch;height:52px;margin:0 8px 16px;display:flex}
 .tabs button{position:relative;display:flex;flex:0 1 76.4px;min-width:0;align-items:center;justify-content:center;border:0;background:transparent;padding:0;color:rgba(32,32,30,.46);font-size:15px;font-weight:400;line-height:1}
 .tabs button[aria-selected=true]{color:#20201e;font-weight:500}.tabs button[aria-selected=true]::after{position:absolute;right:0;bottom:0;left:0;height:1px;background:#20201e;content:''}
-.search{border:1px solid #00000073;border-radius:8px;align-items:center;gap:12px;height:58px;padding:0 10px;display:flex;width:100%}
+.search{border:1px solid #00000073;border-radius:0;align-items:center;gap:12px;height:58px;padding:0 10px;display:flex;width:100%}
 .search>img{width:24px;height:24px;flex:none}
 .search input{min-width:0;flex:1;width:100%;height:100%;border:0;outline:0;background:transparent;color:#20201e;font:400 14px/1.3 Pretendard,sans-serif}
 .search:focus-within{outline:2px solid #666460;outline-offset:3px}
@@ -30,7 +30,7 @@
 .identity h2{margin:0;font-size:16px;font-weight:500;line-height:1.3;}
 .identity p{margin-top:6px;color:#747e8e;font-size:12px;line-height:1.3}
 .works{display:flex;justify-content:space-between;gap:12px;padding-inline:12px}
-.works img{display:block;width:calc((100% - 24px)/3);height:133px;border-radius:4px;object-fit:cover}
+.works img{display:block;width:calc((100% - 24px)/3);height:133px;border-radius:0;object-fit:cover}
 .designerCard :global(.proto-save){top:20px;right:12px}
 .designerCard>.reasonGroup{margin-top:16px}
 .salonCard{padding:20px 12px 24px;border-bottom:1px solid #e6ebf5}
@@ -44,7 +44,7 @@
 .magazineCard img{display:block;width:100%;aspect-ratio:382/400;object-fit:cover}
 .magazineCard span{display:block;margin-top:16px;color:#666460;font-size:11px;line-height:1.3;}
 .magazineCard h2{margin:8px 0 0;font-family:var(--font-editorial);font-size:32px;font-weight:600;line-height:1.05}
-.empty{display:grid;gap:24px;padding:64px 12px;color:#666460;font-size:14px;line-height:1.5;text-align:center}
+.empty{display:grid;gap:24px;padding:200px 12px 64px;color:#666460;font-size:14px;line-height:1.5;text-align:center}
 @media(max-width:360px){.content>h1{font-size:48px}.works{gap:8px;padding-inline:0}.works img{width:calc((100% - 16px)/3);height:auto;aspect-ratio:100/133}.identity{gap:12px}.identity h2{font-size:15px}}
 
 /* Saved-item reason labels are informational chips, not CTA buttons. */
