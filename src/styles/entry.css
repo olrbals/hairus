@@ -6,3 +6,6 @@
 /* Flat login and welcome controls. */
 .entry-screen .social-login{border-color:#dedede;background:#fff;box-shadow:none}
 .welcome-actions .button.button--primary,.welcome-actions .button{border-radius:12px;box-shadow:none}
+
+/* Skip moves into the header; keep the single primary CTA full-width. */
+.welcome-screen .welcome-actions{grid-template-columns:minmax(0,1fr)}

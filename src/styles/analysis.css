@@ -73,7 +73,7 @@
 
 /* Result profile section headings and direct-history helper spacing. */
 .result-screen .profile-group h2 {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .result-screen .profile-group h2:has(+ .privacy-note) {
@@ -87,3 +87,17 @@
 .camera-screen > .hairus-page-header {
   background: #20201e;
 }
+
+/* Processing labels are status chips, not raised/glass buttons. */
+.processing-screen .progress-content li{
+  border:1px solid #dedede;border-radius:12px;background:#f6f6f6;
+  color:#666460;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.processing-screen .progress-content li.active{
+  border-color:#000;background:#000;color:#fff;box-shadow:none;
+}
+/* Guide: skip is in the header, leaving the capture CTA full-width. */
+.guide-screen .analysis-actions{grid-template-columns:minmax(0,1fr)}
+/* Result: compact the requested section rhythm only on the result page. */
+.result-screen > .analysis-heading{margin-top:28px}
+.result-screen .result-content{margin-top:28px;gap:48px}
