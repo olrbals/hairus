@@ -1,10 +1,7 @@
 .glass-top-button{position:fixed;z-index:18;right:max(16px,calc((100vw - 430px)/2 + 16px));bottom:calc(var(--top-button-bottom,16px) + env(safe-area-inset-bottom));width:44px;height:44px;padding:4px;border:0;border-radius:50%;background:transparent;color:#20201e;display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 180ms ease,visibility 180ms ease}
 .glass-top-button[data-visible=true]{opacity:1;visibility:visible;pointer-events:auto}
-/* Neutral, low-opacity body: the backdrop supplies the colour, not a tinted fill.
-   The two thin edge reflections suggest a curved lens without painting its face. */
-.glass-top-button__surface{position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.7);box-shadow:0 3px 12px rgba(0,0,0,.07),0 .5px 2px rgba(0,0,0,.04),inset 0 1px 1px rgba(255,255,255,.8),inset 0 -1px 1px rgba(0,0,0,.045)}
-.glass-top-button__surface::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.24),rgba(255,255,255,0) 60%);box-shadow:inset 1px 0 .5px rgba(255,255,255,.25),inset -1px 0 .5px rgba(255,255,255,.15)}
-.glass-top-button__surface::after{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;border-top:.5px solid rgba(255,255,255,.55);border-bottom:.5px solid rgba(255,255,255,.25)}
+/* Glass surface from .match-banner-cta; TOP geometry stays unchanged. */
+.glass-top-button__surface{position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.48);box-shadow:0 1px 4px rgba(0,0,0,.043),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
 .glass-top-button__surface svg{position:relative;z-index:1}
 .glass-top-button:active .glass-top-button__surface{background-color:rgba(255,255,255,.18)}
 @media(prefers-reduced-motion:reduce){.glass-top-button{transition:none}}
