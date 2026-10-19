@@ -18,6 +18,7 @@
 /* Only onboarding 03 uses the shared black primary CTA; steps 01 and 02 remain glass. */
 .footer .nextPrimary{background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .card{border:1px solid rgba(255,252,242,.24);background:rgba(255,255,255,.9);box-shadow:var(--glass-shadow);border-radius:8px}
+.natural,.about,.hairNote,.appointment{border:1px solid rgba(0,0,0,.24)}
 .profilePreview{width:353px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
 .natural{width:298px;height:159px;position:relative;padding:12px}
 .naturalCopy{width:188px}
@@ -34,7 +35,8 @@
 .noteRow>p{width:210px;font-size:12px;font-weight:500;line-height:16px;color:rgba(0,0,0,.6)}
 .noteImage{position:relative;width:47px;height:66px;flex:none;overflow:hidden}
 .noteImage img{position:absolute;width:100.24%;height:128.48%;left:-.12%;top:-6.76%;max-width:none}
-.stylePreview{display:flex;gap:16px;width:372px;margin:30px auto 0}
+.stylePreview{width:339px;height:265px;margin:30px auto 0}
+.stylePreview img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
 .styleCard{width:178px;height:258px;flex:none;padding:12px 24px;border-radius:4px;margin:0}
 .styleImage{width:128px;height:208px;position:relative;overflow:hidden}
 .styleImage img{position:absolute;max-width:none}

@@ -31,12 +31,9 @@ function HairProfilePreview() {
   </div>;
 }
 function StylePreview() {
-  return <div className={styles.stylePreview}>
-    {[{image:"airy.png",label:"에어리 레이어드 컷",crop:styles.airy},{image:"tassel.png",label:"테슬컷",crop:styles.tassel}].map(style=>
-      <figure key={style.image} className={`${styles.card} ${styles.styleCard}`}>
-        <div className={`${styles.styleImage} ${style.crop}`}><img src={`${asset}${style.image}`} alt={style.label}/></div><figcaption>{style.label}</figcaption>
-      </figure>)}
-  </div>;
+  // Figma 736:2662 — https://www.figma.com/design/Ja8Ep1JwxOOFgMArfYr16T?node-id=736-2662
+  // Reuses the HOME Weekly Editorial asset.
+  return <div className={styles.stylePreview}><img src="/assets/figma/v1/88ad2.png" alt="HAIRUS Weekly Editorial"/></div>;
 }
 function HairNotePreview() {
   return <div className={styles.hairNotePreview}>
