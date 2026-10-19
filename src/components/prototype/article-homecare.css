@@ -19,7 +19,7 @@
 .hc-intro h2{font-size:28px;font-weight:600;line-height:1.3;margin:0}
 .hc-intro>p{font-size:16px;font-weight:400;line-height:1.3;margin:0}
 .hc-body{padding:52px 24px 49px}
-.hc-steps{display:flex;flex-direction:column;gap:52px}
+.hc-steps{display:flex;flex-direction:column;gap:48px}
 .hc-step{display:flex;flex-direction:column;gap:20px;min-width:0}
 .hc-step-heading{display:flex;flex-direction:column;gap:4px;width:100%;padding:0 3px}
 .hc-step-heading h2{font-size:22px;line-height:1.3;font-weight:600;margin:0}
@@ -44,7 +44,6 @@
 .hc-nourish-detail{width:100%;height:210px}
 .hc-nourish-detail img{inset:0;width:100%;height:100%;object-fit:cover}
 .hc-nourish-row p{line-height:1.4}
-.hc-step--dry{padding-top:24px}
 .hc-dry-row{width:100%;display:grid;grid-template-columns:minmax(0,202fr) minmax(0,164fr);gap:16px;align-items:center;height:303px}
 .hc-dry-main{height:303px;width:100%}
 .hc-dry-main img{inset:0;width:100%;height:100%;object-fit:cover}
@@ -53,10 +52,9 @@
 .hc-dry-detail{width:68px;height:88px}
 .hc-dry-detail img{inset:0;width:100%;height:100%;object-fit:cover}
 .hc-dry-finish .hc-hair-tip{margin:0}
-.hc-epilogue{margin-top:52px;display:flex;flex-direction:column;gap:8px}
+.hc-epilogue{margin-top:48px;display:flex;flex-direction:column;gap:8px}
 .hc-epilogue>div{display:flex;flex-direction:column;gap:20px}
 .hc-epilogue h2{font-family:var(--font-editorial),Georgia,serif;font-size:46px;font-weight:500;line-height:43px;margin:0}
 .hc-epilogue p{font-size:16px;line-height:1.3;margin:0;display:flex;flex-direction:column;gap:4px}
 .mobile-shell:has(> .hc-article){padding-bottom:0}
-.hc-article--issue .hc-epilogue{margin-top:76px}
 @media(max-width:390px){.hc-header{padding-inline:18px}.hc-cover h1{font-size:49px;line-height:46px}.hc-intro,.hc-body{padding-inline:18px}.hc-intro h2{font-size:26px}.hc-step-heading h2{font-size:20px}.hc-prepare-row p,.hc-nourish-row p,.hc-dry-row p{font-size:12px}.hc-hair-tip p{font-size:11px}.hc-wash-copy{font-size:14px}.hc-epilogue h2{font-size:43px}}
