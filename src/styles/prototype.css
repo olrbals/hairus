@@ -154,7 +154,7 @@
 
 /* HOME — Meet Your Match (Figma 920:5162) */
 .prototype > .home-seat + .match-banner {
-  margin-top: 52px;
+  margin-top: 48px;
 }
 .prototype > .match-banner {
   position: relative;
@@ -705,10 +705,7 @@
   padding: 24px;
 }
 
-/* 인접한 섹션 프레임 사이: 52px */
-.prototype > .home-section + .home-section {
-  margin-top: 52px;
-}
+/* 인접 HOME 섹션은 각 섹션의 상하 24px 패딩으로만 간격을 만든다. */
 
 
 /* HOME — Magazine Image Crop Refinement */
