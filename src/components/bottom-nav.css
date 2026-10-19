@@ -58,12 +58,15 @@
 }
 .mobile-shell nav.bottom-nav a[aria-current="page"] img{opacity:1}
 
-/* Underline is the only selected background treatment. */
-.mobile-shell nav.bottom-nav a[aria-current="page"]::before{
+/* A quiet 40x2px underline sits 7px below the active label.
+ * Explicitly disable the legacy ::before active-tile background. */
+.mobile-shell nav.bottom-nav a[aria-current="page"]::before{content:none}
+.mobile-shell nav.bottom-nav a[aria-current="page"]::after{
  content:'';
  position:absolute;
- inset:0 auto auto 50%;
- width:48px;
+ left:50%;
+ bottom:4px;
+ width:40px;
  height:2px;
  border:0;
  border-radius:0;
@@ -72,7 +75,6 @@
  box-shadow:none;
  pointer-events:none;
 }
-.mobile-shell nav.bottom-nav a:not([aria-current="page"])::before{content:none}
 @media(prefers-reduced-motion:reduce){
  .mobile-shell nav.bottom-nav a,.mobile-shell nav.bottom-nav img{transition:none}
 }
