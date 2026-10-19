@@ -238,7 +238,8 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
     <p>The right style. The right designer.<br />Just for you.</p>
   </div>
   <Link className="match-banner-cta" href="/recommendation/intro">
-    맞춤 추천 받기
+    <span>맞춤 추천 받기</span>
+    <span className="match-banner-cta-arrow" aria-hidden="true">↗</span>
   </Link>
 </section></main><BottomNav active="/home"/>
 <HomePopup
