@@ -206,7 +206,7 @@ export function BookingComplete({id}:{id:string}){
   const booking=state.bookings.find(booking=>booking.id===id);
   return <BookingPage title="예약 완료" back="/my" confirmed><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
-      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 MY에서 확인할 수 있어요.</p></div>
+      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>예약 일정은 MY 화면에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>
       <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>최종 시술 금액은 상담 후 결정됩니다.</p></div>
       <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my">MY로 이동</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
