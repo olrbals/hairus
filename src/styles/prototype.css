@@ -209,15 +209,16 @@
   opacity: 1;
 }
 
-/* The white reveal layer changes independently from the permanent edge gradient. */
+/* The pure-white veil alone fades with scroll. The permanent top and
+   bottom edge gradient above it stays completely unchanged. */
 .match-banner-reveal {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background: #fff;
-  opacity: var(--match-overlay, .95);
-  transition: opacity 120ms linear;
+  opacity: var(--match-overlay, 1);
+  transition: opacity 90ms linear;
 }
 
 .match-banner-copy {
