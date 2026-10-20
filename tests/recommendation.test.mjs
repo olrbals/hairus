@@ -8,6 +8,8 @@ test('Recommendation uses four questions without the regional selection screen',
  assert.equal(provinces[0],'전체');assert.equal(provinces.at(-1),'제주특별자치도');
  assert.deepEqual(toggleChoice(['서울특별시'],'부산광역시',1),['부산광역시']);
  assert.deepEqual(matchQuestions.map(q=>q.max),[1,1,3,3]);
+ assert.deepEqual(matchQuestions.find(q=>q.key==='consult')?.options,["친절한","솔직한","꼼꼼한","다양한 스타일 추천","취향 존중","충분한 대화","핵심만 빠르게","추가 시술 권유 없는","상담 필요 없음"]);
+ assert.equal(new Set(matchQuestions.find(q=>q.key==='consult')?.options).size,9);
 });
 test('Recommendation new province values use existing salon addresses and retain legacy district scoring',()=>{
  const legacy=recommend({location:['성수']},{}),seoul=recommend({location:['서울특별시']},{});
