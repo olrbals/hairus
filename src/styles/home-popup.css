@@ -154,10 +154,10 @@
 
 /* HOME entry popup starts only after scrolling to In Focus. */
 @media(prefers-reduced-motion:no-preference){
- .home-banner-dialog[open]{animation:homeBannerRise 520ms cubic-bezier(.22,.7,.2,1) both}
+ .home-banner-dialog[open]{animation:homeBannerRise 1050ms cubic-bezier(.2,.72,.22,1) both}
 }
 @keyframes homeBannerRise{
- from{opacity:0;transform:translateY(162px)}
+ from{opacity:0;transform:translateY(144px)}
  to{opacity:1;transform:translateY(120px)}
 }
 

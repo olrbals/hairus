@@ -58,16 +58,18 @@ export function Home(){
  useEffect(()=>{
   const intro=seatIntroRef.current;
   if(!intro)return;
+  const heading=intro.querySelector<HTMLElement>('.section-title');
   const lines=Array.from(intro.querySelectorAll<HTMLElement>('.home-seat-lines > span'));
+  const targets=heading?[heading,...lines]:lines;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   let frame=0;
   const update=()=>{
    const rect=intro.getBoundingClientRect();
    const viewport=window.innerHeight;
    const progress=Math.max(0,Math.min(1,(viewport*.8-rect.top)/(viewport*.6)));
-   lines.forEach((line,index)=>{
-    const filled=Math.max(0,Math.min(1,progress*lines.length-index));
-    line.style.opacity=String(.4+.6*filled);
+   targets.forEach((target,index)=>{
+    const filled=Math.max(0,Math.min(1,progress*targets.length-index));
+    target.style.opacity=String(.4+.6*filled);
    });
   };
   const schedule=()=>{
@@ -77,7 +79,7 @@ export function Home(){
   update();
   window.addEventListener('scroll',schedule,{passive:true});
   window.addEventListener('resize',schedule);
-  return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);lines.forEach(line=>line.style.removeProperty('opacity'));};
+  return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);targets.forEach(target=>target.style.removeProperty('opacity'));};
  },[]);
  const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{
   if(!ready||!today||state.popupDay===today)return;

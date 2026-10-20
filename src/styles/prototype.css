@@ -1001,10 +1001,13 @@
 /* HOME Discover arrows now reuse Magazine's exact banner-controls typography, hit areas and alignment. */
 
 /* In Focus stays static: its visibility only triggers the HomePopup. */
-/* A Seat for You title stays solid black; individual sentences fill top-to-bottom
-   with scroll position. Keep the original editorial line spacing. */
+/* A Seat for You fills from the editorial heading into the sentences.
+   Keep the original line breaks, spacing and layout. */
+.home-seat .home-seat-intro .section-title{opacity:.4}
 .home-seat-intro .home-seat-lines{opacity:1;color:#20201e}
-.home-seat-lines>span{display:block;opacity:.7}
+.home-seat-lines>span{display:block;opacity:.4}
 .home-seat-lines>span:nth-child(2),.home-seat-lines>span:nth-child(4){margin-top:20.8px}
-@media(prefers-reduced-motion:reduce){.home-seat-lines>span{opacity:.7!important}}
+@media(prefers-reduced-motion:reduce){
+ .home-seat .home-seat-intro .section-title,.home-seat-lines>span{opacity:1!important}
+}
 
