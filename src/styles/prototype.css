@@ -206,8 +206,10 @@
   z-index: -1;
   pointer-events: none;
   background: url('/assets/figma/v1/ce227.png') center / cover no-repeat;
-  opacity: var(--match-reveal, .35);
-  filter: blur(calc((1 - var(--match-reveal, .35)) * 2px));
+  opacity: var(--match-reveal, .7);
+  filter:
+    blur(calc((1 - var(--match-focus, 0)) * 10px))
+    contrast(calc(.85 + (var(--match-focus, 0) * .15)));
   transition: opacity 120ms linear, filter 120ms linear;
 }
 
