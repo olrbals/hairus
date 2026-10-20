@@ -55,6 +55,7 @@ const homePopularDesigners: {
 export function Home(){
  const seatIntroRef=useRef<HTMLDivElement>(null);
  const focusCardRef=useRef<HTMLDivElement>(null);
+ const matchBannerRef=useRef<HTMLElement>(null);
  useEffect(()=>{
   const intro=seatIntroRef.current;
   if(!intro)return;
@@ -80,6 +81,28 @@ export function Home(){
   window.addEventListener('scroll',schedule,{passive:true});
   window.addEventListener('resize',schedule);
   return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);targets.forEach(target=>target.style.removeProperty('opacity'));};
+ },[]);
+ useEffect(()=>{
+  const banner=matchBannerRef.current;
+  if(!banner)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const update=()=>{
+   if(reduced){banner.style.setProperty('--match-reveal','1');return;}
+   const rect=banner.getBoundingClientRect();
+   const viewport=window.innerHeight;
+   const progress=Math.max(0,Math.min(1,(viewport*.05-rect.top)/(viewport*.4)));
+   banner.style.setProperty('--match-reveal',String(.12+.88*progress));
+  };
+  let frame=0;
+  const schedule=()=>{
+   if(frame)return;
+   frame=window.requestAnimationFrame(()=>{frame=0;update();});
+  };
+  update();
+  if(reduced)return;
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule);
+  return()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
  },[]);
  const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{
   if(!ready||!today||state.popupDay===today)return;
@@ -279,7 +302,7 @@ export function Home(){
     </div>
   </div>
 </section>
-<section className="match-banner" aria-labelledby="match-banner-title">
+<section className="match-banner" ref={matchBannerRef} aria-labelledby="match-banner-title">
   <div className="match-banner-copy">
     <h2 id="match-banner-title">Meet Your Match</h2>
     <p>The right style. The right designer.<br />Just for you.</p>
