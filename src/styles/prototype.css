@@ -206,8 +206,12 @@
   z-index: -1;
   pointer-events: none;
   background: url('/assets/figma/v1/ce227.png') center / cover no-repeat;
-  opacity: var(--match-reveal, .12);
-  transition: opacity 120ms linear;
+  opacity: var(--match-reveal, .02);
+  filter:
+    blur(calc((1 - var(--match-reveal, .02)) * 7px))
+    contrast(calc(.9 + (var(--match-reveal, .02) * .2)))
+    saturate(calc(.55 + (var(--match-reveal, .02) * .55)));
+  transition: opacity 120ms linear, filter 120ms linear;
 }
 
 .match-banner-copy {
@@ -1029,5 +1033,5 @@
 
 
 @media(prefers-reduced-motion:reduce){
- .prototype > .match-banner::after{opacity:1;transition:none}
+ .prototype > .match-banner::after{opacity:1;filter:none;transition:none}
 }
