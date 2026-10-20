@@ -87,13 +87,11 @@ export function Home(){
   if(!banner)return;
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const update=()=>{
-   if(reduced){banner.style.setProperty('--match-reveal','1');banner.style.setProperty('--match-focus','1');return;}
+   if(reduced){banner.style.setProperty('--match-overlay','0');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
    const progress=Math.max(0,Math.min(1,(viewport-rect.top)/(viewport*.9)));
-   const focus=progress<.5?progress*1.2:.6+(progress-.5)*.8;
-   banner.style.setProperty('--match-reveal',String(.7+.3*progress));
-   banner.style.setProperty('--match-focus',String(focus));
+   banner.style.setProperty('--match-overlay',String(.95*(1-progress)));
   };
   let frame=0;
   const schedule=()=>{
@@ -305,6 +303,7 @@ export function Home(){
   </div>
 </section>
 <section className="match-banner" ref={matchBannerRef} aria-labelledby="match-banner-title">
+  <span className="match-banner-reveal" aria-hidden="true"/>
   <div className="match-banner-copy">
     <h2 id="match-banner-title">Meet Your Match</h2>
     <p>The right style. The right designer.<br />Just for you.</p>
