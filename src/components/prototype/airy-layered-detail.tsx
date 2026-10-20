@@ -5,6 +5,7 @@ import {useState, type CSSProperties, type ReactNode} from 'react';
 import {useHorizontalScroll} from '@/lib/use-horizontal-scroll';
 import {useNickname} from '@/lib/use-nickname';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {BottomNav} from '@/components/bottom-nav';
 import {HeaderBackIcon} from '@/components/primitives';
 import {styles} from '@/lib/prototype/catalog';
@@ -86,7 +87,7 @@ export function AiryLayeredDetail({styleId='airy'}:{styleId?:StyleDetailId}) {
   return <>
     <main id="main" className="airy-detail">
       <header className="airy-header hairus-page-header">
-        <button className="airy-back hairus-header-back" type="button" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push('/explore')}>
+        <button className="airy-back hairus-header-back" type="button" aria-label="이전 화면으로" onClick={() => goBack(router, '/explore')}>
           <HeaderBackIcon/>
         </button>
         {item&&<div className="airy-save"><SaveButton item={item}/></div>}

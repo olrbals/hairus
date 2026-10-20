@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {BackLink} from '@/components/navigation-history';
 import {useState} from 'react';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import './popup-detail.css';
@@ -16,7 +17,7 @@ const experiences = [
 export function PopupDetail() {
   const [notice,setNotice] = useState<'coupon'|'session'|null>(null);
   return <main id="main" className="hairus-popup-detail">
-    <header className="pd-header hairus-page-header"><Link href="/home" aria-label="홈으로 돌아가기" className="pd-back hairus-header-back"><HeaderBackIcon/></Link><span>POPUP 공지</span><span aria-hidden="true"/></header>
+    <header className="pd-header hairus-page-header"><BackLink href="/home" aria-label="홈으로 돌아가기" className="pd-back hairus-header-back"><HeaderBackIcon/></BackLink><span>POPUP 공지</span><span aria-hidden="true"/></header>
     <section className="pd-hero" aria-label="HAIRUS 차홍룸 팝업">
       <h1><span className="pd-hero-brand">HAIRUS <span className="pd-hero-cross">×</span></span><span className="pd-hero-partner">CHAHONG ROOM</span></h1>
       <img src={base+'hero.png'} alt="차홍룸 팝업 매장 조감도" className="pd-hero-image"/>

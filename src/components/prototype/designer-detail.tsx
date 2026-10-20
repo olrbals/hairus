@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useEffect,useRef,useState} from 'react';
 import {useNickname} from '@/lib/use-nickname';
 import {HeaderBackIcon} from '@/components/primitives';
@@ -61,7 +62,7 @@ export function DesignerPage({id}:{id:string}){
 
   return <main id="main" className={`${styles.page} ${fixedBooking?bookingStyles.detailPage:''}`}>
     <header className={`${styles.header} hairus-page-header`}>
-      <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><HeaderBackIcon/></button>
+      <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, '/explore?category=designer')}><HeaderBackIcon/></button>
       <span>{item.id==='yoona'?'윤아 디자이너':'디자이너'}</span>
       <div className={styles.saveControl}><SaveButton item={item}/></div>
     </header>

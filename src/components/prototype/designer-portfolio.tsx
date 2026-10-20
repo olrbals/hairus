@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import {BackLink} from '@/components/navigation-history';
 import {HeaderBackIcon} from '@/components/primitives';
 import {designerPortfolios, type PortfolioSectionData} from '@/lib/prototype/portfolio';
 import {PortfolioCarousel} from './portfolio-carousel';
@@ -15,7 +15,7 @@ export function DesignerPortfolio({designerId}: {designerId: string}) {
   const portfolio = designerPortfolios[designerId];
   return <main id="main" className={styles.page} data-figma-node="920:4815" data-designer-id={designerId}>
     <header className={`${styles.header} hairus-page-header`} data-figma-node="920:4817">
-      <Link className="hairus-header-back" href={`/designers/${designerId}`} aria-label={`${portfolio.name} 디자이너 상세로 돌아가기`}><HeaderBackIcon/></Link><span>포트폴리오</span><span aria-hidden="true"/>
+      <BackLink className="hairus-header-back" href={`/designers/${designerId}`} aria-label={`${portfolio.name} 디자이너 상세로 돌아가기`}><HeaderBackIcon/></BackLink><span>포트폴리오</span><span aria-hidden="true"/>
     </header>
     <h1 className="sr-only">{portfolio.name} 디자이너 Portfolio</h1>
     <div className={styles.sections}>

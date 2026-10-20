@@ -2,6 +2,7 @@
 
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useNickname} from '@/lib/use-nickname';
 import {Button,HeaderBackIcon} from '@/components/primitives';
 import {matchQuestions} from '@/lib/prototype/catalog';
@@ -84,7 +85,7 @@ export function MatchingSurvey({step}: {step: string}) {
     </div>
   </main>;
   return <main id="main" className={css.page} data-matching-survey data-step={index+1} data-answered={selected.length>0}>
-    <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
+    <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => goBack(router, index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
     {!intro && <div className={css.progress} aria-label={`${index + 1} / ${matchQuestions.length}`}>{matchQuestions.map((q, i) => <span key={q.key} aria-current={i === index ? 'step' : undefined}/>)}</div>}
     <section className={css.question}>
       <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 2 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>최대 3개까지 선택 가능해요</p>}

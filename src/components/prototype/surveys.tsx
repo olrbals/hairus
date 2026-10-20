@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {asset,preferenceQuestions,matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
 import {readProfile,effectiveProfile} from '@/lib/analysis/profile';
@@ -17,7 +18,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
  if(kind==='preferences'&&index===0){
   return <main id="main" className="preference-first-step" data-figma-node="939:8564">
    <header className="preference-first-step__header hairus-page-header">
-    <button type="button" className="preference-first-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push('/analysis/result')}>
+    <button type="button" className="preference-first-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, '/analysis/result')}>
      <HeaderBackIcon/>
     </button>
     <div className="preference-first-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
@@ -61,7 +62,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
   const renderedOptions=question.options.filter(option=>option!=='특별한 고민 없음').map(option=>({label:option,value:option}));
   return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':'939:8597'}>
    <header className="preference-survey-step__header hairus-page-header">
-    <button type="button" className="preference-survey-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
+    <button type="button" className="preference-survey-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, `${prefix}/${index}`)}>
      <HeaderBackIcon/>
     </button>
     <div className="preference-survey-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
@@ -85,7 +86,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    <PreferenceActions disabled={!ready||selected.length===0} onNext={goNext} previousHref={`${prefix}/${index}`}>{index===questions.length-1?'결과보기':'다음'}</PreferenceActions>
   </main>;
  }
- return <Screen title={kind==='preferences'?'My Preference':'Meet Your Match'} back={prefix+'/intro'}><div className="progress" aria-label={`${index+1} / ${questions.length}`}>{questions.map((q,i)=><span key={q.key} className={i<=index?'active':''}/>)}</div><div className="question"><p className="eyebrow">0{index+1} / 0{questions.length}</p><h2>{question.title}</h2><p>{question.max===1?'가장 가까운 한 가지를 선택해 주세요.':`최대 ${question.max}개까지 선택할 수 있어요.`}</p></div><div className={images?`image-choices ${images.length===6?'three':''}`:'chips survey-chips'}>{question.options.map((option,i)=><button disabled={!ready} key={option} aria-pressed={selected.includes(option)} onClick={()=>{if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}setMessage('');update(s=>{let next=toggleChoice(s[kind][question.key]||[],option,question.max);if(option==='특별한 고민 없음')next=['특별한 고민 없음'];else next=next.filter(v=>v!=='특별한 고민 없음');return {...s,[kind]:{...s[kind],[question.key]:next}};});}}>{images&&<span><img src={asset(images[i])} alt=""/></span>}{option}</button>)}</div><p role="status" className="validation">{message}</p><div className="survey-actions"><Button disabled={!ready||selected.length===0} onClick={()=>{if(index===questions.length-1){if(kind==='preferences')update(s=>({...s,preferenceComplete:true}));router.push(kind==='preferences'?'/preferences/complete':'/recommendation/results');}else router.push(`${prefix}/${index+2}`);}}>{index===questions.length-1?'결과 보기':'다음'}</Button><Action secondary href={index?`${prefix}/${index}`:`${prefix}/intro`}>이전</Action></div></Screen>;}
+ return <Screen title={kind==='preferences'?'My Preference':'Meet Your Match'} back={prefix+'/intro'}><div className="progress" aria-label={`${index+1} / ${questions.length}`}>{questions.map((q,i)=><span key={q.key} className={i<=index?'active':''}/>)}</div><div className="question"><p className="eyebrow">0{index+1} / 0{questions.length}</p><h2>{question.title}</h2><p>{question.max===1?'가장 가까운 한 가지를 선택해 주세요.':`최대 ${question.max}개까지 선택할 수 있어요.`}</p></div><div className={images?`image-choices ${images.length===6?'three':''}`:'chips survey-chips'}>{question.options.map((option,i)=><button disabled={!ready} key={option} aria-pressed={selected.includes(option)} onClick={()=>{if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}setMessage('');update(s=>{let next=toggleChoice(s[kind][question.key]||[],option,question.max);if(option==='특별한 고민 없음')next=['특별한 고민 없음'];else next=next.filter(v=>v!=='특별한 고민 없음');return {...s,[kind]:{...s[kind],[question.key]:next}};});}}>{images&&<span><img src={asset(images[i])} alt=""/></span>}{option}</button>)}</div><p role="status" className="validation">{message}</p><div className="survey-actions"><Button disabled={!ready||selected.length===0} onClick={()=>{if(index===questions.length-1){if(kind==='preferences')update(s=>({...s,preferenceComplete:true}));router.push(kind==='preferences'?'/preferences/complete':'/recommendation/results');}else router.push(`${prefix}/${index+2}`);}}>{index===questions.length-1?'결과 보기':'다음'}</Button><Action back secondary href={index?`${prefix}/${index}`:`${prefix}/intro`}>이전</Action></div></Screen>;}
 export function ProfileComplete(){
  const router=useRouter();
  const name=useNickname();
@@ -101,7 +102,7 @@ export function ProfileComplete(){
  },[]);
  return <main id="main" className="preference-complete" data-figma-node="939:8783">
   <header className="preference-complete__header hairus-page-header">
-   <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/preferences/3')}>
+   <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, '/preferences/3')}>
     <HeaderBackIcon/>
    </button>
   </header>
