@@ -10,7 +10,7 @@
 .ratingMeta small{font-size:12px}
 .ratingDistribution{display:grid;gap:7px;min-width:0}
 .ratingDistributionRow{display:grid;grid-template-columns:minmax(0,1fr) 12px;align-items:center;gap:8px}
-.ratingDistributionRow>span{font-size:11px;line-height:1;color:#929292;text-align:right}
+.ratingDistributionRow>span{font-size:12px;line-height:1;color:#929292;text-align:right}
 .ratingDistributionTrack{height:5px;overflow:hidden;border-radius:2px;background:#eeeeee}
 .ratingDistributionTrack>span{display:block;height:100%;background:#20201e}
 .reviewHighlights{margin-top:30px}
@@ -37,3 +37,11 @@
 /* Opt-in for salon and designer details; standalone review-list pages stay unchanged. */
 .refinedReviews .ratingMeta{margin-top:12px}
 .refinedReviews .ratingScore>span{font-size:28px}
+
+/* Refined reviews shared by designer and salon detail pages. */
+.refinedReviews .reviewHighlights{margin-top:16px}
+.refinedReviews .reviewHighlights h3{font-size:16px}
+.refinedReviews .reviewHighlights ul{margin:12px 0 0;gap:16px}
+.refinedReviews .reviewHighlightHeading,
+.refinedReviews .reviewHighlightHeading>span:last-child{font-size:14px}
+.refinedReviews .reviewHighlights+article{margin-top:0;padding-top:0}

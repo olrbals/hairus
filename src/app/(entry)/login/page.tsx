@@ -1,4 +1,3 @@
 "use client";
-import {useRouter} from "next/navigation";
-import {writeEntry} from "@/lib/entry-state";
-export default function Login(){const router=useRouter();function start(){writeEntry({loginMode:"demo",onboardingDone:true});router.push('/welcome');}return <main id="main" className="entry-screen login-screen" data-figma-node="920:5386"><header className="login-intro"><h1>HAIRUS</h1><p>로그인하고 나에게 꼭 맞는<br/>헤어 경험을 시작해보세요.</p></header><div className="login-methods">{[{key:'kakao',name:'카카오'},{key:'naver',name:'네이버'},{key:'apple',name:'Apple'}].map(p=><button key={p.key} className="social-login" onClick={start}><span className={p.key==='naver'?'naver-logo':'social-logo'}><img src={`/assets/figma/entry/${p.key}.svg`} alt=""/></span>{p.name}로 계속하기</button>)}<button className="phone-login primary-cta" onClick={start}>휴대폰번호로 로그인하기</button></div><p className="login-legal">계속하면 서비스 이용약관과<br />개인정보 처리방침에 동의하게 됩니다.</p></main>;}
+import {LoginScreen} from "@/components/entry/login-screen";
+export default function Login(){return <LoginScreen/>;}
