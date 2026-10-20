@@ -7,7 +7,7 @@
 .header>a{height:44px;display:flex;align-items:center;justify-content:center;font-size:12px}
 .header>a:first-child{justify-content:flex-start}
 .header>span{text-align:center;font-size:16px;font-weight:500}
-.confirmedPage .header>span{font-size:20px}
+.confirmedPage .header>span,.appointmentsPage .header>span{font-size:20px}
 .content{padding:24px 24px calc(118px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:24px}
 .progress{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0;margin:0}
 .progress li{display:flex;flex-direction:column;gap:5px;padding-top:10px;border-top:2px solid #e8e8e5;color:#999995;font-size:12px;white-space:nowrap}
@@ -97,8 +97,8 @@
 .homeLink{min-height:48px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#777772}
 @media(max-width:360px){.progress{gap:6px}.progress li{font-size:12px}.summary{padding:16px}.intro h1,.success h1{font-size:22px}.days button,.days>span{height:40px}}
 
-.appointments{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
-.appointments .appointmentsTitle{font-family:var(--font-editorial);font-size:60px;font-weight:600;line-height:1;margin:8px 0 12px}
+.content.appointments{padding-top:0;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+.appointments .appointmentsTitle{font-family:var(--font-editorial);margin:0 0 20px;font-size:52px;font-weight:600;line-height:.92}
 .appointment{border:1px solid #e5e5df;padding:20px;display:flex;flex-direction:column;gap:10px}
 .savedStatus{font-size:12px;color:#777772}
 .appointmentDate{font-size:13px;margin-top:4px}
@@ -179,7 +179,7 @@
 .times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 12px}
 .times button{display:flex;align-items:center;justify-content:center;min-width:0;min-height:34px;height:34px;flex:none;padding:8px 4px;border:1px solid #000;border-radius:0;background:transparent;font-size:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .times button[aria-pressed=true]{background:#000;border-color:#000;color:#fff;box-shadow:none}
-.page .times button:disabled{color:#999;border-color:#dedede;background:transparent;box-shadow:none;opacity:1}
+.page .times button:disabled{color:#999;border-color:#dedede;background:transparent;box-shadow:none;opacity:1;text-decoration-line:line-through;text-decoration-color:currentColor;text-decoration-thickness:1px}
 .visitPreview{display:flex;flex-direction:column;gap:8px;margin-top:12px;min-height:96px;padding:12px;border:1px solid #ffffff7a;border-radius:8px;background:#fafafa;box-shadow:0 1px 2px #0000000d,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f}
 /* DATE uses the same outer card geometry despite its calendar's horizontal inset. */
 .schedule>.visitPreview{margin-inline:-12px;min-height:0}
