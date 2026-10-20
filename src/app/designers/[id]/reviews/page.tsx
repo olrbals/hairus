@@ -1,2 +1,0 @@
-import {DesignerExtra} from '@/components/prototype/details';
-export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <DesignerExtra id={id} view="reviews"/>;}

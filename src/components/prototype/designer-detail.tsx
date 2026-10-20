@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useEffect,useRef,useState} from 'react';
 import {useNickname} from '@/lib/use-nickname';
 import {HeaderBackIcon} from '@/components/primitives';
@@ -19,7 +20,6 @@ const profileTags=['꼼꼼한 상담','편안한 소통','세심한 시술'];
 const matchComparisons=[
   {work:'5a15e.png',saved:'ad0de.png',tags:['긴 기장','가벼운 레이어','자연스러운 볼륨']},
   {work:'f66bd.png',saved:'d7b6a.png',tags:['긴 기장','웨이브','풍성한 볼륨']},
-  {work:'bd491.png',saved:'31628.png',tags:['짧은 기장','얼굴선 레이어','차분한 실루엣']},
 ];
 const designerSectionIds=['match','works','service','reviews','salon'] as const;
 const stickyNavigationOffset=64+68; // Header plus section navigation, including its 20px bottom padding.
@@ -62,7 +62,7 @@ export function DesignerPage({id}:{id:string}){
 
   return <main id="main" className={`${styles.page} ${fixedBooking?bookingStyles.detailPage:''}`}>
     <header className={`${styles.header} hairus-page-header`}>
-      <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push('/recommendation/results')}><HeaderBackIcon/></button>
+      <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, '/explore?category=designer')}><HeaderBackIcon/></button>
       <span>{item.id==='yoona'?'윤아 디자이너':'디자이너'}</span>
       <div className={styles.saveControl}><SaveButton item={item}/></div>
     </header>
@@ -74,7 +74,7 @@ export function DesignerPage({id}:{id:string}){
       <h2>{item.name} · {salon?.name||item.location}</h2>
       <div className={styles.tags}>{profileTags.map(tag=><span key={tag}>{tag}</span>)}</div>
       <div className={styles.identity}>
-        <Link href={`/designers/${item.id}/reviews`}>★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</Link>
+        <a href="#reviews">★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</a>
         <p>{introduction}</p>
       </div>
     </section>
@@ -131,7 +131,7 @@ export function DesignerPage({id}:{id:string}){
       </details>)}</div>
     </section>
 
-    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsHref={`/designers/${item.id}/reviews`} variant="refined"/>
+    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsDisabled variant="refined"/>
 
     {salon&&<section id="salon" className={styles.salon} aria-labelledby="salon-title">
       <h2 id="salon-title">THE SALON</h2>

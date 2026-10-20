@@ -26,7 +26,7 @@
 .airy-description h2{margin:0;font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:40px;font-weight:600;line-height:1.3}
 .airy-description p{margin:0;font-size:14px;font-weight:500;line-height:1.5;}
 .airy-description>span{font-size:14px;font-weight:500;line-height:1.5;opacity:.7}
-.airy-for-you{height:318px;margin:52px 24px 0;display:flex;flex-direction:column;gap:24px}
+.airy-for-you{height:318px;margin:52px 24px 0;display:flex;flex-direction:column;gap:20px}
 .airy-section-heading{display:flex;flex-direction:column;gap:8px}
 .airy-section-heading h2{margin:0;font-family:var(--font-editorial),'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:500;line-height:36px;}
 .airy-section-heading p{margin:0;font-size:16px;line-height:1.3;font-weight:400;color:#666460}
@@ -37,7 +37,7 @@
 .airy-guide h3{margin:0;font-size:16px;font-weight:500;line-height:1.3;}
 .airy-guide p{margin:0;font-size:14px;font-weight:400;line-height:1.3;color:#666460;word-break:keep-all}
 .airy-more{margin-top:48px}
-.airy-more>.airy-section-heading{margin:0 24px 24px}
+.airy-more>.airy-section-heading{margin:0 24px 20px}
 .airy-more-scroll{display:flex;gap:8px;padding:0 24px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
 .airy-more-scroll::-webkit-scrollbar{display:none}
 .airy-more-card{display:flex;flex-direction:column;gap:8px;align-items:stretch;flex:0 0 183px;min-width:183px;width:183px;scroll-snap-align:start}

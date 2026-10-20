@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {BackLink} from '@/components/navigation-history';
 import {useEffect,useState,useRef,type ReactNode} from 'react';
 import {useRouter} from 'next/navigation';
 import {Button,HeaderBackIcon} from '@/components/primitives';
@@ -20,10 +21,9 @@ const stickyHeight=64+86+68;
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
-function BookingPage({back,children,title='예약하기',historyBack=false,actions}:{back:string;children:ReactNode;title?:string;historyBack?:boolean;actions?:ReactNode}){
- const router=useRouter();
-  return <main id="main" className={styles.page}>
-    <header className={`${styles.header} hairus-page-header`}><Link className="hairus-header-back" href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><HeaderBackIcon/></Link><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
+function BookingPage({back,children,title='예약하기',actions,confirmed=false,appointmentsPage=false}:{back:string;children:ReactNode;title?:string;actions?:ReactNode;confirmed?:boolean;appointmentsPage?:boolean}){
+  return <main id="main" className={`${styles.page}${confirmed?` ${styles.confirmedPage}`:""}${appointmentsPage?` ${styles.appointmentsPage}`:""}`}>
+    <header className={`${styles.header} hairus-page-header`}><BackLink className="hairus-header-back" href={back} aria-label="뒤로 가기"><HeaderBackIcon/></BackLink><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
     {children}
   </main>;
 }
@@ -156,10 +156,12 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
   <div className={`${styles.content} ${styles.onePageContent}`} id="booking-content">
    <section id="booking-service" className={styles.reservationSection} tabIndex={-1} aria-label="시술 선택">
     <SectionTitle title="SERVICE" description="방문하여 받을 시술을 선택해 주세요."/>
-    <div className={styles.categories} role="group" aria-label="시술 카테고리">{serviceCategories.map(value=><SelectionChip key={value} aria-pressed={category===value} onClick={()=>setCategory(value)}>{value}</SelectionChip>)}</div>
+    <div className={styles.serviceChoices}>
+     <div className={styles.categories} role="group" aria-label="시술 카테고리">{serviceCategories.map(value=><SelectionChip key={value} aria-pressed={category===value} onClick={()=>setCategory(value)}>{value}</SelectionChip>)}</div>
     <div className={styles.services} role="group" aria-label={`${category} 시술 선택`}>{services.filter(item=>item.category===category).map(item=><button type="button" className={styles.service} key={item.id} aria-pressed={selectedIds.includes(item.id)} onClick={()=>{
      const next=selectBookingService(draft,item.id);patchDraft(current=>selectBookingService(current,item.id));if(draft.time&&!next.time&&next.serviceId)setError('선택한 시술에 맞춰 예약 가능한 시간을 다시 선택해 주세요.');
     }}><span className={styles.serviceInfo}><span className={styles.serviceHeading}><strong>{item.name}</strong><span>{item.price.toLocaleString('ko-KR')}원</span></span><span className={styles.serviceDescription}>{item.description}</span><small>{item.minutes?`약 ${item.minutes}분`:'소요 시간 상담 후 안내'} · 마지막 예약 {item.lastBooking}</small></span><span className={styles.selection} aria-hidden="true">{selectedIds.includes(item.id)&&<Check/>}</span></button>)}</div>
+    </div>
     {selectedServices.length?<div className={styles.visitPreview} aria-live="polite" aria-label="선택한 시술"><div className={styles.servicePreviewList}>{selectedServices.map(item=><div key={item.id}><span>{bookingServiceName(item)}</span><strong>{item.price.toLocaleString('ko-KR')}원</strong></div>)}</div><div className={styles.servicePreviewTotal}><span>예상 금액</span><strong>{totalPrice.toLocaleString('ko-KR')}원</strong></div></div>:<p className={styles.serviceSelected} aria-live="polite">시술을 선택해 주세요.</p>}
    </section>
    <section id="booking-schedule" className={styles.reservationSection} tabIndex={-1} aria-label="방문 날짜와 시간">
@@ -202,7 +204,7 @@ export function BookingSummary({draft,editPrefix}:{draft:BookingDraft;editPrefix
 export function BookingComplete({id}:{id:string}){
   const {state,ready}=usePrototype();
   const booking=state.bookings.find(booking=>booking.id===id);
-  return <BookingPage title="예약 완료" back="/my/reservations"><div className={`${styles.content} ${styles.complete}`}>
+  return <BookingPage title="예약 완료" back="/my/reservations" confirmed><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
       <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>
@@ -214,11 +216,14 @@ export function BookingComplete({id}:{id:string}){
 
 export function BookingAppointments(){
  const {state,ready}=usePrototype();
- return <BookingPage back="/my" title="" historyBack><div className={`${styles.content} ${styles.appointments}`}>
+ const isEmpty=ready&&state.bookings.length===0;
+ return <BookingPage back="/my" title="예약 내역" appointmentsPage><div className={`${styles.content} ${styles.appointments}${isEmpty?` ${styles.appointmentsEmptyState}`:''}`}>
  <h1 className={styles.appointmentsTitle}>My Appointments</h1>
  {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
  const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';
  return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{booking.serviceName||(service?bookingServiceName(service):'시술')}</span><span>{(booking.estimatedPrice??service?.price)?.toLocaleString('ko-KR')}원</span></div><Link className={`${styles.primary} primary-cta`} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
- }):<><p>아직 저장한 예약이 없어요.</p><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></>}
- </div></BookingPage>;
+ }):<div className={styles.appointmentsEmpty}><p>아직 저장한 예약이 없어요.</p></div>}
+ </div>
+ {isEmpty&&<footer className={styles.footer}><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></footer>}
+ </BookingPage>;
 }

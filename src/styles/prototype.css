@@ -48,6 +48,8 @@
   color: #20201e;
   opacity: 0.7;
 }
+/* Only intro-to-photo becomes 20px; preserve 48px photo-to-designers. */
+.home-seat-intro + .home-seat-photo { margin-top: -28px; }
 .home-seat-photo {
   display: block;
   width: 322px;
@@ -68,7 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 .home-seat-designers-heading h3 {
   display: flex;
@@ -170,7 +172,7 @@
   justify-content: center;
   gap: 36px;
   text-align: center;
-  background: #fff url('/assets/figma/v1/ce227.png') center / cover no-repeat;
+  background: #fff;
   overflow: hidden;
 }
 
@@ -179,7 +181,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 
   background: linear-gradient(
@@ -197,7 +199,31 @@
 }
 
 
+.prototype > .match-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url('/assets/figma/v1/ce227.png') center / cover no-repeat;
+  opacity: 1;
+}
+
+/* The pure-white veil alone fades with scroll. The permanent top and
+   bottom edge gradient above it stays completely unchanged. */
+.match-banner-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #fff;
+  opacity: var(--match-overlay, 1);
+  transition: opacity 90ms linear;
+}
+
 .match-banner-copy {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,6 +249,8 @@
   color: #616161;
 }
 .match-banner-cta {
+  position: relative;
+  z-index: 2;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -316,7 +344,7 @@
 .hero + .home-section {
   margin-top: 0;
   padding-top: 24px;
-  gap: 28px;
+  gap: 20px;
 }
 
 /* Editorial heading */
@@ -467,7 +495,7 @@
 /* HOME — More to Discover CTA */
 
 .home-discover {
-  row-gap: 28px;
+  row-gap: 20px;
   padding-top: 24px;
   padding-bottom: 24px;
   margin-bottom: 0;
@@ -651,23 +679,23 @@
 /* HOME — Magazine Controls Refinement */
 
 .home-magazine {
-  row-gap: 16px;
+  row-gap: 20px;
 }
 
-/* 제목과 이미지 사이는 기존 28px 유지 */
+/* Section heading-to-carousel spacing is a single 20px gap. */
 .home-magazine .section-heading {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 /* 하단 페이지 컨트롤 */
-.home-magazine .banner-controls {
+:is(.home-magazine,.home-discover) .banner-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 44px;
 }
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -681,7 +709,7 @@
   cursor: pointer;
 }
 
-.home-magazine .banner-controls span {
+:is(.home-magazine,.home-discover) .banner-controls span {
   font-family: Pretendard, var(--font-sans), sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -744,12 +772,12 @@
 
 /* HOME — Magazine Arrow Interaction */
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   transition: color 180ms ease;
 }
 
-.home-magazine .banner-controls button:hover,
-.home-magazine .banner-controls button:focus-visible {
+:is(.home-magazine,.home-discover) .banner-controls button:hover,
+:is(.home-magazine,.home-discover) .banner-controls button:focus-visible {
   color: #20201e;
 }
 
@@ -757,26 +785,26 @@
 
 /* HOME — Magazine Minimal Navigation */
 
-.home-magazine .banner-controls {
+:is(.home-magazine,.home-discover) .banner-controls {
   justify-content: flex-end;
   gap: 0;
 }
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   color: #666460;
   transition: color 180ms ease;
 }
 
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   color: #666460;
   font-size: 12px;
   transition: color 180ms ease;
 }
 
 
-.home-magazine .banner-controls button:hover,
-.home-magazine .banner-controls button:focus-visible {
+:is(.home-magazine,.home-discover) .banner-controls button:hover,
+:is(.home-magazine,.home-discover) .banner-controls button:focus-visible {
   color: #20201e;
 }
 
@@ -784,12 +812,12 @@
 /* HOME — Magazine Arrow Spacing */
 
 /* 왼쪽 화살표를 오른쪽으로 */
-.home-magazine .banner-controls button:first-child {
+:is(.home-magazine,.home-discover) .banner-controls button:first-child {
   justify-content: flex-end;
 }
 
 /* 오른쪽 화살표를 왼쪽으로 */
-.home-magazine .banner-controls button:last-child {
+:is(.home-magazine,.home-discover) .banner-controls button:last-child {
   justify-content: flex-start;
   padding-left: 20px;
 }
@@ -844,7 +872,7 @@
 .bottom-sheet--default .explore-filter-group h3{
   margin:0 0 12px;
   color:#20201e;
-  font-size:16px;
+  font-size:18px;
   font-weight:500;
   line-height:1.3;
 }
@@ -856,6 +884,8 @@
   align-items:center;
   gap:20px 12px;
 }
+/* Discover Style / Designer / Salon filters only: keep other SelectionChips unchanged. */
+.bottom-sheet--default .explore-filter-group .filter-editor-chips button{font-size:16px}
 
 /* Legacy Explore sample: preserve its existing 10px chip-list gap. */
 .hairus-bottom-chip-list{
@@ -992,4 +1022,24 @@
  .mobile-shell .prototype > .match-banner .match-banner-copy h2{
   font-size:clamp(38px,11.1vw,48px);
  }
+}
+
+/* HOME Discover arrows now reuse Magazine's exact banner-controls typography, hit areas and alignment. */
+
+/* In Focus stays static: its visibility only triggers the HomePopup. */
+/* A Seat for You fills from the editorial heading into the sentences.
+   Keep the original line breaks, spacing and layout. */
+.home-seat .home-seat-intro .section-title{opacity:.4}
+.home-seat-intro .home-seat-lines{opacity:1;color:#20201e}
+.home-seat-lines>span{display:block;opacity:.4}
+.home-seat-lines>span:nth-child(2),.home-seat-lines>span:nth-child(4){margin-top:20.8px}
+@media(prefers-reduced-motion:reduce){
+ .home-seat .home-seat-intro .section-title,.home-seat-lines>span{opacity:1!important}
+}
+
+
+
+@media(prefers-reduced-motion:reduce){
+ .prototype > .match-banner::after{opacity:1}
+ .prototype > .match-banner .match-banner-reveal{opacity:0;transition:none}
 }

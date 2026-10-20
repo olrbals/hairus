@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {SectionHeading} from '@/components/primitives';
 
@@ -52,8 +52,89 @@ const homePopularDesigners: {
   },
 ];
 
-export function Home(){const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{if(ready&&today&&state.popupDay!==today){try{if(!sessionStorage.getItem('hairus.popup.seen'))setPopup(true);}catch{setPopup(true);}}},[ready,today,state.popupDay]);function close(){setPopup(false);try{sessionStorage.setItem('hairus.popup.seen','1');}catch{}}return <><main id="main" className="prototype"><section className="hero"><img src={asset('d3c23.png')} alt="HAIRUS 커버 헤어 스타일"/><span className="wordmark hero-logo">HAIRUS</span><div className="hero-copy"><h1>HAIR IS<br/>WHO WE ARE</h1><p>우리의 취향을 가장 우리답게</p></div></section><section className="home-section"><SectionHeading title="In Focus" description="지금 주목해야 할 헤어스타일"/>
-<div className="in-focus-card">
+export function Home(){
+ const seatIntroRef=useRef<HTMLDivElement>(null);
+ const focusCardRef=useRef<HTMLDivElement>(null);
+ const matchBannerRef=useRef<HTMLElement>(null);
+ useEffect(()=>{
+  const intro=seatIntroRef.current;
+  if(!intro)return;
+  const heading=intro.querySelector<HTMLElement>('.section-title');
+  const lines=Array.from(intro.querySelectorAll<HTMLElement>('.home-seat-lines > span'));
+  const targets=heading?[heading,...lines]:lines;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let frame=0;
+  const update=()=>{
+   const rect=intro.getBoundingClientRect();
+   const viewport=window.innerHeight;
+   const progress=Math.max(0,Math.min(1,(viewport*.8-rect.top)/(viewport*.6)));
+   targets.forEach((target,index)=>{
+    const filled=Math.max(0,Math.min(1,progress*targets.length-index));
+    target.style.opacity=String(.4+.6*filled);
+   });
+  };
+  const schedule=()=>{
+   if(frame)return;
+   frame=window.requestAnimationFrame(()=>{frame=0;update();});
+  };
+  update();
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule);
+  return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);targets.forEach(target=>target.style.removeProperty('opacity'));};
+ },[]);
+ useEffect(()=>{
+  const banner=matchBannerRef.current;
+  if(!banner)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const update=()=>{
+   if(reduced){banner.style.setProperty('--match-overlay','0');return;}
+   const rect=banner.getBoundingClientRect();
+   const viewport=window.innerHeight;
+   // From fully white at entry to fully revealed near the viewport center.
+   // Keep the original independent top/bottom edge gradient untouched.
+   const start=viewport*.9;
+   const end=(viewport-rect.height)/2;
+   const linear=Math.max(0,Math.min(1,(start-rect.top)/Math.max(1,start-end)));
+   const reveal=linear*linear*(3-2*linear);
+   banner.style.setProperty('--match-overlay',String(1-reveal));
+  };
+  let frame=0;
+  const schedule=()=>{
+   if(frame)return;
+   frame=window.requestAnimationFrame(()=>{frame=0;update();});
+  };
+  update();
+  if(reduced)return;
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule);
+  return()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+ },[]);
+ const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{
+  if(!ready||!today||state.popupDay===today)return;
+  try{if(sessionStorage.getItem('hairus.popup.seen'))return;}catch{/* Storage may be unavailable. */}
+  const focus=focusCardRef.current;
+  if(!focus)return;
+  const showPopup=()=>{
+   try{if(sessionStorage.getItem('hairus.popup.seen'))return;}catch{/* Continue for this visit. */}
+   setPopup(true);
+  };
+  if(typeof IntersectionObserver==='undefined'){
+   const onScroll=()=>{
+    const rect=focus.getBoundingClientRect(),middle=window.innerHeight*.5;
+    if(rect.top<=middle&&rect.bottom>=middle){window.removeEventListener('scroll',onScroll);showPopup();}
+   };
+   window.addEventListener('scroll',onScroll,{passive:true});
+   onScroll();
+   return ()=>window.removeEventListener('scroll',onScroll);
+  }
+  // Opening waits until In Focus reaches the middle area of the viewport.
+  const observer=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();showPopup();}
+  },{rootMargin:'-30% 0px -30% 0px',threshold:.3});
+  observer.observe(focus);
+  return ()=>observer.disconnect();
+ },[ready,today,state.popupDay]);function close(){setPopup(false);try{sessionStorage.setItem('hairus.popup.seen','1');}catch{}}return <><main id="main" className="prototype"><section className="hero"><img src={asset('d3c23.png')} alt="HAIRUS 커버 헤어 스타일"/><span className="wordmark hero-logo">HAIRUS</span><div className="hero-copy"><h1>HAIR IS<br/>WHO WE ARE</h1><p>우리의 취향을 가장 우리답게</p></div></section><section className="home-section"><SectionHeading title="In Focus" description="지금 주목해야 할 헤어스타일"/>
+<div className="in-focus-card" ref={focusCardRef}>
   <Link href="/in-focus/soft-bob">
     <img
       className="editorial-photo"
@@ -77,6 +158,7 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
 
   <div
     className="horizontal-cards"
+    ref={discoverTrack}
     onMouseDown={(e) => {
       if (e.button !== 0) return;
 
@@ -129,24 +211,19 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
       <Card key={s.id} item={s} linked={['airy','tassel','sand'].includes(s.id)} showSave={false} />
     ))}
   </div>
-
+  <div className="banner-controls" aria-label="More to Discover 카드 이동"><span className="sr-only">좌우 화살표로 스타일 카드를 이동할 수 있어요.</span><button type="button" aria-label="이전 스타일" onClick={()=>moveDiscover(-1)}>←</button><button type="button" aria-label="다음 스타일" onClick={()=>moveDiscover(1)}>→</button></div>
  </section>
 
   <section className="home-section home-magazine"><SectionHeading title="Magazine" description="당신의 스타일링을 위한 헤어 가이드" action={<Link className="view-link" href="/magazine">View all ↗</Link>}/>
 
 <MagazineCarousel/></section><section className="home-section home-seat">
-  <div className="home-seat-intro">
+  <div className="home-seat-intro" ref={seatIntroRef}>
     <h2 className="section-title">A Seat for You</h2>
-    <p>
-      변화는 한 자리에 앉는 순간부터 시작됩니다.
-      <br />
-      <br />
-      어떤 모습이 되고 싶은지,
-      <br />
-      어떤 분위기가 나다운지
-      <br />
-      <br />
-      오늘 당신을 위한 자리에 앉아보세요.
+    <p className="home-seat-lines">
+      <span>변화는 한 자리에 앉는 순간부터 시작됩니다.</span>
+      <span>어떤 모습이 되고 싶은지,</span>
+      <span>어떤 분위기가 나다운지</span>
+      <span>오늘 당신을 위한 자리에 앉아보세요.</span>
     </p>
   </div>
   <div className="home-seat-photo">
@@ -230,7 +307,8 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
     </div>
   </div>
 </section>
-<section className="match-banner" aria-labelledby="match-banner-title">
+<section className="match-banner" ref={matchBannerRef} aria-labelledby="match-banner-title">
+  <span className="match-banner-reveal" aria-hidden="true"/>
   <div className="match-banner-copy">
     <h2 id="match-banner-title">Meet Your Match</h2>
     <p>The right style. The right designer.<br />Just for you.</p>

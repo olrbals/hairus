@@ -14,7 +14,7 @@
 .pd-hero-bottom{position:absolute;top:480px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:flex-end}
 .pd-hero-bottom span{font-size:14px;}
 .pd-hero-bottom strong{font-size:34px;font-weight:500;line-height:1.2}
-.pd-experience{padding:52px 24px 40px}
+.pd-experience{padding:48px 24px}
 .pd-experience h2,.pd-coming h2{font-family:var(--font-editorial),Georgia,serif;font-size:40px;line-height:1.3;margin:0}
 .pd-experience h2{font-weight:600}
 .pd-coming h2{font-weight:700;line-height:46px;}
@@ -45,7 +45,7 @@
 .pd-benefit button span:last-child{font-family:"Noto Sans KR",Pretendard,sans-serif;font-size:26px;font-weight:400;line-height:30px;}
 .pd-benefit small{font-size:12px;font-weight:400;line-height:1.3;}
 .pd-benefit button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
-.pd-coming{padding:52px 24px 50px}
+.pd-coming{padding:48px 24px}
 .pd-coming>p{margin:8px 0 24px;color:#66645f;font-size:12px}
 .pd-space-wide{width:100%;aspect-ratio:382/287;object-fit:cover}
 .pd-space-row{display:grid;grid-template-columns:158fr 212fr;gap:12px;margin-top:12px}
@@ -54,8 +54,8 @@
 .pd-space-media--interior img{left:-5.87%;top:0;width:123.21%;height:100%}
 .pd-space-media--storefront img{left:-14.14%;top:-8.87%;width:117.53%;height:128%}
 .pd-space-caption{display:block;margin-top:4px;text-align:right;font-size:12px;line-height:1.2}
-.pd-footer{background:#000;color:#fff;height:277px;padding:48px 24px;display:flex;flex-direction:column;gap:20px}
-.pd-footer h2{font-family:var(--font-editorial),Georgia,serif;font-size:40px;font-weight:700;line-height:42px;margin:0}
+.pd-footer{background:#000;color:#fff;min-height:277px;height:auto;padding:48px 24px;display:flex;flex-direction:column;gap:20px}
+.pd-footer h2{font-family:var(--font-editorial),Georgia,serif;font-size:52px;font-weight:700;line-height:1;margin:0}
 .pd-footer p{font-size:16px;line-height:1.3;margin:0}
 .pd-footer small{display:block;font-size:14px;line-height:1.3}
 .pd-dialog-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:1000}

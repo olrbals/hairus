@@ -1,4 +1,4 @@
-.reviews>h2{font-family:var(--font-editorial);font-weight:700;font-size:34px;line-height:1.3;}
+.reviews>h2{font-family:var(--font-editorial);font-weight:700;font-size:36px;line-height:1.3;}
 
 .reviews{margin-top:52px;padding:24px 24px;scroll-margin-top:64px}
 .rating{margin-top:20px;display:grid;grid-template-columns:138px minmax(0,1fr);gap:18px;align-items:center;min-height:108px}
@@ -30,7 +30,7 @@
 .reviews article>p{margin-top:10px;font-size:14px;line-height:1.3}
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
 /* Disabled salon-only view-all text mirrors the All Designers link color. */
-.textLinkDisabled{color:#616161}
+.textLinkDisabled{color:#0e0e0e}
 .demoLabel{margin-top:8px;color:#616161;font-size:12px;line-height:1.5}
 @media(max-width:360px){.reviews{padding-inline:18px}}
 
@@ -44,4 +44,7 @@
 .refinedReviews .reviewHighlights ul{margin:12px 0 0;gap:16px}
 .refinedReviews .reviewHighlightHeading,
 .refinedReviews .reviewHighlightHeading>span:last-child{font-size:14px}
-.refinedReviews .reviewHighlights+article{margin-top:0;padding-top:0}
+/* First refined review: 8px from highlights, no separator. */
+.refinedReviews .reviewHighlights+article{margin-top:16px;padding-top:0;border-top:0}
+/* All following reviews: 4px closer overall, with divider centered in 18px / 18px. */
+.refinedReviews article+article{margin-top:18px;padding-top:18px}

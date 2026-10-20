@@ -40,7 +40,7 @@
 .sectionNav a[aria-current=location]{border-bottom:1px solid #0e0e0e;font-weight:600}
 .match,.works,.serviceSection,.reviews,.salon{scroll-margin-top:132px}
 .match{padding:24px 24px 24px}
-.match h2,.works h2,.sectionHeading h2,.reviews>h2,.salon>h2{font-size:34px;line-height:1.3;}
+.match h2,.works h2,.sectionHeading h2,.reviews>h2,.salon>h2{font-size:36px;line-height:1.3;}
 .match>p,.sectionHeading p,.works>div>p{margin-top:4px;color:#616161;font-size:14px;line-height:1.3}
 .matchImages{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px;touch-action:pan-y}
 .matchImages figure{min-width:0;margin:0;display:flex;flex-direction:column}
@@ -53,7 +53,7 @@
 .match>.tags{padding-left:0}
 .works{margin-top:24px;padding:24px 24px;background:#0e0e0e;color:#fff}
 .works>div:first-child>p{color:#c7c7c7}
-.works>a{display:block;min-height:44px;margin-top:4px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
+.works>a{display:block;min-height:44px;margin-top:20px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
 .workGrid{height:346px;display:grid;grid-template-columns:247fr 127fr;gap:8px}
 .workGrid>a>img,.workGrid>div img{display:block;width:100%;height:100%;object-fit:cover}
 .workGrid>a>img{object-position:48% center}
@@ -80,7 +80,7 @@
 .serviceBody>a{min-height:44px;font-size:14px;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
 .salon{padding:24px 24px}
-.salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:18px;object-fit:cover}
+.salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:20px;object-fit:cover}
 .salon h3{margin:18px 0 0;font-size:20px;font-weight:500}
 .salon>p{margin-top:6px;color:#616161;font-size:14px}
 .booking{padding:28px 12px 40px}
