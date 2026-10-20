@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useRef, useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {HeaderBackIcon} from '@/components/primitives';
@@ -41,7 +42,7 @@ export function Saved() {
 
   return <>
     <main id="main" className={css.page}>
-      <header className={`${css.header} hairus-page-header`}><button type="button" className={`${css.back} hairus-header-back`} aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/home')}><HeaderBackIcon/></button></header>
+      <header className={`${css.header} hairus-page-header`}><button type="button" className={`${css.back} hairus-header-back`} aria-label="뒤로 가기" onClick={() => goBack(router, '/home')}><HeaderBackIcon/></button></header>
       <div className={css.content}>
         <h1>Archive</h1>
         <div className={css.tabs} role="tablist" aria-label="저장 카테고리">

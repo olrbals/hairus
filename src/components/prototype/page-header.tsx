@@ -1,6 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {HeaderBackIcon} from '@/components/primitives';
 import type {Editorial} from '@/lib/prototype/editorials';
 import {EditorialHeartSaveButton} from './editorial-bookmark';
@@ -20,7 +21,7 @@ export function PageHeader({title, showBackButton=true, backFallbackHref='/home'
 
   return <header className="hairus-configurable-header hairus-page-header">
     {showBackButton
-      ? <button type="button" className="hairus-configurable-header__back hairus-header-back" aria-label="이전 화면으로" onClick={() => window.history.length > 1 ? router.back() : router.push(backFallbackHref)}><HeaderBackIcon/></button>
+      ? <button type="button" className="hairus-configurable-header__back hairus-header-back" aria-label="이전 화면으로" onClick={() => goBack(router, backFallbackHref)}><HeaderBackIcon/></button>
       : <span className="hairus-configurable-header__slot" aria-hidden="true"/>}
     {title ? <span className="hairus-configurable-header__title">{title}</span> : <span aria-hidden="true"/>}
     {saveOptions.showSaveButton

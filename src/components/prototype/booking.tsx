@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {BackLink} from '@/components/navigation-history';
 import {useEffect,useState,useRef,type ReactNode} from 'react';
 import {useRouter} from 'next/navigation';
 import {Button,HeaderBackIcon} from '@/components/primitives';
@@ -20,10 +21,9 @@ const stickyHeight=64+86+68;
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
-function BookingPage({back,children,title='예약하기',historyBack=false,actions,confirmed=false,appointmentsPage=false}:{back:string;children:ReactNode;title?:string;historyBack?:boolean;actions?:ReactNode;confirmed?:boolean;appointmentsPage?:boolean}){
- const router=useRouter();
+function BookingPage({back,children,title='예약하기',actions,confirmed=false,appointmentsPage=false}:{back:string;children:ReactNode;title?:string;actions?:ReactNode;confirmed?:boolean;appointmentsPage?:boolean}){
   return <main id="main" className={`${styles.page}${confirmed?` ${styles.confirmedPage}`:""}${appointmentsPage?` ${styles.appointmentsPage}`:""}`}>
-    <header className={`${styles.header} hairus-page-header`}><Link className="hairus-header-back" href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><HeaderBackIcon/></Link><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
+    <header className={`${styles.header} hairus-page-header`}><BackLink className="hairus-header-back" href={back} aria-label="뒤로 가기"><HeaderBackIcon/></BackLink><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
     {children}
   </main>;
 }
@@ -217,7 +217,7 @@ export function BookingComplete({id}:{id:string}){
 export function BookingAppointments(){
  const {state,ready}=usePrototype();
  const isEmpty=ready&&state.bookings.length===0;
- return <BookingPage back="/my" title="예약 내역" historyBack appointmentsPage><div className={`${styles.content} ${styles.appointments}${isEmpty?` ${styles.appointmentsEmptyState}`:''}`}>
+ return <BookingPage back="/my" title="예약 내역" appointmentsPage><div className={`${styles.content} ${styles.appointments}${isEmpty?` ${styles.appointmentsEmptyState}`:''}`}>
  <h1 className={styles.appointmentsTitle}>My Appointments</h1>
  {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
  const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';

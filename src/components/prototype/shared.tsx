@@ -1,6 +1,8 @@
 'use client';
 import Link from 'next/link';
+import {BackLink} from '@/components/navigation-history';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {type ReactNode} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {HeaderBackIcon} from '@/components/primitives';
@@ -8,8 +10,8 @@ import {itemHref,salons,type Item} from '@/lib/prototype/catalog';
 import {designerDetails} from '@/lib/prototype/people-presentation';
 import {usePrototype} from './store';
 import {SaveNoteControl} from './save-note-control';
-export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header hairus-page-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back hairus-header-back" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
-export function Action({href,children,secondary=false}:{href:string;children:ReactNode;secondary?:boolean}){return <Link className={`button button--${secondary?'plain':'primary'}`} href={href}>{children}</Link>;}
+export function Screen({title,children,tab,back='/home',actions}:{title:string;children:ReactNode;tab?:'/home'|'/explore'|'/saved'|'/my';back?:string;actions?:ReactNode}){const router=useRouter();return <><main id="main" className="prototype"><header className="proto-header hairus-page-header">{tab?<Link className="wordmark" href="/home">HAIRUS</Link>:<button aria-label="뒤로 가기" className="back hairus-header-back" onClick={()=>goBack(router, back)}><HeaderBackIcon/></button>}<span>{tab?'INTERACTIVE V1':title}</span>{actions||<Link href="/my" aria-label="마이페이지">MY</Link>}</header><div className="proto-content"><h1 className="editorial-title">{title}</h1>{children}</div></main>{tab&&<BottomNav active={tab}/>}</>;}
+export function Action({href,children,secondary=false,back=false}:{href:string;children:ReactNode;secondary?:boolean;back?:boolean}){const Element=back?BackLink:Link;return <Element className={`button button--${secondary?'plain':'primary'}`} href={href}>{children}</Element>;}
 export function Card({item,linked=true,showSave=true}:{item:Item;linked?:boolean;showSave?:boolean}){const content=<><img src={item.image} alt={item.name} loading="lazy"/><h3>{item.name}</h3><p>{item.location||item.tags.join(' · ')}</p></>;return <article className={`proto-card ${item.kind}`}>{linked?<Link href={itemHref(item)}>{content}</Link>:<div>{content}</div>}{showSave&&<SaveButton item={item}/>}</article>;}
 export function Cards({items}:{items:Item[]}){return <div className="proto-grid">{items.map(item=><Card item={item} key={`${item.kind}:${item.id}`}/>)}</div>;}
 export function Chips({options,selected,onSelect}:{options:string[];selected:string[];onSelect:(v:string)=>void}){return <div className="chips">{options.map(option=><button key={option} aria-pressed={selected.includes(option)} onClick={()=>onSelect(option)}>{option}</button>)}</div>;}

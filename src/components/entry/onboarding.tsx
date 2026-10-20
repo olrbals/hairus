@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import {goBackTo} from "@/lib/navigation-history";
 import {useEffect,useRef,useState} from "react";
 import {writeEntry} from "@/lib/entry-state";
 import {Button} from "@/components/primitives";
@@ -86,7 +87,7 @@ export function Onboarding({step}:{step:Step}){
  const touchStart=useRef<{x:number;y:number}|null>(null);
  useEffect(()=>{writeEntry({onboardingStep:step});setIncoming(null);},[step]);
  function finish(){writeEntry({onboardingDone:true});router.push("/login");}
- function navigate(destination:Destination){if(destination==="login")finish();else router.push("/onboarding/"+destination);}
+ function navigate(destination:Destination){if(destination==="login")finish();else if(destination<step)goBackTo(router,"/onboarding/"+destination);else router.push("/onboarding/"+destination);}
  function advance(destination:Destination){
   if(incoming!==null||destination===step)return;
   if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){navigate(destination);return;}

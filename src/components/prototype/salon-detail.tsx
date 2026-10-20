@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useEffect,useRef,useState,type MouseEvent,type CSSProperties} from 'react';
 import {asset,findItem} from '@/lib/prototype/catalog';
 import {arvoTeam,findArvoDesigner,offDaysLabel,arvoPriceGroups,arvoInterior,type ArvoDesigner} from '@/lib/prototype/arvo';
@@ -21,7 +22,7 @@ const localAsset=(name:string)=>`/assets/figma/salon-arvo/${name}`;
 function SalonHeader({title,back,save=false,calendar=false}:{title:string;back:string;save?:boolean;calendar?:boolean}){
   const router=useRouter();
   return <header className={`${designerStyles.header} hairus-page-header`}>
-    <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(back)}><HeaderBackIcon/></button>
+    <button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={()=>goBack(router, back)}><HeaderBackIcon/></button>
     <span>{title}</span>
     {calendar?<Link className={styles.teamCalendar} href="/reservation/yoona/service" aria-label="예약 시작하기"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18M7 15h2m3 0h2m3 0h1M7 18h2m3 0h2"/></svg></Link>:save?<div className={designerStyles.saveControl}><SaveButton item={findItem('salon','arvo')!}/></div>:<span/>}
   </header>;

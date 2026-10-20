@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {useMemo,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {BottomSheet} from '@/components/bottom-sheet';
@@ -63,7 +64,7 @@ export function StyleExplore(){
  return <>
   <main id="main" className={sheet.page}>
    <header className={`${sheet.header} hairus-page-header`}>
-    <button type="button" className={`${sheet.back} hairus-header-back`} aria-label="뒤로 가기" onClick={()=>window.history.length>1?router.back():router.push('/home')}>
+    <button type="button" className={`${sheet.back} hairus-header-back`} aria-label="뒤로 가기" onClick={()=>goBack(router, '/home')}>
      <HeaderBackIcon/>
     </button>
    </header>

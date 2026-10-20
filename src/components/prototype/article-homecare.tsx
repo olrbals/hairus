@@ -1,6 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import {goBack} from '@/lib/navigation-history';
 import {HeaderBackIcon} from '@/components/primitives';
 import {EditorialHeartSaveButton} from './editorial-bookmark';
 import {findEditorial} from '@/lib/prototype/editorials';
@@ -40,7 +41,7 @@ export function HairCareArticle({articleId='care', issue=false}:{articleId?:Arti
 
   return <main id="main" className={`hc-article${issue?' hc-article--issue':''}`}>
     <header className="hc-header hairus-page-header">
-      <button type="button" className="hc-back hairus-header-back" aria-label="뒤로 가기" onClick={() => window.history.length > 1 ? router.back() : router.push('/magazine')}><HeaderBackIcon/></button>
+      <button type="button" className="hc-back hairus-header-back" aria-label="뒤로 가기" onClick={() => goBack(router, '/magazine')}><HeaderBackIcon/></button>
       <span>ARTICLE</span>
       <div className="hc-header-save"><EditorialHeartSaveButton item={findEditorial('article', articleId)!}/></div>
     </header>
