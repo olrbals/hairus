@@ -74,7 +74,7 @@
 .hairNote dl{display:flex;flex-direction:column;gap:18px}
 .hairNote dt,.appointment h3{font-size:12px;font-weight:600;line-height:16px;color:rgba(0,0,0,.8)}
 .hairNote dd{font-size:14px;font-weight:500;line-height:20px;color:rgba(0,0,0,.65);margin:8px 0 0}
-.appointment{grid-area:2/2/4/4;z-index:1;min-width:0;padding:20px}
+.appointment{grid-area:2/2/4/4;z-index:3;min-width:0;padding:20px}
 .designer{font-size:16px;line-height:22px;font-weight:500;margin-top:12px}
 .salon{font-size:12px;line-height:16px;color:rgba(0,0,0,.6);margin-top:6px}
 .date{font-size:14px;line-height:20px;margin-top:12px}
@@ -83,3 +83,21 @@
 @media(max-height:700px){.visual{padding-block:12px 16px}.footer{margin-top:28px}}
 @media(max-width:389px){.copy h1{font-size:36px}}
 @media(prefers-reduced-motion:reduce){.slideIncoming,.slideOut,.slideIncoming .progress a{animation:none}.progress a,.progress span{transition:none}}
+
+/* Short staged onboarding reveals. None change the original layout or page swipe.
+   Intro 02 does not spin: only the existing SOHEE best-match card is emphasized. */
+@media(prefers-reduced-motion:no-preference){
+ .slidePage:not(.slideOut):not(.slideIncoming) .profileCard{animation:onboardProfileAppear 470ms cubic-bezier(.22,.7,.2,1) 90ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .recommendedStyles{animation:onboardStylesAppear 500ms cubic-bezier(.22,.7,.2,1) 385ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .bestMatch{animation:onboardMatchFocus 500ms cubic-bezier(.22,.7,.2,1) 220ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .matchLabel{animation:onboardMatchBadge 320ms ease-out 620ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .hairNote{animation:onboardNoteAppear 500ms cubic-bezier(.22,.7,.2,1) 100ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .appointment{animation:onboardAppointmentAppear 450ms cubic-bezier(.22,.7,.2,1) 480ms both}
+}
+@keyframes onboardProfileAppear{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes onboardStylesAppear{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes onboardMatchFocus{from{opacity:.68;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes onboardMatchBadge{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes onboardNoteAppear{from{opacity:0;transform:translateY(13px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes onboardAppointmentAppear{from{opacity:0;transform:translate(12px,16px) scale(.96)}to{opacity:1;transform:none}}
+
