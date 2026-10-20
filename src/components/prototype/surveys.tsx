@@ -13,11 +13,11 @@ import {PreferenceActions} from './preference-actions';
 export function Survey({kind,step}:{kind:'preferences'|'matching';step:string}){return kind==='matching'?<MatchingSurvey key={step} step={step}/>:<PreferenceSurvey key={step} kind={kind} step={step}/>;}
 function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string}){const router=useRouter();const {state,update,ready}=usePrototype();const [message,setMessage]=useState('');const [limitAttempt,setLimitAttempt]=useState(0);const questions=kind==='preferences'?preferenceQuestions:matchQuestions;const prefix=kind==='preferences'?'/preferences':'/recommendation';const index=Number(step)-1;const question=questions[index];if(step==='intro')return <Screen title={kind==='preferences'?'Your Preference':'Meet Your Match'}><div className="intro-block"><p className="eyebrow">{kind==='preferences'?'나의 취향을 알아가는 시간':'나를 이해하는 디자이너'}</p><h2>{kind==='preferences'?'취향을 알려주시면, 더 나다운 헤어를 찾을 수 있어요.':'당신의 취향에 귀 기울이는 디자이너를 만나보세요.'}</h2><p>{questions.length}개의 짧은 질문 · 선택한 내용은 저장돼요.</p></div><Action href={`${prefix}/1`}>시작하기</Action></Screen>;
  if(!question)return <Screen title="설문"><p>해당 단계를 찾을 수 없어요.</p><Action href={`${prefix}/intro`}>설문 처음으로</Action></Screen>;
- const selected=state[kind][question.key]||[];const images=question.images;
+ const selected=(state[kind][question.key]||[]).filter(value=>question.options.includes(value));const images=question.images;
  if(kind==='preferences'&&index===0){
   return <main id="main" className="preference-first-step" data-figma-node="939:8564">
    <header className="preference-first-step__header hairus-page-header">
-    <button type="button" className="preference-first-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>window.history.length>1?router.back():router.push(`${prefix}/intro`)}>
+    <button type="button" className="preference-first-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push('/analysis/result')}>
      <HeaderBackIcon/>
     </button>
     <div className="preference-first-step__progress" aria-label={`취향 질문 ${index+1} / ${questions.length}`}>
@@ -37,15 +37,15 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
      <span className="preference-first-step__choice-label">{option}</span>
     </button>)}
    </div>
-   <PreferenceActions disabled={!ready||selected.length===0} onNext={()=>router.push(`${prefix}/2`)} previousHref={`${prefix}/intro`}>다음</PreferenceActions>
+   <PreferenceActions disabled={!ready||selected.length===0} onNext={()=>router.push(`${prefix}/2`)} previousHref="/analysis/result">다음</PreferenceActions>
   </main>;
  }
  if(kind==='preferences'&&index>=1&&index<=2){
   const selectOption=(option:string)=>{
-   if(!selected.includes(option)&&selected.length>=question.max&&question.max>1){setLimitAttempt(attempt=>attempt+1);setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}
+   if(option!=='특별한 고민 없음'&&!selected.includes(option)&&selected.length>=question.max&&question.max>1&&!(selected.length===1&&selected[0]==='특별한 고민 없음')){setLimitAttempt(attempt=>attempt+1);setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`);return;}
    setMessage('');
    update(s=>{
-    let next=toggleChoice(s.preferences[question.key]||[],option,question.max);
+    let next=option==='특별한 고민 없음'?(selected.includes(option)?[]:['특별한 고민 없음']):toggleChoice((s.preferences[question.key]||[]).filter(value=>question.options.includes(value)&&value!=='특별한 고민 없음'),option,question.max);
     if(option==='특별한 고민 없음')next=['특별한 고민 없음'];
     else next=next.filter(value=>value!=='특별한 고민 없음');
     return {...s,preferences:{...s.preferences,[question.key]:next}};
@@ -57,9 +57,9 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
     router.push('/preferences/complete');
    }else router.push(`${prefix}/${index+2}`);
   };
-  const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:question.title;
+  const title=index===2?<>어떤 분위기의 스타일을<br/>좋아하나요?</>:index===1?<>평소 헤어스타일을 고를 때,<br/>어떤 점이 고민되나요?</>:question.title;
   const description=index===1?'최대 3개까지 선택 가능해요':index===2?'마음에 드는 분위기를 최대 2개 선택해주세요.':null;
-  const renderedOptions=question.options.map(option=>({label:option,value:option}));
+  const renderedOptions=question.options.filter(option=>option!=='특별한 고민 없음').map(option=>({label:option,value:option}));
   return <main id="main" className={`preference-survey-step preference-survey-step--${index+1}`} data-figma-node={index===1?'939:8528':'939:8597'}>
    <header className="preference-survey-step__header hairus-page-header">
     <button type="button" className="preference-survey-step__back hairus-header-back" aria-label="이전 화면" onClick={()=>router.push(`${prefix}/${index}`)}>
@@ -78,8 +78,9 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
      <span><img src={asset(images[itemIndex])} alt=""/></span>
      <strong>{label}</strong>
     </button>)}
-   </div>:<div className="preference-survey-step__chips chip-options" role="group" aria-label={question.title}>
+   </div>:<div className="preference-survey-step__chips chip-options preference-concerns-grid" role="group" aria-label={question.title}>
     {renderedOptions.map(({label,value})=><button type="button" disabled={!ready} key={value} aria-pressed={selected.includes(value)} onClick={()=>selectOption(value)}>{label}</button>)}
+    {index===1&&<button type="button" className="preference-concerns-none" aria-pressed={selected.includes('특별한 고민 없음')} disabled={!ready} onClick={()=>selectOption('특별한 고민 없음')}>특별한 고민 없음</button>}
    </div>}
    <p role="status" className="preference-survey-step__validation">{message&&<span key={limitAttempt}>{message}<span className="sr-only"> (초과 선택 {limitAttempt}회)</span></span>}</p>
    <PreferenceActions disabled={!ready||selected.length===0} onNext={goNext} previousHref={`${prefix}/${index}`}>{index===questions.length-1?'결과보기':'다음'}</PreferenceActions>

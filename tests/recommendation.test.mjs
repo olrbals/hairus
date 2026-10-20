@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import {provinces} from '../src/lib/prototype/regions.ts';
 import {matchQuestions} from '../src/lib/prototype/catalog.ts';
 import {recommend,toggleChoice} from '../src/lib/prototype/logic.ts';
-test('Recommendation uses four questions without the regional selection screen',()=>{
- assert.deepEqual(matchQuestions.map(q=>q.key),['gender','strength','consult','avoid']);assert.equal(provinces.length,18);
+test('Recommendation uses three questions and goes directly to the designer',()=>{
+ assert.deepEqual(matchQuestions.map(q=>q.key),['gender','strength','consult']);assert.equal(provinces.length,18);
  assert.equal(provinces[0],'전체');assert.equal(provinces.at(-1),'제주특별자치도');
  assert.deepEqual(toggleChoice(['서울특별시'],'부산광역시',1),['부산광역시']);
- assert.deepEqual(matchQuestions.map(q=>q.max),[1,1,3,3]);
+ assert.deepEqual(matchQuestions.map(q=>q.max),[1,1,3]);
  assert.deepEqual(matchQuestions.find(q=>q.key==='consult')?.options,["친절한","솔직한","꼼꼼한","다양한 스타일 추천","취향 존중","충분한 대화","핵심만 빠르게","추가 시술 권유 없는","상담 필요 없음"]);
  assert.equal(new Set(matchQuestions.find(q=>q.key==='consult')?.options).size,9);
 });

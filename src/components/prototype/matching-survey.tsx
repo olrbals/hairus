@@ -15,15 +15,6 @@ const titles = [
   '선호하는 디자이너의 성별을\n알려주세요',
   '어떤 강점을 가진 디자이너를\n만나고 싶나요?',
   '어떤 방식의 상담을\n선호하시나요?',
-  '불편했던 경험을 선택해주세요',
-];
-const avoidCards = [
- ['과한 시술 권유','고가 약제 ·\n추가 시술 권유','1bf0e.svg'],
- ['긴 대기 시간','예약 지연','e9b6e.svg'],
- ['예상 밖 추가금','기장 추가 ·\n현장 추가금','57952.svg'],
- ['불편한 응대','부담스러운 대화 ·\n무뚝뚝한 분위기','d92ea.svg'],
- ['부족한 설명','주의 사항 · 가격\n설명 부족','5fde7.svg'],
- ['아쉬운 결과','요청과 다른 길이 ·\n컬러','024da.svg'],
 ];
 const descriptions: Record<string, string> = {
   '원하는 스타일 경험': '비슷한 시술 · 스타일 작업을 우선해요',
@@ -43,12 +34,12 @@ export function MatchingSurvey({step}: {step: string}) {
   const selected = question ? (state.matching[question.key] || []).filter(value=>question.options.includes(value)) : [];
   const choose = (option: string) => {
     if (!question) return;
-    if (!selected.includes(option) && selected.length >= question.max && question.max > 1 && !(question.key==='avoid'&&option==='특별한 경험 없음')) {
+    if (!selected.includes(option) && selected.length >= question.max && question.max > 1) {
       setLimitAttempt(attempt=>attempt+1);setMessage(`최대 ${question.max}개까지 선택할 수 있어요.`); return;
     }
     setMessage('');
     update(current => ({...current, matching: {...current.matching,
-      [question.key]: question.key==='avoid'&&option==='특별한 경험 없음'?(current.matching.avoid?.includes(option)?[]:[option]):toggleChoice((current.matching[question.key] || []).filter(value=>question.options.includes(value)&&(question.key!=='avoid'||value!=='특별한 경험 없음')), option, question.max)}}));
+      [question.key]: toggleChoice((current.matching[question.key] || []).filter(value=>question.options.includes(value)), option, question.max)}}));
   };
   if (!intro && !question) return <main id="main" className={css.page}><p>해당 단계를 찾을 수 없어요.</p><Button onClick={() => router.push('/recommendation/intro')}>설문 처음으로</Button></main>;
 
@@ -96,16 +87,15 @@ export function MatchingSurvey({step}: {step: string}) {
     <header className={`${css.header} hairus-page-header`}><button type="button" className="hairus-header-back" aria-label="이전 화면" onClick={() => router.push(index ? `/recommendation/${index}` : '/recommendation/intro')}><HeaderBackIcon/></button></header>
     {!intro && <div className={css.progress} aria-label={`${index + 1} / ${matchQuestions.length}`}>{matchQuestions.map((q, i) => <span key={q.key} aria-current={i === index ? 'step' : undefined}/>)}</div>}
     <section className={css.question}>
-      <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 2 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>최대 3개까지 선택 가능해요</p>}{index === 3 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>선택한 내용을 바탕으로<br/>나와 잘 맞는 디자이너를 찾아드려요.</p>}
+      <h1>{titles[index].split('\n').map((line, i) => <span key={i}>{line}</span>)}</h1>{index === 2 && <p key={limitAttempt} className={message?'preference-limit-feedback':undefined} data-limit-exceeded={!!message}>최대 3개까지 선택 가능해요</p>}
     </section>
     {!intro && <>
       {index === 0 ? <div className={css.gender}>{question.options.slice(0,2).map((option,i) => <button key={option} disabled={!ready} aria-pressed={selected.includes(option)} className={css.person} onClick={() => choose(option)}><span className={css.portrait}><span className={css.portraitFill}><img src={`/assets/figma/match-survey/${i===0?'female':'male'}.png`} alt=""/></span></span>{option}</button>)}</div>
       : index === 1 ? <div className={css.strengths}>{question.options.map((option,i) => <button key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={() => choose(option)}><img src={`/assets/figma/match-survey/${['experience','consultation','styling'][i]}.png`} alt=""/><span><strong>{option}</strong><small>{descriptions[option]}</small></span></button>)}</div>
-      : index === 3 ? <><div className={css.avoidCards}>{avoidCards.map(([option,description,icon])=><button key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={()=>choose(option)}><img src={asset(icon)} alt=""/><strong>{option}</strong><small>{description}</small></button>)}</div><button className={css.noExperience} disabled={!ready} type="button" aria-pressed={selected.includes('특별한 경험 없음')} onClick={()=>choose('특별한 경험 없음')}>특별한 경험 없음</button></>
       : <div className={css.consultGrid} role="group" aria-label={question.title}>{question.options.map(option=><button type="button" key={option} disabled={!ready} aria-pressed={selected.includes(option)} onClick={()=>choose(option)}>{option}</button>)}</div>}
       <p role="status" className={index>=2?'preference-survey-step__validation':css.validation}>{message&&<span key={limitAttempt}>{message}<span className="sr-only"> (초과 선택 {limitAttempt}회)</span></span>}</p>
     </>}
-    <div className={css.actions}><Button data-final={index===3} disabled={!ready || !selected.length} onClick={() => router.push(index === 3 ? '/recommendation/results' : `/recommendation/${index + 2}`)}>{index === 3 ? '디자이너 추천 받기' : '다음'}</Button></div>
+    <div className={css.actions}><Button data-final={index===2} disabled={!ready || !selected.length} onClick={() => router.push(index === 2 ? '/designers/yoona' : `/recommendation/${index + 2}`)}>{index === 2 ? '디자이너 추천 받기' : '다음'}</Button></div>
 
   </main>;
 }
