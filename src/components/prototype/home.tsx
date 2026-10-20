@@ -87,11 +87,13 @@ export function Home(){
   if(!banner)return;
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const update=()=>{
-   if(reduced){banner.style.setProperty('--match-reveal','1');return;}
+   if(reduced){banner.style.setProperty('--match-reveal','1');banner.style.setProperty('--match-focus','1');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
    const progress=Math.max(0,Math.min(1,(viewport-rect.top)/(viewport*.9)));
-   banner.style.setProperty('--match-reveal',String(.35+.65*progress));
+   const focus=progress<.5?progress*1.2:.6+(progress-.5)*.8;
+   banner.style.setProperty('--match-reveal',String(.7+.3*progress));
+   banner.style.setProperty('--match-focus',String(focus));
   };
   let frame=0;
   const schedule=()=>{
