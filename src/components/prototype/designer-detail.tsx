@@ -74,7 +74,7 @@ export function DesignerPage({id}:{id:string}){
       <h2>{item.name} · {salon?.name||item.location}</h2>
       <div className={styles.tags}>{profileTags.map(tag=><span key={tag}>{tag}</span>)}</div>
       <div className={styles.identity}>
-        <Link href={`/designers/${item.id}/reviews`}>★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</Link>
+        <a href="#reviews">★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</a>
         <p>{introduction}</p>
       </div>
     </section>
@@ -131,7 +131,7 @@ export function DesignerPage({id}:{id:string}){
       </details>)}</div>
     </section>
 
-    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsHref={`/designers/${item.id}/reviews`} variant="refined"/>
+    <ReviewSection data={designerReviews(item.id,item.name)} allReviewsDisabled variant="refined"/>
 
     {salon&&<section id="salon" className={styles.salon} aria-labelledby="salon-title">
       <h2 id="salon-title">THE SALON</h2>

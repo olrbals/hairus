@@ -147,6 +147,3 @@ export function ArvoDesignersPage(){
   </main>;
 }
 
-export function ArvoReviewsPage(){
-  return <main id="main" className={styles.page}><SalonHeader title="아르보 성수 후기" back="/salons/arvo#reviews"/><ReviewSection data={arvoReviews}/><footer className={styles.booking}><Link className={`${styles.bookingLink} primary-cta`} href="/salons/arvo#reviews">매장 상세로 돌아가기</Link></footer></main>;
-}

@@ -117,7 +117,7 @@
 .sectionNav{position:sticky;top:150px;z-index:28;height:68px;padding:0 24px 20px;display:flex;align-items:stretch;justify-content:space-between;background:#fff}
 .sectionNav a{display:grid;place-items:center;min-width:48px;width:auto;padding-inline:4px;font-size:14px;color:#0e0e0e;border-bottom:1px solid transparent;text-align:center;white-space:nowrap}
 .sectionNav a[aria-current=location]{border-color:#0e0e0e;font-weight:600}
-.onePageContent{gap:68px;padding-top:20px;padding-bottom:calc(129px + env(safe-area-inset-bottom))}
+.onePageContent{gap:48px;padding-top:20px;padding-bottom:calc(129px + env(safe-area-inset-bottom))}
 .reservationSection{display:flex;flex-direction:column;gap:20px;scroll-margin-top:242px;min-width:0;outline:none}
 .sectionTitle{display:flex;flex-direction:column;gap:6px}
 .sectionTitle h2{font-family:var(--font-editorial);font-size:36px;font-weight:700;line-height:39px;margin:0;white-space:nowrap}
