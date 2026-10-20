@@ -53,7 +53,7 @@
 .match>.tags{padding-left:0}
 .works{margin-top:24px;padding:24px 24px;background:#0e0e0e;color:#fff}
 .works>div:first-child>p{color:#c7c7c7}
-.works>a{display:block;min-height:44px;margin-top:4px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
+.works>a{display:block;min-height:44px;margin-top:20px;padding:14px 0 12px;text-align:right;font-size:12px;font-weight:500}
 .workGrid{height:346px;display:grid;grid-template-columns:247fr 127fr;gap:8px}
 .workGrid>a>img,.workGrid>div img{display:block;width:100%;height:100%;object-fit:cover}
 .workGrid>a>img{object-position:48% center}
@@ -80,7 +80,7 @@
 .serviceBody>a{min-height:44px;font-size:14px;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
 .salon{padding:24px 24px}
-.salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:18px;object-fit:cover}
+.salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:20px;object-fit:cover}
 .salon h3{margin:18px 0 0;font-size:20px;font-weight:500}
 .salon>p{margin-top:6px;color:#616161;font-size:14px}
 .booking{padding:28px 12px 40px}

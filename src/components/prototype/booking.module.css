@@ -122,7 +122,8 @@
 .sectionTitle{display:flex;flex-direction:column;gap:6px}
 .sectionTitle h2{font-family:var(--font-editorial);font-size:36px;font-weight:700;line-height:39px;margin:0;white-space:nowrap}
 .sectionTitle p{font-size:14px;line-height:21px;color:#666}
-.categories{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.serviceChoices{display:flex;flex-direction:column;gap:8px;min-width:0}
+.categories{display:flex;gap:8px;flex-wrap:wrap;margin-top:0}
 /* Category buttons use the shared SelectionChip component and its active state. */
 .services{gap:0;border-top:0}
 .service{min-height:0;padding:18px 0;border:0;border-bottom:1px solid #e5e5e5;border-radius:0;gap:12px}

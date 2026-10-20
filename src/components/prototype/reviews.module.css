@@ -44,4 +44,7 @@
 .refinedReviews .reviewHighlights ul{margin:12px 0 0;gap:16px}
 .refinedReviews .reviewHighlightHeading,
 .refinedReviews .reviewHighlightHeading>span:last-child{font-size:14px}
-.refinedReviews .reviewHighlights+article{margin-top:0;padding-top:0}
+/* First refined review: 8px from highlights, no separator. */
+.refinedReviews .reviewHighlights+article{margin-top:8px;padding-top:0;border-top:0}
+/* All following reviews: 4px closer overall, with divider centered in 18px / 18px. */
+.refinedReviews article+article{margin-top:18px;padding-top:18px}
