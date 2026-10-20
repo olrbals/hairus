@@ -995,3 +995,10 @@
   font-size:clamp(38px,11.1vw,48px);
  }
 }
+
+/* Mirror the Magazine carousel's quiet arrow navigation beneath More to Discover. */
+.home-discover .home-discover-controls{display:flex;align-items:center;justify-content:flex-end;gap:0;min-height:44px}
+.home-discover .home-discover-controls button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#666460;font-size:22px;cursor:pointer;transition:color 180ms ease}
+.home-discover .home-discover-controls button:first-child{justify-content:flex-end}
+.home-discover .home-discover-controls button:last-child{justify-content:flex-start;padding-left:20px}
+.home-discover .home-discover-controls button:hover,.home-discover .home-discover-controls button:focus-visible{color:#20201e}

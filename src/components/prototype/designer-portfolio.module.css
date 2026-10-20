@@ -1,12 +1,13 @@
 .page {background:#fff;color:#20201e;container-type:inline-size}
 /* Match the Figma frame's final 98px of whitespace, scoped to this page only. */
 :global(.mobile-shell):has(> .page) {padding-bottom:calc(98px + env(safe-area-inset-bottom))}
-.header {height:64px;padding:10px 24px;display:flex;align-items:center}
-.sections {display:flex;flex-direction:column;gap:52px}
+.header {height:64px;padding:0 24px;display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center}
+.header>span:nth-child(2){font-size:20px;font-weight:500;text-align:center;color:#222b3a}
+.sections {display:flex;flex-direction:column;gap:0}
 .section {position:relative;display:flex;flex-direction:column;gap:28px;padding:24px 0}
-.section:first-child {padding-top:0;padding-bottom:29px}
+/* All portfolio sections keep 24px top and bottom padding, creating a 48px visual gap. */
 /* Figma uses an outside stroke; it must not add to the Auto Layout height. */
-.section:not(:first-child)::before {content:'';position:absolute;left:0;right:0;top:-.8px;border-top:.8px solid rgba(0,0,0,.3)}
+/* Section divider strokes removed. */
 .section h2 {margin:0 24px;font-family:var(--font-editorial);font-weight:700;font-size:44px;line-height:48px}
 .track {--portfolio-unit:min(1px,calc((100cqw - 48px) / 382));position:relative;margin-left:24px;width:calc(100% - 24px);height:min(460px,calc((100cqw - 48px) * 460 / 382));overflow:hidden;touch-action:pan-y pinch-zoom;cursor:grab;user-select:none;-webkit-user-select:none}
 .track:active {cursor:grabbing}

@@ -13,7 +13,7 @@
 .sectionNav a[aria-current=location]{border-bottom:1px solid #0e0e0e;font-weight:600}
 .page section[id]{scroll-margin-top:64px}
 .salonPage section[id]{scroll-margin-top:112px}
-.sectionHeading h2,.information>h2{font:700 34px/1.3 var(--font-editorial);}
+.sectionHeading h2,.information>h2{font:700 36px/1.3 var(--font-editorial);}
 .sectionHeading p{margin-top:4px;color:#616161;font-size:14px}
 .notice{padding:24px}
 .quickInfo{margin:20px 0 28px;padding:0 20px;display:flex;justify-content:space-between;color:rgba(0,0,0,.7);font-weight:500}
