@@ -19,7 +19,7 @@
 .styleCard>a>img{display:block;width:100%;aspect-ratio:183/251;object-fit:cover}
 .styleCard>a>h2{margin:8px 0 0;font-size:16px;font-weight:500;line-height:1.3;overflow-wrap:anywhere}
 .reasonGroup{display:flex;align-items:center;gap:4px;min-width:0;margin-top:6px}
-.reason{position:relative;display:block;flex:0 1 auto;min-width:0;max-width:100%;padding:2px 12px;border:1px solid #ffffff7a;border-radius:8px;background:#00000014;color:#000c;font-size:8px;font-weight:500;line-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;box-shadow:0 1px 2px #0000000d,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f}
+.reason{position:relative;display:block;flex:0 1 auto;min-width:0;max-width:100%;padding:4px 12px;border:0;border-radius:var(--hairus-chip-radius,32px);background:#20201e;color:#fff;font-size:12px;font-weight:500;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .page :global(.proto-save){display:grid;place-items:center;position:absolute;top:8px;right:8px;width:44px;height:44px;padding:0;border:1px solid rgba(255,255,255,.72);border-radius:50%;background:rgba(255,255,255,.55);color:#20201e;backdrop-filter:blur(18px) saturate(120%);-webkit-backdrop-filter:blur(18px) saturate(120%);box-shadow:0 3px 10px #00000014,inset 0 1px 2px #ffffffe6;font-size:24px;line-height:1}
 .page :global(.proto-save[aria-pressed=true]){color:transparent;font-size:0}
 .list{display:flex;flex-direction:column;gap:32px}
@@ -42,7 +42,7 @@
 .magazines{display:flex;flex-direction:column;gap:36px}
 .magazineCard>a{display:block}
 .magazineCard img{display:block;width:100%;aspect-ratio:382/400;object-fit:cover}
-.magazineCard span{display:block;margin-top:16px;color:#666460;font-size:11px;line-height:1.3;}
+.magazineCard span{display:block;margin-top:16px;color:#666460;font-size:12px;line-height:1.3;}
 .magazineCard h2{margin:8px 0 0;font-family:var(--font-editorial);font-size:32px;font-weight:600;line-height:1.05}
 .empty{display:grid;gap:24px;padding:200px 12px 64px;color:#666460;font-size:14px;line-height:1.5;text-align:center}
 @media(max-width:360px){.content>h1{font-size:48px}.works{gap:8px;padding-inline:0}.works img{width:calc((100% - 16px)/3);height:auto;aspect-ratio:100/133}.identity{gap:12px}.identity h2{font-size:15px}}

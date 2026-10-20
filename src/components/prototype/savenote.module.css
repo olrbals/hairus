@@ -1,7 +1,7 @@
 :global(.bottom-sheet--editor):has(.sheet) :global(.sheet-heading){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .sheet{display:flex;flex-direction:column;gap:24px;padding:4px 0 8px;color:#222b3a}
 .sheet p{margin:0}
-.reasonMore{flex:none;min-width:24px;align-self:stretch;display:grid;place-items:center;border:0;background:transparent;padding:4px 2px;color:#8c8c8c;font-size:11px;font-weight:400;line-height:1.3}
+.reasonMore{flex:none;min-width:24px;align-self:stretch;display:grid;place-items:center;border:0;background:transparent;padding:4px 2px;color:#8c8c8c;font-size:12px;font-weight:400;line-height:1.3}
 .toggleNotice{position:fixed;inset:auto;top:0;left:50%;display:flex;flex-direction:column;align-items:center;gap:3px;width:max-content;max-width:calc(100vw - 48px);margin:0;padding:0;border:0;background:transparent;box-shadow:none;color:#222;font-size:12px;line-height:1.45;text-align:center;pointer-events:none;transform:translateX(-50%);animation:noteNoticeIn .2s ease-out}
 .toggleNotice strong{font-size:12px;font-weight:600;line-height:1.45}
 .toggleNotice span{font-size:12px;color:#222;line-height:1.45}
