@@ -216,11 +216,14 @@ export function BookingComplete({id}:{id:string}){
 
 export function BookingAppointments(){
  const {state,ready}=usePrototype();
- return <BookingPage back="/my" title="예약 내역" historyBack appointmentsPage><div className={`${styles.content} ${styles.appointments}`}>
+ const isEmpty=ready&&state.bookings.length===0;
+ return <BookingPage back="/my" title="예약 내역" historyBack appointmentsPage><div className={`${styles.content} ${styles.appointments}${isEmpty?` ${styles.appointmentsEmptyState}`:''}`}>
  <h1 className={styles.appointmentsTitle}>My Appointments</h1>
  {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
  const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';
  return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{booking.serviceName||(service?bookingServiceName(service):'시술')}</span><span>{(booking.estimatedPrice??service?.price)?.toLocaleString('ko-KR')}원</span></div><Link className={`${styles.primary} primary-cta`} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
- }):<><p>아직 저장한 예약이 없어요.</p><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></>}
- </div></BookingPage>;
+ }):<div className={styles.appointmentsEmpty}><p>아직 저장한 예약이 없어요.</p></div>}
+ </div>
+ {isEmpty&&<footer className={styles.footer}><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></footer>}
+ </BookingPage>;
 }

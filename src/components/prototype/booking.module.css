@@ -99,6 +99,11 @@
 
 .content.appointments{padding-top:0;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
 .appointments .appointmentsTitle{font-family:var(--font-editorial);margin:0 0 20px;font-size:52px;font-weight:600;line-height:.92}
+/* Empty MY reservations: center the message while keeping the shared bottom CTA position. */
+.content.appointmentsEmptyState{min-height:calc(100dvh - 64px);padding-bottom:calc(118px + env(safe-area-inset-bottom))}
+.appointmentsEmpty{display:flex;flex:1;align-items:center;justify-content:center;min-height:0;text-align:center;color:#666460;font-size:14px}
+.appointmentsEmpty p{margin:0}
+.appointmentsPage .footer :global(.primary-cta.primary-cta){height:56px;min-height:56px;padding:0 24px}
 .appointment{border:1px solid #e5e5df;padding:20px;display:flex;flex-direction:column;gap:10px}
 .savedStatus{font-size:12px;color:#777772}
 .appointmentDate{font-size:13px;margin-top:4px}
