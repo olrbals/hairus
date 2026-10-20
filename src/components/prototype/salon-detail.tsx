@@ -105,7 +105,7 @@ export function ArvoSalonPage(){
 
     <section id="designers" className={styles.designers} aria-labelledby="designers-title">
       <div className={styles.sectionHeading}><h2 id="designers-title">DESIGNERS</h2><p>아르보 성수의 디자이너들을 만나보세요.</p></div>
-      <div className={styles.featuredDesigners}>{['yoona','sohee'].map(id=>{const person=findArvoDesigner(id)!;return <Link className={styles.featuredDesigner} key={id} href={`/designers/${id}`}><img src={person.image} alt={`${person.name} ${person.title}`} width="64" height="88"/><span><strong>{person.name} {person.title}</strong><small>{id==='yoona'?'레이어드컷 · 샌드펌 전문':'테슬컷 · 그레이스펌 전문'}</small></span></Link>;})}</div>
+      <div className={styles.featuredDesigners}>{['yoona','sohee'].map(id=>{const person=findArvoDesigner(id)!;return <Link className={styles.featuredDesigner} key={id} href={`/designers/${id}`}><img src={person.image} alt={`${person.name} ${person.title}`} width="60" height="84"/><span><strong>{person.name} {person.title}</strong><small>{id==='yoona'?'레이어드컷 · 샌드펌 전문':'테슬컷 · 그레이스펌 전문'}</small></span></Link>;})}</div>
       <Link className={styles.allDesigners} href="/salons/arvo/designers">전체 디자이너 6명 · 전문분야 보기 <img src={localAsset('arrow-right.svg')} alt="" width="16" height="16"/></Link>
     </section>
 

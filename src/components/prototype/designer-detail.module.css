@@ -46,7 +46,7 @@
 .matchImages figure{min-width:0;margin:0;display:flex;flex-direction:column}
 .matchImages figcaption{margin-bottom:8px;color:#0e0e0e;font-size:12px;font-weight:500;line-height:18px;white-space:nowrap}
 .matchImages img{width:100%;height:276px;display:block;object-fit:cover;border:1px solid #e6ebf5}
-.matchPager{height:44px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px}
+.matchPager{height:44px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px}
 .matchPager button{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:inherit;font:inherit;font-size:16px;cursor:pointer}
 .matchPager button:focus-visible{outline:2px solid currentColor;outline-offset:-4px}
 .matchPager>span{min-width:42px;text-align:center}
@@ -65,19 +65,19 @@
 .serviceList{margin-top:20px}
 .service{border-top:.8px solid rgba(0,0,0,.3);padding:12px 0}
 .service:first-child{border-top:0;padding-top:0}
-.service summary{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;font-size:14px;font-weight:500;cursor:pointer}
+.service summary{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;font-size:16px;font-weight:500;cursor:pointer}
 .service summary::-webkit-details-marker{display:none}
 .service summary>span:last-child{display:flex;align-items:center;gap:16px;white-space:nowrap}
 .service summary i::before{content:'+';font-style:normal}
 .service[open] summary i::before{content:'−'}
-.serviceBody>p{margin:0 0 20px;color:#616161;font-size:12px}
+.serviceBody>p{margin:0 0 16px;color:#616161;font-size:14px}
 .serviceBody dl{margin:0 0 20px;padding-left:4px;display:flex;flex-direction:column;gap:8px}
 .serviceBody dl div{display:flex;align-items:center}
 .serviceBody dt{width:92px;display:flex;align-items:center;gap:8px;color:#666460}
 .serviceBody dt img,.serviceBody dt>span{width:16px;height:16px;display:grid;place-items:center;font-size:16px}
 .serviceBody dd{margin:0;font-weight:500}
 .serviceBody>a,.booking>a{display:flex;align-items:center;justify-content:center;border-radius:4px;background:#000;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 1px 2px rgba(255,255,255,.65),inset 0 -1px 3px rgba(0,0,0,.06)}
-.serviceBody>a{min-height:44px;font-size:12px}
+.serviceBody>a{min-height:44px;font-size:14px;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .textLink{display:block;min-height:44px;padding:13px 0;text-align:right;font-size:14px;font-weight:500}
 .salon{padding:24px 24px}
 .salon>img{display:block;width:100%;aspect-ratio:16/9;margin-top:18px;object-fit:cover}

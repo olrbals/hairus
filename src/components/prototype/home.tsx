@@ -9,7 +9,7 @@ import {
   homeDiscoverStyles,
 } from '@/lib/prototype/catalog';
 
-import {Action,Card} from './shared';
+import {Card} from './shared';
 import {MagazineCarousel} from './magazine-carousel';
 import {HomePopup} from './home-popup';
 import {usePrototype} from './store';
@@ -72,6 +72,7 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
   <SectionHeading
     title="More to Discover"
     description="몰랐던 나의 취향을 발견하다"
+    action={<Link className="view-link" href="/explore">View all ↗</Link>}
   />
 
   <div
@@ -129,10 +130,7 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
     ))}
   </div>
 
-  <Action secondary href="/explore">
-    Explore all styles →
-  </Action>
-</section>
+ </section>
 
   <section className="home-section home-magazine"><SectionHeading title="Magazine" description="당신의 스타일링을 위한 헤어 가이드" action={<Link className="view-link" href="/magazine">View all ↗</Link>}/>
 
