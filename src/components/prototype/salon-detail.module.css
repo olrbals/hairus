@@ -85,7 +85,7 @@
 .designerName small{font-size:12px;color:rgba(14,14,14,.5);white-space:nowrap}
 .specialty{display:block;margin-top:4px;font-size:12px;color:rgba(0,0,0,.7)}
 .reserveDesigner{display:flex;flex:none;align-items:center;justify-content:center;min-width:75px;min-height:34px;padding:0;border:0;border-radius:0;background:#000;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-size:12px;color:#fff}
-.reserveDesigner:disabled{opacity:1;background:#eee;color:#999}
+.reserveDesigner:disabled{opacity:1;background:#000;color:#fff;cursor:default}
 .designerGroup{margin-top:24px}
 .designerGroup h2{margin:0 0 12px;font-size:20px;font-weight:600;line-height:1.3;}
 .designerGroup>div{display:grid;gap:12px}

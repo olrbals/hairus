@@ -21,8 +21,8 @@ const stickyHeight=64+86+68;
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
-function BookingPage({back,children,title='예약하기',actions,confirmed=false,appointmentsPage=false}:{back:string;children:ReactNode;title?:string;actions?:ReactNode;confirmed?:boolean;appointmentsPage?:boolean}){
-  return <main id="main" className={`${styles.page}${confirmed?` ${styles.confirmedPage}`:""}${appointmentsPage?` ${styles.appointmentsPage}`:""}`}>
+function BookingPage({back,children,title='예약하기',actions,confirmed=false}:{back:string;children:ReactNode;title?:string;actions?:ReactNode;confirmed?:boolean}){
+  return <main id="main" className={`${styles.page}${confirmed?` ${styles.confirmedPage}`:""}`}>
     <header className={`${styles.header} hairus-page-header`}><BackLink className="hairus-header-back" href={back} aria-label="뒤로 가기"><HeaderBackIcon/></BackLink><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
     {children}
   </main>;
@@ -204,26 +204,12 @@ export function BookingSummary({draft,editPrefix}:{draft:BookingDraft;editPrefix
 export function BookingComplete({id}:{id:string}){
   const {state,ready}=usePrototype();
   const booking=state.bookings.find(booking=>booking.id===id);
-  return <BookingPage title="예약 완료" back="/my/reservations" confirmed><div className={`${styles.content} ${styles.complete}`}>
+  return <BookingPage title="예약 완료" back="/my" confirmed><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
-      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
+      <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 MY에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>
       <div className={styles.visitGuide}><h2>방문 전 확인해 주세요</h2><p>최종 시술 금액은 상담 후 결정됩니다.</p></div>
-      <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my">MY 예약 내역 보기</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
-    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/my">MY 예약 내역 보기</Link></>}
+      <div className={styles.completeActions}><Link className={`${styles.primary} primary-cta`} href="/my">MY로 이동</Link><Link className={styles.homeLink} href="/home">홈으로 돌아가기</Link></div>
+    </>:<><h1>저장된 예약을 찾을 수 없어요.</h1><Link className={`${styles.primary} primary-cta`} href="/my">MY로 이동</Link></>}
   </div></BookingPage>;
-}
-
-export function BookingAppointments(){
- const {state,ready}=usePrototype();
- const isEmpty=ready&&state.bookings.length===0;
- return <BookingPage back="/my" title="예약 내역" appointmentsPage><div className={`${styles.content} ${styles.appointments}${isEmpty?` ${styles.appointmentsEmptyState}`:''}`}>
- <h1 className={styles.appointmentsTitle}>My Appointments</h1>
- {!ready?<p role="status">불러오는 중이에요.</p>:state.bookings.length?state.bookings.map(booking=>{
- const designer=designers.find(person=>person.id===booking.designerId);const service=services.find(service=>service.id===booking.serviceId);const salon=salons.find(salon=>salon.id===designer?.salonId)?.name||'';
- return <article className={styles.appointment} key={booking.id}><p className={styles.savedStatus}>저장 완료</p><p className={styles.appointmentDate}>{bookingDateLabel(booking.date)} · {booking.time}</p><h2>{designer?.name} 디자이너</h2><p className={styles.appointmentSalon}>{salon}</p><div className={styles.appointmentService}><span>{booking.serviceName||(service?bookingServiceName(service):'시술')}</span><span>{(booking.estimatedPrice??service?.price)?.toLocaleString('ko-KR')}원</span></div><Link className={`${styles.primary} primary-cta`} href={`/reservations/${booking.id}`}>상담 노트 및 상세 보기</Link></article>;
- }):<div className={styles.appointmentsEmpty}><p>아직 저장한 예약이 없어요.</p></div>}
- </div>
- {isEmpty&&<footer className={styles.footer}><Link className={`${styles.primary} primary-cta`} href="/explore?category=designer">디자이너 찾아보기</Link></footer>}
- </BookingPage>;
 }

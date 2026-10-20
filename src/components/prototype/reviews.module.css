@@ -34,17 +34,18 @@
 .demoLabel{margin-top:8px;color:#616161;font-size:12px;line-height:1.5}
 @media(max-width:360px){.reviews{padding-inline:18px}}
 
-/* Opt-in for salon and designer details; standalone review-list pages stay unchanged. */
+/* Designer and salon details: preserve the existing review content while giving each group breathing room. */
+.refinedReviews{padding-top:32px;padding-bottom:40px}
+.refinedReviews .rating{margin-top:30px;column-gap:22px}
 .refinedReviews .ratingMeta{margin-top:12px}
 .refinedReviews .ratingScore>span{font-size:28px}
-
-/* Refined reviews shared by designer and salon detail pages. */
-.refinedReviews .reviewHighlights{margin-top:16px}
+.refinedReviews .reviewHighlights{margin-top:36px}
 .refinedReviews .reviewHighlights h3{font-size:16px}
-.refinedReviews .reviewHighlights ul{margin:12px 0 0;gap:16px}
+.refinedReviews .reviewHighlights ul{margin:20px 0 0;gap:22px}
 .refinedReviews .reviewHighlightHeading,
 .refinedReviews .reviewHighlightHeading>span:last-child{font-size:14px}
-/* First refined review: 8px from highlights, no separator. */
-.refinedReviews .reviewHighlights+article{margin-top:16px;padding-top:0;border-top:0}
-/* All following reviews: 4px closer overall, with divider centered in 18px / 18px. */
-.refinedReviews article+article{margin-top:18px;padding-top:18px}
+.refinedReviews .reviewHighlights+article{margin-top:40px;padding-top:26px;border-top:1px solid #e0e0e0}
+.refinedReviews article+article{margin-top:28px;padding-top:24px}
+.refinedReviews article>small{margin-top:12px}
+.refinedReviews article>p{margin-top:14px;line-height:1.65}
+.refinedReviews .textLink{margin-top:12px}

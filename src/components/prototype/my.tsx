@@ -8,7 +8,6 @@ import {useNickname} from '@/lib/use-nickname';
 import {BottomNav} from '@/components/bottom-nav';
 import {usePrototype} from './store';
 import {Screen,Action,Card,DemoNotice} from './shared';
-import {BookingAppointments} from './booking';
 
 const myAsset=(name:string)=>`/assets/figma/my/${name}`;
 
@@ -32,14 +31,11 @@ export function My({view}:{view?:string}){
   setProfile(savedProfile?effectiveProfile(savedProfile):null);
  },[]);
 
- if(view==='reservations')return <BookingAppointments/>;
-
  if(view==='recent')return <Screen title="Recently Viewed" back="/my">{!state.recent.length?<p>최근 조회한 콘텐츠가 없어요.</p>:state.recent.map(key=>{const [kind,id]=key.split(':');if(kind==='article'){const article=[...articles,...events].find(a=>a.id===id);return article?<Link key={key} className="list-link" href={`/articles/${id}`}>{article.title} ↗</Link>:null;}if(kind==='focus')return <Link key={key} className="list-link" href="/in-focus/soft-bob">IN FOCUS · SOFT EXPRESSION ↗</Link>;const item=findItem(kind as Kind,id);return item?<Card key={key} item={item}/>:null;})}</Screen>;
 
  if(view==='settings')return <Screen title="Settings" back="/my"><h2>알림</h2><label className="list-link">데모 알림 설정<input style={{width:24}} type="checkbox" checked={state.notifications} onChange={e=>update(s=>({...s,notifications:e.target.checked}))}/></label><label className="list-link">저장 시 SAVENOTE 자동 표시<input style={{width:24}} type="checkbox" disabled={!ready} checked={state.saveNoteEnabled!==false} onChange={e=>update(s=>({...s,saveNoteEnabled:e.target.checked}))}/></label><DemoNotice>설정만 저장되며 실제 푸시 알림은 전송되지 않아요.</DemoNotice><h2>결제 수단</h2><p>프로토타입에서는 카드 등록이나 결제를 지원하지 않아요.</p><h2>데이터 보관</h2><p>프로필, 취향, 저장 메모와 예약은 이 브라우저에 보관됩니다. 촬영 사진은 영구 저장하거나 서버로 전송하지 않아요.</p><Action secondary href="/onboarding/1">온보딩 다시 보기</Action></Screen>;
 
- const savedPreferenceTags=Object.values(state.preferences).flat().slice(0,3);
- const preferenceTags=savedPreferenceTags.length?savedPreferenceTags:['웨이브','내추럴 무드','최근 커트'];
+ const preferenceTags=['natural','pure','wave'];
  const booking=[...state.bookings].sort((a,b)=>`${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))[0];
  const profileTitle=profile?[profile.length,profile.cut].filter(Boolean).join(' '):'';
  const profileSubtitle=profile?.texture||'';
@@ -70,7 +66,7 @@ export function My({view}:{view?:string}){
 
   <section className="my-menu-section" aria-labelledby="my-activity">
    <div className="my-menu-title"><h2 id="my-activity">MY ACTIVITY</h2><p>나의 활동</p></div>
-   <Link className="my-menu-row" href="/my/reservations"><span>예약 내역</span><Arrow name="row-chevron.svg"/></Link>
+   <div className="my-menu-row"><span>예약 내역</span><Arrow name="row-chevron.svg"/></div>
    <div className="my-menu-row"><span>최근 조회한 콘텐츠</span><Arrow name="row-chevron.svg"/></div>
   </section>
 
