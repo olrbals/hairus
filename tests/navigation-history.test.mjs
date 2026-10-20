@@ -52,7 +52,7 @@ test('external browser history is NOT an app predecessor; direct-entry fallback 
 test('replace on booking completion preserves origin and does not add a repeatable submission',()=>{
   const f=fixture('/designers/yoona');f.push('/reservation/yoona/service');
   f.router.replace('/reservation/yoona/service?return=review');
-  f.router.replace('/reservations/demo');f.back('/my/reservations');
+  f.router.replace('/reservations/demo');f.back('/my');
   assert.equal(f.current(),'/designers/yoona');assert.equal(f.browser.history.length,2);
   f.browser.history.go(1);assert.equal(f.current(),'/reservations/demo');
 });
