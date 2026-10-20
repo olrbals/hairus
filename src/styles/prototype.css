@@ -662,14 +662,14 @@
 }
 
 /* 하단 페이지 컨트롤 */
-.home-magazine .banner-controls {
+:is(.home-magazine,.home-discover) .banner-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 44px;
 }
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -683,7 +683,7 @@
   cursor: pointer;
 }
 
-.home-magazine .banner-controls span {
+:is(.home-magazine,.home-discover) .banner-controls span {
   font-family: Pretendard, var(--font-sans), sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -746,12 +746,12 @@
 
 /* HOME — Magazine Arrow Interaction */
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   transition: color 180ms ease;
 }
 
-.home-magazine .banner-controls button:hover,
-.home-magazine .banner-controls button:focus-visible {
+:is(.home-magazine,.home-discover) .banner-controls button:hover,
+:is(.home-magazine,.home-discover) .banner-controls button:focus-visible {
   color: #20201e;
 }
 
@@ -759,26 +759,26 @@
 
 /* HOME — Magazine Minimal Navigation */
 
-.home-magazine .banner-controls {
+:is(.home-magazine,.home-discover) .banner-controls {
   justify-content: flex-end;
   gap: 0;
 }
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   color: #666460;
   transition: color 180ms ease;
 }
 
 
-.home-magazine .banner-controls button {
+:is(.home-magazine,.home-discover) .banner-controls button {
   color: #666460;
   font-size: 12px;
   transition: color 180ms ease;
 }
 
 
-.home-magazine .banner-controls button:hover,
-.home-magazine .banner-controls button:focus-visible {
+:is(.home-magazine,.home-discover) .banner-controls button:hover,
+:is(.home-magazine,.home-discover) .banner-controls button:focus-visible {
   color: #20201e;
 }
 
@@ -786,12 +786,12 @@
 /* HOME — Magazine Arrow Spacing */
 
 /* 왼쪽 화살표를 오른쪽으로 */
-.home-magazine .banner-controls button:first-child {
+:is(.home-magazine,.home-discover) .banner-controls button:first-child {
   justify-content: flex-end;
 }
 
 /* 오른쪽 화살표를 왼쪽으로 */
-.home-magazine .banner-controls button:last-child {
+:is(.home-magazine,.home-discover) .banner-controls button:last-child {
   justify-content: flex-start;
   padding-left: 20px;
 }
@@ -998,9 +998,4 @@
  }
 }
 
-/* Mirror the Magazine carousel's quiet arrow navigation beneath More to Discover. */
-.home-discover .home-discover-controls{display:flex;align-items:center;justify-content:flex-end;gap:0;min-height:44px}
-.home-discover .home-discover-controls button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#666460;font-size:12px;cursor:pointer;transition:color 180ms ease}
-.home-discover .home-discover-controls button:first-child{justify-content:flex-end}
-.home-discover .home-discover-controls button:last-child{justify-content:flex-start;padding-left:20px}
-.home-discover .home-discover-controls button:hover,.home-discover .home-discover-controls button:focus-visible{color:#20201e}
+/* HOME Discover arrows now reuse Magazine's exact banner-controls typography, hit areas and alignment. */

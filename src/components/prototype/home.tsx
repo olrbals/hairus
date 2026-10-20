@@ -130,7 +130,7 @@ export function Home(){const discoverTrack=useRef<HTMLDivElement>(null);const mo
       <Card key={s.id} item={s} linked={['airy','tassel','sand'].includes(s.id)} showSave={false} />
     ))}
   </div>
-  <div className="home-discover-controls" aria-label="More to Discover 카드 이동"><button type="button" aria-label="이전 스타일" onClick={()=>moveDiscover(-1)}>←</button><button type="button" aria-label="다음 스타일" onClick={()=>moveDiscover(1)}>→</button></div>
+  <div className="banner-controls" aria-label="More to Discover 카드 이동"><span className="sr-only">좌우 화살표로 스타일 카드를 이동할 수 있어요.</span><button type="button" aria-label="이전 스타일" onClick={()=>moveDiscover(-1)}>←</button><button type="button" aria-label="다음 스타일" onClick={()=>moveDiscover(1)}>→</button></div>
  </section>
 
   <section className="home-section home-magazine"><SectionHeading title="Magazine" description="당신의 스타일링을 위한 헤어 가이드" action={<Link className="view-link" href="/magazine">View all ↗</Link>}/>
