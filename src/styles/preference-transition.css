@@ -394,9 +394,10 @@
   position:absolute;
   z-index:1;
   top:0;
+  /* 8px card padding with 4px outward offset leaves ~4px right inset. */
   right:-4px;
-  width:140px;
-  height:190px;
+  width:132px;
+  height:180px;
   overflow:hidden;
 }
 .preference-complete__portrait img{
@@ -410,7 +411,7 @@
 .preference-complete__flower{
   position:absolute;
   z-index:2;
-  top:147px;
+  top:135px;
   left:151px;
   width:101px;
   height:67px;
