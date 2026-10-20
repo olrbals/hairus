@@ -90,7 +90,7 @@ export function Home(){
    if(reduced){banner.style.setProperty('--match-reveal','1');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
-   const progress=Math.max(0,Math.min(1,(viewport*.05-rect.top)/(viewport*.4)));
+   const progress=Math.max(0,Math.min(1,(viewport-rect.top)/(viewport*.9)));
    banner.style.setProperty('--match-reveal',String(.12+.88*progress));
   };
   let frame=0;
