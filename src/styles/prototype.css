@@ -846,7 +846,7 @@
 .bottom-sheet--default .explore-filter-group h3{
   margin:0 0 12px;
   color:#20201e;
-  font-size:16px;
+  font-size:18px;
   font-weight:500;
   line-height:1.3;
 }
@@ -858,6 +858,8 @@
   align-items:center;
   gap:20px 12px;
 }
+/* Discover Style / Designer / Salon filters only: keep other SelectionChips unchanged. */
+.bottom-sheet--default .filter-editor-chips button.chip.chip{font-size:16px}
 
 /* Legacy Explore sample: preserve its existing 10px chip-list gap. */
 .hairus-bottom-chip-list{
@@ -998,7 +1000,7 @@
 
 /* Mirror the Magazine carousel's quiet arrow navigation beneath More to Discover. */
 .home-discover .home-discover-controls{display:flex;align-items:center;justify-content:flex-end;gap:0;min-height:44px}
-.home-discover .home-discover-controls button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#666460;font-size:22px;cursor:pointer;transition:color 180ms ease}
+.home-discover .home-discover-controls button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:transparent;color:#666460;font-size:12px;cursor:pointer;transition:color 180ms ease}
 .home-discover .home-discover-controls button:first-child{justify-content:flex-end}
 .home-discover .home-discover-controls button:last-child{justify-content:flex-start;padding-left:20px}
 .home-discover .home-discover-controls button:hover,.home-discover .home-discover-controls button:focus-visible{color:#20201e}
