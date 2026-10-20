@@ -139,5 +139,3 @@ export function ProfileComplete(){
   <div className="preference-actions"><Button onClick={()=>router.push('/home')}>홈으로 가기</Button></div>
  </main>;
 }
-// Figma yourMatch 1107:2934 is implemented in its dedicated screen component.
-export {RecommendationResults} from './recommendation-result';

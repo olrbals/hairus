@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {useNickname} from '@/lib/use-nickname';
 import {Button,HeaderBackIcon} from '@/components/primitives';
-import {asset, matchQuestions} from '@/lib/prototype/catalog';
+import {matchQuestions} from '@/lib/prototype/catalog';
 import {toggleChoice} from '@/lib/prototype/logic';
 import {usePrototype} from './store';
 import {PageHeader} from './page-header';
