@@ -46,8 +46,7 @@ function PreferenceSurvey({kind,step}:{kind:'preferences'|'matching';step:string
    setMessage('');
    update(s=>{
     let next=option==='특별한 고민 없음'?(selected.includes(option)?[]:['특별한 고민 없음']):toggleChoice((s.preferences[question.key]||[]).filter(value=>question.options.includes(value)&&value!=='특별한 고민 없음'),option,question.max);
-    if(option==='특별한 고민 없음')next=['특별한 고민 없음'];
-    else next=next.filter(value=>value!=='특별한 고민 없음');
+    next=next.filter(value=>option==='특별한 고민 없음'||value!=='특별한 고민 없음');
     return {...s,preferences:{...s.preferences,[question.key]:next}};
    });
   };
