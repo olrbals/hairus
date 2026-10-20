@@ -72,7 +72,7 @@ export function Home(){const {state,update,ready}=usePrototype();const [popup,se
   <SectionHeading
     title="More to Discover"
     description="몰랐던 나의 취향을 발견하다"
-    action={<Link className="view-link" href="/explore">Explore More Styles ↗</Link>}
+    action={<Link className="view-link" href="/explore">View all ↗</Link>}
   />
 
   <div

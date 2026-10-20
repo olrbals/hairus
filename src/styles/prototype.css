@@ -473,16 +473,20 @@
   margin-bottom: 0;
 }
 
-/* Same SectionHeading action structure as Magazine's View all.
-   The longer label sits on its own aligned row so it never overlays the mobile title. */
-.home-discover .section-heading .view-link {
-  align-self: flex-end;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.3;
-  color: #20201e;
-  white-space: nowrap;
-  text-decoration: none;
+/* Match Magazine: right-top View all in the section heading. */
+.home-discover .section-heading .view-link{
+  position:absolute;
+  top:4px;
+  right:0;
+  align-self:auto;
+  font-size:16px;
+  font-weight:500;
+  color:#20201e;
+  white-space:nowrap;
+}
+.home-discover .section-heading h2{
+  max-width:calc(100% - 100px);
+  overflow-wrap:normal;
 }
 
 
