@@ -90,8 +90,13 @@ export function Home(){
    if(reduced){banner.style.setProperty('--match-overlay','0');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
-   const progress=Math.max(0,Math.min(1,(viewport-rect.top)/(viewport*.9)));
-   banner.style.setProperty('--match-overlay',String(.95*(1-progress)));
+   // From fully white at entry to fully revealed near the viewport center.
+   // Keep the original independent top/bottom edge gradient untouched.
+   const start=viewport*.9;
+   const end=(viewport-rect.height)/2;
+   const linear=Math.max(0,Math.min(1,(start-rect.top)/Math.max(1,start-end)));
+   const reveal=linear*linear*(3-2*linear);
+   banner.style.setProperty('--match-overlay',String(1-reveal));
   };
   let frame=0;
   const schedule=()=>{
