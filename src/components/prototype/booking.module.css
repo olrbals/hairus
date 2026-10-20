@@ -105,7 +105,7 @@
 .header>:last-child{justify-self:end}
 .page>.designer{position:sticky;top:64px;z-index:29;height:86px;padding:0;margin:0 24px;border:0;background:#fff}
 .page>.designer::before{position:absolute;inset:0 -24px;content:'';background:#fff;z-index:-1}
-.designer img{width:64px;height:86px;border-radius:12px}
+.designer img{width:64px;height:86px;border-radius:0}
 .designer strong{font-size:16px}
 .designer span{color:#666;font-size:12px}
 /* Matches the designer detail W-wbAW_sectionNav appearance (68px with a 20px bottom inset). */
