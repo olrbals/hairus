@@ -23,13 +23,13 @@
 .natural{width:298px;height:159px;position:relative;padding:12px}
 .naturalCopy{width:188px}
 .natural h2{font:600 24px/31px var(--font-editorial);color:#222b3a}
-.naturalCopy>p{margin-top:4px;font-size:8px;line-height:10px;color:rgba(0,0,0,.7)}
+.naturalCopy>p{margin-top:4px;font-size:12px;line-height:1.3;color:rgba(0,0,0,.7)}
 .keywords{display:flex;gap:8px;margin-top:12px}
-.keywords span{font-size:8px;font-weight:500;line-height:10px;padding:4px 12px;border:1px solid rgba(255,255,255,.78);border-radius:12px;background:rgba(255,255,255,.1);color:rgba(0,0,0,.7);box-shadow:0 1px 4px #0000000b,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000001f;white-space:nowrap}
+.keywords span{font-size:12px;font-weight:500;line-height:1.3;padding:4px 12px;border:1px solid rgba(255,255,255,.78);border-radius:12px;background:rgba(255,255,255,.1);color:rgba(0,0,0,.7);box-shadow:0 1px 4px #0000000b,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000001f;white-space:nowrap}
 .naturalImage{position:absolute;right:8px;top:8px;width:100px;height:133px;overflow:hidden}
 .naturalImage img{position:absolute;width:129.55%;height:129.84%;left:-14.39%;top:-13.14%;max-width:none}
 .about{align-self:flex-end;width:283px;height:162px;padding:12px 0 12px 12px;background:#fff}
-.about h3,.hairNote dt,.appointment h3{font-size:10px;font-weight:600;line-height:13px;color:rgba(0,0,0,.8)}
+.about h3,.hairNote dt,.appointment h3{font-size:12px;font-weight:600;line-height:13px;color:rgba(0,0,0,.8)}
 .aboutSummary{margin-top:8px;margin-bottom:12px;font-size:12px;font-weight:500;line-height:16px;color:rgba(0,0,0,.6)}
 .noteRow{display:flex;align-items:center;gap:12px;margin-top:8px}
 .noteRow>p{width:210px;font-size:12px;font-weight:500;line-height:16px;color:rgba(0,0,0,.6)}
@@ -50,10 +50,10 @@
 .hairNote dd{font-size:12px;font-weight:500;line-height:16px;color:rgba(0,0,0,.65);margin:6px 0 0}
 .appointment{position:absolute;right:0;top:214px;width:204px;padding:16px;background:#fff}
 .designer{font-size:14px;line-height:18px;font-weight:500;margin-top:12px}
-.salon{font-size:10px;line-height:13px;color:rgba(0,0,0,.6);margin-top:4px}
+.salon{font-size:12px;line-height:13px;color:rgba(0,0,0,.6);margin-top:4px}
 .date{font-size:12px;line-height:16px;margin-top:12px}
 .date span{margin-left:8px;color:rgba(0,0,0,.6)}
-.ready{border-top:1px solid rgba(0,0,0,.08);padding-top:8px;margin-top:12px;font-size:10px;line-height:13px;color:rgba(0,0,0,.5)}
+.ready{border-top:1px solid rgba(0,0,0,.08);padding-top:8px;margin-top:12px;font-size:12px;line-height:13px;color:rgba(0,0,0,.5)}
 @media(max-width:389px){.copy h1{font-size:36px}}
 
 /* Onboarding keyword labels follow the same pill radius. */

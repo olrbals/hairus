@@ -3,7 +3,7 @@
 :global(.mobile-shell):has(> .page){padding-bottom:0}
 .content{padding:0 24px}
 .heading{margin-bottom:28px}
-.heading>p{font-family:'Magazine Noto Sans KR',var(--font-sans);font-size:10px;font-weight:500;line-height:16px;letter-spacing:2px;color:#666460}
+.heading>p{font-family:'Magazine Noto Sans KR',var(--font-sans);font-size:12px;font-weight:500;line-height:16px;letter-spacing:2px;color:#666460}
 .heading h1{font-family:var(--font-editorial);font-size:60px;font-weight:400;line-height:1.3;letter-spacing:-2px}
 .stories{display:flex;flex-direction:column;gap:52px}
 .cover{display:flex;flex-direction:column;gap:16px}
@@ -17,7 +17,7 @@
 .gridStory{min-width:0;display:flex;flex-direction:column;gap:12px}
 .gridImage{position:relative;aspect-ratio:188/250;overflow:hidden}
 .gridImage img{display:block;width:100%;height:100%;object-fit:cover}
-.gridStory .volume{font-size:10px}
+.gridStory .volume{font-size:12px}
 .gridStory h2{margin-top:4px;font-size:16px;font-weight:600}
 .colorImage img{position:absolute;max-width:none;width:142%;height:142.2%;left:-28.33%;top:-23.64%}
 .feature{border-top:.8px solid rgba(0,0,0,.3);padding-top:24px;display:flex;gap:12px;align-items:center}
