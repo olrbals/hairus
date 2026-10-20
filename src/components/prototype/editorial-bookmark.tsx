@@ -52,7 +52,7 @@ function EditorialSaveControl({item,buttonClassName}:{item:Editorial;buttonClass
   const {bookmarks,ready,save,remove,warning}=useEditorialBookmarks();
   const saved=bookmarks.find(entry=>entry.kind===item.kind&&entry.id===item.id);
   return <>
-    <SaveNoteControl name={item.title} title="이 콘텐츠, 왜 저장했나요?" savedImage={item.image} displayName={item.title} itemInfo={item.label}
+    <SaveNoteControl name={item.title} title="이 콘텐츠, 왜 저장하나요?" savedImage={item.image} displayName={item.title} itemInfo={item.label} skipSaveNote
       options={['나중에 읽기','스타일링 참고','상담할 때 보여주기','케어 루틴 참고']} saved={saved} ready={ready} buttonClassName={buttonClassName}
       onSave={draft=>save(item,draft)} onRemove={()=>remove(item)}/>
     {warning&&<span className={css.warning} role="status">{warning}</span>}

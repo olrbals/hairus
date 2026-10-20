@@ -13,12 +13,12 @@ type Props = {
  name:string; title:string; savedImage:string; displayName:string; itemInfo?:string;
  options:string[]; saved?:Partial<SaveNoteDraft>; ready:boolean;
  onSave:(draft:SaveNoteDraft)=>void; onRemove:()=>void;
- buttonClassName?:string; reasonClassName?:string; reasonGroupClassName?:string;
+ buttonClassName?:string; reasonClassName?:string; reasonGroupClassName?:string; skipSaveNote?:boolean;
 };
 
 // Both catalog saves and editorial bookmarks use the same SaveNote toggle.
 // When disabled, saving is immediate with an empty note and no bottom sheet.
-export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,options,saved,ready,onSave,onRemove,buttonClassName='proto-save',reasonClassName,reasonGroupClassName}:Props){
+export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,options,saved,ready,onSave,onRemove,buttonClassName='proto-save',reasonClassName,reasonGroupClassName,skipSaveNote=false}:Props){
  const {state,update}=usePrototype();
  const saveNoteEnabled=state.saveNoteEnabled!==false;
  const [open,setOpen]=useState(false);
@@ -49,10 +49,10 @@ export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,opti
   };
  },[showOffNotice]);
  const save=()=>{onSave({reasons,note});setOpen(false);};
- const edit=()=>{if(!saveNoteEnabled)return;setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);};
+ const edit=()=>{if(skipSaveNote||!saveNoteEnabled)return;setReasons(saved?.reasons||[]);setNote(saved?.note||'');setShowOffNotice(false);setOpen(true);};
  const preview=saved?saveNotePreview({reasons:saved.reasons||[],note:saved.note||''}):{visible:[],hiddenCount:0};
  return <>
-  <button type="button" disabled={!ready} className={buttonClassName} aria-label={`${name} ${saved?'저장 해제':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(saved){onRemove();setOpen(false);}else if(!saveNoteEnabled){onSave({reasons:[],note:''});setOpen(false);}else edit();}}>
+  <button type="button" disabled={!ready} className={buttonClassName} aria-label={`${name} ${saved?'저장 해제':'저장하기'}`} aria-pressed={!!saved} onClick={()=>{if(saved){onRemove();setOpen(false);}else if(skipSaveNote||!saveNoteEnabled){onSave({reasons:[],note:''});setOpen(false);}else edit();}}>
    <SaveHeart saved={!!saved}/>
   </button>
   {reasonClassName&&preview.visible.length>0&&<div className={reasonGroupClassName}>
@@ -63,14 +63,18 @@ export function SaveNoteControl({name,title,savedImage,displayName,itemInfo,opti
    {showOffNotice&&<div ref={offNoticeRef} popover="manual" className={savenote.toggleNotice} role="status" aria-live="polite"><strong>OFF</strong><span>MY → 알림에서 다시 설정할 수 있어요.</span></div>}
    <div className={savenote.sheet}>
     <div className={savenote.heading}>
-     <div><h3>{title}</h3><p>나중에 다시 볼 나만의 이유를 남겨보세요.</p></div>
+     <div><h3>{title}</h3></div>
      <GlassToggle checked={saveNoteEnabled} label="저장할 때 SAVENOTE 자동 열기" onChange={enabled=>{setShowOffNotice(!enabled);update(s=>({...s,saveNoteEnabled:enabled}));}}/>
     </div>
+    <ul className={savenote.featureGuide} aria-label="SaveNote 기능 안내">
+     <li>원할 때 끄거나 켤 수 있어요</li>
+     <li>저장 이유를 나중에 확인해요</li>
+     <li>직접 적을 수도 있어요</li>
+    </ul>
     <div className={savenote.savedItem}><img src={savedImage} alt="" /><div className={savenote.savedInfo}><strong>{displayName}</strong>{itemInfo&&<span>{itemInfo}</span>}</div></div>
     <div className={savenote.form}>
-     <p className={savenote.intro}>간편하게 선택하거나 직접 적어보세요.</p>
      <div className={savenote.options}>{options.map(option=><SelectionChip key={option} aria-pressed={reasons.includes(option)} onClick={()=>setReasons(current=>current.includes(option)?current.filter(r=>r!==option):[...current,option])}>{option}</SelectionChip>)}</div>
-     <textarea className={savenote.note} rows={1} aria-label="나만의 메모" placeholder="직접 적어보세요." value={note} maxLength={500} onChange={e=>setNote(e.target.value)}/>
+     <input type="text" className={savenote.note} aria-label="나만의 메모 (10자 이내)" placeholder="직접 적어보세요 (10자 이내)" value={note} maxLength={10} onChange={e=>setNote(e.target.value)} />
     </div>
     <button type="button" className={`${savenote.apply} primary-cta`} onClick={save}>적용하기</button>
     {saved&&<button type="button" className={savenote.remove} onClick={()=>{onRemove();setOpen(false);}}>저장 해제</button>}

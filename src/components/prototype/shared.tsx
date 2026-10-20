@@ -28,7 +28,7 @@ export function SaveButton({item,reasonClassName,reasonGroupClassName}:{item:Ite
    :[salons.find(salon=>salon.id===item.salonId)?.name,item.location].filter(Boolean).join(' · ')
   :undefined;
  const savedImage=item.kind==='designer'&&item.id==='sohee'?designerDetails.sohee.avatar:item.image;
- const title=item.kind==='style'?'이 스타일, 왜 저장했나요?':item.kind==='designer'?'이 디자이너, 왜 저장했나요?':'이 헤어샵, 왜 저장했나요?';
+ const title=item.kind==='style'?'이 스타일, 왜 저장하나요?':item.kind==='designer'?'이 디자이너, 왜 저장하나요?':'이 헤어샵, 왜 저장하나요?';
  return <SaveNoteControl name={item.name} title={title} savedImage={savedImage} displayName={displayName} itemInfo={itemInfo} options={options} saved={saved} ready={ready} reasonClassName={reasonClassName} reasonGroupClassName={reasonGroupClassName}
   onSave={draft=>update(s=>{const current=s.saved.find(i=>i.kind===item.kind&&i.id===item.id);const entry={...draft,id:item.id,kind:item.kind,savedAt:current?.savedAt||new Date().toISOString()};return {...s,saved:current?s.saved.map(i=>i.kind===item.kind&&i.id===item.id?entry:i):[...s.saved,entry]};})}
   onRemove={()=>update(s=>({...s,saved:s.saved.filter(i=>i.kind!==item.kind||i.id!==item.id)}))}/>;
