@@ -859,7 +859,7 @@
   gap:20px 12px;
 }
 /* Discover Style / Designer / Salon filters only: keep other SelectionChips unchanged. */
-.bottom-sheet--default .filter-editor-chips button.chip.chip{font-size:16px}
+.bottom-sheet--default .explore-filter-group .filter-editor-chips button{font-size:16px}
 
 /* Legacy Explore sample: preserve its existing 10px chip-list gap. */
 .hairus-bottom-chip-list{
