@@ -89,14 +89,16 @@
 @media(prefers-reduced-motion:no-preference){
  .slidePage:not(.slideOut):not(.slideIncoming) .profileCard{animation:onboardProfileAppear 470ms cubic-bezier(.22,.7,.2,1) 90ms both}
  .slidePage:not(.slideOut):not(.slideIncoming) .recommendedStyles{animation:onboardStylesAppear 500ms cubic-bezier(.22,.7,.2,1) 385ms both}
- .slidePage:not(.slideOut):not(.slideIncoming) .bestMatch{animation:onboardMatchFocus 500ms cubic-bezier(.22,.7,.2,1) 220ms both}
- .slidePage:not(.slideOut):not(.slideIncoming) .matchLabel{animation:onboardMatchBadge 320ms ease-out 620ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .designerPreview{animation:onboardDesignerGlide 2400ms cubic-bezier(.18,.68,.2,1) 120ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .bestMatch{animation:onboardMatchFocus 420ms ease-out 2060ms both}
+ .slidePage:not(.slideOut):not(.slideIncoming) .matchLabel{animation:onboardMatchBadge 360ms ease-out 2340ms both}
  .slidePage:not(.slideOut):not(.slideIncoming) .hairNote{animation:onboardNoteAppear 500ms cubic-bezier(.22,.7,.2,1) 100ms both}
  .slidePage:not(.slideOut):not(.slideIncoming) .appointment{animation:onboardAppointmentAppear 450ms cubic-bezier(.22,.7,.2,1) 480ms both}
 }
 @keyframes onboardProfileAppear{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes onboardStylesAppear{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
-@keyframes onboardMatchFocus{from{opacity:.68;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes onboardDesignerGlide{from{transform:translateY(62px)}to{transform:translateY(0)}}
+@keyframes onboardMatchFocus{from{opacity:.68;transform:scale(.98)}to{opacity:1;transform:none}}
 @keyframes onboardMatchBadge{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 @keyframes onboardNoteAppear{from{opacity:0;transform:translateY(13px) scale(.985)}to{opacity:1;transform:none}}
 @keyframes onboardAppointmentAppear{from{opacity:0;transform:translate(12px,16px) scale(.96)}to{opacity:1;transform:none}}

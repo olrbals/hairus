@@ -56,19 +56,6 @@ export function Home(){
  const seatIntroRef=useRef<HTMLDivElement>(null);
  const focusCardRef=useRef<HTMLDivElement>(null);
  useEffect(()=>{
-  const focus=focusCardRef.current;
-  if(!focus||typeof IntersectionObserver==='undefined'||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  focus.classList.add('home-motion-await');
-  const observer=new IntersectionObserver(entries=>{
-   if(entries.some(entry=>entry.isIntersecting)){
-    focus.classList.add('home-motion-visible');
-    observer.disconnect();
-   }
-  },{threshold:.35});
-  observer.observe(focus);
-  return ()=>{observer.disconnect();focus.classList.remove('home-motion-await','home-motion-visible');};
- },[]);
- useEffect(()=>{
   const intro=seatIntroRef.current;
   if(!intro)return;
   const lines=Array.from(intro.querySelectorAll<HTMLElement>('.home-seat-lines > span'));
@@ -92,7 +79,31 @@ export function Home(){
   window.addEventListener('resize',schedule);
   return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);lines.forEach(line=>line.style.removeProperty('opacity'));};
  },[]);
- const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{if(ready&&today&&state.popupDay!==today){try{if(!sessionStorage.getItem('hairus.popup.seen'))setPopup(true);}catch{setPopup(true);}}},[ready,today,state.popupDay]);function close(){setPopup(false);try{sessionStorage.setItem('hairus.popup.seen','1');}catch{}}return <><main id="main" className="prototype"><section className="hero"><img src={asset('d3c23.png')} alt="HAIRUS 커버 헤어 스타일"/><span className="wordmark hero-logo">HAIRUS</span><div className="hero-copy"><h1>HAIR IS<br/>WHO WE ARE</h1><p>우리의 취향을 가장 우리답게</p></div></section><section className="home-section"><SectionHeading title="In Focus" description="지금 주목해야 할 헤어스타일"/>
+ const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{
+  if(!ready||!today||state.popupDay===today)return;
+  try{if(sessionStorage.getItem('hairus.popup.seen'))return;}catch{/* Storage may be unavailable. */}
+  const focus=focusCardRef.current;
+  if(!focus)return;
+  const showPopup=()=>{
+   try{if(sessionStorage.getItem('hairus.popup.seen'))return;}catch{/* Continue for this visit. */}
+   setPopup(true);
+  };
+  if(typeof IntersectionObserver==='undefined'){
+   const onScroll=()=>{
+    const rect=focus.getBoundingClientRect(),middle=window.innerHeight*.5;
+    if(rect.top<=middle&&rect.bottom>=middle){window.removeEventListener('scroll',onScroll);showPopup();}
+   };
+   window.addEventListener('scroll',onScroll,{passive:true});
+   onScroll();
+   return ()=>window.removeEventListener('scroll',onScroll);
+  }
+  // Opening waits until In Focus reaches the middle area of the viewport.
+  const observer=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();showPopup();}
+  },{rootMargin:'-30% 0px -30% 0px',threshold:.3});
+  observer.observe(focus);
+  return ()=>observer.disconnect();
+ },[ready,today,state.popupDay]);function close(){setPopup(false);try{sessionStorage.setItem('hairus.popup.seen','1');}catch{}}return <><main id="main" className="prototype"><section className="hero"><img src={asset('d3c23.png')} alt="HAIRUS 커버 헤어 스타일"/><span className="wordmark hero-logo">HAIRUS</span><div className="hero-copy"><h1>HAIR IS<br/>WHO WE ARE</h1><p>우리의 취향을 가장 우리답게</p></div></section><section className="home-section"><SectionHeading title="In Focus" description="지금 주목해야 할 헤어스타일"/>
 <div className="in-focus-card" ref={focusCardRef}>
   <Link href="/in-focus/soft-bob">
     <img

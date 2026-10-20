@@ -1000,14 +1000,10 @@
 
 /* HOME Discover arrows now reuse Magazine's exact banner-controls typography, hit areas and alignment. */
 
-/* Home motion: reveal the In Focus card only once; it never changes layout. */
-@media(prefers-reduced-motion:no-preference){
- .home-section .in-focus-card.home-motion-await{opacity:0;transform:translateY(22px)}
- .home-section .in-focus-card.home-motion-await.home-motion-visible{opacity:1;transform:none;transition:opacity 600ms ease-out,transform 600ms cubic-bezier(.22,.7,.2,1)}
-}
+/* In Focus stays static: its visibility only triggers the HomePopup. */
 /* A Seat for You title stays solid black; individual sentences fill top-to-bottom
    with scroll position. Keep the original editorial line spacing. */
-.home-seat-intro .home-seat-lines{opacity:1}
+.home-seat-intro .home-seat-lines{opacity:1;color:#20201e}
 .home-seat-lines>span{display:block;opacity:.7}
 .home-seat-lines>span:nth-child(2),.home-seat-lines>span:nth-child(4){margin-top:20.8px}
 @media(prefers-reduced-motion:reduce){.home-seat-lines>span{opacity:.7!important}}
