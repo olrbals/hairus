@@ -20,9 +20,9 @@ const stickyHeight=64+86+68;
 
 function Check(){return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
 function Arrow({right=false}:{right?:boolean}){return <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" style={right?{transform:'rotate(180deg)'}:undefined}><path d="m14 6-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
-function BookingPage({back,children,title='예약하기',historyBack=false,actions}:{back:string;children:ReactNode;title?:string;historyBack?:boolean;actions?:ReactNode}){
+function BookingPage({back,children,title='예약하기',historyBack=false,actions,confirmed=false}:{back:string;children:ReactNode;title?:string;historyBack?:boolean;actions?:ReactNode;confirmed?:boolean}){
  const router=useRouter();
-  return <main id="main" className={styles.page}>
+  return <main id="main" className={`${styles.page}${confirmed?` ${styles.confirmedPage}`:""}`}>
     <header className={`${styles.header} hairus-page-header`}><Link className="hairus-header-back" href={back} aria-label="뒤로 가기" onClick={event=>{if(historyBack&&window.history.length>1){event.preventDefault();router.back();}}}><HeaderBackIcon/></Link><span>{title}</span>{actions?<div className={styles.headerActions}>{actions}</div>:<span aria-hidden="true"/>}</header>
     {children}
   </main>;
@@ -204,7 +204,7 @@ export function BookingSummary({draft,editPrefix}:{draft:BookingDraft;editPrefix
 export function BookingComplete({id}:{id:string}){
   const {state,ready}=usePrototype();
   const booking=state.bookings.find(booking=>booking.id===id);
-  return <BookingPage title="예약 완료" back="/my/reservations"><div className={`${styles.content} ${styles.complete}`}>
+  return <BookingPage title="예약 완료" back="/my/reservations" confirmed><div className={`${styles.content} ${styles.complete}`}>
     {!ready?<p role="status">예약 정보를 불러오는 중이에요.</p>:booking?<>
       <div className={styles.success}><span className={styles.successIcon}><Check/></span><h1>예약이 완료되었어요.</h1><p>선택한 일정과 상담 노트를 예약 내역에서 확인할 수 있어요.</p></div>
       <BookingSummary draft={booking}/>

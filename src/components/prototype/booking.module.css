@@ -7,6 +7,7 @@
 .header>a{height:44px;display:flex;align-items:center;justify-content:center;font-size:12px}
 .header>a:first-child{justify-content:flex-start}
 .header>span{text-align:center;font-size:16px;font-weight:500}
+.confirmedPage .header>span{font-size:20px}
 .content{padding:24px 24px calc(118px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:24px}
 .progress{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0;margin:0}
 .progress li{display:flex;flex-direction:column;gap:5px;padding-top:10px;border-top:2px solid #e8e8e5;color:#999995;font-size:12px;white-space:nowrap}
@@ -67,28 +68,32 @@
 .summary .summaryIdentity h2{font-family:Pretendard,sans-serif;font-size:20px;font-weight:500;line-height:1.3;margin:10px 0 5px}
 .summaryIdentity p{font-size:13px;color:#777772;margin:0}
 .summary dl{padding:0;margin:0}
-.summary dl>div{display:grid;grid-template-columns:66px minmax(0,1fr);align-items:start;gap:10px;padding-top:20px}
+.summary dl>div{display:grid;grid-template-columns:66px minmax(0,1fr);align-items:start;gap:10px;padding-top:12px}
 .summary dt{font-size:12px;color:#777772;padding-top:2px}
 .summary dd{margin:0;display:flex;justify-content:space-between;gap:8px;align-items:flex-start;font-size:14px;min-width:0;overflow-wrap:anywhere}
 .summary dd strong{font-size:14px;font-weight:500}
 .summary .edit{margin-top:-12px;margin-bottom:-12px}
 .summaryTime{display:block;margin-top:6px}
-.summary dl>.total{margin-top:20px;padding-top:20px;border-top:1px solid #e9e9e4;align-items:center}
+.summary dl>.total{margin-top:20px;padding-top:12px;border-top:1px solid #e9e9e4;align-items:center}
 .summary .total dd strong{font-size:22px;font-weight:600}
-.summary dl>.payment{padding-top:10px}
+.summary dl>.payment{padding-top:12px}
 .payment dd{font-size:12px;color:#777772}
 .message{font-size:12px;color:#845140}
 .footer{position:fixed;z-index:20;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,430px);background:#fff;border-top:1px solid #efefea;padding:16px 24px calc(16px + env(safe-area-inset-bottom))}
 .page .primary{width:100%;min-height:54px;padding:16px 18px;background:#000;border:0;border-radius:2px;color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;text-align:center}
 .page .primary:disabled{background:#e9e9e5;color:#a4a49d;opacity:1}
-.complete{padding-top:0;padding-bottom:calc(28px + env(safe-area-inset-bottom));gap:24px}
+.complete{min-height:calc(100dvh - 64px);padding-top:0;padding-bottom:calc(28px + env(safe-area-inset-bottom));gap:24px}
 .complete .summary{padding:16px}
 .success{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:20px 0 12px}
-.successIcon{display:grid;place-items:center;border:1px solid #171715;border-radius:50%;width:40px;height:40px;margin-bottom:8px}
+.successIcon{display:grid;place-items:center;border:1px solid #171715;border-radius:50%;width:40px;height:40px;margin-bottom:8px;animation:bookingCheckPop .58s ease-out both}
+.successIcon svg path{stroke-dasharray:20;stroke-dashoffset:20;animation:bookingCheckStroke .48s .12s ease-out forwards}
+@keyframes bookingCheckPop{0%{opacity:.4;transform:scale(.86)}65%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+@keyframes bookingCheckStroke{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.successIcon{animation:none}.successIcon svg path{animation:none;stroke-dashoffset:0}}
 .success>p:last-child{font-size:12px;color:#777772}
-.visitGuide h2{font-size:14px;font-weight:500;margin-bottom:8px}
+.visitGuide h2{font-size:16px;font-weight:500;margin-bottom:8px}
 .visitGuide p{font-size:12px;color:#777772}
-.completeActions{display:flex;flex-direction:column;gap:8px}
+.completeActions{display:flex;flex-direction:column;gap:8px;margin-top:auto}
 .homeLink{min-height:48px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#777772}
 @media(max-width:360px){.progress{gap:6px}.progress li{font-size:12px}.summary{padding:16px}.intro h1,.success h1{font-size:22px}.days button,.days>span{height:40px}}
 
@@ -130,13 +135,14 @@
 .service:last-child{border-bottom:0}
 .service[aria-pressed=true]{border-bottom-color:#e5e5e5;box-shadow:none}
 .service[aria-pressed=true] .serviceHeading strong,.service[aria-pressed=true] .serviceHeading>span{font-weight:700}
-.serviceInfo{flex:1;min-width:0;gap:8px}
+.serviceInfo{flex:1;min-width:0;gap:12px}
+.service>.serviceInfo{gap:12px}
 /* Service heading-to-description: 12px, description-to-duration: 8px. */
-.serviceHeading{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px}
-.serviceHeading strong,.serviceHeading>span{font-size:16px;font-weight:500}
+.serviceHeading{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:0}
+.serviceHeading strong,.serviceHeading>span{font-size:18px;font-weight:500}
 .serviceHeading>span{white-space:nowrap}
-.serviceDescription{font-size:12px;color:#777;word-break:keep-all;overflow-wrap:anywhere}
-.service small{font-size:12px;color:#999}
+.serviceDescription{font-size:14px;color:#777;word-break:keep-all;overflow-wrap:anywhere}
+.service small{font-size:14px;color:#999}
 .selection{margin-left:0;width:20px;height:20px;border:1px solid #ddd;border-radius:50%;align-self:center;color:#fff;flex:none}
 .service[aria-pressed=true] .selection{border-color:#000;background:#000}
 .selection svg{width:18px;height:18px}
@@ -155,25 +161,25 @@
 .monthHeading>div{display:flex;gap:0}
 .monthHeading button{min-width:32px;min-height:34px;padding:5px}
 .monthHeading svg{width:20px;height:20px}
-.weekdays{margin-bottom:12px;color:#999;font-size:12px}
+.weekdays{margin-bottom:12px;color:#999;font-size:14px}
 .weekdays span{padding:0}
 .days{row-gap:8px}
 .days button,.days>span{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;height:38px;margin:0;padding:0;border-radius:0;background:transparent}
-.days button>span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%}
+.days button>span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:16px}
 .days button[aria-pressed=true]{background:transparent;color:#fff}
 /* Figma 1117:2729 — 34px black glass selection chip, white semibold numeral. */
-.days button[aria-pressed=true]>span{background:#000;border-radius:50%;font-size:16px;font-weight:600;line-height:1.3;color:#fff;box-shadow:0 1px 4px #0000000b,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.days button[aria-pressed=true]>span{background:#000;border-radius:50%;font-size:16px;font-weight:600;line-height:1.3;color:#fff;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .days button:disabled{color:#a5a5a5}
 .days button[data-full=true]{gap:0}
 .days button[data-full=true]>span{height:22px}
 .days small{font-size:12px;line-height:1.3;color:#999}
 .hint{font-size:12px;color:#999}
-.timeSection{margin-top:20px;gap:12px}
+.timeSection{margin-top:0;gap:12px}
 .dateCaption{font-size:12px;color:#999}
 .times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 12px}
-.times button{display:flex;align-items:center;justify-content:center;min-width:0;min-height:34px;height:34px;flex:none;padding:8px 4px;border:1px solid #ffffff7a;border-radius:4px;background:#fff;font-size:14px;box-shadow:0 1px 2px #0000000d,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f}
-.times button[aria-pressed=true]{background:#000;border-color:#333;color:#fff}
-.page .times button:disabled{color:#999;border-color:#e8e8e8;background:#f5f5f5;box-shadow:none;opacity:1}
+.times button{display:flex;align-items:center;justify-content:center;min-width:0;min-height:34px;height:34px;flex:none;padding:8px 4px;border:1px solid #000;border-radius:0;background:transparent;font-size:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.times button[aria-pressed=true]{background:#000;border-color:#000;color:#fff;box-shadow:none}
+.page .times button:disabled{color:#999;border-color:#dedede;background:transparent;box-shadow:none;opacity:1}
 .visitPreview{display:flex;flex-direction:column;gap:8px;margin-top:12px;min-height:96px;padding:12px;border:1px solid #ffffff7a;border-radius:8px;background:#fafafa;box-shadow:0 1px 2px #0000000d,inset 0 1px 2px #ffffffa6,inset 0 -1px 3px #0000000f}
 /* DATE uses the same outer card geometry despite its calendar's horizontal inset. */
 .schedule>.visitPreview{margin-inline:-12px;min-height:0}
@@ -182,9 +188,9 @@
 .reservationSummary{display:flex;flex-direction:column;gap:20px;margin:0;padding:0}
 .reservationSummary>div{display:flex;flex-direction:column;gap:8px;border-bottom:.4px solid #00000029;padding-bottom:12px}
 .reservationSummary>div:last-child{border:0}
-.reservationSummary dt{font-size:12px;font-weight:600;color:#333}
+.reservationSummary dt{font-size:14px;font-weight:600;color:#333}
 .reservationSummary dd{font-size:16px;font-weight:400;color:#555;margin:0;overflow-wrap:anywhere}
-.reservationSummary small{display:block;margin-top:4px;font-size:12px;color:#aaa}
+.reservationSummary small{display:block;margin-top:4px;font-size:12px;color:#777}
 .footer{z-index:31}
 /* Detail pages reuse the reservation footer, with the requested 56px CTA. */
 .detailPage{padding-bottom:calc(104px + env(safe-area-inset-bottom))}

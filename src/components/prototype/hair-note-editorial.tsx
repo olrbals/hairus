@@ -46,7 +46,6 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
  const history=sectionValue(['RECENT SERVICE','시술 이력'])??historyFields.filter(([key])=>clean(profile?.[key])).map(([key,label])=>`${label} · ${profile?.[key]}`).join('\n');
  const custom=sections.filter(section=>!section.label).map(section=>section.value).join('\n\n');
  const desired=(draft.noteEdited?sectionValue(['DESIRED STYLE','스타일 제안']):sectionValue(['DESIRED STYLE']))??(draft.noteEdited&&custom?custom:styleRequest({...profile,...draft.noteInput?.bookingProfile} as Values,draft.serviceId,draft.noteInput?.wishes));
- const context=sections.filter(section=>['YOUR WISH','나의 취향','선호하는 분위기','평소 손질','헤어 고민'].includes(section.label)).map(section=>`${section.label} · ${section.value}`).join('\n');
  const request=sectionValue(['REQUEST','더 전하고 싶은 이야기'])??draft.noteInput?.memo??'';
  function openEditor(kind:Editor){
   const saved=draft.noteInput?.bookingProfile;
@@ -99,7 +98,7 @@ export function HairNoteEditorial({draft,profileRevision,onChange}:{
   <div className={styles.delivery}><span>{draft.shareNote===false?'디자이너에게 전달하지 않아요':'디자이너에게 전달해요'}</span><GlassToggle checked={draft.shareNote!==false} label="HAIR NOTE 디자이너에게 전달" onChange={shareNote=>onChange(current=>({...current,shareNote}))}/></div>
   <section className={styles.card} aria-label="나의 HAIR NOTE">
    <h3 className={styles.title}>HAIR NOTE</h3>
-   {([{key:'hair',label:'MY HAIR',value:hair,placeholder:'헤어 정보를 추가해 주세요.'},{key:'history',label:'RECENT SERVICE',value:history,placeholder:'시술 이력을 추가해 주세요.'},{key:'style',label:'DESIRED STYLE',value:desired,placeholder:'원하는 스타일을 알려주세요.'}] as const).map(item=><div className={styles.field} key={item.key}><div><h4>{item.label}</h4><p>{item.value||item.placeholder}</p>{item.key==='style'&&context&&<p className={styles.context}>{context}</p>}</div><button type="button" className={styles.edit} aria-label={`${item.label} 수정`} onClick={()=>openEditor(item.key)}>수정 <img src="/assets/figma/reservation/chevron-right.svg" alt="" width="10" height="10"/></button></div>)}
+   {([{key:'hair',label:'MY HAIR',value:hair,placeholder:'헤어 정보를 추가해 주세요.'},{key:'history',label:'RECENT SERVICE',value:history,placeholder:'시술 이력을 추가해 주세요.'},{key:'style',label:'DESIRED STYLE',value:desired,placeholder:'원하는 스타일을 알려주세요.'}] as const).map(item=><div className={styles.field} key={item.key}><div><h4>{item.label}</h4><p>{item.value||item.placeholder}</p></div><button type="button" className={styles.edit} aria-label={`${item.label} 수정`} onClick={()=>openEditor(item.key)}>수정 <img src="/assets/figma/reservation/chevron-right.svg" alt="" width="10" height="10"/></button></div>)}
    <label className={styles.request}><span>REQUEST</span><textarea aria-label="디자이너에게 요청 사항" rows={1} maxLength={Math.max(50,request.length)} placeholder="요청 사항을 50자 이내로 작성해 주세요." value={request} onChange={event=>{const memo=event.target.value;onChange(current=>({...updateNoteSection(current,['REQUEST','더 전하고 싶은 이야기'],'REQUEST',memo),noteInput:{...current.noteInput,memo}}));}}/></label>
   </section>
   <BottomSheet open={editor!==null} onClose={()=>setEditor(null)} title={editor?editorTitles[editor]:'HAIR NOTE'} variant="default" headingAction={<button type="button" className={styles.sheetClose} onClick={()=>setEditor(null)}>닫음</button>}>
