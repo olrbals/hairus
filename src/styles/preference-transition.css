@@ -371,7 +371,7 @@
 .preference-complete__tags{
   display:flex;
   gap:8px;
-  margin-top:36px;
+  margin-top:20px;
   white-space:nowrap;
 }
 .preference-complete__tags span{
@@ -395,8 +395,8 @@
   z-index:1;
   top:0;
   right:-4px;
-  width:154px;
-  height:205px;
+  width:140px;
+  height:190px;
   overflow:hidden;
 }
 .preference-complete__portrait img{
@@ -410,10 +410,10 @@
 .preference-complete__flower{
   position:absolute;
   z-index:2;
-  top:140px;
-  left:148px;
-  width:111px;
-  height:74px;
+  top:147px;
+  left:151px;
+  width:101px;
+  height:67px;
   overflow:hidden;
 }
 .preference-complete__flower img{display:block;width:100%;height:100%;transform:scaleX(-1)}
