@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import {provinces} from '../src/lib/prototype/regions.ts';
 import {matchQuestions} from '../src/lib/prototype/catalog.ts';
 import {recommend,toggleChoice} from '../src/lib/prototype/logic.ts';
-test('Recommendation shares all 18 unchanged first-level Explore options and single selection',()=>{
- assert.equal(matchQuestions[1].options,provinces);assert.equal(provinces.length,18);
+test('Recommendation uses four questions without the regional selection screen',()=>{
+ assert.deepEqual(matchQuestions.map(q=>q.key),['gender','strength','consult','avoid']);assert.equal(provinces.length,18);
  assert.equal(provinces[0],'전체');assert.equal(provinces.at(-1),'제주특별자치도');
  assert.deepEqual(toggleChoice(['서울특별시'],'부산광역시',1),['부산광역시']);
- assert.deepEqual(matchQuestions.map(q=>q.max),[1,1,1,3,3]);
+ assert.deepEqual(matchQuestions.map(q=>q.max),[1,1,3,3]);
 });
 test('Recommendation new province values use existing salon addresses and retain legacy district scoring',()=>{
  const legacy=recommend({location:['성수']},{}),seoul=recommend({location:['서울특별시']},{});

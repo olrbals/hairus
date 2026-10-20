@@ -33,7 +33,7 @@ export function RecommendationResults() {
 
   return <main id="main" className={css.resultPage} data-figma-node="1107:2934">
     <div className={css.header} data-figma-node="1107:2938">
-      <PageHeader backFallbackHref="/recommendation/5"/>
+      <PageHeader backFallbackHref="/recommendation/4"/>
     </div>
     <div className={css.content} data-figma-node="1107:3109">
       <div className={css.mainContent} data-figma-node="1107:3059">
