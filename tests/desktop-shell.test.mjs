@@ -2,13 +2,14 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import test from "node:test";
 
-const [layout, globals, bottomNav, topButton, booking, appScroll] = await Promise.all([
+const [layout, globals, bottomNav, topButton, booking, appScroll, designerDetail] = await Promise.all([
   readFile(new URL("../src/app/layout.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/app/globals.css", import.meta.url), "utf8"),
   readFile(new URL("../src/components/bottom-nav.css", import.meta.url), "utf8"),
   readFile(new URL("../src/components/glass-top-button.css", import.meta.url), "utf8"),
   readFile(new URL("../src/components/prototype/booking.module.css", import.meta.url), "utf8"),
   readFile(new URL("../src/lib/app-scroll.ts", import.meta.url), "utf8"),
+  readFile(new URL("../src/components/prototype/designer-detail.tsx", import.meta.url), "utf8"),
 ]);
 
 test("desktop shell adds the requested HAIRUS branding outside the mobile app", () => {
@@ -52,4 +53,10 @@ test("desktop fixed controls use the frame while mobile keeps viewport behavior"
   assert.match(booking, /@media\(min-width:431px\)\{\.footer\{bottom:var\(--desktop-frame-offset\)/);
   assert.match(appScroll, /document\.querySelector<HTMLElement>\('\.mobile-scroll'\)/);
   assert.match(appScroll, /else window\.scrollTo\(options\)/);
+});
+
+test("designer section links target the app scroller with the sticky stack offset", () => {
+  assert.match(designerDetail, /appScrollToElement\(section,stickyNavigationOffset/);
+  assert.match(designerDetail, /onClick=\{event=>goToSection\(event,'works'\)\}/);
+  assert.match(designerDetail, /window\.history\.replaceState\(window\.history\.state,'',`#\$\{sectionId\}`\)/);
 });
