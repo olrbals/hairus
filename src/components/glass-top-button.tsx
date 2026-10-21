@@ -2,9 +2,11 @@
 
 import {useEffect, useRef, useState} from 'react';
 import {usePathname} from 'next/navigation';
+import {pageScrollControls} from '@/lib/scroll-interactions';
 import './glass-top-button.css';
 
 const contentRoute = /^\/(home|magazine|articles|in-focus|styles|designers|salons|explore|saved|my|reservation|reservations)(\/|$)/;
+const scrollBehavior = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 
 export function GlassTopButton() {
   const pathname = usePathname();
@@ -13,15 +15,16 @@ export function GlassTopButton() {
 }
 
 function PageTopButton() {
-  const button = useRef<HTMLButtonElement>(null);
-  const [visible, setVisible] = useState(false);
+  const controls = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState({top:false,bottom:false});
 
   useEffect(() => {
     let frame = 0;
     const measure = () => {
       frame = 0;
       const root = document.documentElement;
-      setVisible(root.scrollHeight - window.innerHeight >= 600 && window.scrollY >= 600);
+      const next = pageScrollControls(window.scrollY, window.innerHeight, root.scrollHeight);
+      setVisible(current => current.top === next.top && current.bottom === next.bottom ? current : next);
 
       // Measure the existing navigation / CTA, including fixed wrappers. Do not
       // change their layout or make assumptions about their height or safe area.
@@ -40,7 +43,7 @@ function PageTopButton() {
           element = element.parentElement;
         }
       }
-      button.current?.style.setProperty('--top-button-bottom', `${bottom}px`);
+      controls.current?.style.setProperty('--top-button-bottom', `${bottom}px`);
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
     const resize = new ResizeObserver(schedule);
@@ -60,9 +63,16 @@ function PageTopButton() {
     };
   }, []);
 
-  return <button ref={button} type="button" className="glass-top-button" data-visible={visible}
-    aria-label="페이지 맨 위로" aria-hidden={!visible} tabIndex={visible ? 0 : -1}
-    onClick={() => window.scrollTo({top:0, behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'})}>
-    <span className="glass-top-button__surface"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span>
-  </button>;
+  return <div ref={controls} className="glass-scroll-controls" role="group" aria-label="페이지 빠른 이동">
+    <button type="button" className="glass-top-button" data-visible={visible.top}
+      aria-label="페이지 맨 위로" aria-hidden={!visible.top} tabIndex={visible.top ? 0 : -1}
+      onClick={() => window.scrollTo({top:0, behavior:scrollBehavior()})}>
+      <span className="glass-top-button__surface"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span>
+    </button>
+    <button type="button" className="glass-top-button" data-visible={visible.bottom}
+      aria-label="페이지 맨 아래로" aria-hidden={!visible.bottom} tabIndex={visible.bottom ? 0 : -1}
+      onClick={() => window.scrollTo({top:document.documentElement.scrollHeight, behavior:scrollBehavior()})}>
+      <span className="glass-top-button__surface"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span>
+    </button>
+  </div>;
 }
