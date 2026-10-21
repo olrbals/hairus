@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {useEffect,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {SectionHeading} from '@/components/primitives';
+import {centerTriggeredProgress,viewportTriggeredProgress} from '@/lib/scroll-interactions';
 
 import {
   asset,
@@ -67,7 +68,7 @@ export function Home(){
   const update=()=>{
    const rect=intro.getBoundingClientRect();
    const viewport=window.innerHeight;
-   const progress=Math.max(0,Math.min(1,(viewport*.8-rect.top)/(viewport*.6)));
+   const progress=centerTriggeredProgress(rect.top,viewport,viewport*.6);
    targets.forEach((target,index)=>{
     const filled=Math.max(0,Math.min(1,progress*targets.length-index));
     target.style.opacity=String(.4+.6*filled);
@@ -90,11 +91,11 @@ export function Home(){
    if(reduced){banner.style.setProperty('--match-overlay','0');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
-   // From fully white at entry to fully revealed near the viewport center.
+   // Start the reveal slightly before the banner reaches the viewer's center line.
    // Keep the original independent top/bottom edge gradient untouched.
-   const start=viewport*.9;
+   const start=viewport*.68;
    const end=(viewport-rect.height)/2;
-   const linear=Math.max(0,Math.min(1,(start-rect.top)/Math.max(1,start-end)));
+   const linear=viewportTriggeredProgress(rect.top,viewport,start-end,.68);
    const reveal=linear*linear*(3-2*linear);
    banner.style.setProperty('--match-overlay',String(1-reveal));
   };
