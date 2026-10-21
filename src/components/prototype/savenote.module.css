@@ -3,6 +3,7 @@
 .sheet p{margin:0}
 .reasonMore{flex:none;min-width:24px;align-self:stretch;display:grid;place-items:center;border:0;background:transparent;padding:4px 2px;color:#8c8c8c;font-size:12px;font-weight:400;line-height:1.3}
 .toggleNotice{position:fixed;inset:auto;top:0;left:50%;display:flex;flex-direction:column;align-items:center;gap:3px;width:max-content;max-width:calc(100vw - 48px);margin:0;padding:0;border:0;background:transparent;box-shadow:none;color:#222;font-size:12px;line-height:1.45;text-align:center;pointer-events:none;transform:translateX(-50%);animation:noteNoticeIn .2s ease-out}
+@media(min-width:431px){.toggleNotice{top:var(--desktop-frame-offset);max-width:382px}}
 .toggleNotice strong{font-size:12px;font-weight:600;line-height:1.45}
 .toggleNotice span{font-size:12px;color:#222;line-height:1.45}
 @keyframes noteNoticeIn{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}

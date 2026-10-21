@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from 'react';
 import {usePathname} from 'next/navigation';
+import {appScrollTo,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 import './glass-top-button.css';
 
 const contentRoute = /^\/(home|magazine|articles|in-focus|styles|designers|salons|explore|saved|my|reservation|reservations)(\/|$)/;
@@ -20,8 +21,8 @@ function PageTopButton() {
     let frame = 0;
     const measure = () => {
       frame = 0;
-      const root = document.documentElement;
-      setVisible(root.scrollHeight - window.innerHeight >= 600 && window.scrollY >= 600);
+      const viewport = appScrollViewport();
+      setVisible(viewport.scrollHeight - viewport.height >= 600 && viewport.scrollTop >= 600);
 
       // Measure the existing navigation / CTA, including fixed wrappers. Do not
       // change their layout or make assumptions about their height or safe area.
@@ -30,10 +31,11 @@ function PageTopButton() {
         let element: Element | null = control;
         while (element && element !== document.body) {
           const style = getComputedStyle(element);
-          if (style.position === 'fixed' && style.display !== 'none' && style.visibility !== 'hidden') {
+          if ((style.position === 'fixed' || style.position === 'absolute') && style.display !== 'none' && style.visibility !== 'hidden') {
             const rect = element.getBoundingClientRect();
-            if (rect.height > 0 && rect.top > window.innerHeight / 2 && rect.top < window.innerHeight) {
-              bottom = Math.max(bottom, window.innerHeight - rect.top + 12);
+            const viewportBottom = viewport.top + viewport.height;
+            if (rect.height > 0 && rect.top > viewport.top + viewport.height / 2 && rect.top < viewportBottom) {
+              bottom = Math.max(bottom, viewportBottom - rect.top + 12);
             }
             break;
           }
@@ -45,24 +47,26 @@ function PageTopButton() {
     const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
     const resize = new ResizeObserver(schedule);
     resize.observe(document.body);
+    const scrollRoot = document.querySelector<HTMLElement>('.mobile-scroll');
+    if (scrollRoot) resize.observe(scrollRoot);
     // Covers async content, tab changes and the persistent navigation host.
     const mutations = new MutationObserver(schedule);
     mutations.observe(document.querySelector('.mobile-shell')!, {childList:true, subtree:true});
-    window.addEventListener('scroll', schedule, {passive:true});
+    const stopObservingScroll = observeAppScroll(schedule);
     window.addEventListener('resize', schedule);
     schedule();
     return () => {
       cancelAnimationFrame(frame);
       resize.disconnect();
       mutations.disconnect();
-      window.removeEventListener('scroll', schedule);
+      stopObservingScroll();
       window.removeEventListener('resize', schedule);
     };
   }, []);
 
   return <button ref={button} type="button" className="glass-top-button" data-visible={visible}
     aria-label="페이지 맨 위로" aria-hidden={!visible} tabIndex={visible ? 0 : -1}
-    onClick={() => window.scrollTo({top:0, behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'})}>
+    onClick={() => appScrollTo({top:0, behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'})}>
     <span className="glass-top-button__surface"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span>
   </button>;
 }

@@ -39,3 +39,6 @@
  .glass-top-button:hover .glass-top-button__surface{background:#f7f7f7}
 }
 @media(prefers-reduced-motion:reduce){.glass-top-button{transition:none}}
+@media(min-width:431px){
+ .glass-top-button{position:absolute;right:22px;bottom:var(--top-button-bottom,16px)}
+}

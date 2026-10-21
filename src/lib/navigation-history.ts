@@ -1,6 +1,8 @@
 // Metadata on native entries, not a second router or a persisted navigation stack.
 // Only SPA entries observed in this document qualify as an in-app predecessor.
 const key = '__hairusNavigation';
+const scrollKey = '__hairusScrollTop';
+export const navigationScrollEvent = 'hairus:navigation-scroll';
 type Entry = {version: 1; path: string; parents: string[]};
 type Browser = Pick<Window, 'history' | 'location'>;
 type Router = {back: () => void; replace: (href: string) => void};
@@ -17,6 +19,17 @@ function entry(browser: Browser): Entry | undefined {
         typeof item === 'string' && item.startsWith('/') && !item.startsWith('//'))) return value;
 }
 
+function liveScrollTop(browser: Browser) {
+  if (typeof window === 'undefined' || browser !== window) return 0;
+  const root = window.matchMedia('(min-width: 431px)').matches ? document.querySelector<HTMLElement>('.mobile-scroll') : null;
+  return root?.scrollTop ?? window.scrollY;
+}
+
+export function navigationScrollTop(browser: Browser = window) {
+  const value = browser.history.state?.[scrollKey];
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? value : 0;
+}
+
 export function installNavigationHistory(browser: Browser) {
   if (installed.has(browser)) return;
   installed.add(browser);
@@ -25,7 +38,7 @@ export function installNavigationHistory(browser: Browser) {
   const replace = history.replaceState.bind(history);
   // A Splash entry begins a new experience. Keep the existing refresh/reset policy.
   const initial = browser.location.pathname === '/' ? undefined : entry(browser);
-  replace({...history.state, [key]: initial ?? {version: 1, path: path(browser), parents: []}}, '');
+  replace({...history.state, [key]: initial ?? {version: 1, path: path(browser), parents: []}, [scrollKey]: liveScrollTop(browser)}, '');
 
   function write(method: 'push' | 'replace', data: unknown, unused: string, url?: string | URL | null) {
     const currentPath = path(browser);
@@ -39,9 +52,12 @@ export function installNavigationHistory(browser: Browser) {
     const nextPath = target.pathname + target.search + target.hash;
     const addsEntry = method === 'push' && nextPath !== currentPath;
     const parents = addsEntry ? [...(current?.parents ?? []), currentPath].slice(-64) : current?.parents ?? [];
-    const state = {...(data && typeof data === 'object' ? data : {}), [key]: {version: 1, path: nextPath, parents}};
+    const currentScrollTop = liveScrollTop(browser);
+    if (addsEntry) replace({...history.state, [scrollKey]: currentScrollTop}, unused);
+    const state = {...(data && typeof data === 'object' ? data : {}), [key]: {version: 1, path: nextPath, parents}, [scrollKey]: addsEntry ? 0 : currentScrollTop};
     // Repeated taps on the current destination must not add identical entries.
     (addsEntry ? push : replace)(state, unused, url);
+    if (typeof window !== 'undefined' && browser === window) window.dispatchEvent(new Event(navigationScrollEvent));
   }
   history.pushState = (data, unused, url) => write('push', data, unused, url);
   history.replaceState = (data, unused, url) => write('replace', data, unused, url);

@@ -4,6 +4,7 @@ import {useEffect,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {SectionHeading} from '@/components/primitives';
 import {centerTriggeredProgress,viewportTriggeredProgress} from '@/lib/scroll-interactions';
+import {appScrollRoot,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 
 import {
   asset,
@@ -67,8 +68,8 @@ export function Home(){
   let frame=0;
   const update=()=>{
    const rect=intro.getBoundingClientRect();
-   const viewport=window.innerHeight;
-   const progress=centerTriggeredProgress(rect.top,viewport,viewport*.6);
+   const viewport=appScrollViewport();
+   const progress=centerTriggeredProgress(rect.top-viewport.top,viewport.height,viewport.height*.6);
    targets.forEach((target,index)=>{
     const filled=Math.max(0,Math.min(1,progress*targets.length-index));
     target.style.opacity=String(.4+.6*filled);
@@ -79,9 +80,9 @@ export function Home(){
    frame=window.requestAnimationFrame(()=>{frame=0;update();});
   };
   update();
-  window.addEventListener('scroll',schedule,{passive:true});
+  const stopObservingScroll=observeAppScroll(schedule);
   window.addEventListener('resize',schedule);
-  return ()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);targets.forEach(target=>target.style.removeProperty('opacity'));};
+  return ()=>{window.cancelAnimationFrame(frame);stopObservingScroll();window.removeEventListener('resize',schedule);targets.forEach(target=>target.style.removeProperty('opacity'));};
  },[]);
  useEffect(()=>{
   const banner=matchBannerRef.current;
@@ -90,12 +91,12 @@ export function Home(){
   const update=()=>{
    if(reduced){banner.style.setProperty('--match-overlay','0');return;}
    const rect=banner.getBoundingClientRect();
-   const viewport=window.innerHeight;
+   const viewport=appScrollViewport();
    // Start the reveal slightly before the banner reaches the viewer's center line.
    // Keep the original independent top/bottom edge gradient untouched.
-   const start=viewport*.68;
-   const end=(viewport-rect.height)/2;
-   const linear=viewportTriggeredProgress(rect.top,viewport,start-end,.68);
+   const start=viewport.height*.68;
+   const end=(viewport.height-rect.height)/2;
+   const linear=viewportTriggeredProgress(rect.top-viewport.top,viewport.height,start-end,.68);
    const reveal=linear*linear*(3-2*linear);
    banner.style.setProperty('--match-overlay',String(1-reveal));
   };
@@ -106,9 +107,9 @@ export function Home(){
   };
   update();
   if(reduced)return;
-  window.addEventListener('scroll',schedule,{passive:true});
+  const stopObservingScroll=observeAppScroll(schedule);
   window.addEventListener('resize',schedule);
-  return()=>{window.cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+  return()=>{window.cancelAnimationFrame(frame);stopObservingScroll();window.removeEventListener('resize',schedule);};
  },[]);
  const discoverTrack=useRef<HTMLDivElement>(null);const moveDiscover=(direction:-1|1)=>{const track=discoverTrack.current;if(!track)return;const first=track.firstElementChild as HTMLElement|null;const gap=parseFloat(getComputedStyle(track).gap)||0;track.scrollBy({left:direction*((first?.getBoundingClientRect().width||track.clientWidth)+gap),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};const {state,update,ready}=usePrototype();const [popup,setPopup]=useState(false);const [popupSlide,setPopupSlide]=useState(0);const [today,setToday]=useState('');useEffect(()=>{setToday(new Date().toLocaleDateString('en-CA'));},[]);useEffect(()=>{
   if(!ready||!today||state.popupDay===today)return;
@@ -121,17 +122,17 @@ export function Home(){
   };
   if(typeof IntersectionObserver==='undefined'){
    const onScroll=()=>{
-    const rect=focus.getBoundingClientRect(),middle=window.innerHeight*.5;
-    if(rect.top<=middle&&rect.bottom>=middle){window.removeEventListener('scroll',onScroll);showPopup();}
+    const rect=focus.getBoundingClientRect(),viewport=appScrollViewport(),middle=viewport.top+viewport.height*.5;
+    if(rect.top<=middle&&rect.bottom>=middle){stopObservingScroll();showPopup();}
    };
-   window.addEventListener('scroll',onScroll,{passive:true});
+   const stopObservingScroll=observeAppScroll(onScroll);
    onScroll();
-   return ()=>window.removeEventListener('scroll',onScroll);
+   return stopObservingScroll;
   }
   // Opening waits until In Focus reaches the middle area of the viewport.
   const observer=new IntersectionObserver(entries=>{
    if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();showPopup();}
-  },{rootMargin:'-30% 0px -30% 0px',threshold:.3});
+  },{root:appScrollRoot(),rootMargin:'-30% 0px -30% 0px',threshold:.3});
   observer.observe(focus);
   return ()=>observer.disconnect();
  },[ready,today,state.popupDay]);function close(){setPopup(false);try{sessionStorage.setItem('hairus.popup.seen','1');}catch{}}return <><main id="main" className="prototype"><section className="hero"><img src={asset('d3c23.png')} alt="HAIRUS 커버 헤어 스타일"/><span className="wordmark hero-logo">HAIRUS</span><div className="hero-copy"><h1>HAIR IS<br/>WHO WE ARE</h1><p>우리의 취향을 가장 우리답게</p></div></section><section className="home-section"><SectionHeading title="In Focus" description="지금 주목해야 할 헤어스타일"/>
