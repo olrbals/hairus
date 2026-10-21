@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {goBack} from '@/lib/navigation-history';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,type MouseEvent} from 'react';
 import {useNickname} from '@/lib/use-nickname';
 import {HeaderBackIcon} from '@/components/primitives';
 import {asset,findItem,salons,featuredServices} from '@/lib/prototype/catalog';
@@ -14,7 +14,7 @@ import styles from './designer-detail.module.css';
 import bookingStyles from './booking.module.css';
 import {ReviewSection} from './reviews';
 import {designerReviews} from '@/lib/prototype/reviews';
-import {appScrollAtEnd,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
+import {appScrollAtEnd,appScrollToElement,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 
 const profileTags=['꼼꼼한 상담','편안한 소통','세심한 시술'];
 // Figma prototype comparison pairs. These images illustrate the matching UX only.
@@ -50,6 +50,15 @@ export function DesignerPage({id}:{id:string}){
     updateActiveSection();
     return stopObservingScroll;
   },[]);
+  function goToSection(event:MouseEvent<HTMLAnchorElement>,sectionId:string){
+    if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||event.button!==0)return;
+    const section=document.getElementById(sectionId);
+    if(!section)return;
+    event.preventDefault();
+    window.history.replaceState(window.history.state,'',`#${sectionId}`);
+    setActiveSection(sectionId);
+    appScrollToElement(section,stickyNavigationOffset,window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth');
+  }
   const item=findItem('designer',id);
   useEffect(()=>{if(item)update(current=>({...current,recent:[`designer:${id}`,...current.recent.filter(value=>value!==`designer:${id}`)].slice(0,30)}));},[id,item,update]);
   if(!item)return <main id="main" className={styles.missing}><p>이 디자이너를 찾을 수 없어요.</p><Link href="/explore?category=designer">디자이너 탐색으로</Link></main>;
@@ -76,17 +85,17 @@ export function DesignerPage({id}:{id:string}){
       <h2>{item.name} · {salon?.name||item.location}</h2>
       <div className={styles.tags}>{profileTags.map(tag=><span key={tag}>{tag}</span>)}</div>
       <div className={styles.identity}>
-        <a href="#reviews">★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</a>
+        <a href="#reviews" onClick={event=>goToSection(event,'reviews')}>★ 4.9&nbsp; · &nbsp;리뷰 {reviewCount}</a>
         <p>{introduction}</p>
       </div>
     </section>
 
     <nav className={styles.sectionNav} aria-label="디자이너 상세 섹션">
-      <a href="#match" aria-current={activeSection==='match'?'location':undefined} onClick={()=>setActiveSection('match')}>매칭</a>
-      <a href="#works" aria-current={activeSection==='works'?'location':undefined} onClick={()=>setActiveSection('works')}>스타일</a>
-      <a href="#service" aria-current={activeSection==='service'?'location':undefined} onClick={()=>setActiveSection('service')}>메뉴</a>
-      <a href="#reviews" aria-current={activeSection==='reviews'?'location':undefined} onClick={()=>setActiveSection('reviews')}>후기</a>
-      <a href="#salon" aria-current={activeSection==='salon'?'location':undefined} onClick={()=>setActiveSection('salon')}>살롱</a>
+      <a href="#match" aria-current={activeSection==='match'?'location':undefined} onClick={event=>goToSection(event,'match')}>매칭</a>
+      <a href="#works" aria-current={activeSection==='works'?'location':undefined} onClick={event=>goToSection(event,'works')}>스타일</a>
+      <a href="#service" aria-current={activeSection==='service'?'location':undefined} onClick={event=>goToSection(event,'service')}>메뉴</a>
+      <a href="#reviews" aria-current={activeSection==='reviews'?'location':undefined} onClick={event=>goToSection(event,'reviews')}>후기</a>
+      <a href="#salon" aria-current={activeSection==='salon'?'location':undefined} onClick={event=>goToSection(event,'salon')}>살롱</a>
     </nav>
 
     <section id="match" className={styles.match} aria-labelledby="match-title">

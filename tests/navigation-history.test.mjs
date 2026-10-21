@@ -89,4 +89,5 @@ test('refresh re-experience script remains intact; navigation never reads/writes
   assert.match(layout,/store\.removeItem\(key\)/);
   const helper=readFileSync(new URL('../src/lib/navigation-history.ts',import.meta.url),'utf8');
   assert.doesNotMatch(helper,/localStorage|sessionStorage|history\.length/);
+  assert.match(helper,/if \(changesDocument && typeof window/);
 });
