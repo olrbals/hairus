@@ -14,6 +14,7 @@ import {usePrototype} from './store';
 import styles from './booking.module.css';
 import {HairNoteEditorial} from './hair-note-editorial';
 import {SelectionChip} from '@/components/selection-chip';
+import {appScrollAtEnd,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 
 const steps=['service','schedule','note','review'];
 const labels=['시술','방문일','헤어노트','예약 확인'];
@@ -120,15 +121,16 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
   if(!ready||!draftId)return;
   let frame=0;
   const spy=()=>{
+   const viewport=appScrollViewport();
    let current='service';
-   for(const id of steps)if((document.getElementById(`booking-${id}`)?.getBoundingClientRect().top??Infinity)<=stickyHeight+24)current=id;
-   if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2)current='review';
+   for(const id of steps)if((document.getElementById(`booking-${id}`)?.getBoundingClientRect().top??Infinity)-viewport.top<=stickyHeight+24)current=id;
+   if(appScrollAtEnd())current='review';
    setActiveSection(previous=>previous===current?previous:current);
   };
   const schedule=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(spy);};
-  window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);spy();
+  const stopObservingScroll=observeAppScroll(schedule);window.addEventListener('resize',schedule);spy();
   const observer=new ResizeObserver(schedule);const content=document.getElementById('booking-content');if(content)observer.observe(content);
-  return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);observer.disconnect();};
+  return()=>{cancelAnimationFrame(frame);stopObservingScroll();window.removeEventListener('resize',schedule);observer.disconnect();};
  },[ready,draftId]);
  function patchDraft(change:(value:BookingDraft)=>BookingDraft){setError('');update(current=>({...current,draft:current.draft?.designerId===designerId?change(current.draft):current.draft}));}
  function goTo(target:string,focus=false){const section=document.getElementById(`booking-${target}`);section?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});if(focus)section?.focus({preventScroll:true});}

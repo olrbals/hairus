@@ -14,6 +14,7 @@ import {HeaderBackIcon} from '@/components/primitives';
 import designerStyles from './designer-detail.module.css';
 import styles from './salon-detail.module.css';
 import bookingStyles from './booking.module.css';
+import {appScrollAtEnd,appScrollToElement,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 
 const sections=[['notice','공지'],['price','가격'],['designers','디자이너'],['reviews','후기'],['information','정보']] as const;
 const salonSectionOffset=112; // 64px shared header + 48px section navigation.
@@ -46,22 +47,23 @@ export function ArvoSalonPage(){
     let frame=0;
     const sync=()=>{
       frame=0;
+      const viewport=appScrollViewport();
       let current:string='notice';
       for(const [id] of sections){
         const section=document.getElementById(id);
-        if(section&&section.getBoundingClientRect().top<=salonSectionOffset+16)current=id;
+        if(section&&section.getBoundingClientRect().top-viewport.top<=salonSectionOffset+16)current=id;
       }
-      if(window.scrollY>0&&window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2)current='information';
+      if(appScrollAtEnd())current='information';
       setActive(previous=>previous===current?previous:current);
     };
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(sync);};
     const observer=new ResizeObserver(schedule);
     if(pageRef.current)observer.observe(pageRef.current);
-    window.addEventListener('scroll',schedule,{passive:true});
+    const stopObservingScroll=observeAppScroll(schedule);
     window.addEventListener('resize',schedule);
     window.addEventListener('hashchange',schedule);
     sync();
-    return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);window.removeEventListener('hashchange',schedule);};
+    return()=>{cancelAnimationFrame(frame);observer.disconnect();stopObservingScroll();window.removeEventListener('resize',schedule);window.removeEventListener('hashchange',schedule);};
   },[]);
   function goToSection(event:MouseEvent<HTMLAnchorElement>,id:string){
     if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||event.button!==0)return;
@@ -71,7 +73,7 @@ export function ArvoSalonPage(){
     // Preserve Next's history state and the previous page's back navigation.
     window.history.replaceState(window.history.state,'',`#${id}`);
     setActive(id);
-    window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-salonSectionOffset,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+    appScrollToElement(section,salonSectionOffset,window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth');
   }
   const firstDesigner=arvoTeam[0];
   return <main id="main" className={`${styles.page} ${styles.salonPage} ${bookingStyles.detailPage}`} ref={pageRef}>

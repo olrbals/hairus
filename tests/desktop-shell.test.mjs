@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import test from "node:test";
 
-const [layout, globals] = await Promise.all([
+const [layout, globals, bottomNav, topButton, booking, appScroll] = await Promise.all([
   readFile(new URL("../src/app/layout.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/app/globals.css", import.meta.url), "utf8"),
+  readFile(new URL("../src/components/bottom-nav.css", import.meta.url), "utf8"),
+  readFile(new URL("../src/components/glass-top-button.css", import.meta.url), "utf8"),
+  readFile(new URL("../src/components/prototype/booking.module.css", import.meta.url), "utf8"),
+  readFile(new URL("../src/lib/app-scroll.ts", import.meta.url), "utf8"),
 ]);
 
 test("desktop shell adds the requested HAIRUS branding outside the mobile app", () => {
@@ -24,4 +28,20 @@ test("desktop shell uses a black outer background without changing the mobile sh
   assert.match(globals, /@media\(min-width:1160px\)\{\.desktop-brand\{/);
   assert.match(globals, /\.desktop-brand__logo\{font-size:72px/);
   assert.match(globals, /\.desktop-brand__copy\{margin-top:12px/);
+});
+
+test("desktop frame has a bounded viewport with an independent content scroller", () => {
+  assert.match(layout, /className="mobile-shell"[^]*className="mobile-scroll"/);
+  assert.match(globals, /--desktop-frame-height:min\(932px,100dvh\)/);
+  assert.match(globals, /\.mobile-shell\{[^}]*height:var\(--desktop-frame-height\)[^}]*overflow:hidden[^}]*border-radius/);
+  assert.match(globals, /\.mobile-scroll\{[^}]*height:100%[^}]*overflow-y:auto[^}]*overscroll-behavior:contain/);
+  assert.match(globals, /\.mobile-scroll\{display:contents\}/);
+});
+
+test("desktop fixed controls use the frame while mobile keeps viewport behavior", () => {
+  assert.match(bottomNav, /@media\(min-width:431px\)[^]*position:absolute[^]*bottom:0/);
+  assert.match(topButton, /@media\(min-width:431px\)[^]*position:absolute[^]*right:22px/);
+  assert.match(booking, /@media\(min-width:431px\)\{\.footer\{bottom:var\(--desktop-frame-offset\)/);
+  assert.match(appScroll, /document\.querySelector<HTMLElement>\('\.mobile-scroll'\)/);
+  assert.match(appScroll, /else window\.scrollTo\(options\)/);
 });

@@ -14,6 +14,7 @@ import styles from './designer-detail.module.css';
 import bookingStyles from './booking.module.css';
 import {ReviewSection} from './reviews';
 import {designerReviews} from '@/lib/prototype/reviews';
+import {appScrollAtEnd,appScrollViewport,observeAppScroll} from '@/lib/app-scroll';
 
 const profileTags=['꼼꼼한 상담','편안한 소통','세심한 시술'];
 // Figma prototype comparison pairs. These images illustrate the matching UX only.
@@ -35,18 +36,19 @@ export function DesignerPage({id}:{id:string}){
   useEffect(()=>{
     // Keep the tab underline in sync with the section currently below the sticky nav.
     const updateActiveSection=()=>{
+      const viewport=appScrollViewport();
       let current='match';
       for(const sectionId of designerSectionIds){
         const section=document.getElementById(sectionId);
-        if(section&&section.getBoundingClientRect().top<=stickyNavigationOffset+4)current=sectionId;
+        if(section&&section.getBoundingClientRect().top-viewport.top<=stickyNavigationOffset+4)current=sectionId;
       }
       // The salon is near the page end and may not reach the sticky bar on short pages.
-      if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2&&document.getElementById('salon'))current='salon';
+      if(appScrollAtEnd()&&document.getElementById('salon'))current='salon';
       setActiveSection(previous=>previous===current?previous:current);
     };
-    window.addEventListener('scroll',updateActiveSection,{passive:true});
+    const stopObservingScroll=observeAppScroll(updateActiveSection);
     updateActiveSection();
-    return()=>window.removeEventListener('scroll',updateActiveSection);
+    return stopObservingScroll;
   },[]);
   const item=findItem('designer',id);
   useEffect(()=>{if(item)update(current=>({...current,recent:[`designer:${id}`,...current.recent.filter(value=>value!==`designer:${id}`)].slice(0,30)}));},[id,item,update]);

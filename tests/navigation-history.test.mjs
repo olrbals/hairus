@@ -68,6 +68,14 @@ test('same-URL pushes and Strict Mode installation do not duplicate entries',()=
   f.push('/home');f.push('/explore');f.push('/explore');
   assert.equal(f.browser.history.length,2);f.back('/home');assert.equal(f.current(),'/home');
 });
+test('new entries start at the top and retain per-entry scroll metadata',()=>{
+  const f=fixture('/home');
+  assert.equal(f.browser.history.state.__hairusScrollTop,0);
+  f.push('/explore');
+  assert.equal(f.browser.history.state.__hairusScrollTop,0);
+  f.back('/home');
+  assert.equal(f.browser.history.state.__hairusScrollTop,0);
+});
 test('onboarding backward dots traverse existing steps; skipped steps use replacement',()=>{
   const f=fixture('/onboarding/1');f.push('/onboarding/2');f.push('/onboarding/3');
   goBackTo(f.router,'/onboarding/1',f.browser);assert.equal(f.current(),'/onboarding/1');assert.equal(f.browser.history.length,3);
