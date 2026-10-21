@@ -43,7 +43,8 @@ test("desktop frame has a bounded viewport with an independent content scroller"
 
 test("desktop headers and viewport CTAs stay pinned to the phone frame", () => {
   assert.match(globals, /\.mobile-scroll \.hairus-page-header\{position:sticky;top:0;z-index:30\}/);
-  assert.match(globals, /\.mobile-scroll \.bottom-cta-screen>\.bottom-cta-actions\{position:fixed/);
+  assert.match(globals, /\.mobile-shell \.mobile-scroll \.bottom-cta-screen>\.bottom-cta-actions\{position:fixed/);
+  assert.match(globals, /\.bottom-cta-actions\{position:fixed;[^}]*padding:16px 24px calc\(41px \+ env\(safe-area-inset-bottom\)\)/);
   assert.match(globals, /bottom:var\(--desktop-frame-offset\)/);
 });
 
