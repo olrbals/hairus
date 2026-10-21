@@ -19,10 +19,13 @@ html{scrollbar-width:none}html::-webkit-scrollbar{display:none}
 @media(min-width:431px){
  :root{--desktop-frame-height:min(932px,100dvh);--desktop-frame-offset:max(0px,calc((100dvh - 932px)/2));--desktop-frame-radius:24px}
  html,body{height:100%;overflow:hidden}
- .mobile-shell{position:fixed;inset:auto;top:50%;left:50%;width:430px;height:var(--desktop-frame-height);min-height:0;max-height:932px;margin:0;padding-bottom:0;overflow:hidden;border-radius:var(--desktop-frame-radius);transform:translate(-50%,-50%)}
+ .mobile-shell{position:fixed;inset:auto;top:var(--desktop-frame-offset);left:calc(50% - 215px);width:430px;height:var(--desktop-frame-height);min-height:0;max-height:932px;margin:0;padding-bottom:0;overflow:hidden;border-radius:var(--desktop-frame-radius)}
  .mobile-scroll{display:block;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
  .mobile-scroll::-webkit-scrollbar{display:none}
  .mobile-shell:has(nav.bottom-nav:not([hidden])) .mobile-scroll{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+ .mobile-scroll .hairus-page-header{position:sticky;top:0;z-index:30}
+ .mobile-scroll .bottom-cta-screen{min-height:100%;padding-bottom:calc(117px + env(safe-area-inset-bottom))}
+ .mobile-scroll .bottom-cta-screen>.bottom-cta-actions{position:fixed;z-index:31;bottom:var(--desktop-frame-offset);left:50%;width:430px;margin-top:0;padding:16px 24px calc(39px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#fff}
  .bottom-sheet{bottom:var(--desktop-frame-offset);max-height:min(838px,90dvh)}
  .mobile-scroll .pd-dialog-backdrop{inset:var(--desktop-frame-offset) calc(50% - 215px)}
 }

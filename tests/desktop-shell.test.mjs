@@ -33,9 +33,17 @@ test("desktop shell uses a black outer background without changing the mobile sh
 test("desktop frame has a bounded viewport with an independent content scroller", () => {
   assert.match(layout, /className="mobile-shell"[^]*className="mobile-scroll"/);
   assert.match(globals, /--desktop-frame-height:min\(932px,100dvh\)/);
+  assert.match(globals, /top:var\(--desktop-frame-offset\);left:calc\(50% - 215px\)/);
+  assert.doesNotMatch(globals, /\.mobile-shell\{[^}]*transform:translate\(-50%,-50%\)/);
   assert.match(globals, /\.mobile-shell\{[^}]*height:var\(--desktop-frame-height\)[^}]*overflow:hidden[^}]*border-radius/);
   assert.match(globals, /\.mobile-scroll\{[^}]*height:100%[^}]*overflow-y:auto[^}]*overscroll-behavior:contain/);
   assert.match(globals, /\.mobile-scroll\{display:contents\}/);
+});
+
+test("desktop headers and viewport CTAs stay pinned to the phone frame", () => {
+  assert.match(globals, /\.mobile-scroll \.hairus-page-header\{position:sticky;top:0;z-index:30\}/);
+  assert.match(globals, /\.mobile-scroll \.bottom-cta-screen>\.bottom-cta-actions\{position:fixed/);
+  assert.match(globals, /bottom:var\(--desktop-frame-offset\)/);
 });
 
 test("desktop fixed controls use the frame while mobile keeps viewport behavior", () => {
