@@ -1,12 +1,8 @@
-.glass-scroll-controls{
+.glass-top-button{
  position:fixed;
  z-index:18;
  right:max(22px,calc((100vw - 430px)/2 + 22px));
  bottom:calc(var(--top-button-bottom,16px) + env(safe-area-inset-bottom));
- display:grid;
- gap:8px;
-}
-.glass-top-button{
  width:44px;
  height:44px;
  padding:0;
@@ -38,7 +34,6 @@
  -webkit-backdrop-filter:none;
 }
 .glass-top-button__surface svg{display:block}
-.glass-top-button:focus-visible{outline:2px solid #20201e;outline-offset:3px}
 .glass-top-button:active .glass-top-button__surface{background:#f1f1f1}
 @media(hover:hover) and (pointer:fine){
  .glass-top-button:hover .glass-top-button__surface{background:#f7f7f7}

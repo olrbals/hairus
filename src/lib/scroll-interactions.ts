@@ -7,22 +7,22 @@ export function centerTriggeredProgress(
   viewportHeight: number,
   travelDistance: number,
 ) {
-  const viewportCenter = viewportHeight * 0.5;
-  return clampProgress(
-    (viewportCenter - elementTop) / Math.max(1, travelDistance),
+  return viewportTriggeredProgress(
+    elementTop,
+    viewportHeight,
+    travelDistance,
+    0.5,
   );
 }
 
-export function pageScrollControls(
-  scrollY: number,
+export function viewportTriggeredProgress(
+  elementTop: number,
   viewportHeight: number,
-  scrollHeight: number,
+  travelDistance: number,
+  triggerRatio: number,
 ) {
-  const maxScroll = Math.max(0, scrollHeight - viewportHeight);
-  const hasLongPage = maxScroll >= 600;
-
-  return {
-    top: hasLongPage && scrollY >= 600,
-    bottom: hasLongPage && scrollY < maxScroll - 4,
-  };
+  const triggerLine = viewportHeight * triggerRatio;
+  return clampProgress(
+    (triggerLine - elementTop) / Math.max(1, travelDistance),
+  );
 }

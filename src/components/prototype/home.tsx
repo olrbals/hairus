@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {useEffect,useRef,useState} from 'react';
 import {BottomNav} from '@/components/bottom-nav';
 import {SectionHeading} from '@/components/primitives';
-import {centerTriggeredProgress} from '@/lib/scroll-interactions';
+import {centerTriggeredProgress,viewportTriggeredProgress} from '@/lib/scroll-interactions';
 
 import {
   asset,
@@ -91,11 +91,11 @@ export function Home(){
    if(reduced){banner.style.setProperty('--match-overlay','0');return;}
    const rect=banner.getBoundingClientRect();
    const viewport=window.innerHeight;
-   // Start the reveal when the banner reaches the viewer's center line.
+   // Start the reveal slightly before the banner reaches the viewer's center line.
    // Keep the original independent top/bottom edge gradient untouched.
-   const start=viewport*.5;
+   const start=viewport*.68;
    const end=(viewport-rect.height)/2;
-   const linear=centerTriggeredProgress(rect.top,viewport,start-end);
+   const linear=viewportTriggeredProgress(rect.top,viewport,start-end,.68);
    const reveal=linear*linear*(3-2*linear);
    banner.style.setProperty('--match-overlay',String(1-reveal));
   };
