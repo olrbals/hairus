@@ -40,3 +40,9 @@ test("screens that fit the viewport do not scroll", () => {
     assert.match(css, /^\.page\{min-height:calc\(100dvh - 100px - env\(safe-area-inset-bottom\)\);/);
   }
 });
+
+test("welcome analysis CTA stays disabled until a name is entered", async () => {
+  const welcome = await readFile(new URL("../src/app/(entry)/welcome/page.tsx", import.meta.url), "utf8");
+  assert.match(welcome, /<Button disabled=\{!name\.trim\(\)\} onClick=\{\(\)=>\{if\(!name\.trim\(\)\)return;[^]*?\}\}>분석하기<\/Button>/);
+  assert.doesNotMatch(welcome, /입력하지 않아도 계속할 수 있습니다/);
+});
