@@ -50,6 +50,7 @@ export function installNavigationHistory(browser: Browser) {
       return;
     }
     const nextPath = target.pathname + target.search + target.hash;
+    const changesDocument = target.pathname !== browser.location.pathname || target.search !== browser.location.search;
     const addsEntry = method === 'push' && nextPath !== currentPath;
     const parents = addsEntry ? [...(current?.parents ?? []), currentPath].slice(-64) : current?.parents ?? [];
     const currentScrollTop = liveScrollTop(browser);
@@ -57,7 +58,7 @@ export function installNavigationHistory(browser: Browser) {
     const state = {...(data && typeof data === 'object' ? data : {}), [key]: {version: 1, path: nextPath, parents}, [scrollKey]: addsEntry ? 0 : currentScrollTop};
     // Repeated taps on the current destination must not add identical entries.
     (addsEntry ? push : replace)(state, unused, url);
-    if (typeof window !== 'undefined' && browser === window) window.dispatchEvent(new Event(navigationScrollEvent));
+    if (changesDocument && typeof window !== 'undefined' && browser === window) window.dispatchEvent(new Event(navigationScrollEvent));
   }
   history.pushState = (data, unused, url) => write('push', data, unused, url);
   history.replaceState = (data, unused, url) => write('replace', data, unused, url);

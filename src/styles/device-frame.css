@@ -1,0 +1,28 @@
+/* Desktop iPhone mockup (src/components/device-frame.tsx). Screen 430 × 932, app viewport 430 × 874. */
+html.device-screen{overscroll-behavior:none}
+html.device-screen body{overscroll-behavior:none}
+
+html.device-host,html.device-host body{height:100%;overflow:hidden}
+.device-host .mobile-shell,.device-host .skip-link{display:none}
+
+.device{position:fixed;top:50%;left:50%;z-index:1;width:458px;height:960px;padding:14px;border-radius:70px;background:#1c1c1e;box-shadow:inset 0 0 0 2px #3a3a3c,inset 0 0 0 6px #0b0b0c,0 0 0 1px #000,0 40px 90px rgba(0,0,0,.55);transform:translate(-50%,-50%) scale(var(--device-scale,1));transform-origin:center}
+/* Volume buttons on the left, power button on the right. */
+.device:before,.device:after{content:'';position:absolute;width:4px;border-radius:2px;background:#2c2c2e}
+.device:before{left:-4px;top:200px;height:62px;border-radius:2px 0 0 2px;box-shadow:0 78px 0 0 #2c2c2e}
+.device:after{right:-4px;top:290px;height:104px;border-radius:0 2px 2px 0}
+.device__screen{position:relative;width:430px;height:932px;overflow:hidden;border-radius:56px;background:#000;isolation:isolate}
+.device__status{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:58px;padding:4px 30px 0 52px;color:#000;transition:background-color .2s,color .2s}
+.device__status[data-dark=true]{color:#fff}
+/* Cover the sub-pixel seam between the status bar and the scaled app so content never peeks above a pinned header. */
+.device__status:after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:inherit;pointer-events:none}
+.device__time{width:54px;font-family:var(--font-sans);font-size:17px;font-weight:600;line-height:22px;text-align:center}
+.device__status-icons{display:flex;align-items:center;gap:6px}
+.device__status-icons svg{display:block;fill:currentColor}
+.device__island{position:absolute;top:11px;left:50%;z-index:3;width:126px;height:37px;margin-left:-63px;border-radius:19px;background:#000}
+.device__app{display:block;width:430px;height:874px;border:0;background:transparent}
+.device__home{position:absolute;bottom:8px;left:50%;z-index:3;width:144px;height:5px;margin-left:-72px;border-radius:3px;background:#111;pointer-events:none;transition:background-color .2s}
+.device__home[data-dark=true]{background:#fff}
+
+@media(min-width:1160px){
+ .device-host .desktop-brand{right:calc(50% + 229px * var(--device-scale,1) + 64px)}
+}
