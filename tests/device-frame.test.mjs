@@ -30,6 +30,7 @@ test("the app runs in a fixed 430 × 874 phone viewport scaled uniformly to the 
   assert.match(frameCss, /\.device__status\{[^}]*height:58px/);
   assert.match(frameCss, /\.device__app\{[^}]*width:430px;height:874px/);
   assert.match(frameCss, /\.device__island\{/);
+  assert.match(frameCss, /\.device__status:after\{[^}]*bottom:-2px;height:2px;background:inherit/);
   assert.match(frameCss, /\.device__home\{/);
 });
 
