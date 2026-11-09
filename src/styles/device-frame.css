@@ -13,7 +13,7 @@ html.device-host,html.device-host body{height:100%;overflow:hidden}
 .device__screen{position:relative;width:430px;height:932px;overflow:hidden;border-radius:56px;background:#000;isolation:isolate}
 .device__status{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:58px;padding:4px 30px 0 52px;color:#000;transition:background-color .2s,color .2s}
 .device__status[data-dark=true]{color:#fff}
-.device__time{width:54px;font-family:var(--font-sans);font-size:17px;font-weight:600;line-height:22px;text-align:center;letter-spacing:-0.02em}
+.device__time{width:54px;font-family:var(--font-sans);font-size:17px;font-weight:600;line-height:22px;text-align:center}
 .device__status-icons{display:flex;align-items:center;gap:6px}
 .device__status-icons svg{display:block;fill:currentColor}
 .device__island{position:absolute;top:11px;left:50%;z-index:3;width:126px;height:37px;margin-left:-63px;border-radius:19px;background:#000}
