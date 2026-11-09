@@ -134,9 +134,10 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
  },[ready,draftId]);
  function patchDraft(change:(value:BookingDraft)=>BookingDraft){setError('');update(current=>({...current,draft:current.draft?.designerId===designerId?change(current.draft):current.draft}));}
  function goTo(target:string,focus=false){const section=document.getElementById(`booking-${target}`);section?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});if(focus)section?.focus({preventScroll:true});}
+ const missingStep=!draft?'service':!selectedBookingServiceIds(draft).length?'service':!availableBookingTimes(selectedBookingServiceIds(draft),draft.date,designerId).includes(draft.time)?'schedule':draft.shareNote!==false&&!draft.note.trim()?'note':null;
  function reserve(){
   if(!draft||submitted.current)return;
-  const target=!selectedBookingServiceIds(draft).length?'service':!availableBookingTimes(selectedBookingServiceIds(draft),draft.date,designerId).includes(draft.time)?'schedule':draft.shareNote!==false&&!draft.note.trim()?'note':null;
+  const target=missingStep;
   if(target){setError(target==='service'?'시술을 선택해 주세요.':target==='schedule'?'방문할 날짜와 시간을 선택해 주세요.':'전달할 HAIR NOTE를 작성해 주세요.');goTo(target,true);return;}
   if(!validBooking(draft))return;
   try{submitted.current=true;setSubmitting(true);update(current=>({...current,bookings:completeBooking(current.bookings,draft)}));router.replace(`/reservations/${draft.id}`);}catch(error){submitted.current=false;setSubmitting(false);setError((error as Error).message);}
@@ -184,7 +185,7 @@ export function BookingFlow({designerId,step,initialService}:{designerId:string;
     <dl className={styles.reservationSummary} aria-live="polite"><div><dt>VISIT</dt><dd>{bookingVisitLabel(draft.date,draft.time)}</dd></div><div><dt>SERVICE</dt><dd>{selectedServices.length?bookingServicesLabel(draft):'시술을 선택해 주세요.'}</dd></div><div><dt>HAIR NOTE</dt><dd>{draft.shareNote===false?'전달하지 않음':draft.note.trim()?'작성 완료 · 디자이너에게 전달':'작성 전'}</dd></div><div><dt>ESTIMATED PRICE</dt><dd>{selectedServices.length?`${totalPrice.toLocaleString('ko-KR')}원`:'—'}<small>가격은 HAIRUS의 예상 가격으로, 현장에서 상담 후 달라질 수 있습니다.</small></dd></div></dl>
    </section>
   </div>
-  <footer className={styles.footer}>{error&&<p role="status" className={styles.message}>{error}</p>}<Button disabled={submitting} onClick={reserve}>{submitting?'예약 중…':'예약하기'}</Button></footer>
+  <footer className={styles.footer}>{error&&<p role="status" className={styles.message}>{error}</p>}<Button disabled={submitting} aria-disabled={missingStep?true:undefined} data-incomplete={missingStep?true:undefined} onClick={reserve}>{submitting?'예약 중…':'예약하기'}</Button></footer>
  </BookingPage>;
 }
 

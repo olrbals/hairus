@@ -19,15 +19,21 @@ function bookingDateLabel(date:string,time:string){
  return `${month}월 ${String(day).padStart(2,'0')}일 · ${period} ${displayHour}:${String(minute).padStart(2,'0')}`;
 }
 
+const localDate=(date:Date)=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+/* Demo booking stays in the near future: five days ahead, skipping the salon's regular closed days (Tue, Fri). */
+function demoBookingDate(from:Date){const date=new Date(from.getFullYear(),from.getMonth(),from.getDate()+5);while([2,5].includes(date.getDay()))date.setDate(date.getDate()+1);return localDate(date);}
+
 function Arrow({name}:{name:string}){return <span className={`my-arrow-slot my-arrow-slot--${name.replace('.svg','')}`} aria-hidden="true"><span><img className="my-arrow" src={myAsset(name)} alt=""/></span></span>;}
 
 export function My({view}:{view?:string}){
  const {state,update,ready}=usePrototype();
  const name=useNickname();
  const [profile,setProfile]=useState<Values|null>(null);
+ const [today,setToday]=useState('');
 
  useEffect(()=>{
   const savedProfile=readProfile();
+  setToday(localDate(new Date()));
   setProfile(savedProfile?effectiveProfile(savedProfile):null);
  },[]);
 
@@ -36,7 +42,8 @@ export function My({view}:{view?:string}){
  if(view==='settings')return <Screen title="Settings" back="/my"><h2>알림</h2><label className="list-link">데모 알림 설정<input style={{width:24}} type="checkbox" checked={state.notifications} onChange={e=>update(s=>({...s,notifications:e.target.checked}))}/></label><label className="list-link">저장 시 SAVENOTE 자동 표시<input style={{width:24}} type="checkbox" disabled={!ready} checked={state.saveNoteEnabled!==false} onChange={e=>update(s=>({...s,saveNoteEnabled:e.target.checked}))}/></label><DemoNotice>설정만 저장되며 실제 푸시 알림은 전송되지 않아요.</DemoNotice><h2>결제 수단</h2><p>프로토타입에서는 카드 등록이나 결제를 지원하지 않아요.</p><h2>데이터 보관</h2><p>프로필, 취향, 저장 메모와 예약은 이 브라우저에 보관됩니다. 촬영 사진은 영구 저장하거나 서버로 전송하지 않아요.</p><Action secondary href="/onboarding/1">온보딩 다시 보기</Action></Screen>;
 
  const preferenceTags=['natural','pure','wave'];
- const booking=[...state.bookings].sort((a,b)=>`${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))[0];
+ const booking=[...state.bookings].filter(item=>!today||item.date>=today).sort((a,b)=>`${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))[0];
+ const demoDate=today?demoBookingDate(new Date(`${today}T00:00:00`)):'';
  const profileTitle=profile?[profile.length,profile.cut].filter(Boolean).join(' '):'';
  const profileSubtitle=profile?.texture||'';
  const profileMeta=profile?[profile.length,profile.texture,profile.color].filter(Boolean):[];
@@ -61,7 +68,7 @@ export function My({view}:{view?:string}){
 
   <section className="my-upcoming">
    <div className="my-section-link"><span>다가오는 예약</span><Arrow name="section-chevron.svg"/></div>
-   {booking?<div className="my-booking-card"><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></div>:<div className="my-booking-card"><strong>11월 04일 · 오후 2:00</strong><p>윤아 디자이너 · 아르보 성수</p></div>}
+   {booking?<div className="my-booking-card"><strong>{bookingDateLabel(booking.date,booking.time)}</strong><p>{(() => {const designer=designers.find(item=>item.id===booking.designerId);return `${designer?.name||'디자이너'} 디자이너 · ${salons.find(item=>item.id===designer?.salonId)?.name||'살롱'}`;})()}</p></div>:<div className="my-booking-card"><strong>{demoDate?bookingDateLabel(demoDate,'14:00'):'\u00a0'}</strong><p>윤아 디자이너 · 아르보 성수</p></div>}
   </section>
 
   <section className="my-menu-section" aria-labelledby="my-activity">

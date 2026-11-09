@@ -2,6 +2,8 @@ export type EntryState={version:1;onboardingStep:1|2|3;onboardingDone:boolean;lo
 export const emptyEntry:EntryState={version:1,onboardingStep:1,onboardingDone:false,loginMode:"guest",name:"",analysis:"not-started"};
 const key="hairus.entry.v1";
 export const entryChangedEvent="hairus:entry-changed";
+/** A usable nickname has at least one complete letter, syllable or digit (not just jamo like 'ㅇ'). */
+export function isValidNickname(name:unknown):boolean{return typeof name==='string'&&/[가-힣A-Za-z0-9]/.test(name.trim());}
 export function displayNickname(name:unknown):string{return typeof name==='string'&&name.trim()?name.trim():'사용자';}
 export function readEntry():EntryState {try{const raw=JSON.parse(localStorage.getItem(key)||"null");if(!raw||raw.version!==1)return {...emptyEntry};return {...emptyEntry,onboardingStep:[1,2,3].includes(raw.onboardingStep)?raw.onboardingStep:1,onboardingDone:raw.onboardingDone===true,loginMode:raw.loginMode==="demo"?"demo":"guest",name:typeof raw.name==="string"?raw.name.slice(0,20):"",analysis:raw.analysis==="complete"?"complete":raw.analysis==="skipped"?"skipped":"not-started"};}catch{return {...emptyEntry};}}
 export function writeEntry(patch:Partial<Omit<EntryState,"version">>):EntryState {const next={...readEntry(),...patch};try{localStorage.setItem(key,JSON.stringify(next));}catch{/* 저장이 제한되어도 현재 화면의 여정은 계속한다. */}if(typeof window!=='undefined')window.dispatchEvent(new Event(entryChangedEvent));return next;}
