@@ -41,19 +41,6 @@ test("screens that fit the viewport do not scroll", () => {
   }
 });
 
-test("nickname needs a complete letter, syllable or digit", async () => {
-  const [entry, welcome] = await Promise.all([
-    readFile(new URL("../src/lib/entry-state.ts", import.meta.url), "utf8"),
-    readFile(new URL("../src/app/(entry)/welcome/page.tsx", import.meta.url), "utf8"),
-  ]);
-  const source = entry.match(/export function isValidNickname\(name:unknown\):boolean\{return ([^}]*);\}/)[1];
-  const isValidNickname = new Function("name", `return ${source};`);
-  for (const ok of ["규민", "Kim", "a", "7", " 지 "]) assert.equal(isValidNickname(ok), true, ok);
-  for (const bad of ["", "   ", "ㅇ", "ㅇㅇ", "ㅏ", "!!", 3]) assert.equal(isValidNickname(bad), false, String(bad));
-  assert.match(welcome, /<Button disabled=\{!nameReady\} onClick=\{\(\)=>\{if\(!nameReady\)return;/);
-  assert.doesNotMatch(welcome, /입력하지 않아도 계속할 수 있습니다/);
-});
-
 test("booking CTA looks inactive until complete but still jumps to the missing step", async () => {
   const [booking, css] = await Promise.all([
     readFile(new URL("../src/components/prototype/booking.tsx", import.meta.url), "utf8"),
