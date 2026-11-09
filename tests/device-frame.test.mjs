@@ -58,3 +58,17 @@ test("MY upcoming booking never shows a past date", async () => {
   assert.match(my, /\.filter\(item=>!today\|\|item\.date>=today\)/);
   assert.match(my, /bookingDateLabel\(demoDate,'14:00'\)/);
 });
+
+test("MY dashboard puts the booking first and every row leads somewhere", async () => {
+  const [my, bookingsPage] = await Promise.all([
+    readFile(new URL("../src/components/prototype/my.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/(main)/my/bookings/page.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.ok(my.indexOf('className="my-upcoming"') < my.indexOf('className="my-profile-card"'));
+  assert.doesNotMatch(my, /<div className="my-menu-row">/);
+  for (const href of ['/my/bookings', '/my/recent', '/my/settings', '/saved']) assert.match(my, new RegExp(`className="my-menu-row" href="${href}"`));
+  assert.match(my, /<Link className="my-user-info" href="\/my\/settings"/);
+  assert.match(my, /const preferenceTags=\['내추럴','퓨어','웨이브'\]/);
+  assert.match(my, /return days<=0\?'D-DAY':`D-\$\{days\}`/);
+  assert.match(bookingsPage, /<My view="bookings"\/>/);
+});

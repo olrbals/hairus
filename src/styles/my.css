@@ -53,3 +53,30 @@
 
 /* Flat MY preference keywords use the same pill radius. */
 .my-tag-list span{border-radius:0}
+
+/* MY dashboard refresh: booking first, real links, live counts. */
+.my-user-info{color:inherit}
+.my-section-link{color:rgba(0,0,0,.5)}
+.my-upcoming{gap:12px}
+.my-booking-card{display:flex;flex-direction:column;gap:4px;height:auto;padding:20px 16px;color:inherit;transition:background-color var(--motion-fast)}
+.my-booking-card:active{background:#f6f6f6}
+.my-booking-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.my-booking-card .my-booking-top strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.my-dday{flex:none;padding:4px 8px;background:#20201e;color:#fff;font-size:12px;font-weight:600;line-height:16px}
+.my-booking-card p.my-booking-detail{margin-top:8px;padding-top:12px;border-top:1px solid #efefef;color:rgba(0,0,0,.7);font-size:13px;line-height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.my-profile-card{height:auto;gap:16px}
+.my-profile-main{height:auto;gap:8px;color:inherit}
+.my-profile-type{margin:8px 0 2px;font-family:var(--font-editorial);font-size:30px;font-weight:700;line-height:1.1;color:#20201e}
+.my-profile-copy{min-height:0}
+.my-profile-copy h2{font-size:18px;line-height:24px}
+.my-preference{padding-bottom:0}
+.my-menu-title{margin-bottom:8px}
+.my-menu-row,.my-menu-row+.my-menu-row{display:flex;align-items:center;justify-content:space-between;height:auto;min-height:52px;margin:0;padding:0;border-bottom:1px solid rgba(0,0,0,.08);color:rgba(0,0,0,.8)}
+.my-menu-row:last-child{border-bottom:0}
+.my-menu-row .my-arrow-slot{margin-top:0}
+.my-menu-meta{display:flex;align-items:center;gap:12px;color:rgba(0,0,0,.45);font-size:13px;font-weight:400}
+.my-booking-list{display:flex;flex-direction:column;gap:12px}
+.my-booking-past{opacity:.5}
+.my-name-field{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;font-size:14px;font-weight:500}
+.my-name-field input{height:52px;padding:0 16px;border:1px solid #d8d8d8;border-radius:0;font:inherit;font-weight:400;background:#fff}
+.my-name-field input:focus-visible{outline:2px solid #20201e;outline-offset:0}
