@@ -56,7 +56,7 @@ test("MY upcoming booking never shows a past date", async () => {
   const my = await readFile(new URL("../src/components/prototype/my.tsx", import.meta.url), "utf8");
   assert.doesNotMatch(my, /11월 04일/);
   assert.match(my, /\.filter\(item=>!today\|\|item\.date>=today\)/);
-  assert.match(my, /bookingDateLabel\(demoDate,'14:00'\)/);
+  assert.match(my, /<BookingCard date=\{demoDate\} time="14:00"/);
 });
 
 test("MY dashboard puts the booking first and every row leads somewhere", async () => {
